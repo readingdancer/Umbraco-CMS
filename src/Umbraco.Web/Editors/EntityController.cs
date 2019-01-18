@@ -193,7 +193,7 @@ namespace Umbraco.Web.Editors
         /// Gets the url of an entity
         /// </summary>
         /// <param name="id">Int id of the entity to fetch URL for</param>
-        /// <param name="type">The tpye of entity such as Document, Media, Member</param>
+        /// <param name="type">The type of entity such as Document, Media, Member</param>
         /// <returns>The URL or path to the item</returns>
         public HttpResponseMessage GetUrl(int id, UmbracoEntityTypes type)
         {
@@ -242,7 +242,7 @@ namespace Umbraco.Web.Editors
 
 
             if (type != UmbracoEntityTypes.Document)
-                throw new ArgumentException("Get by query is only compatible with enitities of type Document");
+                throw new ArgumentException("Get by query is only compatible with entities of type Document");
 
 
             var q = ParseXPathQuery(query, nodeContextId);
@@ -254,7 +254,7 @@ namespace Umbraco.Web.Editors
             return GetById(node.Id, type);
         }
 
-        //PP: wip in progress on the query parser
+        // PP: Work in progress on the query parser
         private string ParseXPathQuery(string query, int id)
         {
             return UmbracoXPathPathSyntaxParser.ParseXPathQuery(

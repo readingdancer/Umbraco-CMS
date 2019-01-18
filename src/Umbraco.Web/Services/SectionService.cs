@@ -166,7 +166,7 @@ namespace Umbraco.Web.Services
         }
 
         /// <summary>
-        /// Creates a new applcation if no application with the specified alias is found.
+        /// Creates a new application if no application with the specified alias is found.
         /// </summary>
         /// <param name="name">The application name.</param>
         /// <param name="alias">The application alias.</param>
@@ -291,12 +291,12 @@ namespace Umbraco.Web.Services
                 {
                     // Load all Applications by attribute and add them to the XML config
 
-                    //don't cache the result of this because it is only used once during app startup, caching will just add a bit more mem overhead for no reason
+                    // don't cache the result of this because it is only used once during app startup, caching will just add a bit more memory overhead for no reason
                     var types = Current.TypeLoader.GetTypesWithAttribute<IApplication, ApplicationAttribute>(cache: false); // fixme - inject
 
-                    //since applications don't populate their metadata from the attribute and because it is an interface,
-                    //we need to interrogate the attributes for the data. Would be better to have a base class that contains
-                    //metadata populated by the attribute. Oh well i guess.
+                    // since applications don't populate their metadata from the attribute and because it is an interface,
+                    // we need to interrogate the attributes for the data. Would be better to have a base class that contains
+                    // metadata populated by the attribute. Oh well i guess.
                     var attrs = types.Select(x => x.GetCustomAttributes<ApplicationAttribute>(false).Single());
                     return attrs.Select(x => new Section(x.Name, x.Alias, x.SortOrder)).ToArray();
                 });

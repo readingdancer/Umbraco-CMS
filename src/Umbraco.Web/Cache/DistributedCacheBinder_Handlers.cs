@@ -315,7 +315,7 @@ namespace Umbraco.Web.Cache
         #region LocalizationService / Language
 
         /// <summary>
-        /// Fires when a langauge is deleted
+        /// Fires when a language is deleted
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -326,7 +326,7 @@ namespace Umbraco.Web.Cache
         }
 
         /// <summary>
-        /// Fires when a langauge is saved
+        /// Fires when a language is saved
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

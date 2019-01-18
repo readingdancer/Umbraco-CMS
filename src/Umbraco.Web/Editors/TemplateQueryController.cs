@@ -118,7 +118,7 @@ namespace Umbraco.Web.Editors
                 contents = pointerNode.Children.OfTypes(new[] { model.ContentType.Alias });
 
                 timer.Stop();
-                // TODO change to .Children({0})
+                // TODO: change to .Children({0})
                 sb.AppendFormat(".Children(\"{0}\")", model.ContentType.Alias);
             }
             else
@@ -159,7 +159,7 @@ namespace Umbraco.Web.Editors
                     timer.Start();
 
                     //trial-run the tokenized clause to time the execution
-                    //for review - this uses a tonized query rather then the normal linq query.
+                    //for review - this uses a tokenized query rather then the normal linq query.
                     // fixme - that cannot work anymore now that we have killed dynamic support
                     //contents = contents.AsQueryable().Where(clause, model.Filters.Select(this.GetConstraintValue).ToArray());
                     throw new NotImplementedException();

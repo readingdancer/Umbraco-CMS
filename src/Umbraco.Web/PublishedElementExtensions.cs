@@ -199,7 +199,7 @@ namespace Umbraco.Web
 
         // recurse should be implemented via fallback
 
-        // todo - that one should be refactored, missing culture and so many things
+        // TODO: that one should be refactored, missing culture and so many things
         public static IHtmlString Value<T>(this IPublishedElement content, string aliases, Func<T, string> format, string alt = "")
         {
             if (format == null) format = x => x.ToString();

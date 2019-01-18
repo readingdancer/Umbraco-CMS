@@ -256,7 +256,7 @@ namespace Umbraco.Web.Services
         }
 
         /// <summary>
-        /// Gets the application tree for the applcation with the specified alias
+        /// Gets the application tree for the application with the specified alias
         /// </summary>
         /// <param name="applicationAlias">The application alias.</param>
         /// <returns>Returns a ApplicationTree Array</returns>
@@ -266,7 +266,7 @@ namespace Umbraco.Web.Services
         }
 
         /// <summary>
-        /// Gets the application tree for the applcation with the specified alias
+        /// Gets the application tree for the application with the specified alias
         /// </summary>
         /// <param name="applicationAlias">The application alias.</param>
         /// <param name="onlyInitialized"></param>

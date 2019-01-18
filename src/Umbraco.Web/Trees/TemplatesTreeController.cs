@@ -38,7 +38,7 @@ namespace Umbraco.Web.Trees
         /// All of the query string parameters passed from jsTree
         /// </param>
         /// <remarks>
-        /// We are allowing an arbitrary number of query strings to be pased in so that developers are able to persist custom data from the front-end
+        /// We are allowing an arbitrary number of query strings to be passed in so that developers are able to persist custom data from the front-end
         /// to the back end to be used in the query for model data.
         /// </remarks>
         protected override TreeNodeCollection GetTreeNodes(string id, FormDataCollection queryStrings)
@@ -122,7 +122,7 @@ namespace Umbraco.Web.Trees
 
         private string GetEditorPath(ITemplate template, FormDataCollection queryStrings)
         {
-            //TODO: Rebuild the language editor in angular, then we dont need to have this at all (which is just a path to the legacy editor)
+            //TODO: Rebuild the language editor in angular, then we don't need to have this at all (which is just a path to the legacy editor)
 
             return Services.FileService.DetermineTemplateRenderingEngine(template) == RenderingEngine.WebForms
                 ? "/" + queryStrings.GetValue<string>("application") + "/framed/" +

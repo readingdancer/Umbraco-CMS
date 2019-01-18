@@ -34,7 +34,7 @@ namespace Umbraco.Web.Components
     [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
 
     // during Initialize / Startup, we end up checking Examine, which needs to be initialized beforehand
-    // todo - should not be a strong dependency on "examine" but on an "indexing component"
+    // TODO: should not be a strong dependency on "examine" but on an "indexing component"
     [ComposeAfter(typeof(ExamineComposer))]
 
     public sealed class DatabaseServerRegistrarAndMessengerComposer : ComponentComposer<DatabaseServerRegistrarAndMessengerComponent>, ICoreComposer
@@ -107,7 +107,7 @@ namespace Umbraco.Web.Components
         public DatabaseServerRegistrarAndMessengerComponent(IRuntimeState runtime, IServerRegistrar serverRegistrar, IServerMessenger serverMessenger, IServerRegistrationService registrationService, ILogger logger, IndexRebuilder indexRebuilder)
         {
             _registrar = serverRegistrar as DatabaseServerRegistrar;
-            if (_registrar == null) throw new Exception("panic: registar.");
+            if (_registrar == null) throw new Exception("panic: registrar.");
 
             _messenger = serverMessenger as BatchedDatabaseServerMessenger;
             if (_messenger == null) throw new Exception("panic: messenger");

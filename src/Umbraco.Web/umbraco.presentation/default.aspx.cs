@@ -61,7 +61,7 @@ namespace umbraco
                 };
                 FireBeforeRequestInit(args);
 
-                //if we are cancelling then return and don't proceed
+                //if we are canceling then return and don't proceed
                 if (args.Cancel) return;
 
                 var template = Current.Services.FileService.GetTemplate(_upage.Template);

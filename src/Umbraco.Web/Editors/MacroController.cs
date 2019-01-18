@@ -41,7 +41,7 @@ namespace Umbraco.Web.Editors
         /// </summary>
         /// <returns></returns>
         /// <remarks>
-        /// Note that ALL logged in users have access to this method because editors will need to isnert macros into rte (content/media/members) and it's used for
+        /// Note that ALL logged in users have access to this method because editors will need to insert macros into rte (content/media/members) and it's used for
         /// inserting into templates/views/etc... it doesn't expose any sensitive data.
         /// </remarks>
         public IEnumerable<MacroParameter> GetMacroParameters(int macroId)
@@ -56,7 +56,7 @@ namespace Umbraco.Web.Editors
         }
 
         /// <summary>
-        /// Gets a rendered macro as html for rendering in the rich text editor
+        /// Gets a rendered macro as HTML for rendering in the rich text editor
         /// </summary>
         /// <param name="macroAlias"></param>
         /// <param name="pageId"></param>
@@ -74,8 +74,8 @@ namespace Umbraco.Web.Editors
         }
 
         /// <summary>
-        /// Gets a rendered macro as html for rendering in the rich text editor.
-        /// Using HTTP POST instead of GET allows for more parameters to be passed as it's not dependant on URL-length limitations like GET.
+        /// Gets a rendered macro as HTML for rendering in the rich text editor.
+        /// Using HTTP POST instead of GET allows for more parameters to be passed as it's not dependent on URL-length limitations like GET.
         /// The method using GET is kept to maintain backwards compatibility
         /// </summary>
         /// <param name="model"></param>
@@ -112,14 +112,14 @@ namespace Umbraco.Web.Editors
             if (macro.RenderInEditor == false)
             {
                 var response = Request.CreateResponse();
-                //need to create a specific content result formatted as html since this controller has been configured
+                //need to create a specific content result formatted as HTML since this controller has been configured
                 //with only json formatters.
                 response.Content = new StringContent(string.Empty, Encoding.UTF8, "text/html");
 
                 return response;
             }
 
-            //because macro's are filled with insane legacy bits and pieces we need all sorts of wierdness to make them render.
+            //because macro's are filled with insane legacy bits and pieces we need all sorts of weirdness to make them render.
             //the 'easiest' way might be to create an IPublishedContent manually and populate the legacy 'page' object with that
             //and then set the legacy parameters.
 
@@ -141,7 +141,7 @@ namespace Umbraco.Web.Editors
             var renderer = new UmbracoComponentRenderer(UmbracoContext);
 
             var result = Request.CreateResponse();
-            //need to create a specific content result formatted as html since this controller has been configured
+            //need to create a specific content result formatted as HTML since this controller has been configured
             //with only json formatters.
             result.Content = new StringContent(
                 renderer.RenderMacro(macro, macroParams, legacyPage).ToString(),
