@@ -361,6 +361,7 @@
     <key alias="memberHasPassword">The member already has a password set</key>
     <key alias="memberLockoutNotEnabled">Lockout is not enabled for this member</key>
     <key alias="memberNotInGroup">The member is not in group '%0%'</key>
+    <key alias="2fa">Two-Factor Authentication</key>
   </area>
   <area alias="contentType">
     <key alias="copyFailed">Failed to copy content type</key>
@@ -1489,11 +1490,10 @@ To manage your website, simply open the Umbraco backoffice and start adding cont
   </area>
   <area alias="rollback">
     <key alias="changes">Changes</key>
-    <key alias="created">Created</key>
     <key alias="headline">Select a version to compare with the current version</key>
-    <key alias="currentVersion">Current version</key>
     <key alias="diffHelp">
-      <![CDATA[This shows the differences between the current version and the selected version<br /><del>Red text</del> will be removed in the selected version, <ins>green text</ins> will be added]]></key>
+      <![CDATA[This shows the differences between the current (draft) version and the selected version<br /><del>Red text</del> will be removed in the selected version, <ins>green text</ins> will be added]]></key>
+    <key alias="noDiff">There are no differences between the current (draft) version and the selected version</key>
     <key alias="documentRolledBack">Document has been rolled back</key>
     <key alias="htmlHelp">This displays the selected version as HTML, if you wish to see the difference between 2
       versions at the same time, use the diff view
@@ -1503,7 +1503,6 @@ To manage your website, simply open the Umbraco backoffice and start adding cont
     <key alias="view">View</key>
     <key alias="pagination"><![CDATA[Showing version %0% to %1% of %2% versions]]></key>
     <key alias="versions">Versions</key>
-    <key alias="currentDraftVersion">Current draft version</key>
     <key alias="currentPublishedVersion">Current published version</key>
   </area>
   <area alias="scripts">
@@ -1515,6 +1514,7 @@ To manage your website, simply open the Umbraco backoffice and start adding cont
     <key alias="media">Media</key>
     <key alias="member">Members</key>
     <key alias="packages">Packages</key>
+    <key alias="marketplace">Marketplace</key>
     <key alias="settings">Settings</key>
     <key alias="translation">Translation</key>
     <key alias="users">Users</key>
@@ -2885,7 +2885,7 @@ To manage your website, simply open the Umbraco backoffice and start adding cont
     <key alias="allowBlockInRoot">Allow in root</key>
     <key alias="allowBlockInRootHelp">Make this block available in the root of the layout.</key>
     <key alias="allowBlockInAreas">Allow in areas</key>
-    <key alias="allowBlockInAreasHelp">Make this block available within other Blocks.</key>
+    <key alias="allowBlockInAreasHelp">Make this block available by default within the areas of other Blocks (unless explicit permissions are set for these areas).</key>
     <key alias="areaAllowedBlocksEmpty">When empty all Blocks allowed for Areas can be created.</key>
     <key alias="areas">Areas</key>
     <key alias="areasLayoutColumns">Grid Columns for Areas</key>
@@ -2899,17 +2899,10 @@ To manage your website, simply open the Umbraco backoffice and start adding cont
       <![CDATA[The inserted content contained disallowed content, which has not been created. Would you like to keep the rest of this content anyway?]]></key>
     <key alias="areaAliasHelp">
       <![CDATA[The alias will be printed by GetBlockGridHTML(), use the alias to target the Element representing this area. Ex. .umb-block-grid__area[data-area-alias="MyAreaAlias"] { ... }]]></key>
-    <key alias="forceLeftLabel">Force placement at left side</key>
-    <key alias="forceRightLabel">Force placement at right side</key>
-    <key alias="unforceLeftLabel">Remove forced placement at left side</key>
-    <key alias="unforceRightLabel">Remove forced placement at right side</key>
-    <key alias="forceLeftButton">Toggle forced placement at left side</key>
-    <key alias="forceRightButton">Toggle forced placement at right side</key>
     <key alias="scaleHandlerButtonTitle">Drag to scale</key>
     <key alias="areaCreateLabelTitle">Create Button Label</key>
     <key alias="areaCreateLabelHelp">Overwrite the label on the create button of this Area.</key>
     <key alias="showSizeOptions">Show resize options</key>
-    <key alias="showAppearanceOptions">Show catalogue appearance</key>
     <key alias="addBlockType">Add Block</key>
     <key alias="addBlockGroup">Add group</key>
     <key alias="pickSpecificAllowance">Pick group or Block</key>
@@ -2920,13 +2913,16 @@ To manage your website, simply open the Umbraco backoffice and start adding cont
     <key alias="tabBlockTypeSettings">Settings</key>
     <key alias="tabAreas">Areas</key>
     <key alias="tabAdvanced">Advanced</key>
-    <key alias="headlineAllowance">permissions</key>
+    <key alias="headlineAllowance">Permissions</key>
     <key alias="getSampleHeadline">Install Sample Configuration</key>
     <key alias="getSampleDescription"><![CDATA[This will add basic Blocks and help you get started with the Block Grid Editor. You'll get Blocks for Headline, Rich Text, Image, as well as a Two Column Layout.]]></key>
     <key alias="getSampleButton">Install</key>
     <key alias="actionEnterSortMode">Sort mode</key>
     <key alias="actionExitSortMode">End sort mode</key>
     <key alias="areaAliasIsNotUnique">This Areas Alias must be unique compared to the other Areas of this Block.</key>
+    <key alias="configureArea">Configure area</key>
+    <key alias="deleteArea">Delete area</key>
+    <key alias="addColumnSpanOption">Add spanning %0% columns option</key>
   </area>
   <area alias="contentTemplatesDashboard">
     <key alias="whatHeadline">What are Content Templates?</key>

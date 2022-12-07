@@ -1238,11 +1238,10 @@ Mange hilsner fra Umbraco robotten
   </area>
   <area alias="rollback">
     <key alias="changes">Ændringer</key>
-    <key alias="created">Oprettet</key>
     <key alias="headline">Vælg en version at sammenligne med den nuværende version</key>
-    <key alias="currentVersion">Nuværende version</key>
     <key alias="diffHelp">
       <![CDATA[Her vises forskellene mellem den nuværende version og den valgte version<br /><del>Rød</del> tekst vil ikke blive vist i den valgte version. <ins>Grøn betyder tilføjet</ins>]]></key>
+    <key alias="noDiff">Der er ingen forskelle mellem den nuværende version og den valgte version</key>
     <key alias="documentRolledBack">Dokument tilbagerullet</key>
     <key alias="htmlHelp">Her vises den valgte version som html. Hvis du ønsker at se forskellen mellem de 2 versioner
       på samme tid, brug 'diff'-oversigten
@@ -1263,6 +1262,7 @@ Mange hilsner fra Umbraco robotten
     <key alias="media">Mediearkiv</key>
     <key alias="member">Medlemmer</key>
     <key alias="packages">Pakker</key>
+    <key alias="marketplace">Marketplace</key>
     <key alias="newsletters">Nyhedsbreve</key>
     <key alias="settings">Indstillinger</key>
     <key alias="statistics">Statistik</key>
@@ -2244,18 +2244,10 @@ Mange hilsner fra Umbraco robotten
       <![CDATA[Det indsatte indhold bestod af ikke tilladt del-indhold, disse dele er blevet afvist. Vil du beholde det resterene alligevel?]]></key>
     <key alias="areaAliasHelp">
       <![CDATA[Dette alias skrives ud via GetBlockGridHTML(), brug aliaset til at fange det element der repræsentere dette område. F.eks.. .umb-block-grid__area[data-area-alias="MitOmraadeAlias"] { ... }]]></key>
-    <key alias="forceLeftLabel">Påtving placering i venstre side</key>
-    <key alias="forceRightLabel">Påtving placering i højre side</key>
-    <key alias="unforceLeftLabel">Fjern påtvungen placering i venstre side</key>
-    <key alias="unforceRightLabel">Fjern påtvungen placering i højre side</key>
-    <key alias="forceLeftButton">Skift påtvungen placering i venstre side</key>
-    <key alias="forceRightButton">Skift påtvungen placering i højre side</key>
     <key alias="scaleHandlerButtonTitle">Træk for at skalere</key>
     <key alias="areaCreateLabelTitle">Tilføj indhold label</key>
     <key alias="areaCreateLabelHelp">Overskriv labellen for tilføj indholds knappen i dette område.</key>
-    <key alias="addSizeOptions">Tilføj skalerings muligheder</key>
-    <key alias="addAreaOptions">Tilføj områder</key>
-    <key alias="addAppearanceOptions">Tilføj katalog udseende</key>
+    <key alias="showSizeOptions">Tilføj skalerings muligheder</key>
     <key alias="addBlockType">Tilføj Blok</key>
     <key alias="addBlockGroup">Tilføj gruppe</key>
     <key alias="pickSpecificAllowance">Tilføj gruppe eller Blok</key>
@@ -2273,6 +2265,9 @@ Mange hilsner fra Umbraco robotten
     <key alias="actionEnterSortMode">Sortings tilstand</key>
     <key alias="actionExitSortMode">Afslut sortings tilstand</key>
     <key alias="areaAliasIsNotUnique">Dette område alias skal være unikt sammenlignet med andre områder af denne Blok.</key>
+    <key alias="configureArea">Konfigurer område</key>
+    <key alias="deleteArea">Slet område</key>
+    <key alias="addColumnSpanOption">Tilføj mulighed for %0% koloner</key>
   </area>
   <area alias="contentTemplatesDashboard">
     <key alias="whatHeadline">Hvad er Indholdsskabeloner?</key>

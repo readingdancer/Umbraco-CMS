@@ -1253,9 +1253,7 @@ Echter, Runway biedt een gemakkelijke basis om je snel op weg te helpen. Als je 
   </area>
   <area alias="rollback">
     <key alias="changes">Wijzigingen</key>
-    <key alias="created">Aangemaakt</key>
     <key alias="headline">Selecteer een versie om te vergelijken met de huidige versie</key>
-    <key alias="currentVersion">Huidige versie</key>
     <key alias="diffHelp">
       <![CDATA[Hier worden de verschillen getoond tussen de huidige en de geselecteerde versie<br /><del>Rode</del> tekst wordt niet getoond in de geselecteerde versie, <ins>groen betekent toegevoegd</ins>]]></key>
     <key alias="documentRolledBack">Document is teruggezet</key>
@@ -1267,7 +1265,6 @@ Echter, Runway biedt een gemakkelijke basis om je snel op weg te helpen. Als je 
     <key alias="view">Bekijk</key>
     <key alias="pagination"><![CDATA[Toont versie %0% tot %1% van %2% versies]]></key>
     <key alias="versions">Versies</key>
-    <key alias="currentDraftVersion">Conceptversie</key>
     <key alias="currentPublishedVersion">Gepubliceerde versie</key>
   </area>
   <area alias="scripts">
@@ -2520,6 +2517,38 @@ Echter, Runway biedt een gemakkelijke basis om je snel op weg te helpen. Als je 
     <key alias="propertyEditorNotSupported">Eigenschap '%0%' gebruikt editor '%1%' die niet ondersteund wordt in
       blokken.
     </key>
+    <key alias="focusParentBlock">Geef focus aan het container blok</key>
+    <key alias="areaIdentification">Identificatie</key>
+    <key alias="areaValidation">Validatie</key>
+    <key alias="areaValidationEntriesShort"><![CDATA[<strong>%0%</strong> moet minimaal <strong>%2%</strong> keer aanwezig zijn.]]></key>
+    <key alias="areaValidationEntriesExceed"><![CDATA[<strong>%0%</strong>mag maximaal <strong>%3%</strong> keer aanwezig zijn.]]></key>
+    <key alias="areaNumberOfBlocks">Hoeveelheid blokken</key>
+    <key alias="areaDisallowAllBlocks">Sta alleen specifiek bloktype toe</key>
+    <key alias="areaAllowedBlocks">Toegestane bloktypes</key>
+    <key alias="areaAllowedBlocksHelp">Definieer de type blokken die zijn toegestaan in dit gebied, en optioneel hoeveel van ieder type aanwezig moet zijn.</key>
+    <key alias="confirmDeleteBlockAreaMessage">Weet je zeker dat je dit gebied wilt verwijderen?</key>
+    <key alias="confirmDeleteBlockAreaNotice">Alle blokken op dit moment aangemaakt binnen dit gebied zullen worden verwijderd.</key>
+    <key alias="layoutOptions">Lay-out opties</key>
+    <key alias="structuralOptions">Structuur</key>
+    <key alias="sizeOptions">Afmetingen</key>
+    <key alias="sizeOptionsHelp">Definiëer een of meer afmetingen, dit maakt het mogelijk blokken te vergroten/verkleinen</key>
+    <key alias="allowedBlockColumns">Beschikbare kolommen</key>
+    <key alias="allowedBlockColumnsHelp">Definieer de verschillende aantal kolombreedtes dat dit blok mag in nemen. Dit voorkomt niet dat blokken in gebieden met kleine kolombreedtes kan worden geplaatst.</key>
+    <key alias="allowedBlockRows">Beschikbare rijen</key>
+    <key alias="allowedBlockRowsHelp">Definiëer de verschillende aantal rijen dat dit blok mag innemen.</key>
+    <key alias="allowBlockInRoot">Sta toe in root</key>
+    <key alias="allowBlockInRootHelp">Maak dit blok beschikbaar in de root van de lay-out</key>
+    <key alias="allowBlockInAreas">Sta toe in gebieden</key>
+    <key alias="block">Blok</key>
+    <key alias="tabBlock">Blokken</key>
+    <key alias="tabBlockTypeSettings">Instellingen</key>
+    <key alias="allowBlockInAreasHelp">Maak dit blok standaard beschikbaar binnen de gebieden van andere blokken (behalve wanneer expliciete rechten zijn gezet voor deze gebieden).</key>
+    <key alias="areas">Gebieden</key>
+    <key alias="tabAreas">Gebieden</key>
+    <key alias="tabAdvanced">Geadvanceerd</key>
+    <key alias="headlineAllowance">Rechten</key>
+    <key alias="configureArea">Configureer gebied</key>
+    <key alias="deleteArea">Verwijder gebied</key>
   </area>
   <area alias="contentTemplatesDashboard">
     <key alias="whatHeadline">Wat zijn Inhoudssjablonen?</key>

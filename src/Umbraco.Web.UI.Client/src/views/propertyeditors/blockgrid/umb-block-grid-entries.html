@@ -2,9 +2,10 @@
     <div
         class="umb-block-grid__layout-container"
         ng-class="{
-            '--not-allowing-drop': vm.showNotAllowedUI,
-            '--droppable-indication': vm.droppableIndication
+            '--not-allowing-drop': vm.showNotAllowedUI
         }"
+        umb-block-grid-sorter="::vm.sorterOptions"
+        umb-block-grid-sorter-model="vm.entries"
     >
         <umb-block-grid-entry ng-repeat="layoutEntry in vm.entries track by layoutEntry.$block.key"
             class="umb-block-grid__layout-item"
@@ -14,8 +15,6 @@
             data-element-udi="{{layoutEntry.contentUdi}}"
             data-col-span="{{layoutEntry.columnSpan}}"
             data-row-span="{{layoutEntry.rowSpan}}"
-            ng-attr-data-force-left="{{layoutEntry.forceLeft || undefined}}"
-            ng-attr-data-force-right="{{layoutEntry.forceRight || undefined}}"
             style="
             --umb-block-grid--item-column-span: {{layoutEntry.columnSpan}};
             --umb-block-grid--item-row-span: {{layoutEntry.rowSpan}};
