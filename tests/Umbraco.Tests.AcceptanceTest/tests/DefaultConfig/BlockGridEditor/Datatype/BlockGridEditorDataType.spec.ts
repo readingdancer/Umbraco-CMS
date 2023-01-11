@@ -6,10 +6,9 @@ import {StylesheetBuilder} from "@umbraco/json-models-builders";
 test.describe('BlockGridEditorDataType', () => {
   const blockGridName = 'BlockGridEditorTest';
   const elementName = 'TestElement';
-
   const elementAlias = AliasHelper.toAlias(elementName);
 
-  test.beforeEach(async ({ page, umbracoApi }, testInfo) => {
+  test.beforeEach(async ({page, umbracoApi}, testInfo) => {
     await umbracoApi.report.report(testInfo);
     await umbracoApi.login();
     await umbracoApi.dataTypes.ensureNameNotExists(blockGridName);
@@ -18,7 +17,30 @@ test.describe('BlockGridEditorDataType', () => {
   test.afterEach(async ({page, umbracoApi, umbracoUi}) => {
     await umbracoApi.dataTypes.ensureNameNotExists(blockGridName);
   });
+
+  async function createDefaultBlockGridWithElement(umbracoApi) {
+    const element = await umbracoApi.documentTypes.createDefaultElementType(elementName, elementAlias);
+
+    const blockGridType = new BlockGridDataTypeBuilder()
+      .withName(blockGridName)
+      .addBlock()
+        .withContentElementTypeKey(element['key'])
+      .done()
+      .build();
+    await umbracoApi.dataTypes.save(blockGridType);
+
+    return element;
+  }
   
+  async function createEmptyBlockGridWithName(umbracoApi){
+    const blockGridType = new BlockGridDataTypeBuilder()
+      .withName(blockGridName)
+      .build();
+    await umbracoApi.dataTypes.save(blockGridType);
+    
+    return blockGridType;
+  }
+
   test.describe('Block tests', () => {
     test('can create empty block grid editor', async ({page, umbracoApi, umbracoUi}) => {
       await umbracoUi.goToSection(ConstantHelper.sections.settings);
@@ -27,17 +49,16 @@ test.describe('BlockGridEditorDataType', () => {
       await umbracoUi.clickDataElementByElementName('tree-item-dataTypes', {button: 'right'});
       await umbracoUi.clickDataElementByElementName(ConstantHelper.actions.create);
       await umbracoUi.clickDataElementByElementName(ConstantHelper.actions.dataType);
-
+      
       await umbracoUi.setEditorHeaderName(blockGridName);
 
       // Adds BlockGrid as property editor
       await umbracoUi.clickDataElementByElementName('property-editor-add');
       await umbracoUi.clickDataElementByElementName('propertyeditor-', {hasText: 'Block Grid'});
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks if the blockGrid dataType was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
       await umbracoUi.doesDataTypeExist(blockGridName);
@@ -46,10 +67,7 @@ test.describe('BlockGridEditorDataType', () => {
     test('can create a block grid datatype with an element', async ({page, umbracoApi, umbracoUi}) => {
       await umbracoApi.documentTypes.ensureNameNotExists(elementName);
 
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .build();
-      await umbracoApi.dataTypes.save(blockGridType);
+      await createEmptyBlockGridWithName(umbracoApi);
 
       await umbracoApi.documentTypes.createDefaultElementType(elementName, elementAlias);
 
@@ -59,11 +77,10 @@ test.describe('BlockGridEditorDataType', () => {
       await umbracoUi.clickElement(umbracoUi.getButtonByKey('blockEditor_addBlockType'));
       await page.locator('[data-element="editor-container"]').locator('[data-element="tree-item-' + elementName + '"]').click();
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.submitChanges));
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks if the element is added
       await expect(page.locator('umb-block-card', {hasText: elementName})).toBeVisible();
       // Checks if the datatype was created
@@ -81,16 +98,9 @@ test.describe('BlockGridEditorDataType', () => {
       await umbracoApi.documentTypes.ensureNameNotExists(elementName);
       await umbracoApi.documentTypes.ensureNameNotExists(elementNameTwo);
 
-      const element = await umbracoApi.documentTypes.createDefaultElementType(elementName, elementAlias);
       await umbracoApi.documentTypes.createDefaultElementType(elementNameTwo, elementTwoAlias);
 
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .addBlock()
-        .withContentElementTypeKey(element['key'])
-        .done()
-        .build();
-      await umbracoApi.dataTypes.save(blockGridType);
+      await createDefaultBlockGridWithElement(umbracoApi);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
@@ -98,11 +108,10 @@ test.describe('BlockGridEditorDataType', () => {
       await umbracoUi.clickElement(umbracoUi.getButtonByKey('blockEditor_addBlockType'));
       await page.locator('[data-element="editor-container"]').locator('[data-element="tree-item-' + elementNameTwo + '"]').click();
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.submitChanges));
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks if the elements are added
       await expect(page.locator('umb-block-card', {hasText: elementName})).toBeVisible();
       await expect(page.locator('umb-block-card', {hasText: elementNameTwo})).toBeVisible();
@@ -120,10 +129,7 @@ test.describe('BlockGridEditorDataType', () => {
 
       const element = await umbracoApi.documentTypes.createDefaultElementType(elementName, elementAlias);
 
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .build();
-      await umbracoApi.dataTypes.save(blockGridType);
+      await createEmptyBlockGridWithName(umbracoApi);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
@@ -135,11 +141,10 @@ test.describe('BlockGridEditorDataType', () => {
       await page.locator('[key="blockEditor_addBlockType"]').nth(1).click();
       await page.locator('[data-element="editor-container"]').locator('[data-element="tree-item-' + elementName + '"]').click();
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.submitChanges));
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks if the element is added to TestGroup
       await expect(page.locator('.umb-block-card-group').nth(1).locator('[data-content-element-type-key="' + element['key'] + '"]')).toBeVisible();
       // Checks if the datatype was created
@@ -169,15 +174,15 @@ test.describe('BlockGridEditorDataType', () => {
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .addBlockGroups()
-        .withName(groupOne)
+          .withName(groupOne)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementOne['key'])
-        .withGroupName(groupOne)
+          .withContentElementTypeKey(elementOne['key'])
+          .withGroupName(groupOne)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementTwo['key'])
-        .withGroupName(groupOne)
+          .withContentElementTypeKey(elementTwo['key'])
+          .withGroupName(groupOne)
         .done()
         .build();
       await umbracoApi.dataTypes.save(blockGridType);
@@ -188,12 +193,10 @@ test.describe('BlockGridEditorDataType', () => {
       await page.locator('[key="blockEditor_addBlockType"]').nth(1).click();
       await page.locator('[data-element="editor-container"]').locator('[data-element="tree-item-' + elementNameThree + '"]').click();
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.submitChanges));
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks if the elements are added to GroupOne
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
       await expect(page.locator('.umb-block-card-group').nth(1).locator('[data-content-element-type-key="' + elementOne['key'] + '"]')).toBeVisible();
@@ -224,22 +227,22 @@ test.describe('BlockGridEditorDataType', () => {
 
       const elementOne = await umbracoApi.documentTypes.createDefaultElementType(elementName, elementAlias);
       const elementTwo = await umbracoApi.documentTypes.createDefaultElementType(elementNameTwo, elementTwoAlias);
-      const elementThree= await umbracoApi.documentTypes.createDefaultElementType(elementNameThree, elementThreeAlias);
+      const elementThree = await umbracoApi.documentTypes.createDefaultElementType(elementNameThree, elementThreeAlias);
 
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .addBlockGroups()
-        .withName(groupOne)
+          .withName(groupOne)
         .done()
         .addBlockGroups()
-        .withName(groupTwo)
+          .withName(groupTwo)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementOne['key'])
+          .withContentElementTypeKey(elementOne['key'])
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementTwo['key'])
-        .withGroupName(groupOne)
+          .withContentElementTypeKey(elementTwo['key'])
+          .withGroupName(groupOne)
         .done()
         .build();
       await umbracoApi.dataTypes.save(blockGridType);
@@ -254,7 +257,7 @@ test.describe('BlockGridEditorDataType', () => {
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout:10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks if the elements is are added to their correct groups
       await expect(page.locator('.umb-block-card-group').nth(0).locator('[data-content-element-type-key="' + elementOne['key'] + '"]')).toBeVisible();
       await expect(page.locator('.umb-block-card-group').nth(1).locator('[data-content-element-type-key="' + elementTwo['key'] + '"]')).toBeVisible();
@@ -269,7 +272,6 @@ test.describe('BlockGridEditorDataType', () => {
       await umbracoApi.documentTypes.ensureNameNotExists(elementNameThree);
     });
 
-    // Might be overkill with this test.
     test('can create a block grid datatype with multiple groups and multiple element in each group', async ({page, umbracoApi, umbracoUi}) => {
       const elementNameTwo = 'SecondElement';
       const elementTwoAlias = AliasHelper.toAlias(elementNameTwo);
@@ -315,39 +317,39 @@ test.describe('BlockGridEditorDataType', () => {
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .addBlockGroups()
-        .withName(GroupOne)
+          .withName(GroupOne)
         .done()
         .addBlockGroups()
-        .withName(GroupTwo)
+          .withName(GroupTwo)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementOne['key'])
+          .withContentElementTypeKey(elementOne['key'])
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementTwo['key'])
+          .withContentElementTypeKey(elementTwo['key'])
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementThree['key'])
+          .withContentElementTypeKey(elementThree['key'])
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementFour['key'])
-        .withGroupName(GroupOne)
+          .withContentElementTypeKey(elementFour['key'])
+          .withGroupName(GroupOne)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementFive['key'])
-        .withGroupName(GroupOne)
+          .withContentElementTypeKey(elementFive['key'])
+          .withGroupName(GroupOne)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementSix['key'])
-        .withGroupName(GroupOne)
+          .withContentElementTypeKey(elementSix['key'])
+          .withGroupName(GroupOne)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementSeven['key'])
-        .withGroupName(GroupTwo)
+          .withContentElementTypeKey(elementSeven['key'])
+          .withGroupName(GroupTwo)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementEight['key'])
-        .withGroupName(GroupTwo)
+          .withContentElementTypeKey(elementEight['key'])
+          .withGroupName(GroupTwo)
         .done()
         .build();
       await umbracoApi.dataTypes.save(blockGridType);
@@ -358,11 +360,10 @@ test.describe('BlockGridEditorDataType', () => {
       await page.locator('[key="blockEditor_addBlockType"]').nth(2).click();
       await page.locator('[data-element="editor-container"]').locator('[data-element="tree-item-' + elementNameNinth + '"]').click();
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.submitChanges));
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks if the elements is are added to their correct groups
       await expect(page.locator('.umb-block-card-group').nth(0).locator('[data-content-element-type-key="' + elementOne['key'] + '"]')).toBeVisible();
       await expect(page.locator('.umb-block-card-group').nth(0).locator('[data-content-element-type-key="' + elementTwo['key'] + '"]')).toBeVisible();
@@ -392,16 +393,8 @@ test.describe('BlockGridEditorDataType', () => {
     test('cant add an element which already exists in a block grid editor', async ({page, umbracoApi, umbracoUi}) => {
       await umbracoApi.documentTypes.ensureNameNotExists(elementName);
 
-      const element = await umbracoApi.documentTypes.createDefaultElementType(elementName, elementAlias);
-
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .addBlock()
-        .withContentElementTypeKey(element['key'])
-        .done()
-        .build();
-      await umbracoApi.dataTypes.save(blockGridType);
-
+      const element = await createDefaultBlockGridWithElement(umbracoApi);
+      
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Tries to add the same element to the block grid
@@ -425,27 +418,18 @@ test.describe('BlockGridEditorDataType', () => {
     test('can remove an element from a block grid editor', async ({page, umbracoApi, umbracoUi}) => {
       await umbracoApi.documentTypes.ensureNameNotExists(elementName);
 
-      const element = await umbracoApi.documentTypes.createDefaultElementType(elementName, elementAlias);
-
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .addBlock()
-        .withContentElementTypeKey(element['key'])
-        .done()
-        .build();
-      await umbracoApi.dataTypes.save(blockGridType);
-
+      const element = await createDefaultBlockGridWithElement(umbracoApi);
+      
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Removes the element
       await page.locator('[data-content-element-type-key="' + element['key'] + '"]').locator('.btn-reset').click();
       // Cant use the constant key because the constant key is "action-delete"
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey("actions_delete"));
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks to make sure the element is removed
       await expect(page.locator('[data-content-element-type-key="' + element['key'] + '"]')).not.toBeVisible();
       // Checks if the datatype was created
@@ -457,12 +441,12 @@ test.describe('BlockGridEditorDataType', () => {
     });
 
     test('can delete a group without elements from a block grid editor', async ({page, umbracoApi, umbracoUi}) => {
-      const Group = "GroupToBeDeleted"
+      const Group = "GroupToBeDeleted";
 
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .addBlockGroups()
-        .withName(Group)
+          .withName(Group)
         .done()
         .build();
       await umbracoApi.dataTypes.save(blockGridType);
@@ -471,13 +455,12 @@ test.describe('BlockGridEditorDataType', () => {
 
       // Removes the empty group
       await page.locator('.umb-block-card-group').nth(1).locator('[title="Delete"]').click();
-
-      await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey("actions_delete"));
-
+      // Cant use the constant key because the correct constant key is "action-delete"
+      await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey("actions_delete"));  
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks to make sure the element is removed
       await expect(page.locator('.umb-block-card-group').nth(1)).not.toBeVisible();
       // Checks if the datatype exists
@@ -495,20 +478,20 @@ test.describe('BlockGridEditorDataType', () => {
       const elementOne = await umbracoApi.documentTypes.createDefaultElementType(elementName, elementAlias);
       const elementTwo = await umbracoApi.documentTypes.createDefaultElementType(elementNameTwo, elementTwoAlias);
 
-      const Group = "GroupToBeDeleted"
+      const Group = "GroupToBeDeleted";
 
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .addBlockGroups()
-        .withName(Group)
+          .withName(Group)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementOne['key'])
-        .withGroupName(Group)
+          .withContentElementTypeKey(elementOne['key'])
+          .withGroupName(Group)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementTwo['key'])
-        .withGroupName(Group)
+          .withContentElementTypeKey(elementTwo['key'])
+          .withGroupName(Group)
         .done()
         .build();
       await umbracoApi.dataTypes.save(blockGridType);
@@ -517,13 +500,12 @@ test.describe('BlockGridEditorDataType', () => {
 
       // Removes the group with elements
       await page.locator('.umb-block-card-group').nth(1).locator('[title="Delete"]').click();
-
+      // Cant use the constant key because the correct constant key is "action-delete"
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey("actions_delete"));
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks to make sure the element is removed
       await expect(page.locator('.umb-block-card-group').nth(1)).not.toBeVisible();
       await expect(page.locator('[data-content-element-type-key="' + elementOne['key'] + '"]')).not.toBeVisible();
@@ -531,22 +513,20 @@ test.describe('BlockGridEditorDataType', () => {
       // Checks if the datatype exists
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
       await umbracoUi.doesDataTypeExist(blockGridName);
+      
       // Clean
       await umbracoApi.documentTypes.ensureNameNotExists(elementName);
       await umbracoApi.documentTypes.ensureNameNotExists(elementNameTwo);
     });
 
     test('can delete an empty block grid editor', async ({page, umbracoApi, umbracoUi}) => {
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .build();
-      await umbracoApi.dataTypes.save(blockGridType);
+      const blockGridType = await createEmptyBlockGridWithName(umbracoApi);
 
       await umbracoUi.goToSection(ConstantHelper.sections.settings);
 
       // Deletes the empty block grid editor
       await page.locator('[data-element="tree-item-dataTypes"]').locator('[data-element="tree-item-expand"]').click();
-      await umbracoUi.clickDataElementByElementName("tree-item-" + blockGridName , {button: 'right'});
+      await umbracoUi.clickDataElementByElementName("tree-item-" + blockGridName, {button: 'right'});
       await umbracoUi.clickDataElementByElementName(ConstantHelper.actions.delete);
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.delete));
 
@@ -556,12 +536,12 @@ test.describe('BlockGridEditorDataType', () => {
       await umbracoUi.clickDataElementByElementName('tree-item-dataTypes', {button: "right"});
       await umbracoUi.clickDataElementByElementName('action-refreshNode');
       await expect(page.locator('[data-element="tree-item-dataTypes"] >> [data-element="tree-item-' + blockGridType + '"]')).not.toBeVisible();
+      await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(false);
     });
 
     test('can delete an block grid editor with elements and groups', async ({page, umbracoApi, umbracoUi}) => {
       const elementNameTwo = 'SecondElement';
       const elementTwoAlias = AliasHelper.toAlias(elementNameTwo);
-
       const groupOne = 'GroupOne';
 
       await umbracoApi.documentTypes.ensureNameNotExists(elementName);
@@ -573,14 +553,14 @@ test.describe('BlockGridEditorDataType', () => {
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .addBlockGroups()
-        .withName(groupOne)
+          .withName(groupOne)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementOne['key'])
+          .withContentElementTypeKey(elementOne['key'])
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementTwo['key'])
-        .withGroupName(groupOne)
+          .withContentElementTypeKey(elementTwo['key'])
+          .withGroupName(groupOne)
         .done()
         .build();
       await umbracoApi.dataTypes.save(blockGridType);
@@ -589,7 +569,7 @@ test.describe('BlockGridEditorDataType', () => {
 
       // Deletes the empty block grid editor
       await page.locator('[data-element="tree-item-dataTypes"]').locator('[data-element="tree-item-expand"]').click();
-      await umbracoUi.clickDataElementByElementName("tree-item-" + blockGridName , {button: 'right'});
+      await umbracoUi.clickDataElementByElementName("tree-item-" + blockGridName, {button: 'right'});
       await umbracoUi.clickDataElementByElementName(ConstantHelper.actions.delete);
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.delete));
 
@@ -599,6 +579,7 @@ test.describe('BlockGridEditorDataType', () => {
       await umbracoUi.clickDataElementByElementName('tree-item-dataTypes', {button: "right"});
       await umbracoUi.clickDataElementByElementName('action-refreshNode');
       await expect(page.locator('[data-element="tree-item-dataTypes"] >> [data-element="tree-item-' + blockGridType + '"]')).not.toBeVisible();
+      await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(false);
     });
 
     test('can move an element in a block grid editor to another group', async ({page, umbracoApi, umbracoUi}) => {
@@ -606,29 +587,28 @@ test.describe('BlockGridEditorDataType', () => {
 
       const GroupMoveHere = 'MoveToHere';
 
-      const element = await umbracoApi.documentTypes.createDefaultElementType(elementName,elementAlias);
+      const element = await umbracoApi.documentTypes.createDefaultElementType(elementName, elementAlias);
 
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .addBlockGroups()
-        .withName(GroupMoveHere)
+          .withName(GroupMoveHere)
         .done()
         .addBlock()
-        .withContentElementTypeKey(element['key'])
-        .withLabel('Did we move?')
+          .withContentElementTypeKey(element['key'])
+          .withLabel('Did we move?')
         .done()
-        .build()
+        .build();
       await umbracoApi.dataTypes.save(blockGridType);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Drags the element from the default group to the 'MoveToHere' Group.
       await page.locator('.umb-block-card-group').nth(0).locator('[data-content-element-type-key="' + element['key'] + '"]').dragTo(page.locator('[key="blockEditor_addBlockType"]').nth(1));
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks if the elements was moved to the correct group
       await expect(page.locator('.umb-block-card-group').nth(1).locator('[data-content-element-type-key="' + element['key'] + '"]')).toBeVisible();
       // Checks if the element still contains the correct text
@@ -650,23 +630,22 @@ test.describe('BlockGridEditorDataType', () => {
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .addBlockGroups()
-        .withName(GroupMove)
+          .withName(GroupMove)
         .done()
         .addBlockGroups()
-        .withName(GroupNotMoving)
+          .withName(GroupNotMoving)
         .done()
-        .build()
+        .build();
       await umbracoApi.dataTypes.save(blockGridType);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Drags the group GroupMove under GroupNotMoving
       await page.locator('.umb-block-card-group >> [icon="icon-navigation"]').nth(0).dragTo(page.locator('[key="blockEditor_addBlockType"]').nth(2));
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks if the groups are in the correct order
       // The reason that we are checking nth(0) and not 1, is because the default group has no input.
       await expect(page.locator('.umb-block-card-group >> input[title="group name"]').nth(0)).toHaveValue(GroupNotMoving);
@@ -691,43 +670,49 @@ test.describe('BlockGridEditorDataType', () => {
 
       const elementOne = await umbracoApi.documentTypes.createDefaultElementType(elementName, elementAlias);
       const elementTwo = await umbracoApi.documentTypes.createDefaultElementType(elementNameTwo, elementTwoAlias);
-      const elementThree= await umbracoApi.documentTypes.createDefaultElementType(elementNameThree, elementThreeAlias)
+      const elementThree = await umbracoApi.documentTypes.createDefaultElementType(elementNameThree, elementThreeAlias);
 
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .addBlockGroups()
-        .withName(GroupMove)
+          .withName(GroupMove)
         .done()
         .addBlockGroups()
-        .withName(GroupNotMoving)
+          .withName(GroupNotMoving)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementOne['key'])
-        .withLabel('Did we move?')
-        .withGroupName(GroupMove)
+          .withContentElementTypeKey(elementOne['key'])
+          .withLabel('Did we move?')
+          .withGroupName(GroupMove)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementTwo['key'])
-        .withLabel('I hope so')
-        .withGroupName(GroupMove)
+          .withContentElementTypeKey(elementTwo['key'])
+          .withLabel('I hope so')
+          .withGroupName(GroupMove)
         .done()
         .addBlock()
-        .withContentElementTypeKey(elementThree['key'])
-        .withLabel('Me stay')
-        .withGroupName(GroupNotMoving)
+          .withContentElementTypeKey(elementThree['key'])
+          .withLabel('Me stay')
+          .withGroupName(GroupNotMoving)
         .done()
-        .build()
+        .build();
       await umbracoApi.dataTypes.save(blockGridType);
-
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Drags the group GroupMove under GroupNotMoving
-      await page.locator('.umb-block-card-group >> [icon="icon-navigation"]').nth(0).dragTo(page.locator('[key="blockEditor_addBlockType"]').nth(2));
-
+      await page.locator('.umb-block-card-group >> [icon="icon-navigation"]').nth(0).hover();
+      await page.mouse.down();
+      await page.mouse.move(0, -20);
+      await page.locator('[key="blockEditor_addBlockType"]').nth(2).hover({
+        position: {
+          x: 0, y: 20
+        }
+      });
+      await page.mouse.up();
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
+      await umbracoUi.isSuccessNotificationVisible();
       // Checks if the elements were moved with their group
       await expect(page.locator('.umb-block-card-group').nth(1).locator('[data-content-element-type-key="' + elementThree['key'] + '"]')).toBeVisible();
       await expect(page.locator('.umb-block-card-group').nth(2).locator('[data-content-element-type-key="' + elementOne['key'] + '"]')).toBeVisible();
@@ -754,29 +739,25 @@ test.describe('BlockGridEditorDataType', () => {
       await umbracoApi.documentTypes.ensureNameNotExists(elementNameTwo);
       await umbracoApi.documentTypes.ensureNameNotExists(elementNameThree);
     });
-    
   });
-  
+
   test.describe('Amount tests', () => {
 
     test('can add a min and max amount to a block grid editor', async ({page, umbracoApi, umbracoUi}) => {
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .build()
-      await umbracoApi.dataTypes.save(blockGridType);
+      await createEmptyBlockGridWithName(umbracoApi);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Changes the amount in min and max
       await page.locator('[name="numberFieldMin"]').fill('2');
       await page.locator('[name="numberFieldMax"]').fill('4');
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-      await expect(page.locator('input[name="numberFieldMin"]')).toHaveValue('2')
-      await expect(page.locator('input[name="numberFieldMax"]')).toHaveValue('4')
+      await umbracoUi.isSuccessNotificationVisible();
+      // Checks if min and max were added
+      await expect(page.locator('input[name="numberFieldMin"]')).toHaveValue('2');
+      await expect(page.locator('input[name="numberFieldMax"]')).toHaveValue('4');
       // Checks if the datatype was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
       await umbracoUi.doesDataTypeExist(blockGridName);
@@ -787,37 +768,33 @@ test.describe('BlockGridEditorDataType', () => {
         .withName(blockGridName)
         .withMin(1)
         .withMax(2)
-        .build()
+        .build();
       await umbracoApi.dataTypes.save(blockGridType);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Updates min so it's equal to max
       await page.locator('[name="numberFieldMin"]').fill('2');
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-      await expect(page.locator('input[name="numberFieldMin"]')).toHaveValue('2')
-      await expect(page.locator('input[name="numberFieldMax"]')).toHaveValue('2')
+      await umbracoUi.isSuccessNotificationVisible();
+      // Checks if min and max were updated
+      await expect(page.locator('input[name="numberFieldMin"]')).toHaveValue('2');
+      await expect(page.locator('input[name="numberFieldMax"]')).toHaveValue('2');
       // Checks if the datatype was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
       await umbracoUi.doesDataTypeExist(blockGridName);
     });
 
     test('min amount cant be more than max amount in a block grid editor', async ({page, umbracoApi, umbracoUi}) => {
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .build()
-      await umbracoApi.dataTypes.save(blockGridType);
+      await createEmptyBlockGridWithName(umbracoApi);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Updates min so it's more than max
       await page.locator('[name="numberFieldMin"]').fill('4');
       await page.locator('[name="numberFieldMax"]').fill('2');
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
@@ -832,10 +809,7 @@ test.describe('BlockGridEditorDataType', () => {
   test.describe('Live editing mode tests', () => {
 
     test('can turn live editing mode on for a block grid editor', async ({page, umbracoApi, umbracoUi}) => {
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .build()
-      await umbracoApi.dataTypes.save(blockGridType);
+      await createEmptyBlockGridWithName(umbracoApi);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
@@ -856,21 +830,17 @@ test.describe('BlockGridEditorDataType', () => {
     test('can add editor width for a block grid editor', async ({page, umbracoApi, umbracoUi}) => {
       const editorWidth = '100%';
 
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .build()
-      await umbracoApi.dataTypes.save(blockGridType);
+      await createEmptyBlockGridWithName(umbracoApi);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Adds editor width
       await page.locator('[id="maxPropertyWidth"]').fill(editorWidth);
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-      // Checks if live editing mode is true
+      await umbracoUi.isSuccessNotificationVisible();
+      // Checks if the editor width was added
       await expect(page.locator('input[id="maxPropertyWidth"]')).toHaveValue(editorWidth);
       // Checks if the datatype was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
@@ -883,19 +853,18 @@ test.describe('BlockGridEditorDataType', () => {
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .withMaxPropertyWidth('100%')
-        .build()
+        .build();
       await umbracoApi.dataTypes.save(blockGridType);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Edits editor width
       await page.locator('[id="maxPropertyWidth"]').fill(editorWidth);
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-      // Checks if live editing mode is true
+      await umbracoUi.isSuccessNotificationVisible();
+      // Checks if the editor width was updated
       await expect(page.locator('input[id="maxPropertyWidth"]')).toHaveValue(editorWidth);
       // Checks if the datatype was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
@@ -908,21 +877,17 @@ test.describe('BlockGridEditorDataType', () => {
     test('can add grid columns for a block grid editor', async ({page, umbracoApi, umbracoUi}) => {
       const gridColumns = '10';
 
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .build()
-      await umbracoApi.dataTypes.save(blockGridType);
+      await createEmptyBlockGridWithName(umbracoApi);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Adds grid columns
       await page.locator('[name="numberField"]').fill(gridColumns);
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-      // Checks if live editing mode is true
+      await umbracoUi.isSuccessNotificationVisible();
+      // Checks if the grid columns was added
       await expect(page.locator('input[name="numberField"]')).toHaveValue(gridColumns);
       // Checks if the datatype was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
@@ -935,19 +900,18 @@ test.describe('BlockGridEditorDataType', () => {
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .withGridColumns(8)
-        .build()
+        .build();
       await umbracoApi.dataTypes.save(blockGridType);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Edits grid columns
       await page.locator('[name="numberField"]').fill(gridColumns);
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-      // Checks if live editing mode is true
+      await umbracoUi.isSuccessNotificationVisible();
+      // Checks if grid columns were updated
       await expect(page.locator('input[name="numberField"]')).toHaveValue(gridColumns);
       // Checks if the datatype was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
@@ -962,16 +926,13 @@ test.describe('BlockGridEditorDataType', () => {
 
       await umbracoApi.stylesheets.ensureNameNotExists(stylesheetName + '.css');
 
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .build()
-      await umbracoApi.dataTypes.save(blockGridType);
+      await createEmptyBlockGridWithName(umbracoApi);
 
       const stylesheet = new StylesheetBuilder()
         .withVirtualPath("/css/")
         .withFileType("stylesheets")
         .withName(stylesheetName)
-        .build()
+        .build();
       await umbracoApi.stylesheets.save(stylesheet);
 
       await umbracoUi.navigateToDataType(blockGridName);
@@ -983,8 +944,8 @@ test.describe('BlockGridEditorDataType', () => {
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-      // Checks if the stylesheet is selected
+      await umbracoUi.isSuccessNotificationVisible();
+      // Checks if the stylesheet was added
       await expect(page.locator('.umb-node-preview__name', {hasText: 'StylesheetTest'})).toBeVisible();
       // Checks if the datatype was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
@@ -1004,25 +965,24 @@ test.describe('BlockGridEditorDataType', () => {
         .withVirtualPath(path)
         .withFileType("stylesheets")
         .withName(stylesheetName)
-        .build()
+        .build();
       await umbracoApi.stylesheets.save(stylesheet);
 
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .withLayoutStylesheet('~' + path + stylesheetName + '.css')
-        .build()
+        .build();
       await umbracoApi.dataTypes.save(blockGridType);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // Removes the stylesheet
       await page.locator('.__control-actions >> .btn-reset').click();
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-      // Checks if the stylesheet is selected
+      await umbracoUi.isSuccessNotificationVisible();
+      // Checks if the stylesheet is deleted
       await expect(page.locator('.umb-node-preview__name', {hasText: 'StylesheetTest'})).not.toBeVisible();
       // Checks if the datatype was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
@@ -1038,21 +998,17 @@ test.describe('BlockGridEditorDataType', () => {
     test('can add a create button label for a block grid editor', async ({page, umbracoApi, umbracoUi}) => {
       const createButtonLabel = 'testButton';
 
-      const blockGridType = new BlockGridDataTypeBuilder()
-        .withName(blockGridName)
-        .build()
-      await umbracoApi.dataTypes.save(blockGridType);
+      await createEmptyBlockGridWithName(umbracoApi);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // adds create button label text
       await page.locator('[id="createLabel"]').fill(createButtonLabel);
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-      // Checks if live editing mode is true
+      await umbracoUi.isSuccessNotificationVisible();
+      // Checks if the label for create button label was added
       await expect(page.locator('input[id="createLabel"]')).toHaveValue(createButtonLabel);
       // Checks if the datatype was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
@@ -1065,83 +1021,22 @@ test.describe('BlockGridEditorDataType', () => {
       const blockGridType = new BlockGridDataTypeBuilder()
         .withName(blockGridName)
         .withCreateLabel('OldLabel')
-        .build()
+        .build();
       await umbracoApi.dataTypes.save(blockGridType);
 
       await umbracoUi.navigateToDataType(blockGridName);
 
       // edits create button label text
       await page.locator('[id="createLabel"]').fill(editButtonLabel);
-
       await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.save));
 
       // Assert
-      await umbracoUi.isSuccessNotificationVisible({timeout: 10000});
-      // Checks if live editing mode is true
+      await umbracoUi.isSuccessNotificationVisible();
+      // Checks if the label for create button label was updated
       await expect(page.locator('input[id="createLabel"]')).toHaveValue(editButtonLabel);
       // Checks if the datatype was created
       await expect(await umbracoApi.dataTypes.exists(blockGridName)).toBe(true);
       await umbracoUi.doesDataTypeExist(blockGridName);
     });
   });
-
-
-  // Fully used BlockGridBuilder
-  // const blockGridType = new BlockGridDataTypeBuilder()
-  //   .withName(blockGridName)
-  //   .addBlockGroups()
-  //    .withName('testGroup')
-  //   .done()
-  //   .addBlockGroups()
-  //    .withName('Groups')
-  //   .done()
-  //   .addBlock()
-  //    .withContentElementTypeKey(elementTwo['key'])
-  //    .withGroupName('testGroup')
-  //   .done()
-  //   .addBlock()
-  //    .addColumnSpanOptions(2)
-  //    .addColumnSpanOptions(5)
-  //    .addColumnSpanOptions(10)
-  //    .withContentElementTypeKey(element['key'])
-  //    .withSettingsElementTypeKey(elementTwo['key'])
-  //    .withLabel('LabelWeGood')
-  //    .withBackgroundColor('#f1c232')
-  //    .withAllowAtRoot(false)
-  //    .withAllowInAreas(false)
-  //    .withRowMinSpan(2)
-  //    .withRowMaxSpan(2)
-  //    .withAreaGridColumns(2)
-  //    .withIconColor('#f1c232')
-  //    .withEditorSize('small')
-  //    .withForceHideContentEditorInOverlay(true)
-  //    .withGroupName('Groups')
-  //    .addArea()
-  //      .withAlias('HejAlias')
-  //      .withColumnSpan(6)
-  //      .withRowSpan(6)
-  //      .withMinAllowed(1)
-  //      .withMaxAllowed(20)
-  //      .withCreateLabel('Test')
-  //      .addSpecifiedAllowance()
-  //        .withElementTypeKey(element['key'])
-  //        .withMin(1)
-  //        .withMax(20)
-  //        .withMinAllowed(0)
-  //        .withMaxAllowed(25)
-  //      .done()
-  //    .done()
-  //   .done()
-  //   .addBlock()
-  //    .withContentElementTypeKey(elementThree['key'])
-  //   .done()
-  //   .withMax(10)
-  //   .withMin(0)
-  //   .withUseLiveEditing(true)
-  //   .withMaxPropertyWidth('Yes?')
-  //   .withGridColumns(10)
-  //   .withCreateLabel('Heyoooo')
-  //   .build();
-  // const blockGridEditor = await umbracoApi.dataTypes.save(blockGridType);
-  
 });
