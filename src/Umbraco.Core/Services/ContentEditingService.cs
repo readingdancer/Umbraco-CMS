@@ -13,7 +13,7 @@ internal sealed class ContentEditingService
     private readonly ITemplateService _templateService;
     private readonly ILogger<ContentEditingService> _logger;
     private readonly ICoreScopeProvider _scopeProvider;
-    private readonly IUserIdKeyResolver _userIdKeyResolver;
+    private readonly IUserService _userService;
 
     public ContentEditingService(
         IContentService contentService,
@@ -23,13 +23,13 @@ internal sealed class ContentEditingService
         ITemplateService templateService,
         ILogger<ContentEditingService> logger,
         ICoreScopeProvider scopeProvider,
-        IUserIdKeyResolver userIdKeyResolver)
+        IUserService userService)
         : base(contentService, contentTypeService, propertyEditorCollection, dataTypeService, logger, scopeProvider)
     {
         _templateService = templateService;
         _logger = logger;
         _scopeProvider = scopeProvider;
-        _userIdKeyResolver = userIdKeyResolver;
+        _userService = userService;
     }
 
     public async Task<IContent?> GetAsync(Guid id)
@@ -81,13 +81,13 @@ internal sealed class ContentEditingService
 
     public async Task<Attempt<IContent?, ContentEditingOperationStatus>> MoveToRecycleBinAsync(Guid id, Guid userKey)
     {
-        var currentUserId = await _userIdKeyResolver.GetAsync(id) ?? Constants.Security.SuperUserId;
+        var currentUserId = _userService.GetAsync(userKey).Result?.Id ?? Constants.Security.SuperUserId;
         return await HandleDeletionAsync(id, content => ContentService.MoveToRecycleBin(content, currentUserId), false);
     }
 
     public async Task<Attempt<IContent?, ContentEditingOperationStatus>> DeleteAsync(Guid id, Guid userKey)
     {
-        var currentUserId = await _userIdKeyResolver.GetAsync(id) ?? Constants.Security.SuperUserId;
+        var currentUserId = _userService.GetAsync(userKey).Result?.Id ?? Constants.Security.SuperUserId;
         return await HandleDeletionAsync(id, content => ContentService.Delete(content, currentUserId), false);
     }
 
@@ -122,7 +122,7 @@ internal sealed class ContentEditingService
     {
         try
         {
-            var currentUserId = _userIdKeyResolver.GetAsync(userKey).GetAwaiter().GetResult() ?? Constants.Security.SuperUserId;
+            var currentUserId = _userService.GetAsync(userKey).Result?.Id ?? Constants.Security.SuperUserId;
             OperationResult saveResult = ContentService.Save(content, currentUserId);
             return saveResult.Result switch
             {

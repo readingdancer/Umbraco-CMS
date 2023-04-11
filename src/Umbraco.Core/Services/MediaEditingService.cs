@@ -11,7 +11,7 @@ internal sealed class MediaEditingService
     : ContentEditingServiceBase<IMedia, IMediaType, IMediaService, IMediaTypeService>, IMediaEditingService
 {
     private readonly ILogger<ContentEditingServiceBase<IMedia, IMediaType, IMediaService, IMediaTypeService>> _logger;
-    private readonly IUserIdKeyResolver _userIdKeyResolver;
+    private readonly IUserService _userService;
 
     public MediaEditingService(
         IMediaService contentService,
@@ -20,11 +20,11 @@ internal sealed class MediaEditingService
         IDataTypeService dataTypeService,
         ILogger<ContentEditingServiceBase<IMedia, IMediaType, IMediaService, IMediaTypeService>> logger,
         ICoreScopeProvider scopeProvider,
-        IUserIdKeyResolver userIdKeyResolver)
+        IUserService userService)
         : base(contentService, contentTypeService, propertyEditorCollection, dataTypeService, logger, scopeProvider)
     {
         _logger = logger;
-        _userIdKeyResolver = userIdKeyResolver;
+        _userService = userService;
     }
 
     public async Task<IMedia?> GetAsync(Guid id)
@@ -43,7 +43,7 @@ internal sealed class MediaEditingService
 
         IMedia media = result.Result!;
 
-        var currentUserId = await _userIdKeyResolver.GetAsync(userKey) ?? Constants.Security.SuperUserId;
+        var currentUserId = _userService.GetAsync(userKey).Result?.Id ?? Constants.Security.SuperUserId;
         ContentEditingOperationStatus operationStatus = Save(media, currentUserId);
         return operationStatus == ContentEditingOperationStatus.Success
             ? Attempt.SucceedWithStatus<IMedia?, ContentEditingOperationStatus>(ContentEditingOperationStatus.Success, media)
@@ -58,7 +58,7 @@ internal sealed class MediaEditingService
             return Attempt.FailWithStatus(result.Result, content);
         }
 
-        var currentUserId = await _userIdKeyResolver.GetAsync(userKey) ?? Constants.Security.SuperUserId;
+        var currentUserId = _userService.GetAsync(userKey).Result?.Id ?? Constants.Security.SuperUserId;
         ContentEditingOperationStatus operationStatus = Save(content, currentUserId);
         return operationStatus == ContentEditingOperationStatus.Success
             ? Attempt.SucceedWithStatus(ContentEditingOperationStatus.Success, content)
@@ -67,13 +67,13 @@ internal sealed class MediaEditingService
 
     public async Task<Attempt<IMedia?, ContentEditingOperationStatus>> MoveToRecycleBinAsync(Guid id, Guid userKey)
     {
-        var currentUserId = await _userIdKeyResolver.GetAsync(userKey) ?? Constants.Security.SuperUserId;
+        var currentUserId = _userService.GetAsync(userKey).Result?.Id ?? Constants.Security.SuperUserId;
         return await HandleDeletionAsync(id, media => ContentService.MoveToRecycleBin(media, currentUserId).Result, false);
     }
 
     public async Task<Attempt<IMedia?, ContentEditingOperationStatus>> DeleteAsync(Guid id, Guid userKey)
     {
-        var currentUserId = await _userIdKeyResolver.GetAsync(userKey) ?? Constants.Security.SuperUserId;
+        var currentUserId = _userService.GetAsync(userKey).Result?.Id ?? Constants.Security.SuperUserId;
         return await HandleDeletionAsync(id, media => ContentService.Delete(media, currentUserId).Result, true);
     }
 

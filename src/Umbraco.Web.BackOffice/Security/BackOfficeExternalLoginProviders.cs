@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Authentication;
-using Umbraco.Cms.Core.Security;
 
 namespace Umbraco.Cms.Web.BackOffice.Security;
 
 /// <inheritdoc />
-public class BackOfficeExternalLoginProviders : IBackOfficeExternalLoginProviders, ILocalLoginSettingProvider
+public class BackOfficeExternalLoginProviders : IBackOfficeExternalLoginProviders
 {
     private readonly IAuthenticationSchemeProvider _authenticationSchemeProvider;
     private readonly Dictionary<string, BackOfficeExternalLoginProvider> _externalLogins;

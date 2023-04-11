@@ -41,7 +41,6 @@ public static partial class UmbracoBuilderExtensions
 
         // register the special idk map
         builder.Services.AddUnique<IIdKeyMap, IdKeyMap>();
-        builder.Services.AddUnique<IUserIdKeyResolver, UserIdKeyResolver>();
 
         builder.Services.AddUnique<IAuditService, AuditService>();
         builder.Services.AddUnique<ICacheInstructionService, CacheInstructionService>();
