@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using NPoco;
+﻿using NPoco;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Infrastructure.Persistence;
 using Umbraco.Cms.Infrastructure.Persistence.Dtos;
@@ -8,95 +7,45 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Infrastructure.Services.Implement;
 
+// This could be made better with caching and stuff, but it's really a stop gap measure
+// So for now we'll just use the database to resolve the key/id every time.
 // It's okay that we never clear this, since you can never change a user's key/id
 // and it'll be caught by the services if it doesn't exist.
 internal sealed class UserIdKeyResolver : IUserIdKeyResolver
 {
     private readonly IScopeProvider _scopeProvider;
-    private readonly ConcurrentDictionary<Guid, int?> _keyToId = new();
-    private readonly ConcurrentDictionary<int, Guid?> _idToKey = new();
-    private readonly SemaphoreSlim _keytToIdLock = new(1, 1);
-    private readonly SemaphoreSlim _idToKeyLock = new(1, 1);
 
-    public UserIdKeyResolver(IScopeProvider scopeProvider) => _scopeProvider = scopeProvider;
-
-    /// <inheritdoc/>
-    public async Task<int?> GetAsync(Guid key)
+    public UserIdKeyResolver(IScopeProvider scopeProvider)
     {
-        if (_keyToId.TryGetValue(key, out int? id))
-        {
-            return id;
-        }
-
-        // We don't have it in the cache, so we'll need to look it up in the database
-        // We'll lock, and then recheck, just to make sure the value wasn't added between the initial check and now.
-        await _keytToIdLock.WaitAsync();
-        try
-        {
-            if (_keyToId.TryGetValue(key, out int? recheckedId))
-            {
-                // It was added while we were waiting, so we'll just return it
-                return recheckedId;
-            }
-
-            // Still not here, so actually fetch it now
-            using IScope scope = _scopeProvider.CreateScope(autoComplete: true);
-            ISqlContext sqlContext = scope.SqlContext;
-
-            Sql<ISqlContext> query = sqlContext.Sql()
-                .Select<UserDto>(x => x.Id)
-                .From<UserDto>()
-                .Where<UserDto>(x => x.Key == key);
-
-            int? fetchedId = await scope.Database.ExecuteScalarAsync<int?>(query);
-
-            _keyToId[key] = fetchedId;
-            return fetchedId;
-        }
-        finally
-        {
-            _keytToIdLock.Release();
-        }
+        _scopeProvider = scopeProvider;
     }
 
-    /// <inheritdoc/>
+    public Task<int?> GetAsync(Guid key)
+    {
+        using IScope scope = _scopeProvider.CreateScope(autoComplete: true);
+        ISqlContext sqlContext = scope.SqlContext;
+
+        Sql<ISqlContext> query = sqlContext.Sql()
+            .Select<UserDto>(x => x.Id)
+            .From<UserDto>()
+            .Where<UserDto>(x => x.Key == key);
+
+
+        return scope.Database.ExecuteScalarAsync<int?>(query);
+    }
+
     public async Task<Guid?> GetAsync(int id)
     {
-        if (_idToKey.TryGetValue(id, out Guid? key))
-        {
-            return key;
-        }
+        using IScope scope = _scopeProvider.CreateScope(autoComplete: true);
+        ISqlContext sqlContext = scope.SqlContext;
 
-        await _idToKeyLock.WaitAsync();
-        try
-        {
-            if (_idToKey.TryGetValue(id, out Guid? recheckedKey))
-            {
-                return recheckedKey;
-            }
+        Sql<ISqlContext> query = sqlContext.Sql()
+            .Select<UserDto>(x => x.Key)
+            .From<UserDto>()
+            .Where<UserDto>(x => x.Id == id);
 
-            using IScope scope = _scopeProvider.CreateScope(autoComplete: true);
-            ISqlContext sqlContext = scope.SqlContext;
+        string? guidString = await scope.Database.ExecuteScalarAsync<string?>(query);
 
-            Sql<ISqlContext> query = sqlContext.Sql()
-                .Select<UserDto>(x => x.Key)
-                .From<UserDto>()
-                .Where<UserDto>(x => x.Id == id);
-
-            string? guidString = await scope.Database.ExecuteScalarAsync<string?>(query);
-            Guid? fetchedKey = guidString is null ? null : new Guid(guidString);
-
-            // For ids we don't want to cache the null value, since unlike keys, it's pretty likely that we'll see collision
-            if (fetchedKey is not null)
-            {
-                _idToKey[id] = fetchedKey;
-            }
-
-            return fetchedKey;
-        }
-        finally
-        {
-            _idToKeyLock.Release();
-        }
+        return guidString is null ? null : new Guid(guidString);
     }
 }

@@ -769,12 +769,12 @@ public class UsersController : BackOfficeNotificationsController
             return result;
         }
 
-        if (passwordChangeResult.Result?.Error is not null)
+        if (passwordChangeResult.Result?.ChangeError is not null)
         {
-            foreach (var memberName in passwordChangeResult.Result.Error.MemberNames)
+            foreach (var memberName in passwordChangeResult.Result.ChangeError.MemberNames)
             {
                 ModelState.AddModelError(memberName,
-                    passwordChangeResult.Result.Error.ErrorMessage ?? string.Empty);
+                    passwordChangeResult.Result.ChangeError.ErrorMessage ?? string.Empty);
             }
         }
 

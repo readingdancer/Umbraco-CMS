@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace Umbraco.Cms.Core.Models.Membership;
 
-namespace Umbraco.Cms.Core.Models.Membership;
-
-public abstract class ErrorMessageResult
+public interface IErrorMessageResult
 {
-    public ValidationResult? Error { get; set; }
+    public string? ErrorMessage { get; }
 }

@@ -6,12 +6,12 @@ using Umbraco.Cms.Web.Common.Security;
 
 namespace Umbraco.Cms.Web.BackOffice.Security;
 
-public class BackOfficePasswordChanger : IBackOfficePasswordChanger
+public class BackofficePasswordChanger : IBackofficePasswordChanger
 {
     private readonly IPasswordChanger<BackOfficeIdentityUser> _passwordChanger;
     private readonly IBackOfficeUserManager _userManager;
 
-    public BackOfficePasswordChanger(
+    public BackofficePasswordChanger(
         IPasswordChanger<BackOfficeIdentityUser> passwordChanger,
         IBackOfficeUserManager userManager)
     {
@@ -19,8 +19,8 @@ public class BackOfficePasswordChanger : IBackOfficePasswordChanger
         _userManager = userManager;
     }
 
-    public async Task<Attempt<PasswordChangedModel?>> ChangeBackOfficePassword(
-        ChangeBackOfficeUserPasswordModel model)
+    public async Task<Attempt<PasswordChangedModel?>> ChangeBackofficePassword(
+        ChangeBackofficeUserPasswordModel model)
     {
         var mappedModel = new ChangingPasswordModel
         {

@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Http;
@@ -21,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.Security;
 
 public class BackOfficeUserManager : UmbracoUserManager<BackOfficeIdentityUser, UserPasswordConfigurationSettings>,
     IBackOfficeUserManager,
-    ICoreBackOfficeUserManager
+    ICoreBackofficeUserManager
 {
     private readonly IBackOfficeUserPasswordChecker _backOfficeUserPasswordChecker;
     private readonly GlobalSettings _globalSettings;
@@ -154,14 +153,14 @@ public class BackOfficeUserManager : UmbracoUserManager<BackOfficeIdentityUser, 
 
         if (identityUser is null)
         {
-            return Attempt.FailWithStatus(UserOperationStatus.UserNotFound, new UserUnlockResult());
+            return Attempt.FailWithStatus(UserOperationStatus.NotFound, new UserUnlockResult());
         }
 
         IdentityResult result = await SetLockoutEndDateAsync(identityUser, DateTimeOffset.Now.AddMinutes(-1));
 
         return result.Succeeded
             ? Attempt.SucceedWithStatus(UserOperationStatus.Success, new UserUnlockResult())
-            : Attempt.FailWithStatus(UserOperationStatus.UnknownFailure, new UserUnlockResult { Error = new ValidationResult(result.Errors.ToErrorMessage()) });
+            : Attempt.FailWithStatus(UserOperationStatus.UnknownFailure, new UserUnlockResult { ErrorMessage = result.Errors.ToErrorMessage() });
     }
 
     public override async Task<IdentityResult> ResetAccessFailedCountAsync(BackOfficeIdentityUser user)
@@ -323,7 +322,7 @@ public class BackOfficeUserManager : UmbracoUserManager<BackOfficeIdentityUser, 
 
         if (identityUser is null)
         {
-            return Attempt.FailWithStatus(UserOperationStatus.UserNotFound, string.Empty);
+            return Attempt.FailWithStatus(UserOperationStatus.NotFound, string.Empty);
         }
 
         var token = await GenerateEmailConfirmationTokenAsync(identityUser);

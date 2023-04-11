@@ -288,11 +288,11 @@ public class CurrentUserController : UmbracoAuthorizedJsonController
             return result;
         }
 
-        if (passwordChangeResult.Result?.Error?.MemberNames is not null)
+        if (passwordChangeResult.Result?.ChangeError?.MemberNames is not null)
         {
-            foreach (var memberName in passwordChangeResult.Result.Error.MemberNames)
+            foreach (var memberName in passwordChangeResult.Result.ChangeError.MemberNames)
             {
-                ModelState.AddModelError(memberName, passwordChangeResult.Result.Error.ErrorMessage ?? string.Empty);
+                ModelState.AddModelError(memberName, passwordChangeResult.Result.ChangeError.ErrorMessage ?? string.Empty);
             }
         }
 

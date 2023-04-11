@@ -27,7 +27,7 @@ public class UserIdKeyResolverTests : UmbracoIntegrationTest
             UserName = "test@test.com",
             Email = "test@test.com",
             Name = "Test Mc. Gee",
-            UserGroupKeys = new HashSet<Guid> { userGroup.Key }
+            UserGroups = new HashSet<IUserGroup> { userGroup! }
         };
 
         var creationResult = await UserService.CreateAsync(Constants.Security.SuperUserKey, userCreateModel);
@@ -48,7 +48,7 @@ public class UserIdKeyResolverTests : UmbracoIntegrationTest
             UserName = "test@test.com",
             Email = "test@test.com",
             Name = "Test Mc. Gee",
-            UserGroupKeys = new HashSet<Guid> { userGroup.Key }
+            UserGroups = new HashSet<IUserGroup> { userGroup! }
         };
 
         var creationResult = await UserService.CreateAsync(Constants.Security.SuperUserKey, userCreateModel);

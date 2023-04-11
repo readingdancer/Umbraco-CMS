@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+using System.Formats.Asn1;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Security.Cryptography;
@@ -23,6 +23,7 @@ using Umbraco.Cms.Core.Services.OperationStatus;
 using Umbraco.Cms.Core.Strings;
 using Umbraco.Extensions;
 using Umbraco.New.Cms.Core.Models;
+using Umbraco.Extensions;
 using UserProfile = Umbraco.Cms.Core.Models.Membership.UserProfile;
 
 namespace Umbraco.Cms.Core.Services;
@@ -45,7 +46,6 @@ internal class UserService : RepositoryService, IUserService
     private readonly MediaFileManager _mediaFileManager;
     private readonly ITemporaryFileService _temporaryFileService;
     private readonly IShortStringHelper _shortStringHelper;
-    private readonly IIsoCodeValidator _isoCodeValidator;
     private readonly IUserRepository _userRepository;
     private readonly ContentSettings _contentSettings;
 
@@ -65,8 +65,7 @@ internal class UserService : RepositoryService, IUserService
         MediaFileManager mediaFileManager,
         ITemporaryFileService temporaryFileService,
         IShortStringHelper shortStringHelper,
-        IOptions<ContentSettings> contentSettings,
-        IIsoCodeValidator isoCodeValidator)
+        IOptions<ContentSettings> contentSettings)
         : base(provider, loggerFactory, eventMessagesFactory)
     {
         _userRepository = userRepository;
@@ -79,7 +78,6 @@ internal class UserService : RepositoryService, IUserService
         _mediaFileManager = mediaFileManager;
         _temporaryFileService = temporaryFileService;
         _shortStringHelper = shortStringHelper;
-        _isoCodeValidator = isoCodeValidator;
         _globalSettings = globalSettings.Value;
         _securitySettings = securitySettings.Value;
         _contentSettings = contentSettings.Value;
@@ -284,8 +282,8 @@ internal class UserService : RepositoryService, IUserService
     public IUser? GetByEmail(string email)
     {
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
-        return backOfficeUserStore.GetByEmailAsync(email).GetAwaiter().GetResult();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
+        return backofficeUserStore.GetByEmailAsync(email).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -302,9 +300,9 @@ internal class UserService : RepositoryService, IUserService
             return null;
         }
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
-        return backOfficeUserStore.GetByUserNameAsync(username).GetAwaiter().GetResult();
+        return backofficeUserStore.GetByUserNameAsync(username).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -314,9 +312,9 @@ internal class UserService : RepositoryService, IUserService
     public void Delete(IUser membershipUser)
     {
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
-        backOfficeUserStore.DisableAsync(membershipUser).GetAwaiter().GetResult();
+        backofficeUserStore.DisableAsync(membershipUser).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -359,9 +357,9 @@ internal class UserService : RepositoryService, IUserService
     public void Save(IUser entity)
     {
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
-        backOfficeUserStore.SaveAsync(entity).GetAwaiter().GetResult();
+        backofficeUserStore.SaveAsync(entity).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -371,9 +369,9 @@ internal class UserService : RepositoryService, IUserService
     public async Task<UserOperationStatus> SaveAsync(IUser entity)
     {
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
-        return await backOfficeUserStore.SaveAsync(entity);
+        return await backofficeUserStore.SaveAsync(entity);
     }
 
     /// <summary>
@@ -611,13 +609,6 @@ internal class UserService : RepositoryService, IUserService
             return Attempt.FailWithStatus(UserOperationStatus.MissingUser, new UserCreationResult());
         }
 
-        var userGroups = _userGroupRepository.GetMany().Where(x=>model.UserGroupKeys.Contains(x.Key)).ToArray();
-
-        if (userGroups.Length != model.UserGroupKeys.Count)
-        {
-            return Attempt.FailWithStatus(UserOperationStatus.MissingUserGroup, new UserCreationResult());
-        }
-
         UserOperationStatus result = ValidateUserCreateModel(model);
         if (result != UserOperationStatus.Success)
         {
@@ -629,16 +620,16 @@ internal class UserService : RepositoryService, IUserService
             null,
             null,
             null,
-            userGroups.Select(x => x.Alias));
+            model.UserGroups.Select(x => x.Alias));
 
         if (authorizationAttempt.Success is false)
         {
             return Attempt.FailWithStatus(UserOperationStatus.Unauthorized, new UserCreationResult());
         }
 
-        ICoreBackOfficeUserManager backOfficeUserManager = serviceScope.ServiceProvider.GetRequiredService<ICoreBackOfficeUserManager>();
+        ICoreBackofficeUserManager backofficeUserManager = serviceScope.ServiceProvider.GetRequiredService<ICoreBackofficeUserManager>();
 
-        IdentityCreationResult identityCreationResult = await backOfficeUserManager.CreateAsync(model);
+        IdentityCreationResult identityCreationResult = await backofficeUserManager.CreateAsync(model);
 
         if (identityCreationResult.Succeded is false)
         {
@@ -646,13 +637,13 @@ internal class UserService : RepositoryService, IUserService
             // But there should be more information in the message.
             return Attempt.FailWithStatus(
                 UserOperationStatus.UnknownFailure,
-                new UserCreationResult { Error = new ValidationResult(identityCreationResult.ErrorMessage) });
+                new UserCreationResult { ErrorMessage = identityCreationResult.ErrorMessage });
         }
 
         // The user is now created, so we can fetch it to map it to a result model with our generated password.
         // and set it to being approved
-        IBackOfficeUserStore backOfficeUserStore = serviceScope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
-        IUser? createdUser = await backOfficeUserStore.GetByEmailAsync(model.Email);
+        IBackofficeUserStore backofficeUserStore = serviceScope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
+        IUser? createdUser = await backofficeUserStore.GetByEmailAsync(model.Email);
 
         if (createdUser is null)
         {
@@ -662,12 +653,12 @@ internal class UserService : RepositoryService, IUserService
 
         createdUser.IsApproved = approveUser;
 
-        foreach (IUserGroup userGroup in userGroups)
+        foreach (IUserGroup userGroup in model.UserGroups)
         {
             createdUser.AddGroup(userGroup.ToReadOnlyGroup());
         }
 
-        await backOfficeUserStore.SaveAsync(createdUser);
+        await backofficeUserStore.SaveAsync(createdUser);
 
         scope.Complete();
 
@@ -692,13 +683,6 @@ internal class UserService : RepositoryService, IUserService
             return Attempt.FailWithStatus(UserOperationStatus.MissingUser, new UserInvitationResult());
         }
 
-        var userGroups = _userGroupRepository.GetMany().Where(x=>model.UserGroupKeys.Contains(x.Key)).ToArray();
-
-        if (userGroups.Length != model.UserGroupKeys.Count)
-        {
-            return Attempt.FailWithStatus(UserOperationStatus.MissingUserGroup, new UserInvitationResult());
-        }
-
         UserOperationStatus validationResult = ValidateUserCreateModel(model);
 
         if (validationResult is not UserOperationStatus.Success)
@@ -711,7 +695,7 @@ internal class UserService : RepositoryService, IUserService
             null,
             null,
             null,
-            userGroups.Select(x => x.Alias));
+            model.UserGroups.Select(x => x.Alias));
 
         if (authorizationAttempt.Success is false)
         {
@@ -723,8 +707,8 @@ internal class UserService : RepositoryService, IUserService
             return Attempt.FailWithStatus(UserOperationStatus.CannotInvite, new UserInvitationResult());
         }
 
-        ICoreBackOfficeUserManager userManager = serviceScope.ServiceProvider.GetRequiredService<ICoreBackOfficeUserManager>();
-        IBackOfficeUserStore userStore = serviceScope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        ICoreBackofficeUserManager userManager = serviceScope.ServiceProvider.GetRequiredService<ICoreBackofficeUserManager>();
+        IBackofficeUserStore userStore = serviceScope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
         IdentityCreationResult creationResult = await userManager.CreateForInvite(model);
         if (creationResult.Succeded is false)
@@ -733,7 +717,7 @@ internal class UserService : RepositoryService, IUserService
             // But there should be more information in the message.
             return Attempt.FailWithStatus(
                 UserOperationStatus.UnknownFailure,
-                new UserInvitationResult { Error = new ValidationResult(creationResult.ErrorMessage) });
+                new UserInvitationResult { ErrorMessage = creationResult.ErrorMessage });
         }
 
         IUser? invitedUser = await userStore.GetByEmailAsync(model.Email);
@@ -746,7 +730,7 @@ internal class UserService : RepositoryService, IUserService
 
         invitedUser.InvitedDate = DateTime.Now;
         invitedUser.ClearGroups();
-        foreach(IUserGroup userGroup in userGroups)
+        foreach(IUserGroup userGroup in model.UserGroups)
         {
             invitedUser.AddGroup(userGroup.ToReadOnlyGroup());
         }
@@ -780,10 +764,6 @@ internal class UserService : RepositoryService, IUserService
         {
             return UserOperationStatus.UserNameIsNotEmail;
         }
-        if (!IsEmailValid(model.Email))
-        {
-            return UserOperationStatus.InvalidEmail;
-        }
 
         if (GetByEmail(model.Email) is not null)
         {
@@ -795,7 +775,7 @@ internal class UserService : RepositoryService, IUserService
             return UserOperationStatus.DuplicateUserName;
         }
 
-        if(model.UserGroupKeys.Count == 0)
+        if(model.UserGroups.Count == 0)
         {
             return UserOperationStatus.NoUserGroup;
         }
@@ -803,100 +783,59 @@ internal class UserService : RepositoryService, IUserService
         return UserOperationStatus.Success;
     }
 
-    public async Task<Attempt<IUser?, UserOperationStatus>> UpdateAsync(Guid performingUserKey, UserUpdateModel model)
+    public async Task<Attempt<IUser, UserOperationStatus>> UpdateAsync(Guid performingUserKey, UserUpdateModel model)
     {
-        using ICoreScope scope = ScopeProvider.CreateCoreScope();
-        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore userStore = serviceScope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
-
-        IUser? existingUser = await userStore.GetAsync(model.ExistingUserKey);
-
-        if (existingUser is null)
-        {
-            return Attempt.FailWithStatus(UserOperationStatus.MissingUser, existingUser);
-        }
-
-        IUser? performingUser = await userStore.GetAsync(performingUserKey);
+        IUser? performingUser = await GetAsync(performingUserKey);
 
         if (performingUser is null)
         {
-            return Attempt.FailWithStatus<IUser?, UserOperationStatus>(UserOperationStatus.MissingUser, existingUser);
-        }
-
-        var userGroups = _userGroupRepository.GetMany().Where(x=>model.UserGroupKeys.Contains(x.Key)).ToHashSet();
-
-        if (userGroups.Count != model.UserGroupKeys.Count)
-        {
-            return Attempt.FailWithStatus<IUser?, UserOperationStatus>(UserOperationStatus.MissingUserGroup, existingUser);
+            return Attempt.FailWithStatus(UserOperationStatus.MissingUser, model.ExistingUser);
         }
 
         // We have to resolve the keys to ids to be compatible with the repository, this could be done in the factory,
         // but I'd rather keep the ids out of the service API as much as possible.
         int[]? startContentIds = GetIdsFromKeys(model.ContentStartNodeKeys, UmbracoObjectTypes.Document);
-
-        if (startContentIds is null || startContentIds.Length != model.ContentStartNodeKeys.Count)
-        {
-            return Attempt.FailWithStatus<IUser?, UserOperationStatus>(UserOperationStatus.ContentStartNodeNotFound, existingUser);
-        }
-
         int[]? startMediaIds = GetIdsFromKeys(model.MediaStartNodeKeys, UmbracoObjectTypes.Media);
-
-        if (startMediaIds is null || startMediaIds.Length != model.MediaStartNodeKeys.Count)
-        {
-            return Attempt.FailWithStatus<IUser?, UserOperationStatus>(UserOperationStatus.MediaStartNodeNotFound, existingUser);
-        }
 
         Attempt<string?> isAuthorized = _userEditorAuthorizationHelper.IsAuthorized(
             performingUser,
-            existingUser,
+            model.ExistingUser,
             startContentIds,
             startMediaIds,
-            userGroups.Select(x => x.Alias));
+            model.UserGroups.Select(x => x.Alias));
 
         if (isAuthorized.Success is false)
         {
-            return Attempt.FailWithStatus<IUser?, UserOperationStatus>(UserOperationStatus.Unauthorized, existingUser);
+            return Attempt.FailWithStatus(UserOperationStatus.Unauthorized, model.ExistingUser);
         }
 
-        UserOperationStatus validationStatus = ValidateUserUpdateModel(existingUser, model);
+        UserOperationStatus validationStatus = ValidateUserUpdateModel(model);
         if (validationStatus is not UserOperationStatus.Success)
         {
-            return Attempt.FailWithStatus<IUser?, UserOperationStatus>(validationStatus, existingUser);
+            return Attempt.FailWithStatus(validationStatus, model.ExistingUser);
         }
 
         // Now that we're all authorized and validated we can actually map over changes and update the user
         // TODO: This probably shouldn't live here, once we have user content start nodes as keys this can be moved to a mapper
         // Alternatively it should be a map definition, but then we need to use entity service to resolve the IDs
         // TODO: Add auditing
-        IUser updated = MapUserUpdate(model, userGroups, existingUser, startContentIds, startMediaIds);
-        UserOperationStatus saveStatus = await userStore.SaveAsync(updated);
+        IUser updated = MapUserUpdate(model, model.ExistingUser, startContentIds, startMediaIds);
+        UserOperationStatus saveStatus = await SaveAsync(updated);
 
-        if (saveStatus is not UserOperationStatus.Success)
-        {
-            return Attempt.FailWithStatus<IUser?, UserOperationStatus>(saveStatus, existingUser);
-        }
-
-        scope.Complete();
-        return Attempt.SucceedWithStatus<IUser?, UserOperationStatus>(UserOperationStatus.Success, updated);
-
+        return saveStatus is UserOperationStatus.Success
+            ? Attempt.SucceedWithStatus(UserOperationStatus.Success, updated)
+            : Attempt.FailWithStatus(saveStatus, model.ExistingUser);
     }
 
-    public async Task<UserOperationStatus> SetAvatarAsync(Guid userKey, Guid temporaryFileKey)
+    public async Task<UserOperationStatus> SetAvatarAsync(IUser user, Guid temporaryFileKey)
     {
         using ICoreScope scope = ScopeProvider.CreateCoreScope();
-
-        IUser? user = await GetAsync(userKey);
-        if (user is null)
-        {
-            return UserOperationStatus.UserNotFound;
-        }
-
         TemporaryFileModel? avatarTemporaryFile = await _temporaryFileService.GetAsync(temporaryFileKey);
         _temporaryFileService.EnlistDeleteIfScopeCompletes(temporaryFileKey, ScopeProvider);
 
         if (avatarTemporaryFile is null)
         {
-            return UserOperationStatus.AvatarFileNotFound;
+            return UserOperationStatus.NotFound;
         }
 
         const string allowedAvatarFileTypes = "jpeg,jpg,gif,bmp,png,tiff,tif,webp";
@@ -927,20 +866,19 @@ internal class UserService : RepositoryService, IUserService
 
     private IUser MapUserUpdate(
         UserUpdateModel source,
-        ISet<IUserGroup> sourceUserGroups,
         IUser target,
         int[]? startContentIds,
         int[]? startMediaIds)
     {
         target.Name = source.Name;
-        target.Language = source.LanguageIsoCode;
+        target.Language = source.Language;
         target.Email = source.Email;
         target.Username = source.UserName;
         target.StartContentIds = startContentIds;
         target.StartMediaIds = startMediaIds;
 
         target.ClearGroups();
-        foreach (IUserGroup group in sourceUserGroups)
+        foreach (IUserGroup group in source.UserGroups)
         {
             target.AddGroup(group.ToReadOnlyGroup());
         }
@@ -948,15 +886,10 @@ internal class UserService : RepositoryService, IUserService
         return target;
     }
 
-    private UserOperationStatus ValidateUserUpdateModel(IUser existingUser, UserUpdateModel model)
+    private UserOperationStatus ValidateUserUpdateModel(UserUpdateModel model)
     {
-        if (_isoCodeValidator.IsValid(model.LanguageIsoCode) is false)
-        {
-            return UserOperationStatus.InvalidIsoCode;
-        }
-
         // We need to check if there's any Deny Local login providers present, if so we need to ensure that the user's email address cannot be changed.
-        if (_localLoginSettingProvider.HasDenyLocalLogin() && model.Email != existingUser.Email)
+        if (_localLoginSettingProvider.HasDenyLocalLogin() && model.Email != model.ExistingUser.Email)
         {
             return UserOperationStatus.EmailCannotBeChanged;
         }
@@ -966,13 +899,8 @@ internal class UserService : RepositoryService, IUserService
             return UserOperationStatus.UserNameIsNotEmail;
         }
 
-        if (!IsEmailValid(model.Email))
-        {
-            return UserOperationStatus.InvalidEmail;
-        }
-
         IUser? existing = GetByEmail(model.Email);
-        if (existing is not null && existing.Key != existingUser.Key)
+        if (existing is not null && existing.Key != model.ExistingUser.Key)
         {
             return UserOperationStatus.DuplicateEmail;
         }
@@ -980,21 +908,19 @@ internal class UserService : RepositoryService, IUserService
         // In case the user has updated their username to be a different email, but not their actually email
         // we have to try and get the user by email using their username, and ensure we don't get any collisions.
         existing = GetByEmail(model.UserName);
-        if (existing is not null && existing.Key != existingUser.Key)
+        if (existing is not null && existing.Key != model.ExistingUser.Key)
         {
             return UserOperationStatus.DuplicateUserName;
         }
 
         existing = GetByUsername(model.UserName);
-        if (existing is not null && existing.Key != existingUser.Key)
+        if (existing is not null && existing.Key != model.ExistingUser.Key)
         {
             return UserOperationStatus.DuplicateUserName;
         }
 
         return UserOperationStatus.Success;
     }
-
-    private static bool IsEmailValid(string email) => new EmailAddressAttribute().IsValid(email);
 
     private int[]? GetIdsFromKeys(IEnumerable<Guid>? guids, UmbracoObjectTypes type)
     {
@@ -1007,41 +933,29 @@ internal class UserService : RepositoryService, IUserService
         return keys;
     }
 
-    public async Task<Attempt<PasswordChangedModel, UserOperationStatus>> ChangePasswordAsync(Guid performingUserKey, ChangeUserPasswordModel model)
+    public async Task<Attempt<PasswordChangedModel, UserOperationStatus>> ChangePasswordAsync(Guid performingUserKey, ChangeBackofficeUserPasswordModel model)
     {
         IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
         using ICoreScope scope = ScopeProvider.CreateCoreScope();
-        IBackOfficeUserStore userStore = serviceScope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
 
-        IUser? user = await userStore.GetAsync(model.UserKey);
-        if (user is null)
-        {
-            return Attempt.FailWithStatus(UserOperationStatus.UserNotFound, new PasswordChangedModel());
-        }
-
-        IUser? performingUser = await userStore.GetAsync(performingUserKey);
+        IUser? performingUser = await GetAsync(performingUserKey);
         if (performingUser is null)
         {
             return Attempt.FailWithStatus(UserOperationStatus.MissingUser, new PasswordChangedModel());
         }
 
-        if (performingUser.Username == user.Username && string.IsNullOrEmpty(model.OldPassword))
+        if (performingUser.Username == model.User.Username && string.IsNullOrEmpty(model.OldPassword))
         {
             return Attempt.FailWithStatus(UserOperationStatus.OldPasswordRequired, new PasswordChangedModel());
         }
 
-        if (performingUser.IsAdmin() is false && user.IsAdmin())
+        if (performingUser.IsAdmin() is false && model.User.IsAdmin())
         {
             return Attempt.FailWithStatus(UserOperationStatus.Forbidden, new PasswordChangedModel());
         }
 
-        IBackOfficePasswordChanger passwordChanger = serviceScope.ServiceProvider.GetRequiredService<IBackOfficePasswordChanger>();
-        Attempt<PasswordChangedModel?> result = await passwordChanger.ChangeBackOfficePassword(new ChangeBackOfficeUserPasswordModel
-        {
-            NewPassword = model.NewPassword,
-            OldPassword = model.OldPassword,
-            User = user,
-        });
+        IBackofficePasswordChanger passwordChanger = serviceScope.ServiceProvider.GetRequiredService<IBackofficePasswordChanger>();
+        Attempt<PasswordChangedModel?> result = await passwordChanger.ChangeBackofficePassword(model);
 
         if (result.Success is false)
         {
@@ -1261,7 +1175,7 @@ internal class UserService : RepositoryService, IUserService
 
         if (user is null)
         {
-            return UserOperationStatus.UserNotFound;
+            return UserOperationStatus.NotFound;
         }
 
         // Check user hasn't logged in. If they have they may have made content changes which will mean
@@ -1298,12 +1212,12 @@ internal class UserService : RepositoryService, IUserService
         }
 
         IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore userStore = serviceScope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore userStore = serviceScope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
         IUser[] usersToDisable = (await userStore.GetUsersAsync(keys.ToArray())).ToArray();
 
         if (usersToDisable.Length != keys.Count)
         {
-            return UserOperationStatus.UserNotFound;
+            return UserOperationStatus.NotFound;
         }
 
         foreach (IUser user in usersToDisable)
@@ -1339,12 +1253,12 @@ internal class UserService : RepositoryService, IUserService
         }
 
         IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore userStore = serviceScope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore userStore = serviceScope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
         IUser[] usersToEnable = (await userStore.GetUsersAsync(keys.ToArray())).ToArray();
 
         if (usersToEnable.Length != keys.Count)
         {
-            return UserOperationStatus.UserNotFound;
+            return UserOperationStatus.NotFound;
         }
 
         foreach (IUser user in usersToEnable)
@@ -1364,7 +1278,7 @@ internal class UserService : RepositoryService, IUserService
 
         if (user is null)
         {
-            return UserOperationStatus.UserNotFound;
+            return UserOperationStatus.NotFound;
         }
 
         if (string.IsNullOrWhiteSpace(user.Avatar))
@@ -1374,11 +1288,11 @@ internal class UserService : RepositoryService, IUserService
         }
 
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
         string filePath = user.Avatar;
         user.Avatar = null;
-        UserOperationStatus result = await backOfficeUserStore.SaveAsync(user);
+        UserOperationStatus result = await backofficeUserStore.SaveAsync(user);
 
         if (result is not UserOperationStatus.Success)
         {
@@ -1409,8 +1323,8 @@ internal class UserService : RepositoryService, IUserService
         }
 
         IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
-        ICoreBackOfficeUserManager manager = serviceScope.ServiceProvider.GetRequiredService<ICoreBackOfficeUserManager>();
-        IBackOfficeUserStore userStore = serviceScope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        ICoreBackofficeUserManager manager = serviceScope.ServiceProvider.GetRequiredService<ICoreBackofficeUserManager>();
+        IBackofficeUserStore userStore = serviceScope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
         IEnumerable<IUser> usersToUnlock = await userStore.GetUsersAsync(keys);
 
@@ -1533,9 +1447,9 @@ internal class UserService : RepositoryService, IUserService
         }
 
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
-        return backOfficeUserStore.GetAllInGroupAsync(groupId.Value).GetAwaiter().GetResult();
+        return backofficeUserStore.GetAllInGroupAsync(groupId.Value).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -1602,9 +1516,9 @@ internal class UserService : RepositoryService, IUserService
     public IUser? GetUserById(int id)
     {
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
-        return backOfficeUserStore.GetAsync(id).GetAwaiter().GetResult();
+        return backofficeUserStore.GetAsync(id).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -1615,25 +1529,25 @@ internal class UserService : RepositoryService, IUserService
     public Task<IUser?> GetAsync(Guid key)
     {
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
-        return backOfficeUserStore.GetAsync(key);
+        return backofficeUserStore.GetAsync(key);
     }
 
     public Task<IEnumerable<IUser>> GetAsync(IEnumerable<Guid> keys)
     {
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
-        return backOfficeUserStore.GetUsersAsync(keys.ToArray());
+        return backofficeUserStore.GetUsersAsync(keys.ToArray());
     }
 
     public IEnumerable<IUser> GetUsersById(params int[]? ids)
     {
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
-        IBackOfficeUserStore backOfficeUserStore = scope.ServiceProvider.GetRequiredService<IBackOfficeUserStore>();
+        IBackofficeUserStore backofficeUserStore = scope.ServiceProvider.GetRequiredService<IBackofficeUserStore>();
 
-        return backOfficeUserStore.GetUsersAsync(ids).GetAwaiter().GetResult();
+        return backofficeUserStore.GetUsersAsync(ids).GetAwaiter().GetResult();
     }
 
     /// <summary>

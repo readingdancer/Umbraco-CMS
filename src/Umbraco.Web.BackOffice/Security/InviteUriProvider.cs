@@ -15,13 +15,13 @@ namespace Umbraco.Cms.Web.BackOffice.Security;
 public class InviteUriProvider : IInviteUriProvider
 {
     private readonly LinkGenerator _linkGenerator;
-    private readonly ICoreBackOfficeUserManager _userManager;
+    private readonly ICoreBackofficeUserManager _userManager;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly WebRoutingSettings _webRoutingSettings;
 
     public InviteUriProvider(
         LinkGenerator linkGenerator,
-        ICoreBackOfficeUserManager userManager,
+        ICoreBackofficeUserManager userManager,
         IHttpContextAccessor httpContextAccessor,
         IOptions<WebRoutingSettings> webRoutingSettings)
     {

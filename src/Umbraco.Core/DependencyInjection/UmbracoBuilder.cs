@@ -286,7 +286,6 @@ namespace Umbraco.Cms.Core.DependencyInjection
             Services.AddUnique<ILocalizationService, LocalizationService>();
             Services.AddUnique<IDictionaryItemService, DictionaryItemService>();
             Services.AddUnique<IDataTypeContainerService, DataTypeContainerService>();
-            Services.AddUnique<IIsoCodeValidator, IsoCodeValidator>();
             Services.AddUnique<ILanguageService, LanguageService>();
             Services.AddUnique<IMacroService, MacroService>();
             Services.AddUnique<IMemberGroupService, MemberGroupService>();

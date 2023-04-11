@@ -4,7 +4,6 @@ using Umbraco.Cms.Api.Management.Factories;
 using Umbraco.Cms.Api.Management.ViewModels.Users;
 using Umbraco.Cms.Core.Models.Membership;
 using Umbraco.Cms.Core.Services;
-using Umbraco.Cms.Core.Services.OperationStatus;
 
 namespace Umbraco.Cms.Api.Management.Controllers.Users;
 
@@ -31,7 +30,7 @@ public class ByKeyUsersController : UsersControllerBase
 
         if (user is null)
         {
-            return UserOperationStatusResult(UserOperationStatus.UserNotFound);
+            return NotFound();
         }
 
         UserResponseModel responseModel = _userPresentationFactory.CreateResponseModel(user);
