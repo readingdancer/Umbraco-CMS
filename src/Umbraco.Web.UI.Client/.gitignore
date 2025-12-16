@@ -9,7 +9,10 @@ lerna-debug.log*
 
 node_modules
 dist
+dist-bundled
 dist-cms
+dist-cms-bundled
+dist-final
 dist-ssr
 /types
 *.tsbuildinfo

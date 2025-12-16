@@ -166,6 +166,11 @@
 	"scripts": {
 		"backoffice:test:e2e": "npx playwright test",
 		"build-storybook": "npm run wc-analyze && storybook build",
+		"build:bundle": "vite build --config vite.bundle.config.ts",
+		"build:stubs": "node ./devops/build/generate-stubs.js",
+		"build:optimized": "npm run build && npm run build:workspaces && npm run build:bundle && npm run build:stubs",
+		"build:optimized:cms": "npm run build:optimized && npm run generate:manifest && npm run package:validate && node ./devops/build/copy-optimized-to-cms.js",
+		"build:benchmark": "node ./devops/build/benchmark-builds.js",
 		"build:for:cms": "npm run build && npm run build:workspaces && npm run generate:manifest && npm run package:validate && node ./devops/build/copy-to-cms.js",
 		"build:for:npm": "npm run build -- --declaration && npm run generate:manifest && npm run package:validate",
 		"build:for:static": "cross-env VITE_UMBRACO_USE_MSW=on vite build",
