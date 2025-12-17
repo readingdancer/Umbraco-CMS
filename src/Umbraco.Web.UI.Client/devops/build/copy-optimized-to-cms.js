@@ -64,21 +64,21 @@ function getDirSize(dir) {
 
 // Statistics
 const totalJsFiles = countFiles(outputDir, '.js');
-const appJsPath = resolve(outputDir, 'app.js');
+const appJsPath = resolve(outputDir, 'apps/app/app.element.js');
 const bundleSize = existsSync(appJsPath) ? statSync(appJsPath).size : 0;
-const stubCount = totalJsFiles - 1; // All except app.js are stubs
+const stubCount = totalJsFiles - 1; // All except app.element.js are stubs
 
 console.log('\n📊 Build Statistics:');
-console.log(`   Main bundle: app.js (${(bundleSize / 1024 / 1024).toFixed(2)} MB)`);
+console.log(`   Main bundle: apps/app/app.element.js (${(bundleSize / 1024 / 1024).toFixed(2)} MB)`);
 console.log(`   Stub files: ${stubCount}`);
 console.log(`   Total JS files: ${totalJsFiles}`);
 
 console.log('\n✅ Copy complete!');
 console.log(`   Output: ${resolve(outputDir)}`);
 console.log('\n📋 How it works (single bundle mode):');
-console.log('   1. Browser loads apps/app/app.element.js (entry point)');
-console.log('   2. All code is in app.js (single bundle)');
-console.log('   3. Stubs re-export from app.js for import map compatibility');
+console.log('   1. Browser loads apps/app/app.element.js (bundled entry point)');
+console.log('   2. All code is bundled into app.element.js');
+console.log('   3. Stubs re-export from the bundle for import map compatibility');
 console.log('   4. Extensions import from stubs → same bundle instance');
 console.log('   5. 100% backward compatible!');
 
