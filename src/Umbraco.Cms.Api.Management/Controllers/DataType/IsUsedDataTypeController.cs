@@ -28,7 +28,6 @@ public class IsUsedDataTypeController : DataTypeControllerBase
     /// <returns>
     /// An <see cref="IActionResult"/> containing a boolean value: <c>true</c> if the data type is used; <c>false</c> otherwise. Returns <see cref="StatusCodes.Status404NotFound"/> if the data type does not exist.
     /// </returns>
-
     [HttpGet("{id:guid}/is-used")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
