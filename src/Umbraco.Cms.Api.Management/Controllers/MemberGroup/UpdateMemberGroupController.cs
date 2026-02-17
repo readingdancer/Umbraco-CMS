@@ -36,7 +36,7 @@ public class UpdateMemberGroupController : MemberGroupControllerBase
     /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     /// <param name="id">The unique identifier of the member group to update.</param>
     /// <param name="model">The model containing the updated member group details.</param>
-    /// <returns>An <see cref="IActionResult"/> indicating the outcome of the update operation.</returns
+    /// <returns>An <see cref="IActionResult"/> indicating the outcome of the update operation.</returns>
     [HttpPut($"{{{nameof(id)}:guid}}")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
