@@ -126,7 +126,7 @@ namespace Umbraco.Extensions
         /// <param name="sql">The Sql statement.</param>
         /// <param name="field">An expression specifying the field.</param>
         /// <param name="values">The values.</param>
-        /// <param name="alias"></param>
+        /// <param name="alias">The table alias for the field.</param>
         /// <returns>The Sql statement.</returns>
         public static Sql<ISqlContext> WhereIn<TDto>(this Sql<ISqlContext> sql, Expression<Func<TDto, object?>> field, IEnumerable? values, string alias)
         {

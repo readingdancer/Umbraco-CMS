@@ -216,8 +216,8 @@ public class RichTextPropertyEditor : DataEditor
         /// <summary>
         ///     Resolve references from <see cref="IDataValueEditor" /> values
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">The rich text editor value to resolve references from.</param>
+        /// <returns>The entity references found in the value.</returns>
         public override IEnumerable<UmbracoEntityReference> GetReferences(object? value)
         {
             if (TryParseEditorValue(value, out RichTextEditorValue? richTextEditorValue) is false)
@@ -300,9 +300,9 @@ public class RichTextPropertyEditor : DataEditor
         /// <summary>
         ///     Format the data for persistence
         /// </summary>
-        /// <param name="editorValue"></param>
-        /// <param name="currentValue"></param>
-        /// <returns></returns>
+        /// <param name="editorValue">The value from the editor.</param>
+        /// <param name="currentValue">The current property value.</param>
+        /// <returns>The formatted value for persistence.</returns>
         public override object? FromEditor(ContentPropertyData editorValue, object? currentValue)
         {
             // See note on BlockEditorPropertyValueEditor.FromEditor for why we can't return early with only a null or empty editorValue.

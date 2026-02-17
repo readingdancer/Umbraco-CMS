@@ -69,9 +69,9 @@ internal static class UmbracoDatabaseExtensions
     /// <summary>
     ///     Returns true if the database contains the specified table
     /// </summary>
-    /// <param name="database"></param>
-    /// <param name="tableName"></param>
-    /// <returns></returns>
+    /// <param name="database">The database to check.</param>
+    /// <param name="tableName">The table name to look for.</param>
+    /// <returns>True if the table exists.</returns>
     public static bool HasTable(this IUmbracoDatabase database, string tableName)
     {
         try
@@ -88,8 +88,8 @@ internal static class UmbracoDatabaseExtensions
     /// <summary>
     ///     Returns true if the database contains no tables
     /// </summary>
-    /// <param name="database"></param>
-    /// <returns></returns>
+    /// <param name="database">The database to check.</param>
+    /// <returns>True if the database has no tables.</returns>
     public static bool IsDatabaseEmpty(this IUmbracoDatabase database)
         => database.SqlContext.SqlSyntax.GetTablesInSchema(database).Any() == false;
 

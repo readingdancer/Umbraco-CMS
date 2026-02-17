@@ -38,8 +38,8 @@ public class JsonValueConverter : PropertyValueConverterBase, IDeliveryApiProper
     ///     Unless it's in the Excluded Property Editors list
     ///     The new MediaPicker 3 stores JSON but we want to use its own ValueConvertor
     /// </summary>
-    /// <param name="propertyType"></param>
-    /// <returns></returns>
+    /// <param name="propertyType">The published property type to check.</param>
+    /// <returns>True if this converter can convert the property type.</returns>
     public override bool IsConverter(IPublishedPropertyType propertyType) =>
         _propertyEditors.TryGet(propertyType.EditorAlias, out IDataEditor? editor)
         && editor.GetValueEditor().ValueType.InvariantEquals(ValueTypes.Json)

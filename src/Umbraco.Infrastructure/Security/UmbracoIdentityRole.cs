@@ -78,7 +78,7 @@ public class UmbracoIdentityRole : IdentityRole, IRememberBeingDirty
     public override string? ConcurrencyStamp { get => base.ConcurrencyStamp; set => base.ConcurrencyStamp = value; }
 
     /// <summary>
-    ///     Gets the <see cref="BeingDirty" /> for change tracking
+    ///     Gets the <see cref="BeingDirty" /> instance used for change tracking.
     /// </summary>
     protected BeingDirty BeingDirty { get; } = new();
 

@@ -44,13 +44,13 @@ public interface IUmbracoIndexingHandler
     /// <summary>
     ///     Deletes all documents for the content type Ids
     /// </summary>
-    /// <param name="removedContentTypes"></param>
+    /// <param name="removedContentTypes">The content type IDs whose documents should be deleted.</param>
     void DeleteDocumentsForContentTypes(IReadOnlyCollection<int> removedContentTypes);
 
     /// <summary>
     ///     Remove an item from an index
     /// </summary>
-    /// <param name="entityId"></param>
+    /// <param name="entityId">The entity ID to remove from the index.</param>
     /// <param name="keepIfUnpublished">
     ///     If true, indicates that we will only delete this item from indexes that don't support unpublished content.
     ///     If false it will delete this from all indexes regardless.
@@ -60,7 +60,7 @@ public interface IUmbracoIndexingHandler
     /// <summary>
     ///     Remove items from an index
     /// </summary>
-    /// <param name="entityIds"></param>
+    /// <param name="entityIds">The entity IDs to remove from the index.</param>
     /// <param name="keepIfUnpublished">
     ///     If true, indicates that we will only delete this item from indexes that don't support unpublished content.
     ///     If false it will delete this from all indexes regardless.

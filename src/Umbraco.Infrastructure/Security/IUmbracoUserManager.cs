@@ -327,7 +327,7 @@ public interface IUmbracoUserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user whose two factor authentication enabled status should be retrieved.</param>
     /// <returns>
-    ///     The <see cref="Task" /> that represents the asynchronous operation, true if the specified <paramref name="user " />
+    ///     The <see cref="Task" /> that represents the asynchronous operation, true if the specified <paramref name="user" />
     ///     has two factor authentication enabled, otherwise false.
     /// </returns>
     Task<bool> GetTwoFactorEnabledAsync(TUser user);
@@ -336,7 +336,7 @@ public interface IUmbracoUserManager<TUser> : IDisposable
     ///     Gets a list of valid two factor token providers for the specified <paramref name="user" />,
     ///     as an asynchronous operation.
     /// </summary>
-    /// <param name="user">The user the whose two factor authentication providers will be returned.</param>
+    /// <param name="user">The user whose two factor authentication providers will be returned.</param>
     /// <returns>
     ///     The <see cref="Task" /> that represents result of the asynchronous operation, a list of two
     ///     factor authentication providers for the specified user.

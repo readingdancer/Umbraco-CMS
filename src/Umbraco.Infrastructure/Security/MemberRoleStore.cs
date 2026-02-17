@@ -248,8 +248,8 @@ public class MemberRoleStore : IQueryableRoleStore<UmbracoIdentityRole>
     /// <summary>
     ///     Maps a member group to an identity role
     /// </summary>
-    /// <param name="memberGroup"></param>
-    /// <returns></returns>
+    /// <param name="memberGroup">The member group to map.</param>
+    /// <returns>The mapped identity role.</returns>
     private UmbracoIdentityRole MapFromMemberGroup(IMemberGroup memberGroup)
     {
         // NOTE: there is a ConcurrencyStamp property but we don't use it. The purpose
@@ -265,9 +265,9 @@ public class MemberRoleStore : IQueryableRoleStore<UmbracoIdentityRole>
     /// <summary>
     ///     Map an identity role to a member group
     /// </summary>
-    /// <param name="role"></param>
-    /// <param name="memberGroup"></param>
-    /// <returns></returns>
+    /// <param name="role">The identity role to map.</param>
+    /// <param name="memberGroup">The member group to update.</param>
+    /// <returns>True if any properties were changed.</returns>
     private bool MapToMemberGroup(UmbracoIdentityRole role, IMemberGroup memberGroup)
     {
         var anythingChanged = false;

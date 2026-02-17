@@ -25,10 +25,10 @@ internal static class SqlSyntaxProviderExtensions
     /// <summary>
     ///     Returns the quotes tableName.columnName combo
     /// </summary>
-    /// <param name="sql"></param>
-    /// <param name="tableName"></param>
-    /// <param name="columnName"></param>
-    /// <returns></returns>
+    /// <param name="sql">The SQL syntax provider.</param>
+    /// <param name="tableName">The table name.</param>
+    /// <param name="columnName">The column name.</param>
+    /// <returns>The quoted table.column string.</returns>
     public static string GetQuotedColumn(this ISqlSyntaxProvider sql, string tableName, string columnName) =>
         sql.GetQuotedTableName(tableName) + "." + sql.GetQuotedColumnName(columnName);
 

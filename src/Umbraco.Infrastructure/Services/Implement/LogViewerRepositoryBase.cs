@@ -17,7 +17,7 @@ public abstract class LogViewerRepositoryBase : ILogViewerRepository
     /// <summary>
     /// Initializes a new instance of the <see cref="LogViewerRepositoryBase"/> class.
     /// </summary>
-    /// <param name="umbracoFileConfig"></param>
+    /// <param name="umbracoFileConfig">The Umbraco file configuration for log file paths.</param>
     public LogViewerRepositoryBase(UmbracoFileConfiguration umbracoFileConfig) => _umbracoFileConfig = umbracoFileConfig;
 
     /// <inheritdoc />

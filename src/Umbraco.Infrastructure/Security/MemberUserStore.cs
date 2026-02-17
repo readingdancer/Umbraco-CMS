@@ -35,7 +35,7 @@ public class MemberUserStore : UmbracoUserStore<MemberIdentityUser, UmbracoIdent
     /// <param name="describer">The error describer</param>
     /// <param name="externalLoginService">The external login service</param>
     /// <param name="twoFactorLoginService">The two factor login service</param>
-    /// <param name="memberCache"></param>
+    /// <param name="memberCache">The published member cache for resolving member content.</param>
     public MemberUserStore(
         IMemberService memberService,
         IUmbracoMapper mapper,

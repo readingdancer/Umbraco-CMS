@@ -36,7 +36,7 @@ public sealed class ContentIndexingNotificationHandler :
     /// <summary>
     ///     Updates indexes based on content changes
     /// </summary>
-    /// <param name="args"></param>
+    /// <param name="args">The content cache refresher notification.</param>
     public void Handle(ContentCacheRefresherNotification args)
     {
         if (!_umbracoIndexingHandler.Enabled)

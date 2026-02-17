@@ -141,7 +141,7 @@ internal sealed class UserRepository : EntityRepositoryBase<Guid, IUser>, IUserR
     /// <summary>
     ///     Returns a user by username
     /// </summary>
-    /// <param name="username"></param>
+    /// <param name="username">The username of the user to retrieve.</param>
     /// <param name="includeSecurityData">
     ///     Can be used for slightly faster user lookups if the result doesn't require security data (i.e. groups, apps &amp; start nodes).
     ///     This is really only used for a shim in order to upgrade to 7.6.
@@ -213,7 +213,7 @@ internal sealed class UserRepository : EntityRepositoryBase<Guid, IUser>, IUserR
     /// <summary>
     ///     Returns a user by id
     /// </summary>
-    /// <param name="id"></param>
+    /// <param name="id">The user ID to retrieve.</param>
     /// <param name="includeSecurityData">
     ///     This is really only used for a shim in order to upgrade to 7.6 but could be used
     ///     for slightly faster user lookups if the result doesn't require security data (i.e. groups, apps &amp; start nodes)
@@ -1184,12 +1184,12 @@ SELECT 4 AS {keyAlias}, COUNT(id) AS {valueAlias} FROM {userTableName}
     /// <summary>
     ///     Gets paged user results
     /// </summary>
-    /// <param name="query"></param>
-    /// <param name="pageIndex"></param>
-    /// <param name="pageSize"></param>
-    /// <param name="totalRecords"></param>
-    /// <param name="orderBy"></param>
-    /// <param name="orderDirection"></param>
+    /// <param name="query">The query to filter users.</param>
+    /// <param name="pageIndex">The zero-based page index.</param>
+    /// <param name="pageSize">The number of items per page.</param>
+    /// <param name="totalRecords">The total number of records matching the query.</param>
+    /// <param name="orderBy">The expression to order results by.</param>
+    /// <param name="orderDirection">The sort direction.</param>
     /// <param name="includeUserGroups">
     ///     A filter to only include user that belong to these user groups
     /// </param>
@@ -1197,8 +1197,8 @@ SELECT 4 AS {keyAlias}, COUNT(id) AS {valueAlias} FROM {userTableName}
     ///     A filter to only include users that do not belong to these user groups
     /// </param>
     /// <param name="userState">Optional parameter to filter by specified user state</param>
-    /// <param name="filter"></param>
-    /// <returns></returns>
+    /// <param name="filter">Optional filter to apply to results.</param>
+    /// <returns>A paged enumerable of users.</returns>
     /// <remarks>
     ///     The query supplied will ONLY work with data specifically on the umbracoUser table because we are using NPoco paging
     ///     (SQL paging)

@@ -43,7 +43,7 @@ internal static class ImageCropperConfigurationExtensions
     /// <summary>
     ///     Applies the configuration to ensure only valid crops are kept and have the correct width/height.
     /// </summary>
-    /// <param name="imageCropperValue"></param>
+    /// <param name="imageCropperValue">The image cropper value to apply configuration to.</param>
     /// <param name="configuration">The configuration.</param>
     public static void ApplyConfiguration(this ImageCropperValue imageCropperValue, ImageCropperConfiguration? configuration)
     {

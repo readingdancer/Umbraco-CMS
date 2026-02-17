@@ -47,7 +47,7 @@ public sealed class ContentTypeIndexingNotificationHandler : INotificationHandle
     /// <summary>
     ///     Updates indexes based on content type changes
     /// </summary>
-    /// <param name="args"></param>
+    /// <param name="args">The content type cache refresher notification.</param>
     public void Handle(ContentTypeCacheRefresherNotification args)
     {
         if (!_umbracoIndexingHandler.Enabled)

@@ -350,10 +350,10 @@ public abstract class BlockValuePropertyValueEditorBase<TValue, TLayout> : DataV
     /// <summary>
     /// Updates the invariant data in the source with the invariant data in the value if allowed
     /// </summary>
-    /// <param name="source"></param>
-    /// <param name="target"></param>
-    /// <param name="canUpdateInvariantData"></param>
-    /// <returns></returns>
+    /// <param name="source">The source block editor data.</param>
+    /// <param name="target">The target block editor data.</param>
+    /// <param name="canUpdateInvariantData">Whether invariant data can be updated.</param>
+    /// <returns>The merged block editor data, or null.</returns>
     internal virtual BlockEditorData<TValue, TLayout>? UpdateSourceInvariantData(BlockEditorData<TValue, TLayout>? source, BlockEditorData<TValue, TLayout>? target, bool canUpdateInvariantData)
     {
         if (source is null && target is null)

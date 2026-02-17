@@ -10,14 +10,14 @@ public interface IMemberManager : IUmbracoUserManager<MemberIdentityUser>
     /// <summary>
     ///     Returns the <see cref="IPublishedContent" /> instance for the specified <see cref="MemberIdentityUser" />
     /// </summary>
-    /// <param name="user"></param>
-    /// <returns></returns>
+    /// <param name="user">The member identity user.</param>
+    /// <returns>The published content for the member, or null if not found.</returns>
     IPublishedContent? AsPublishedMember(MemberIdentityUser user);
 
     /// <summary>
     ///     Returns the currently logged in member if there is one, else returns null
     /// </summary>
-    /// <returns></returns>
+    /// <returns>The current member, or null if not logged in.</returns>
     Task<MemberIdentityUser?> GetCurrentMemberAsync();
 
     /// <summary>
@@ -35,7 +35,7 @@ public interface IMemberManager : IUmbracoUserManager<MemberIdentityUser>
     /// <summary>
     ///     Check if a member is logged in
     /// </summary>
-    /// <returns></returns>
+    /// <returns>True if a member is logged in.</returns>
     bool IsLoggedIn();
 
     /// <summary>
@@ -48,8 +48,8 @@ public interface IMemberManager : IUmbracoUserManager<MemberIdentityUser>
     /// <summary>
     ///     Checks if the current user has access to the paths
     /// </summary>
-    /// <param name="paths"></param>
-    /// <returns></returns>
+    /// <param name="paths">The document paths to check access for.</param>
+    /// <returns>A dictionary mapping each path to whether the member has access.</returns>
     Task<IReadOnlyDictionary<string, bool>> MemberHasAccessAsync(IEnumerable<string> paths);
 
     /// <summary>

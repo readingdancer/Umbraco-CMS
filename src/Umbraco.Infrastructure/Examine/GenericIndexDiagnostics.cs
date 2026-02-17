@@ -65,7 +65,7 @@ public class GenericIndexDiagnostics : IIndexDiagnostics
     /// </summary>
     /// <returns>
     /// An <see cref="Attempt{string?}"/> that succeeds if the index is healthy, or fails with an error message if not.
-    /// </returns
+    /// </returns>
     public Attempt<string?> IsHealthy()
     {
         if (!_index.IndexExists())

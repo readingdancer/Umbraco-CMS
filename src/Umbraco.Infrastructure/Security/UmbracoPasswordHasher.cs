@@ -47,10 +47,10 @@ public class UmbracoPasswordHasher<TUser> : PasswordHasher<TUser>
     /// <summary>
     ///     Verifies a user's hashed password
     /// </summary>
-    /// <param name="user"></param>
-    /// <param name="hashedPassword"></param>
-    /// <param name="providedPassword"></param>
-    /// <returns></returns>
+    /// <param name="user">The user whose password is being verified.</param>
+    /// <param name="hashedPassword">The stored hashed password.</param>
+    /// <param name="providedPassword">The plain-text password to verify.</param>
+    /// <returns>The verification result indicating whether the password matches.</returns>
     /// <remarks>
     ///     This will check the user's current hashed password format stored with their user row and use that to verify the
     ///     hash. This could be any hashes

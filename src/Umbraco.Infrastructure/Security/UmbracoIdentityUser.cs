@@ -275,12 +275,12 @@ public abstract class UmbracoIdentityUser : IdentityUser, IRememberBeingDirty
     }
 
     /// <summary>
-    ///     Gets the <see cref="BeingDirty" /> for change tracking
+    ///     Gets the <see cref="BeingDirty" /> instance used for change tracking.
     /// </summary>
     protected BeingDirty BeingDirty { get; } = new();
 
     /// <summary>
-    ///     Gets or sets a value indicating whether the IUser IsApproved
+    ///     Gets or sets a value indicating whether the user is approved.
     /// </summary>
     public bool IsApproved { get; set; }
 

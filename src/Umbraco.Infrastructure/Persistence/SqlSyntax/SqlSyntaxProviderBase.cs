@@ -547,9 +547,9 @@ public abstract class SqlSyntaxProviderBase<TSyntax> : ISqlSyntaxProvider
     /// <summary>
     ///     This is used ONLY if we need to format datetime without using SQL parameters (i.e. during migrations)
     /// </summary>
-    /// <param name="date"></param>
-    /// <param name="includeTime"></param>
-    /// <returns></returns>
+    /// <param name="date">The date to format.</param>
+    /// <param name="includeTime">Whether to include the time component.</param>
+    /// <returns>The formatted date string.</returns>
     /// <remarks>
     ///     MSSQL has a DateTime standard that is unambiguous and works on all servers:
     ///     YYYYMMDD HH:mm:ss

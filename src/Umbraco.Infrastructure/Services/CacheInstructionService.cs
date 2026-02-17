@@ -397,14 +397,14 @@ namespace Umbraco.Cms
             /// <summary>
             ///     Processes the instruction batch and checks for errors.
             /// </summary>
-            /// <param name="cacheRefreshers"></param>
-            /// <param name="instructionBatch"></param>
-            /// <param name="instruction"></param>
+            /// <param name="cacheRefreshers">The collection of cache refreshers to notify.</param>
+            /// <param name="instructionBatch">The batch of refresh instructions to process.</param>
+            /// <param name="instruction">The current instruction being processed.</param>
             /// <param name="processed">
             ///     Tracks which instructions have already been processed to avoid duplicates
             /// </param>
-            /// <param name="cancellationToken"></param>
-            /// <param name="lastId"></param>
+            /// <param name="cancellationToken">Cancellation token.</param>
+            /// <param name="lastId">The last processed instruction ID, updated when processing completes.</param>
             /// <returns>
             /// Returns true if all instructions in the batch were processed, otherwise false if they could not be due to the app being shut down
             /// </returns>

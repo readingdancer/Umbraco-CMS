@@ -233,7 +233,7 @@ public class ImageCropperPropertyEditor : DataEditor,
     /// <summary>
     ///     The paths to all image cropper property files contained within a collection of content entities
     /// </summary>
-    /// <param name="entities"></param>
+    /// <param name="entities">The content entities to search for image cropper properties.</param>
     private IEnumerable<string> ContainedFilePaths(IEnumerable<IContentBase> entities) => entities
         .SelectMany(x => x.Properties)
         .Where(IsCropperField)
@@ -243,8 +243,8 @@ public class ImageCropperPropertyEditor : DataEditor,
     /// <summary>
     ///     Look through all property values stored against the property and resolve any file paths stored
     /// </summary>
-    /// <param name="prop"></param>
-    /// <returns></returns>
+    /// <param name="prop">The property containing image cropper values.</param>
+    /// <returns>The file paths from the property values.</returns>
     private IEnumerable<string> GetFilePathsFromPropertyValues(IProperty prop)
     {
         // parses out the src from a json string
@@ -269,9 +269,9 @@ public class ImageCropperPropertyEditor : DataEditor,
     /// <summary>
     ///     Returns the "src" property from the json structure if the value is formatted correctly
     /// </summary>
-    /// <param name="propVal"></param>
+    /// <param name="propVal">The property value (JSON string) to extract the src from.</param>
     /// <param name="relative">Should the path returned be the application relative path</param>
-    /// <returns></returns>
+    /// <returns>The src path from the property value, or null if not found.</returns>
     private string? GetFileSrcFromPropertyValue(object? propVal, bool relative = true)
     {
         if (propVal is not string stringValue)
