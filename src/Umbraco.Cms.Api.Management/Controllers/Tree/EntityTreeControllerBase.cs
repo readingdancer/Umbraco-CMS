@@ -13,6 +13,10 @@ using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.Cms.Api.Management.Controllers.Tree;
 
+/// <summary>
+/// Serves as the base controller for managing entity trees, where each entity is of type <typeparamref name="TItem"/>.
+/// Provides common functionality for tree-based entity management in the API.
+/// </summary>
 public abstract class EntityTreeControllerBase<TItem> : ManagementApiControllerBase
     where TItem : EntityTreeItemResponseModel, new()
 {

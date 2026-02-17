@@ -35,6 +35,11 @@ public static partial class UmbracoBuilderExtensions
         .AddDistributedCache()
         .AddCoreNotifications();
 
+    /// <summary>
+    /// Registers the essential services required for the Umbraco back office, including the back office path generator and the physical file system implementation.
+    /// </summary>
+    /// <param name="builder">The <see cref="IUmbracoBuilder"/> to add services to.</param>
+    /// <returns>The updated <see cref="IUmbracoBuilder"/> instance.</returns>
     public static IUmbracoBuilder AddBackOfficeCore(this IUmbracoBuilder builder)
     {
         builder.Services.AddUnique<IBackOfficePathGenerator, UmbracoBackOfficePathGenerator>();
