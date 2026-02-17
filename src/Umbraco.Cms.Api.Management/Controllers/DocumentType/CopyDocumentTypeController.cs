@@ -21,9 +21,9 @@ public class CopyDocumentTypeController : DocumentTypeControllerBase
     private readonly IContentTypeService _contentTypeService;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="T:Umbraco.Cms.Api.Management.Controllers.DocumentType.CopyDocumentTypeController"/> class.
+    /// Initializes a new instance of the <see cref="CopyDocumentTypeController"/> class.
     /// </summary>
-    /// <param name="contentTypeService">An instance of <see cref="T:Umbraco.Cms.Core.Services.IContentTypeService"/> used to manage content types.</param>
+    /// <param name="contentTypeService">An instance of <see cref="IContentTypeService"/> used to manage content types.</param>
     public CopyDocumentTypeController(IContentTypeService contentTypeService)
         => _contentTypeService = contentTypeService;
 
