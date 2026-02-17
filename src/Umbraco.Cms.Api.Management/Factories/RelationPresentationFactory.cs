@@ -33,7 +33,7 @@ public class RelationPresentationFactory : IRelationPresentationFactory
     /// <returns>
     /// A <see cref="RelationResponseModel"/> representing the relation, with references to the parent and child entities
     /// and their names populated if they can be resolved.
-    /// </returns
+    /// </returns>
     public RelationResponseModel Create(IRelation relation)
     {
         IEntitySlim child = _entityService.Get(relation.ChildId)!;
