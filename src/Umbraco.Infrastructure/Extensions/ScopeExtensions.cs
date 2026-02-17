@@ -25,7 +25,6 @@ public static class ScopeExtensions
     /// </summary>
     /// <param name="scope">The scope on which to acquire the write locks.</param>
     /// <param name="lockIds">The collection of lock IDs to acquire write locks for.</param>
-    
     public static void WriteLock(this IScope scope, ICollection<int> lockIds)
     {
         foreach (var lockId in lockIds)
