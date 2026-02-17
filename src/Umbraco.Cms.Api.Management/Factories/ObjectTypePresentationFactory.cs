@@ -12,9 +12,9 @@ public class ObjectTypePresentationFactory : IObjectTypePresentationFactory
     private readonly IRelationService _relationService;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="T:Umbraco.Cms.Api.Management.Factories.ObjectTypePresentationFactory"/> class with the specified relation service.
+    /// Initializes a new instance of the <see cref="ObjectTypePresentationFactory"/> class with the specified relation service.
     /// </summary>
-    /// <param name="relationService">An instance of <see cref="T:Umbraco.Cms.Core.Services.IRelationService"/> to be used by the factory.</param>
+    /// <param name="relationService">An instance of <see cref="IRelationService"/> to be used by the factory.</param>
     public ObjectTypePresentationFactory(IRelationService relationService)
     {
         _relationService = relationService;

@@ -15,7 +15,7 @@ public class GetTelemetryController : TelemetryControllerBase
     private readonly IMetricsConsentService _metricsConsentService;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="T:Umbraco.Cms.Api.Management.Controllers.Telemetry.GetTelemetryController"/> class.
+    /// Initializes a new instance of the <see cref="GetTelemetryController"/> class.
     /// </summary>
     /// <param name="metricsConsentService">Service used to manage metrics consent.</param>
     public GetTelemetryController(IMetricsConsentService metricsConsentService) => _metricsConsentService = metricsConsentService;

@@ -43,9 +43,9 @@ public class StylesheetTreeControllerBase : FileSystemTreeControllerBase
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="T:Umbraco.Cms.Api.Management.Controllers.Stylesheet.Tree.StylesheetTreeControllerBase"/> class with the specified file systems.
+    /// Initializes a new instance of the <see cref="StylesheetTreeControllerBase"/> class with the specified file systems.
     /// </summary>
-    /// <param name="fileSystems">The <see cref="T:Umbraco.Cms.Core.IO.FileSystems"/> instance to be used by the controller.</param>
+    /// <param name="fileSystems">The <see cref="FileSystems"/> instance to be used by the controller.</param>
     [Obsolete("Please use the constructor taking all parameters. Scheduled to be removed in Umbraco 19.")]
     public StylesheetTreeControllerBase(FileSystems fileSystems)
         : base()

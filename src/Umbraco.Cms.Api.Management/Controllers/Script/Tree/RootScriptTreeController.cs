@@ -17,9 +17,9 @@ public class RootScriptTreeController : ScriptTreeControllerBase
 {
     // TODO Remove the static service provider, and replace with base when the other constructors are obsoleted.
     /// <summary>
-    /// Initializes a new instance of the <see cref="T:Umbraco.Cms.Api.Management.Controllers.Script.Tree.RootScriptTreeController"/> class.
+    /// Initializes a new instance of the <see cref="RootScriptTreeController"/> class.
     /// </summary>
-    /// <param name="scriptTreeService">An instance of <see cref="T:Umbraco.Cms.Api.Management.Services.IScriptTreeService"/> used to manage script trees.</param>
+    /// <param name="scriptTreeService">An instance of <see cref="IScriptTreeService"/> used to manage script trees.</param>
     [ActivatorUtilitiesConstructor]
     public RootScriptTreeController(IScriptTreeService scriptTreeService)
         : base(scriptTreeService)

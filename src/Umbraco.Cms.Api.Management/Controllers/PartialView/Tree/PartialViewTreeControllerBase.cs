@@ -44,9 +44,9 @@ public class PartialViewTreeControllerBase : FileSystemTreeControllerBase
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="T:Umbraco.Cms.Api.Management.Controllers.PartialView.Tree.PartialViewTreeControllerBase"/> class.
+    /// Initializes a new instance of the <see cref="PartialViewTreeControllerBase"/> class.
     /// </summary>
-    /// <param name="fileSystems">The <see cref="T:Umbraco.Cms.Core.IO.FileSystems"/> instance to be used by the controller.</param>
+    /// <param name="fileSystems">The <see cref="FileSystems"/> instance to be used by the controller.</param>
     [Obsolete("Please use the constructor taking all parameters. Scheduled to be removed in Umbraco 19.")]
     public PartialViewTreeControllerBase(FileSystems fileSystems)
         : base()
