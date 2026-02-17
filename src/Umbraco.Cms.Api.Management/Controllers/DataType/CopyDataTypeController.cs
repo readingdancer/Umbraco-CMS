@@ -41,7 +41,7 @@ public class CopyDataTypeController : DataTypeControllerBase
     /// <param name="cancellationToken">Token to monitor for cancellation requests.</param>
     /// <param name="id">The unique identifier of the data type to copy.</param>
     /// <param name="copyDataTypeRequestModel">The request model containing copy options, such as the target container Id.</param>
-    /// <returns>A result indicating the outcome of the copy operation.</returns
+    /// <returns>A result indicating the outcome of the copy operation.</returns>
     [HttpPost("{id:guid}/copy")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status201Created)]
