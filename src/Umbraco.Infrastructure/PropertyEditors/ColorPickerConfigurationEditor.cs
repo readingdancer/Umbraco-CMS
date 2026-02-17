@@ -12,9 +12,11 @@ namespace Umbraco.Cms.Core.PropertyEditors;
 
 internal sealed partial class ColorPickerConfigurationEditor : ConfigurationEditor<ColorPickerConfiguration>
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ColorPickerConfigurationEditor"/> class.
-    /// </summary>
+/// <summary>
+/// Initializes a new instance of the <see cref="ColorPickerConfigurationEditor"/> class.
+/// </summary>
+/// <param name="ioHelper">Provides methods for IO operations within the Umbraco CMS.</param>
+/// <param name="configurationEditorJsonSerializer">Handles serialization and deserialization of configuration editor settings as JSON.</param>
     public ColorPickerConfigurationEditor(IIOHelper ioHelper, IConfigurationEditorJsonSerializer configurationEditorJsonSerializer)
         : base(ioHelper)
     {

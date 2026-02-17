@@ -5,11 +5,20 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.Security;
 
+/// <summary>
+/// Provides password hashing and verification functionality for Umbraco users.
+/// This generic class implements the <see cref="Microsoft.AspNetCore.Identity.IPasswordHasher{TUser}"/> interface for user types in Umbraco.
+/// </summary>
 public class UmbracoPasswordHasher<TUser> : PasswordHasher<TUser>
     where TUser : UmbracoIdentityUser
 {
     private readonly IJsonSerializer _jsonSerializer;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Umbraco.Cms.Core.Security.UmbracoPasswordHasher{TUser}"/> class.
+    /// </summary>
+    /// <param name="legacyPasswordSecurity">An instance of <see cref="Umbraco.Cms.Core.Security.LegacyPasswordSecurity"/> used for legacy password operations.</param>
+    /// <param name="jsonSerializer">An instance of <see cref="Umbraco.Cms.Core.Serialization.IJsonSerializer"/> used for serializing password data.</param>
     public UmbracoPasswordHasher(LegacyPasswordSecurity legacyPasswordSecurity, IJsonSerializer jsonSerializer)
     {
         LegacyPasswordSecurity =
@@ -17,8 +26,17 @@ public class UmbracoPasswordHasher<TUser> : PasswordHasher<TUser>
         _jsonSerializer = jsonSerializer ?? throw new ArgumentNullException(nameof(jsonSerializer));
     }
 
+    /// <summary>
+    /// Gets the implementation used for legacy password security operations.
+    /// </summary>
     public LegacyPasswordSecurity LegacyPasswordSecurity { get; }
 
+    /// <summary>
+    /// Hashes the provided plain text password for the specified user using the current password hashing algorithm.
+    /// </summary>
+    /// <param name="user">The user for whom the password is being hashed.</param>
+    /// <param name="password">The plain text password to hash.</param>
+    /// <returns>A hashed representation of the password.</returns>
     public override string HashPassword(TUser user, string password) =>
 
         // Always use the latest/current hash algorithm when hashing new passwords for storage.

@@ -43,9 +43,17 @@ public class ImageCropperPropertyEditor : DataEditor,
 
     private ContentSettings _contentSettings;
 
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="ImageCropperPropertyEditor" /> class.
-    /// </summary>
+/// <summary>
+///     Initializes a new instance of the <see cref="ImageCropperPropertyEditor" /> class.
+/// </summary>
+/// <param name="dataValueEditorFactory">Factory for creating data value editors for property values.</param>
+/// <param name="loggerFactory">Factory used to create logger instances for logging operations.</param>
+/// <param name="mediaFileManager">Manages media file storage and retrieval.</param>
+/// <param name="contentSettings">Provides access to content-related configuration settings.</param>
+/// <param name="ioHelper">Helper for IO operations such as path resolution and file handling.</param>
+/// <param name="uploadAutoFillProperties">Configuration for auto-filling properties on file upload.</param>
+/// <param name="contentService">Service for managing and accessing content items.</param>
+/// <param name="jsonSerializer">Serializer for handling JSON serialization and deserialization.</param>
     public ImageCropperPropertyEditor(
         IDataValueEditorFactory dataValueEditorFactory,
         ILoggerFactory loggerFactory,
@@ -70,8 +78,19 @@ public class ImageCropperPropertyEditor : DataEditor,
         SupportsReadOnly = true;
     }
 
+    /// <summary>
+    /// Gets the <see cref="IPropertyIndexValueFactory"/> instance used by the image cropper property editor to provide index values for properties.
+    /// For this editor, a <see cref="NoopPropertyIndexValueFactory"/> is used, meaning no index values are generated.
+    /// </summary>
     public override IPropertyIndexValueFactory PropertyIndexValueFactory { get; } = new NoopPropertyIndexValueFactory();
 
+    /// <summary>
+    /// Attempts to extract the media path from the provided value if the property editor alias matches this editor.
+    /// </summary>
+    /// <param name="propertyEditorAlias">The alias of the property editor to compare with this editor's alias.</param>
+    /// <param name="value">The property value from which to attempt to extract the media path.</param>
+    /// <param name="mediaPath">When this method returns, contains the extracted media path if successful; otherwise, <c>null</c>.</param>
+    /// <returns><c>true</c> if a valid media path was extracted; otherwise, <c>false</c>.</returns>
     public bool TryGetMediaPath(string? propertyEditorAlias, object? value, out string? mediaPath)
     {
         if (propertyEditorAlias == Alias &&
@@ -86,9 +105,10 @@ public class ImageCropperPropertyEditor : DataEditor,
         return false;
     }
 
-    /// <summary>
-    ///     After a content has been copied, also copy uploaded files.
-    /// </summary>
+/// <summary>
+///     Handles the copying of uploaded image files for image cropper properties after content has been copied.
+/// </summary>
+/// <param name="notification">The notification containing the original content and its copy.</param>
     public void Handle(ContentCopiedNotification notification)
     {
         // get the image cropper field properties
@@ -370,6 +390,9 @@ public class ImageCropperPropertyEditor : DataEditor,
     // for efficient value deserialization, we don't want to deserialize more than we need to (we don't need crops, focal point etc.)
     private sealed class LightWeightImageCropperValue
     {
+    /// <summary>
+    /// Gets or sets the source URL of the image used by the cropper. May be <c>null</c> or empty if no image is set.
+    /// </summary>
         public string? Src { get; set; } = string.Empty;
     }
 }

@@ -7,8 +7,10 @@ namespace Umbraco.Cms.Infrastructure.Migrations.Expressions.Alter;
 /// </summary>
 public interface IAlterBuilder : IFluentBuilder
 {
-    /// <summary>
-    ///     Specifies the table to alter.
-    /// </summary>
+/// <summary>
+/// Specifies which table to alter in the database schema.
+/// </summary>
+/// <param name="tableName">The name of the table to be altered.</param>
+/// <returns>An <see cref="IAlterTableBuilder"/> instance to continue building the alteration expression.</returns>
     IAlterTableBuilder Table(string tableName);
 }

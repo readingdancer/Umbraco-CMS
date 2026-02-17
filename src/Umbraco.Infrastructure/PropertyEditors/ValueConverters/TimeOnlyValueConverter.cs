@@ -13,9 +13,11 @@ namespace Umbraco.Cms.Core.PropertyEditors.ValueConverters;
 /// </remarks>
 public class TimeOnlyValueConverter : DateTimeValueConverterBase
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TimeOnlyValueConverter"/> class.
-    /// </summary>
+/// <summary>
+/// Initializes a new instance of the <see cref="TimeOnlyValueConverter"/> class.
+/// </summary>
+/// <param name="jsonSerializer">The serializer used for JSON serialization and deserialization of property values.</param>
+/// <param name="logger">The logger used for logging events related to the value converter.</param>
     public TimeOnlyValueConverter(IJsonSerializer jsonSerializer, ILogger<TimeOnlyValueConverter> logger)
         : base(jsonSerializer, logger)
     {

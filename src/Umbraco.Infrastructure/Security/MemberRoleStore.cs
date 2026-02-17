@@ -23,6 +23,11 @@ public class MemberRoleStore : IQueryableRoleStore<UmbracoIdentityRole>
     private bool _disposed;
 
     // private const string genericIdentityErrorCode = "IdentityErrorUserStore";
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Umbraco.Cms.Core.Security.MemberRoleStore"/> class.
+    /// </summary>
+    /// <param name="memberGroupService">Service used to manage and retrieve member groups.</param>
+    /// <param name="errorDescriber">Provides error messages for identity-related operations.</param>
     public MemberRoleStore(IMemberGroupService memberGroupService, IdentityErrorDescriber errorDescriber)
     {
         _memberGroupService = memberGroupService ?? throw new ArgumentNullException(nameof(memberGroupService));
@@ -34,6 +39,9 @@ public class MemberRoleStore : IQueryableRoleStore<UmbracoIdentityRole>
     /// </summary>
     public IdentityErrorDescriber ErrorDescriber { get; set; }
 
+    /// <summary>
+    /// Gets a queryable collection of all member roles, represented as <see cref="UmbracoIdentityRole"/>, retrieved from the member group service.
+    /// </summary>
     public IQueryable<UmbracoIdentityRole> Roles =>
         _memberGroupService.GetAll().Select(MapFromMemberGroup).AsQueryable();
 

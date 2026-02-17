@@ -29,9 +29,18 @@ public class ContentFinderByConfigured404 : IContentLastChanceFinder
     private readonly IDocumentNavigationQueryService _documentNavigationQueryService;
     private ContentSettings _contentSettings;
 
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="ContentFinderByConfigured404" /> class.
-    /// </summary>
+/// <summary>
+///     Initializes a new instance of the <see cref="ContentFinderByConfigured404" /> class.
+/// </summary>
+/// <param name="logger">The logger used for diagnostic and error logging.</param>
+/// <param name="entityService">Service for accessing Umbraco entities.</param>
+/// <param name="contentSettings">The monitor providing current content settings options.</param>
+/// <param name="examineManager">The manager for Examine search indexes.</param>
+/// <param name="variationContextAccessor">Accessor for the current variation context (e.g., culture/language).</param>
+/// <param name="umbracoContextAccessor">Accessor for the current Umbraco context.</param>
+/// <param name="documentUrlService">Service for resolving document URLs.</param>
+/// <param name="publishedContentCache">Cache for published Umbraco content.</param>
+/// <param name="documentNavigationQueryService">Service for querying document navigation structure.</param>
     public ContentFinderByConfigured404(
         ILogger<ContentFinderByConfigured404> logger,
         IEntityService entityService,
@@ -56,6 +65,15 @@ public class ContentFinderByConfigured404 : IContentLastChanceFinder
         contentSettings.OnChange(x => _contentSettings = x);
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ContentFinderByConfigured404"/> class, which is responsible for finding content based on configured 404 settings in Umbraco.
+    /// </summary>
+    /// <param name="logger">The logger used for logging diagnostic and error information.</param>
+    /// <param name="entityService">Service for accessing Umbraco entities such as content and media.</param>
+    /// <param name="contentSettings">Monitors and provides access to content-related configuration settings.</param>
+    /// <param name="examineManager">Manages Examine indexes and searchers for content retrieval.</param>
+    /// <param name="variationContextAccessor">Provides access to the current variation context, such as culture or segment.</param>
+    /// <param name="umbracoContextAccessor">Provides access to the current Umbraco context.</param>
     [Obsolete("Scheduled for removal in Umbraco 18")]
     public ContentFinderByConfigured404(
         ILogger<ContentFinderByConfigured404> logger,

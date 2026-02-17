@@ -28,9 +28,11 @@ public class MultiNodeTreePickerPropertyEditor : DataEditor
 {
     private readonly IIOHelper _ioHelper;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MultiNodeTreePickerPropertyEditor"/> class.
-    /// </summary>
+/// <summary>
+/// Initializes a new instance of the <see cref="MultiNodeTreePickerPropertyEditor"/> class.
+/// </summary>
+/// <param name="dataValueEditorFactory">Factory used to create data value editors for property values.</param>
+/// <param name="ioHelper">Helper for IO operations, such as path and file handling.</param>
     public MultiNodeTreePickerPropertyEditor(IDataValueEditorFactory dataValueEditorFactory, IIOHelper ioHelper)
         : base(dataValueEditorFactory)
     {
@@ -228,9 +230,12 @@ public class MultiNodeTreePickerPropertyEditor : DataEditor
             private readonly ICoreScopeProvider _coreScopeProvider;
             private readonly IEntityService _entityService;
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="ObjectTypeValidator"/> class.
-            /// </summary>
+/// <summary>
+/// Initializes a new instance of the <see cref="ObjectTypeValidator"/> class.
+/// </summary>
+/// <param name="localizedTextService">Service used for retrieving localized text strings.</param>
+/// <param name="coreScopeProvider">Provider for managing database transaction scopes.</param>
+/// <param name="entityService">Service for accessing and managing Umbraco entities.</param>
             public ObjectTypeValidator(
                 ILocalizedTextService localizedTextService,
                 ICoreScopeProvider coreScopeProvider,
@@ -318,9 +323,14 @@ public class MultiNodeTreePickerPropertyEditor : DataEditor
             private readonly IMediaService _mediaService;
             private readonly IMemberService _memberService;
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="ContentTypeValidator"/> class.
-            /// </summary>
+/// <summary>
+/// Initializes a new instance of the <see cref="ContentTypeValidator"/> class.
+/// </summary>
+/// <param name="localizedTextService">Service used for retrieving localized text strings.</param>
+/// <param name="coreScopeProvider">Provider for managing database transaction scopes.</param>
+/// <param name="contentService">Service for accessing and managing content items.</param>
+/// <param name="mediaService">Service for accessing and managing media items.</param>
+/// <param name="memberService">Service for accessing and managing member entities.</param>
             public ContentTypeValidator(
                 ILocalizedTextService localizedTextService,
                 ICoreScopeProvider coreScopeProvider,

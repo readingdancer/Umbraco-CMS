@@ -5,6 +5,9 @@ using Umbraco.Cms.Infrastructure.Persistence.DatabaseModelDefinitions;
 
 namespace Umbraco.Cms.Infrastructure.Persistence.Dtos;
 
+/// <summary>
+/// Represents a data transfer object (DTO) that encapsulates information about a specific version of content within Umbraco CMS.
+/// </summary>
 [TableName(TableName)]
 [PrimaryKey(PrimaryKeyColumnName)]
 [ExplicitColumns]
@@ -22,24 +25,40 @@ public class ContentVersionDto
 
     private int? _userId;
 
+    /// <summary>
+    /// Gets or sets the unique identifier for the content version.
+    /// </summary>
     [Column(PrimaryKeyColumnName)]
     [PrimaryKeyColumn]
     public int Id { get; set; }
 
+    /// <summary>
+    /// Gets or sets the unique identifier of the node for this content version.
+    /// </summary>
     [Column(NodeIdColumnName)]
     [ForeignKey(typeof(ContentDto))]
     [Index(IndexTypes.NonClustered, Name = "IX_" + TableName + "_NodeId", ForColumns = $"{NodeIdColumnName},{CurrentColumnName}", IncludeColumns = $"{PrimaryKeyColumnName},{VersionDateColumnName},{TextColumnName},{UserIdColumnName},{PreventCleanupColumnName}")]
     public int NodeId { get; set; }
 
+    /// <summary>
+    /// Gets or sets the date and time when the content version was last updated.
+    /// </summary>
     [Column(VersionDateColumnName)] // TODO: db rename to 'updateDate'
     [Constraint(Default = SystemMethods.CurrentUTCDateTime)]
     public DateTime VersionDate { get; set; }
 
+    /// <summary>
+    /// Gets or sets the ID of the user who last modified or updated this content version.
+    /// A value of <c>null</c> indicates that no user is associated with the update.
+    /// </summary>
     [Column(UserIdColumnName)] // TODO: db rename to 'updateUserId'
     [ForeignKey(typeof(UserDto))]
     [NullSetting(NullSetting = NullSettings.Null)]
     public int? UserId { get => _userId == 0 ? null : _userId; set => _userId = value; } // return null if zero
 
+    /// <summary>
+    /// Gets or sets a value indicating whether this is the current version of the content.
+    /// </summary>
     [Column(CurrentColumnName)]
     [Index(IndexTypes.NonClustered, Name = "IX_" + TableName + "_Current", IncludeColumns = NodeIdColumnName)]
     public bool Current { get; set; }
@@ -50,14 +69,23 @@ public class ContentVersionDto
     // we could use a content.currentVersionId FK that would need to be nullable, or (better?) an additional table
     // linking a content itemt to its current version (nodeId, versionId) - that would guarantee uniqueness BUT it would
     // not guarantee existence - so, really... we are trusting our code to manage 'current' correctly.
+    /// <summary>
+    /// Gets or sets the textual representation associated with this content version.
+    /// </summary>
     [Column(TextColumnName)]
     [NullSetting(NullSetting = NullSettings.Null)]
     public string? Text { get; set; }
 
+    /// <summary>
+    /// Gets or sets the <see cref="ContentDto"/> associated with this content version.
+    /// </summary>
     [ResultColumn]
     [Reference(ReferenceType.OneToOne, ColumnName = nameof(NodeId), ReferenceMemberName = nameof(ContentDto.NodeId))]
     public ContentDto? ContentDto { get; set; }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether this content version is protected from cleanup operations.
+    /// </summary>
     [Column(PreventCleanupColumnName)]
     [Constraint(Default = "0")]
     public bool PreventCleanup { get; set; }

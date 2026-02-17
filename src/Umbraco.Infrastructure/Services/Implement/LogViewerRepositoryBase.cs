@@ -58,9 +58,10 @@ public abstract class LogViewerRepositoryBase : ILogViewerRepository
         return Enum.Parse<LogLevel>(logLevel.ToString());
     }
 
-    /// <summary>
-    /// Gets the minimum-level log value from the config file.
-    /// </summary>
+/// <summary>
+/// Gets the minimum log level specified in the configuration file.
+/// </summary>
+/// <returns>The minimum <see cref="LogLevel"/> configured for logging.</returns>
     public virtual LogLevel RestrictedToMinimumLevel()
     {
         LogEventLevel minLevel = _umbracoFileConfig.RestrictedToMinimumLevel;

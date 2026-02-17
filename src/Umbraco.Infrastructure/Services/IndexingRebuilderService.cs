@@ -13,6 +13,11 @@ public class IndexingRebuilderService : IIndexingRebuilderService
     private readonly IIndexRebuilder _indexRebuilder;
     private readonly ILogger<IndexingRebuilderService> _logger;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IndexingRebuilderService"/> class.
+    /// </summary>
+    /// <param name="indexRebuilder">An implementation of <see cref="IIndexRebuilder"/> used to rebuild indexes.</param>
+    /// <param name="logger">The <see cref="ILogger{IndexingRebuilderService}"/> used for logging operations.</param>
     public IndexingRebuilderService(
         IIndexRebuilder indexRebuilder,
         ILogger<IndexingRebuilderService> logger)
@@ -21,6 +26,12 @@ public class IndexingRebuilderService : IIndexingRebuilderService
         _logger = logger;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IndexingRebuilderService"/> class.
+    /// </summary>
+    /// <param name="runtimeCache">The application-level runtime cache used for caching operations.</param>
+    /// <param name="indexRebuilder">The service responsible for rebuilding search indexes.</param>
+    /// <param name="logger">The logger used for logging information and errors related to the indexing rebuilder service.</param>
     [Obsolete("Use the non-obsolete constructor instead. Scheduled for removal in Umbraco 19.")]
     public IndexingRebuilderService(
         AppCaches runtimeCache,

@@ -4,20 +4,33 @@ using Umbraco.Cms.Core.Models.Entities;
 
 namespace Umbraco.Cms.Core.Security;
 
+/// <summary>
+/// Represents an identity role used for authorization within the Umbraco CMS.
+/// </summary>
 public class UmbracoIdentityRole : IdentityRole, IRememberBeingDirty
 {
     private string _id = string.Empty;
     private string _name = string.Empty;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UmbracoIdentityRole"/> class using the specified role name.
+    /// </summary>
+    /// <param name="roleName">The name to assign to the role.</param>
     public UmbracoIdentityRole(string roleName)
         : base(roleName)
     {
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UmbracoIdentityRole"/> class with default values.
+    /// </summary>
     public UmbracoIdentityRole()
     {
     }
 
+    /// <summary>
+    /// Occurs when a property value of the <see cref="UmbracoIdentityRole"/> changes.
+    /// </summary>
     public event PropertyChangedEventHandler PropertyChanged
     {
         add => BeingDirty.PropertyChanged += value;
@@ -58,6 +71,10 @@ public class UmbracoIdentityRole : IdentityRole, IRememberBeingDirty
     // model. A good writeup of that is here:
     // https://stackoverflow.com/a/37362173
     // For our purposes currently we won't worry about this.
+    /// <summary>
+    /// Gets or sets a random value that changes whenever the role is persisted to the store.
+    /// This value is used to implement optimistic concurrency checks to prevent conflicting updates.
+    /// </summary>
     public override string? ConcurrencyStamp { get => base.ConcurrencyStamp; set => base.ConcurrencyStamp = value; }
 
     /// <summary>

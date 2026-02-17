@@ -17,9 +17,11 @@ public class EmailAddressPropertyEditor : DataEditor
 {
     private readonly ILocalizedTextService _localizedTextService;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="EmailAddressPropertyEditor"/> class.
-    /// </summary>
+/// <summary>
+/// Initializes a new instance of the <see cref="EmailAddressPropertyEditor"/> class.
+/// </summary>
+/// <param name="dataValueEditorFactory">Factory used to create data value editors for the property editor.</param>
+/// <param name="localizedTextService">Service used to provide localized text for the property editor.</param>
     public EmailAddressPropertyEditor(IDataValueEditorFactory dataValueEditorFactory, ILocalizedTextService localizedTextService)
         : base(dataValueEditorFactory)
     {

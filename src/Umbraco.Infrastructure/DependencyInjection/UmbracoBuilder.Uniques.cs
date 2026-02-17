@@ -14,11 +14,12 @@ namespace Umbraco.Cms.Infrastructure.DependencyInjection;
 /// </summary>
 public static partial class UmbracoBuilderExtensions
 {
-    /// <summary>
-    ///     Sets the culture dictionary factory.
-    /// </summary>
-    /// <typeparam name="T">The type of the factory.</typeparam>
-    /// <param name="builder">The builder.</param>
+/// <summary>
+///     Registers the specified <typeparamref name="T"/> as the implementation of <see cref="ICultureDictionaryFactory"/> in the dependency injection container.
+/// </summary>
+/// <typeparam name="T">The type of the factory to register. Must implement <see cref="ICultureDictionaryFactory"/>.</typeparam>
+/// <param name="builder">The Umbraco builder to configure.</param>
+/// <returns>The same <paramref name="builder"/> instance so that additional calls can be chained.</returns>
     public static IUmbracoBuilder SetCultureDictionaryFactory<T>(this IUmbracoBuilder builder)
         where T : class, ICultureDictionaryFactory
     {
@@ -39,11 +40,12 @@ public static partial class UmbracoBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    ///     Sets the culture dictionary factory.
-    /// </summary>
-    /// <param name="builder">The builder.</param>
-    /// <param name="factory">A function creating a culture dictionary factory.</param>
+/// <summary>
+/// Sets the culture dictionary factory used for localization in the application.
+/// </summary>
+/// <param name="builder">The Umbraco builder to configure.</param>
+/// <param name="factory">A function that creates an <see cref="ICultureDictionaryFactory"/> instance.</param>
+/// <returns>The <paramref name="builder"/> instance for chaining.</returns>
     public static IUmbracoBuilder SetCultureDictionaryFactory(
         this IUmbracoBuilder builder,
         Func<IServiceProvider, ICultureDictionaryFactory> factory)
@@ -52,11 +54,12 @@ public static partial class UmbracoBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    ///     Sets the culture dictionary factory.
-    /// </summary>
-    /// <param name="builder">The builder.</param>
-    /// <param name="factory">A factory.</param>
+/// <summary>
+///     Sets the <see cref="ICultureDictionaryFactory"/> implementation to be used by the Umbraco builder.
+/// </summary>
+/// <param name="builder">The <see cref="IUmbracoBuilder"/> to configure.</param>
+/// <param name="factory">The <see cref="ICultureDictionaryFactory"/> instance to use for culture dictionary operations.</param>
+/// <returns>The configured <see cref="IUmbracoBuilder"/> instance.</returns>
     public static IUmbracoBuilder SetCultureDictionaryFactory(
         this IUmbracoBuilder builder,
         ICultureDictionaryFactory factory)
@@ -65,11 +68,12 @@ public static partial class UmbracoBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    ///     Sets the published content model factory.
-    /// </summary>
-    /// <typeparam name="T">The type of the factory.</typeparam>
-    /// <param name="builder">The builder.</param>
+/// <summary>
+///     Configures the <see cref="IPublishedModelFactory"/> implementation to use the specified factory type.
+/// </summary>
+/// <typeparam name="T">The type of the published content model factory to register. Must implement <see cref="IPublishedModelFactory"/>.</typeparam>
+/// <param name="builder">The <see cref="IUmbracoBuilder"/> to configure.</param>
+/// <returns>The same <see cref="IUmbracoBuilder"/> instance so that multiple calls can be chained.</returns>
     public static IUmbracoBuilder SetPublishedContentModelFactory<T>(this IUmbracoBuilder builder)
         where T : class, IPublishedModelFactory
     {
@@ -77,11 +81,12 @@ public static partial class UmbracoBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    ///     Sets the published content model factory.
-    /// </summary>
-    /// <param name="builder">The builder.</param>
-    /// <param name="factory">A function creating a published content model factory.</param>
+/// <summary>
+///     Sets the published content model factory.
+/// </summary>
+/// <param name="builder">The builder.</param>
+/// <param name="factory">A function creating a published content model factory.</param>
+/// <returns>The builder.</returns>
     public static IUmbracoBuilder SetPublishedContentModelFactory(
         this IUmbracoBuilder builder,
         Func<IServiceProvider, IPublishedModelFactory> factory)
@@ -90,11 +95,12 @@ public static partial class UmbracoBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    ///     Sets the published content model factory.
-    /// </summary>
-    /// <param name="builder">The builder.</param>
-    /// <param name="factory">A published content model factory.</param>
+/// <summary>
+///     Sets the published content model factory to the specified <see cref="IPublishedModelFactory"/> implementation.
+/// </summary>
+/// <param name="builder">The <see cref="IUmbracoBuilder"/> to configure.</param>
+/// <param name="factory">The <see cref="IPublishedModelFactory"/> instance to use.</param>
+/// <returns>The same <see cref="IUmbracoBuilder"/> instance so that multiple calls can be chained.</returns>
     public static IUmbracoBuilder SetPublishedContentModelFactory(
         this IUmbracoBuilder builder,
         IPublishedModelFactory factory)
@@ -103,11 +109,12 @@ public static partial class UmbracoBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    ///     Sets the short string helper.
-    /// </summary>
-    /// <typeparam name="T">The type of the short string helper.</typeparam>
-    /// <param name="builder">The builder.</param>
+/// <summary>
+///     Configures the <see cref="IShortStringHelper"/> implementation to use the specified type <typeparamref name="T"/>.
+/// </summary>
+/// <typeparam name="T">The type of the short string helper to register. Must implement <see cref="IShortStringHelper"/>.</typeparam>
+/// <param name="builder">The Umbraco builder to configure.</param>
+/// <returns>The same <paramref name="builder"/> instance so that additional calls can be chained.</returns>
     public static IUmbracoBuilder SetShortStringHelper<T>(this IUmbracoBuilder builder)
         where T : class, IShortStringHelper
     {
@@ -115,11 +122,12 @@ public static partial class UmbracoBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    ///     Sets the short string helper.
-    /// </summary>
-    /// <param name="builder">The builder.</param>
-    /// <param name="factory">A function creating a short string helper.</param>
+/// <summary>
+/// Configures the <see cref="IShortStringHelper"/> implementation to use within the Umbraco builder by specifying a factory function.
+/// </summary>
+/// <param name="builder">The Umbraco builder to configure.</param>
+/// <param name="factory">A factory function that creates an <see cref="IShortStringHelper"/> instance.</param>
+/// <returns>The configured <see cref="IUmbracoBuilder"/> instance.</returns>
     public static IUmbracoBuilder SetShortStringHelper(
         this IUmbracoBuilder builder,
         Func<IServiceProvider, IShortStringHelper> factory)
@@ -128,22 +136,24 @@ public static partial class UmbracoBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    ///     Sets the short string helper.
-    /// </summary>
-    /// <param name="builder">A builder.</param>
-    /// <param name="helper">A short string helper.</param>
+/// <summary>
+///     Sets the <see cref="IShortStringHelper"/> implementation to use for the Umbraco builder.
+/// </summary>
+/// <param name="builder">The <see cref="IUmbracoBuilder"/> to configure.</param>
+/// <param name="helper">The <see cref="IShortStringHelper"/> instance to register.</param>
+/// <returns>The configured <see cref="IUmbracoBuilder"/> instance.</returns>
     public static IUmbracoBuilder SetShortStringHelper(this IUmbracoBuilder builder, IShortStringHelper helper)
     {
         builder.Services.AddUnique(helper);
         return builder;
     }
 
-    /// <summary>
-    ///     Sets the filesystem used by the MediaFileManager
-    /// </summary>
-    /// <param name="builder">A builder.</param>
-    /// <param name="filesystemFactory">Factory method to create an IFileSystem implementation used in the MediaFileManager</param>
+/// <summary>
+///     Sets the filesystem used by the MediaFileManager
+/// </summary>
+/// <param name="builder">A builder.</param>
+/// <param name="filesystemFactory">Factory method to create an IFileSystem implementation used in the MediaFileManager</param>
+/// <returns>The <see cref="IUmbracoBuilder"/> instance.</returns>
     public static IUmbracoBuilder SetMediaFileSystem(
         this IUmbracoBuilder builder,
         Func<IServiceProvider, IFileSystem> filesystemFactory)
@@ -164,13 +174,14 @@ public static partial class UmbracoBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    ///     Register FileSystems with a method to configure the <see cref="FileSystems" />.
-    /// </summary>
-    /// <param name="builder">A builder.</param>
-    /// <param name="configure">Method that configures the <see cref="FileSystems" />.</param>
-    /// <exception cref="ArgumentNullException">Throws exception if <paramref name="configure" /> is null.</exception>
-    /// <exception cref="InvalidOperationException">Throws exception if full path can't be resolved successfully.</exception>
+/// <summary>
+///     Register FileSystems with a method to configure the <see cref="FileSystems" />.
+/// </summary>
+/// <param name="builder">A builder.</param>
+/// <param name="configure">Method that configures the <see cref="FileSystems" />.</param>
+/// <exception cref="ArgumentNullException">Throws exception if <paramref name="configure" /> is null.</exception>
+/// <exception cref="InvalidOperationException">Throws exception if full path can't be resolved successfully.</exception>
+/// <returns>The <see cref="IUmbracoBuilder" />.</returns>
     public static IUmbracoBuilder ConfigureFileSystems(
         this IUmbracoBuilder builder,
         Action<IServiceProvider, FileSystems> configure)
@@ -215,11 +226,12 @@ public static partial class UmbracoBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    ///     Sets the log viewer.
-    /// </summary>
-    /// <param name="builder">A builder.</param>
-    /// <param name="viewer">A log viewer.</param>
+/// <summary>
+///     Configures the <see cref="ILogViewer"/> implementation to be used by the Umbraco builder.
+/// </summary>
+/// <param name="builder">The <see cref="IUmbracoBuilder"/> used to configure services.</param>
+/// <param name="viewer">The <see cref="ILogViewer"/> instance to register.</param>
+/// <returns>The <see cref="IUmbracoBuilder"/> instance for chaining.</returns>
     [Obsolete("No longer used. Scheduled for removal in Umbraco 18.")]
     public static IUmbracoBuilder SetLogViewer(this IUmbracoBuilder builder, ILogViewer viewer)
     {

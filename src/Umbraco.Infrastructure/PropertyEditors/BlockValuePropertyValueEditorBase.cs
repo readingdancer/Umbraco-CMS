@@ -11,6 +11,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
+/// <summary>
+/// Serves as the base class for property value editors that process block-based property values, parameterized by specific value (<typeparamref name="TValue"/>) and layout (<typeparamref name="TLayout"/>) types.
+/// </summary>
 public abstract class BlockValuePropertyValueEditorBase<TValue, TLayout> : DataValueEditor, IDataValueReference, IDataValueTags
     where TValue : BlockValue<TLayout>, new()
     where TLayout : class, IBlockLayoutItem, new()
@@ -232,8 +235,14 @@ public abstract class BlockValuePropertyValueEditorBase<TValue, TLayout> : DataV
 
     private sealed class BlockStateMapping<T>
     {
+    /// <summary>
+    /// Gets or sets the edited value for the block, or <c>null</c> if no edited value is present.
+    /// </summary>
         public T? Edited { get; set; }
 
+    /// <summary>
+    /// Gets or sets the current mapped block state value of type <typeparamref name="T"/>.
+    /// </summary>
         public T? Current { get; set; }
     }
 

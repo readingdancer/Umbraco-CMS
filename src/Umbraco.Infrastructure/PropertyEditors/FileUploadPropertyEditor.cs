@@ -17,9 +17,11 @@ public class FileUploadPropertyEditor : DataEditor, IMediaUrlGenerator
 {
     private readonly IIOHelper _ioHelper;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FileUploadPropertyEditor"/> class.
-    /// </summary>
+/// <summary>
+/// Initializes a new instance of the <see cref="FileUploadPropertyEditor"/> class.
+/// </summary>
+/// <param name="dataValueEditorFactory">Factory used to create data value editors for property values.</param>
+/// <param name="ioHelper">Helper used for IO operations such as file path resolution.</param>
     public FileUploadPropertyEditor(
         IDataValueEditorFactory dataValueEditorFactory,
         IIOHelper ioHelper)

@@ -6,25 +6,34 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors.ValueConverters;
 
+/// <summary>
+/// Handles value variance for the Block Editor property editor, determining how property values differ based on culture and segment.
+/// </summary>
 public sealed class BlockEditorVarianceHandler
 {
     private readonly ILanguageService _languageService;
     private readonly IContentTypeService _contentTypeService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BlockEditorVarianceHandler"/> class.
+    /// </summary>
+    /// <param name="languageService">Service used to manage and retrieve language information for localization.</param>
+    /// <param name="contentTypeService">Service used to manage and retrieve content type definitions.</param>
     public BlockEditorVarianceHandler(ILanguageService languageService, IContentTypeService contentTypeService)
     {
         _languageService = languageService;
         _contentTypeService = contentTypeService;
     }
 
-    /// <summary>
-    /// Aligns a collection of block property values for variance changes.
-    /// </summary>
-    /// <param name="blockPropertyValues">The block property values to align.</param>
-    /// <param name="culture">The culture being handled (null if invariant).</param>
-    /// <remarks>
-    /// Used for aligning variance changes when editing content.
-    /// </remarks>
+/// <summary>
+/// Aligns a collection of block property values for variance changes.
+/// </summary>
+/// <param name="blockPropertyValues">The block property values to align.</param>
+/// <param name="culture">The culture being handled (null if invariant).</param>
+/// <returns>A task that represents the asynchronous operation, containing the aligned block property values.</returns>
+/// <remarks>
+/// Used for aligning variance changes when editing content.
+/// </remarks>
     public async Task<IList<BlockPropertyValue>> AlignPropertyVarianceAsync(IList<BlockPropertyValue> blockPropertyValues, string? culture)
     {
         var defaultIsoCodeAsync = await _languageService.GetDefaultIsoCodeAsync();
@@ -59,15 +68,16 @@ public sealed class BlockEditorVarianceHandler
         return blockPropertyValues.Except(valuesToRemove).ToList();
     }
 
-    /// <summary>
-    /// Aligns a block property value for variance changes.
-    /// </summary>
-    /// <param name="blockPropertyValue">The block property value to align.</param>
-    /// <param name="propertyType">The underlying property type.</param>
-    /// <param name="owner">The containing block element.</param>
-    /// <remarks>
-    /// Used for aligning variance changes when rendering content.
-    /// </remarks>
+/// <summary>
+/// Aligns a block property value for variance changes.
+/// </summary>
+/// <param name="blockPropertyValue">The block property value to align.</param>
+/// <param name="propertyType">The underlying property type.</param>
+/// <param name="owner">The containing block element.</param>
+/// <returns>A task representing the asynchronous operation. The task result contains the aligned <see cref="BlockPropertyValue"/>, or <c>null</c> if alignment is not applicable.</returns>
+/// <remarks>
+/// Used for aligning variance changes when rendering content.
+/// </remarks>
     public async Task<BlockPropertyValue?> AlignedPropertyVarianceAsync(BlockPropertyValue blockPropertyValue, IPublishedPropertyType propertyType, IPublishedElement owner)
     {
         ContentVariation propertyTypeVariation = owner.ContentType.Variations & propertyType.Variations;
@@ -109,15 +119,16 @@ public sealed class BlockEditorVarianceHandler
         return null;
     }
 
-    /// <summary>
-    /// Aligns a block value for variance changes.
-    /// </summary>
-    /// <param name="blockValue">The block property value to align.</param>
-    /// <param name="owner">The owner element (the content for block properties at content level, or the parent element for nested block properties).</param>
-    /// <param name="element">The containing block element.</param>
-    /// <remarks>
-    /// Used for aligning variance changes when rendering content.
-    /// </remarks>
+/// <summary>
+/// Aligns a block value for variance changes.
+/// </summary>
+/// <param name="blockValue">The block property value to align for variance.</param>
+/// <param name="owner">The owner element, which is either the content for block properties at the content level or the parent element for nested block properties.</param>
+/// <param name="element">The block element containing the property.</param>
+/// <returns>A task representing the asynchronous operation, with a result containing the aligned <see cref="BlockItemVariation"/> instances for the specified block element.</returns>
+/// <remarks>
+/// Used for aligning block item variations according to variance (such as culture or segment) when rendering content.
+/// </remarks>
     public async Task<IEnumerable<BlockItemVariation>> AlignedExposeVarianceAsync(BlockValue blockValue, IPublishedElement owner, IPublishedElement element)
     {
         BlockItemVariation[] blockVariations = blockValue.Expose.Where(v => v.ContentKey == element.Key).ToArray();

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Serialization;
 using Umbraco.Extensions;
@@ -6,6 +6,9 @@ using Umbraco.Extensions;
 namespace Umbraco.Cms.Core.PropertyEditors;
 
 // NOTE: this class is deliberately made accessible to 3rd party consumers (i.e. Deploy, uSync, ...)
+/// <summary>
+/// Provides static helper methods for working with the Rich Text Property Editor in Umbraco.
+/// </summary>
 public static class RichTextPropertyEditorHelper
 {
     /// <summary>

@@ -9,10 +9,18 @@ namespace Umbraco.Cms.Infrastructure.Persistence.Mappers;
 // this mapper will either fail or the syntax will target umbracoNode which will be filtering on the actual content NOT the content type.
 // I'm leaving this here purely because the ExpressionTests rely on this which is fine for testing that the expressions work, but note that this
 // resulting query will not.
+/// <summary>
+/// Provides mapping logic between the <c>SimpleContentType</c> entity and its corresponding database schema representation.
+/// </summary>
 [MapperFor(typeof(ISimpleContentType))]
 [MapperFor(typeof(SimpleContentType))]
 public sealed class SimpleContentTypeMapper : BaseMapper
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SimpleContentTypeMapper"/> class.
+    /// </summary>
+    /// <param name="sqlContext">The lazy-loaded <see cref="ISqlContext"/> used for database operations.</param>
+    /// <param name="maps">The <see cref="MapperConfigurationStore"/> containing mapping configurations.</param>
     public SimpleContentTypeMapper(Lazy<ISqlContext> sqlContext, MapperConfigurationStore maps)
         : base(sqlContext, maps)
     {

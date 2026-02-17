@@ -11,6 +11,12 @@ internal enum WhereInType
 
 internal static class SqlSyntaxProviderExtensions
 {
+    /// <summary>
+    /// Retrieves the defined index definitions from the specified SQL syntax provider and database.
+    /// </summary>
+    /// <param name="sql">The SQL syntax provider.</param>
+    /// <param name="db">The database instance.</param>
+    /// <returns>An enumerable collection of <see cref="DbIndexDefinition"/> objects representing the defined indexes.</returns>
     public static IEnumerable<DbIndexDefinition>
         GetDefinedIndexesDefinitions(this ISqlSyntaxProvider sql, IDatabase db) =>
         sql.GetDefinedIndexes(db)

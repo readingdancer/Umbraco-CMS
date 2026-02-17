@@ -19,9 +19,14 @@ internal sealed class FileUploadMediaSavingNotificationHandler : FileUploadNotif
     private readonly IOptionsMonitor<ContentSettings> _contentSettings;
     private readonly UploadAutoFillProperties _uploadAutoFillProperties;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FileUploadMediaSavingNotificationHandler"/> class.
-    /// </summary>
+/// <summary>
+/// Initializes a new instance of the <see cref="FileUploadMediaSavingNotificationHandler"/> class.
+/// </summary>
+/// <param name="jsonSerializer">The serializer used for handling JSON data related to media uploads.</param>
+/// <param name="mediaFileManager">Manages media file storage and retrieval operations.</param>
+/// <param name="elementTypeCache">Caches block editor element types for efficient access during media processing.</param>
+/// <param name="contentSettings">Provides access to content-related configuration settings.</param>
+/// <param name="uploadAutoFillProperties">Handles automatic population of media properties during file upload.</param>
     public FileUploadMediaSavingNotificationHandler(
         IJsonSerializer jsonSerializer,
         MediaFileManager mediaFileManager,

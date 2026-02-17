@@ -210,6 +210,22 @@ public static partial class NPocoDatabaseExtensions
         throw new DataException("Record could not be inserted or updated.");
     }
 
+    /// <summary>
+    /// Safely inserts a record, or updates it if it exists, based on a unique constraint.
+    /// </summary>
+    /// <param name="db">The <see cref="IUmbracoDatabase"/> instance to perform the operation on.</param>
+    /// <param name="poco">The record to insert or update.</param>
+    /// <param name="updateCommand">An optional custom update command to use for updating the record. If null, a default update command is used.</param>
+    /// <param name="updateArgs">Optional arguments for the update command.</param>
+    /// <returns>
+    /// The action that executed, either an insert or an update. If an insert occurred and a primary key value was generated, the <paramref name="poco"/> object will be updated with the new value.
+    /// </returns>
+    /// <remarks>
+    /// <para>
+    ///     This method does not rely on database-specific upsert options because SQLCE does not support them. Instead, it attempts to update, then insert, until successful.
+    ///     Note that transaction isolation is managed manually, and in some concurrency scenarios, the final value in the database may not be deterministic.
+    /// </para>
+    /// </remarks>
     public static RecordPersistenceType InsertOrUpdate<T>(
         this IUmbracoDatabase db,
         T poco,
@@ -318,6 +334,15 @@ public static partial class NPocoDatabaseExtensions
         }
     }
 
+    /// <summary>
+    /// Removes all rows from the specified table in the database by executing a TRUNCATE TABLE command.
+    /// </summary>
+    /// <param name="db">The <see cref="IDatabase"/> instance on which to execute the truncate operation.</param>
+    /// <param name="sqlSyntax">The <see cref="ISqlSyntaxProvider"/> used to generate the appropriate SQL syntax for truncating the table.</param>
+    /// <param name="tableName">The name of the table to truncate. This should be the unquoted table name; quoting is handled internally.</param>
+    /// <remarks>
+    /// This operation deletes all data from the table but does not remove the table structure itself.
+    /// </remarks>
     public static void TruncateTable(this IDatabase db, ISqlSyntaxProvider sqlSyntax, string tableName)
     {
         var sql = new Sql(string.Format(
@@ -326,12 +351,27 @@ public static partial class NPocoDatabaseExtensions
         db.Execute(sql);
     }
 
+    /// <summary>
+    /// Gets the current transaction isolation level of the specified database.
+    /// </summary>
+    /// <param name="database">The database instance to retrieve the transaction isolation level from.</param>
+    /// <returns>The current <see cref="System.Data.IsolationLevel"/> of the active transaction, or <see cref="System.Data.IsolationLevel.Unspecified"/> if no transaction is active.</returns>
     public static IsolationLevel GetCurrentTransactionIsolationLevel(this IDatabase database)
     {
         DbTransaction? transaction = database.Transaction;
         return transaction?.IsolationLevel ?? IsolationLevel.Unspecified;
     }
 
+    /// <summary>
+    /// Fetches results from the database by splitting the source collection into groups of a specified size, and executing a SQL query for each group.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result returned from the database for each group.</typeparam>
+    /// <typeparam name="TSource">The type of the items in the source collection.</typeparam>
+    /// <param name="db">The database instance used to perform the fetch operations.</param>
+    /// <param name="source">The collection of source items to be grouped and used in queries.</param>
+    /// <param name="groupSize">The maximum number of items in each group when splitting the source collection.</param>
+    /// <param name="sqlFactory">A function that generates a SQL query for each group of source items.</param>
+    /// <returns>An enumerable containing the results fetched from the database for each group, concatenated into a single sequence.</returns>
     public static IEnumerable<TResult> FetchByGroups<TResult, TSource>(this IDatabase db, IEnumerable<TSource> source, int groupSize, Func<IEnumerable<TSource>, Sql<ISqlContext>> sqlFactory) =>
         source.SelectByGroups(x => db.Fetch<TResult>(sqlFactory(x)), groupSize);
 }

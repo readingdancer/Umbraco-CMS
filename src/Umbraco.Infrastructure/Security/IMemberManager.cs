@@ -59,5 +59,10 @@ public interface IMemberManager : IUmbracoUserManager<MemberIdentityUser>
     /// <returns>True if the document object is protected</returns>
     Task<bool> IsProtectedAsync(string path);
 
+    /// <summary>
+    /// Checks if the document objects specified by their paths are protected by the "Protect Pages" functionality in Umbraco.
+    /// </summary>
+    /// <param name="paths">The full paths of the document objects to check.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a read-only dictionary mapping each document path to a boolean value indicating whether the corresponding document object is protected.</returns>
     Task<IReadOnlyDictionary<string, bool>> IsProtectedAsync(IEnumerable<string> paths);
 }

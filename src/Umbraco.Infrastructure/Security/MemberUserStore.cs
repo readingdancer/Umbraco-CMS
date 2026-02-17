@@ -296,6 +296,13 @@ public class MemberUserStore : UmbracoUserStore<MemberIdentityUser, UmbracoIdent
         return Task.FromResult<MemberIdentityUser?>(result);
     }
 
+    /// <summary>
+    /// Retrieves the published member content associated with the specified <see cref="MemberIdentityUser"/>.
+    /// </summary>
+    /// <param name="user">The member identity user whose published member content is to be retrieved. If <c>null</c>, the method returns <c>null</c>.</param>
+    /// <returns>
+    /// The <see cref="IPublishedContent"/> representing the published member content if found; otherwise, <c>null</c>.
+    /// </returns>
     public IPublishedContent? GetPublishedMember(MemberIdentityUser? user)
     {
         if (user is null)
@@ -479,12 +486,15 @@ public class MemberUserStore : UmbracoUserStore<MemberIdentityUser, UmbracoIdent
             .Select(l => new UserLoginInfo(l.LoginProvider, l.ProviderKey, l.LoginProvider)).ToList());
     }
 
-    /// <summary>
-    ///     Gets a list of role names the specified user belongs to.
-    /// </summary>
-    /// <remarks>
-    ///     This lazy loads the roles for the member
-    /// </remarks>
+/// <summary>
+///     Gets a list of role names that the specified user belongs to.
+/// </summary>
+/// <remarks>
+///     This method lazy loads the roles for the member.
+/// </remarks>
+/// <param name="user">The user whose roles are to be retrieved.</param>
+/// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+/// <returns>A task that represents the asynchronous operation. The task result contains the list of role names the user belongs to.</returns>
     public override Task<IList<string>> GetRolesAsync(
         MemberIdentityUser user,
         CancellationToken cancellationToken = default)
@@ -493,9 +503,13 @@ public class MemberUserStore : UmbracoUserStore<MemberIdentityUser, UmbracoIdent
         return base.GetRolesAsync(user, cancellationToken);
     }
 
-    /// <summary>
-    ///     Returns true if a user is in the role
-    /// </summary>
+/// <summary>
+///     Determines whether the specified user is a member of the given role.
+/// </summary>
+/// <param name="user">The user to check.</param>
+/// <param name="roleName">The name of the role to check.</param>
+/// <param name="cancellationToken">A cancellation token to observe while waiting for the task to complete.</param>
+/// <returns>True if the user is in the specified role; otherwise, false.</returns>
     public override Task<bool> IsInRoleAsync(
         MemberIdentityUser user,
         string roleName,
@@ -593,9 +607,12 @@ public class MemberUserStore : UmbracoUserStore<MemberIdentityUser, UmbracoIdent
         }
     }
 
-    /// <summary>
-    ///     Lists all users of a given role.
-    /// </summary>
+/// <summary>
+///     Asynchronously retrieves all users assigned to the specified role as <see cref="MemberIdentityUser"/> objects.
+/// </summary>
+/// <param name="roleName">The name of the role to list users for.</param>
+/// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+/// <returns>A task that represents the asynchronous operation. The task result contains a list of <see cref="MemberIdentityUser"/> instances in the specified role.</returns>
     public override Task<IList<MemberIdentityUser>> GetUsersInRoleAsync(
         string roleName,
         CancellationToken cancellationToken = default)

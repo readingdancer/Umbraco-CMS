@@ -201,9 +201,12 @@ public class TypeModel
         }
     }
 
-    /// <summary>
-    ///     Maps ModelType.
-    /// </summary>
+/// <summary>
+///     Updates the <see cref="PropertyModel.ClrTypeName"/> of each property in the provided <see cref="TypeModel"/> list
+///     by mapping their model CLR types to fully qualified type names, optionally prepending the specified namespace.
+/// </summary>
+/// <param name="typeModels">The list of <see cref="TypeModel"/> instances whose property type names will be mapped.</param>
+/// <param name="ns">The namespace to prepend to the CLR type names, or an empty string to use no namespace.</param>
     public static void MapModelTypes(IList<TypeModel> typeModels, string ns)
     {
         var hasNs = !string.IsNullOrWhiteSpace(ns);

@@ -2,6 +2,9 @@ using Umbraco.Cms.Core.Models;
 
 namespace Umbraco.Cms.Infrastructure.Search;
 
+/// <summary>
+/// Represents a handler that defines methods for managing indexing operations related to Umbraco content and data.
+/// </summary>
 public interface IUmbracoIndexingHandler
 {
     /// <summary>
@@ -13,10 +16,24 @@ public interface IUmbracoIndexingHandler
     /// </remarks>
     bool Enabled { get; }
 
+    /// <summary>
+    /// Re-indexes the specified content item in the search index.
+    /// </summary>
+    /// <param name="sender">The <see cref="IContent"/> instance to re-index.</param>
+    /// <param name="isPublished">True if the content item is published; otherwise, false.</param>
     void ReIndexForContent(IContent sender, bool isPublished);
 
+    /// <summary>
+    /// Re-indexes the specified <see cref="IMember"/> in the search index.
+    /// </summary>
+    /// <param name="member">The <see cref="IMember"/> instance to re-index.</param>
     void ReIndexForMember(IMember member);
 
+    /// <summary>
+    /// Re-indexes the specified media item in the search index.
+    /// </summary>
+    /// <param name="sender">The <see cref="IMedia"/> item to re-index.</param>
+    /// <param name="isPublished">True if the media item is published; otherwise, false.</param>
     void ReIndexForMedia(IMedia sender, bool isPublished);
 
     /// <summary>

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.DependencyInjection;
 using Umbraco.Cms.Core.Notifications;
 using Umbraco.Cms.Core.Services.Navigation;
@@ -13,9 +13,11 @@ namespace Umbraco.Cms.Infrastructure.DependencyInjection;
 
 public static partial class UmbracoBuilderExtensions
 {
-    /// <summary>
-    /// Add Umbraco background jobs
-    /// </summary>
+/// <summary>
+/// Registers the default set of Umbraco background jobs and related hosted services with the specified builder.
+/// </summary>
+/// <param name="builder">The <see cref="IUmbracoBuilder"/> to which background jobs will be added.</param>
+/// <returns>The same <see cref="IUmbracoBuilder"/> instance so that additional calls can be chained.</returns>
     public static IUmbracoBuilder AddBackgroundJobs(this IUmbracoBuilder builder)
     {
         // Add background jobs
