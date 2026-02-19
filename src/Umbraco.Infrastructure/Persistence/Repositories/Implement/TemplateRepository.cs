@@ -29,7 +29,6 @@ internal sealed class TemplateRepository : EntityRepositoryBase<int, ITemplate>,
     private readonly IFileSystem? _viewsFileSystem;
     private readonly IViewHelper _viewHelper;
     private readonly IOptionsMonitor<RuntimeSettings> _runtimeSettings;
-    private readonly TemplateByGuidReadRepository _templateByGuidReadRepository;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TemplateRepository"/> class, which manages persistence and retrieval of template entities.
@@ -66,13 +65,6 @@ internal sealed class TemplateRepository : EntityRepositoryBase<int, ITemplate>,
         _viewsFileSystem = fileSystems.MvcViewsFileSystem;
         _viewHelper = viewHelper;
         _runtimeSettings = runtimeSettings;
-        _templateByGuidReadRepository = new TemplateByGuidReadRepository(
-            this,
-            scopeAccessor,
-            cache,
-            loggerFactory.CreateLogger<TemplateByGuidReadRepository>(),
-            repositoryCacheVersionService,
-            cacheSyncService);
     }
 
     /// <summary>
@@ -117,16 +109,21 @@ internal sealed class TemplateRepository : EntityRepositoryBase<int, ITemplate>,
     /// </summary>
     /// <param name="key">The unique identifier of the template.</param>
     /// <returns>The template if found; otherwise, null.</returns>
-    public ITemplate? Get(Guid key) => _templateByGuidReadRepository.Get(key);
+    /// <remarks>GUID-based lookups delegate to GetMany() which is served from FullDataSetRepositoryCachePolicy.</remarks>
+    public ITemplate? Get(Guid key) => GetMany().FirstOrDefault(x => x.Key == key);
 
-    IEnumerable<ITemplate> IReadRepository<Guid, ITemplate>.GetMany(params Guid[]? keys) => _templateByGuidReadRepository.GetMany(keys);
+    IEnumerable<ITemplate> IReadRepository<Guid, ITemplate>.GetMany(params Guid[]? keys)
+    {
+        IEnumerable<ITemplate> all = GetMany();
+        return keys?.Length > 0 ? all.Where(x => keys.Contains(x.Key)).ToArray() : all;
+    }
 
     /// <summary>
     /// Determines whether a template with the specified identifier exists.
     /// </summary>
     /// <param name="id">The unique identifier of the template.</param>
     /// <returns>True if the template exists; otherwise, false.</returns>
-    public bool Exists(Guid id) => _templateByGuidReadRepository.Exists(id);
+    public bool Exists(Guid id) => GetMany().Any(x => x.Key == id);
 
     /// <summary>
     /// Saves the specified template entity to the repository.
@@ -140,10 +137,8 @@ internal sealed class TemplateRepository : EntityRepositoryBase<int, ITemplate>,
 
         // Force population of the full dataset cache so subsequent lookups don't hit the database.
         // TemplateRepository uses FullDataSetRepositoryCachePolicy which caches all templates together.
+        // GUID-based lookups also use this cache via GetMany().
         GetMany();
-
-        // Also populate the GUID cache so subsequent lookups by GUID don't hit the database.
-        _templateByGuidReadRepository.PopulateCacheByKey(entity);
     }
 
     /// <summary>
@@ -153,9 +148,6 @@ internal sealed class TemplateRepository : EntityRepositoryBase<int, ITemplate>,
     public override void Delete(ITemplate entity)
     {
         base.Delete(entity);
-
-        // Also clear the GUID cache so subsequent lookups by GUID don't return stale data.
-        _templateByGuidReadRepository.ClearCacheByKey(entity.Key);
     }
 
     /// <summary>
@@ -445,12 +437,6 @@ internal sealed class TemplateRepository : EntityRepositoryBase<int, ITemplate>,
         //use the underlying GetAll which will force cache all templates
         ITemplate? template = GetMany().FirstOrDefault(x => x.Id == id);
 
-        if (template != null)
-        {
-            // Also populate the GUID cache so subsequent lookups by GUID don't hit the database.
-            _templateByGuidReadRepository.PopulateCacheByKey(template);
-        }
-
         return template;
     }
 
@@ -482,9 +468,6 @@ internal sealed class TemplateRepository : EntityRepositoryBase<int, ITemplate>,
             .ToArray();
 
         ITemplate[] templates = dtos.Select(d => MapFromDto(d, childIds)).ToArray();
-
-        // Also populate the GUID cache so subsequent lookups by GUID don't hit the database.
-        _templateByGuidReadRepository.PopulateCacheByKey(templates);
 
         return templates;
     }
@@ -816,120 +799,6 @@ internal sealed class TemplateRepository : EntityRepositoryBase<int, ITemplate>,
         {
             AddChildren(all, descendants, child.Alias);
         }
-    }
-
-    #endregion
-
-    #region Read Repository implementation for Guid keys
-
-    // Reading repository purely for looking up by GUID.
-    // This leverages the outer repository's GetMany() which uses FullDataSetRepositoryCachePolicy
-    // to cache all templates together, ensuring efficient lookups by both ID and GUID.
-    private sealed class TemplateByGuidReadRepository : EntityRepositoryBase<Guid, ITemplate>
-    {
-        private readonly TemplateRepository _outerRepo;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TemplateByGuidReadRepository"/> class.
-    /// </summary>
-    /// <param name="outerRepo">The parent <see cref="TemplateRepository"/> instance.</param>
-    /// <param name="scopeAccessor">Provides access to the current scope.</param>
-    /// <param name="cache">The application-level caches.</param>
-    /// <param name="logger">The logger for this repository.</param>
-    /// <param name="repositoryCacheVersionService">Service for managing repository cache versions.</param>
-    /// <param name="cacheSyncService">Service for synchronizing cache across instances.</param>
-        public TemplateByGuidReadRepository(
-            TemplateRepository outerRepo,
-            IScopeAccessor scopeAccessor,
-            AppCaches cache,
-            ILogger<TemplateByGuidReadRepository> logger,
-            IRepositoryCacheVersionService repositoryCacheVersionService,
-            ICacheSyncService cacheSyncService)
-            : base(
-                scopeAccessor,
-                cache,
-                logger,
-                repositoryCacheVersionService,
-                cacheSyncService) =>
-            _outerRepo = outerRepo;
-
-        protected override ITemplate? PerformGet(Guid id)
-        {
-            // Use the outer repository's GetMany() which benefits from FullDataSetRepositoryCachePolicy.
-            // This ensures all templates are cached together for efficient lookups.
-            return _outerRepo.GetMany().FirstOrDefault(x => x.Key == id);
-        }
-
-        protected override IEnumerable<ITemplate> PerformGetAll(params Guid[]? ids)
-        {
-            // Use the outer repository's GetMany() which benefits from FullDataSetRepositoryCachePolicy.
-            IEnumerable<ITemplate> all = _outerRepo.GetMany();
-
-            if (ids?.Length > 0)
-            {
-                return all.Where(x => ids.Contains(x.Key)).ToArray();
-            }
-
-            return all;
-        }
-
-        protected override IEnumerable<ITemplate> PerformGetByQuery(IQuery<ITemplate> query) =>
-            throw new InvalidOperationException("This method won't be implemented.");
-
-        protected override IEnumerable<string> GetDeleteClauses() =>
-            throw new InvalidOperationException("This method won't be implemented.");
-
-        protected override void PersistNewItem(ITemplate entity) =>
-            throw new InvalidOperationException("This method won't be implemented.");
-
-        protected override void PersistUpdatedItem(ITemplate entity) =>
-            throw new InvalidOperationException("This method won't be implemented.");
-
-        protected override Sql<ISqlContext> GetBaseQuery(bool isCount) =>
-            throw new InvalidOperationException("This method won't be implemented.");
-
-        protected override string GetBaseWhereClause() =>
-            throw new InvalidOperationException("This method won't be implemented.");
-
-/// <summary>
-/// Populates the GUID-keyed cache with the given entity.
-/// This allows entities retrieved by int ID to also be cached for GUID lookups.
-/// </summary>
-/// <param name="entity">The template entity to cache by its GUID key.</param>
-        public void PopulateCacheByKey(ITemplate entity)
-        {
-            if (entity.HasIdentity)
-            {
-                var cacheKey = GetCacheKey(entity.Key);
-                IsolatedCache.Insert(cacheKey, () => entity, TimeSpan.FromMinutes(5), true);
-            }
-        }
-
-/// <summary>
-/// Populates the GUID-keyed cache with the specified template entities.
-/// This allows entities retrieved by integer ID to also be cached for GUID lookups.
-/// </summary>
-/// <param name="entities">The template entities to cache by their GUID keys.</param>
-        public void PopulateCacheByKey(IEnumerable<ITemplate> entities)
-        {
-            foreach (ITemplate entity in entities)
-            {
-                PopulateCacheByKey(entity);
-            }
-        }
-
-/// <summary>
-/// Clears the GUID-keyed cache entry for the given key.
-/// This ensures deleted entities are not returned from the cache.
-/// </summary>
-/// <param name="key">The GUID key of the cache entry to clear.</param>
-        public void ClearCacheByKey(Guid key)
-        {
-            var cacheKey = GetCacheKey(key);
-            IsolatedCache.Clear(cacheKey);
-        }
-
-        private static string GetCacheKey(Guid key) => RepositoryCacheKeys.GetKey<ITemplate>() + key;
     }
 
     #endregion

@@ -14,7 +14,7 @@ using Umbraco.Extensions;
 namespace Umbraco.Cms.Infrastructure;
 
 /// <summary>
-///     A class used to query for published content, media items
+///     A class used to query for published content and media items.
 /// </summary>
 /// <seealso cref="Umbraco.Cms.Core.IPublishedContentQuery" />
 public class PublishedContentQuery : IPublishedContentQuery
@@ -24,6 +24,8 @@ public class PublishedContentQuery : IPublishedContentQuery
     private readonly IPublishedMediaCache _publishedMediaCache;
     private readonly IVariationContextAccessor _variationContextAccessor;
     private readonly IDocumentNavigationQueryService _documentNavigationQueryService;
+    private readonly IMediaNavigationQueryService _mediaNavigationQueryService;
+
     private static readonly HashSet<string> _returnedQueryFields =
         new() { ExamineFieldNames.ItemIdFieldName, ExamineFieldNames.CategoryFieldName };
 
@@ -35,31 +37,46 @@ public class PublishedContentQuery : IPublishedContentQuery
         IExamineManager examineManager,
         IPublishedContentCache publishedContent,
         IPublishedMediaCache publishedMediaCache,
-        IDocumentNavigationQueryService documentNavigationQueryService)
+        IDocumentNavigationQueryService documentNavigationQueryService,
+        IMediaNavigationQueryService mediaNavigationQueryService)
     {
-        _variationContextAccessor = variationContextAccessor ??
-                                    throw new ArgumentNullException(nameof(variationContextAccessor));
+        _variationContextAccessor = variationContextAccessor ?? throw new ArgumentNullException(nameof(variationContextAccessor));
         _examineManager = examineManager ?? throw new ArgumentNullException(nameof(examineManager));
         _publishedContent = publishedContent;
         _publishedMediaCache = publishedMediaCache;
         _documentNavigationQueryService = documentNavigationQueryService;
+        _mediaNavigationQueryService = mediaNavigationQueryService;
     }
 
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="PublishedContentQuery" /> class.
-    /// </summary>
-    [Obsolete("Scheduled for removal in Umbraco 18")]
+    [Obsolete("Please use the constructor taking all parameters. Scheduled for removal in Umbraco 19.")]
+    public PublishedContentQuery(
+        IVariationContextAccessor variationContextAccessor,
+        IExamineManager examineManager,
+        IPublishedContentCache publishedContent,
+        IPublishedMediaCache publishedMediaCache,
+        IDocumentNavigationQueryService documentNavigationQueryService)
+        : this(
+            variationContextAccessor,
+            examineManager,
+            publishedContent,
+            publishedMediaCache,
+            documentNavigationQueryService,
+            StaticServiceProvider.Instance.GetRequiredService<IMediaNavigationQueryService>())
+    {
+    }
+
+    [Obsolete("Please use the constructor taking all parameters. Scheduled for removal in Umbraco 18.")]
     public PublishedContentQuery(
         IVariationContextAccessor variationContextAccessor,
         IExamineManager examineManager,
         IPublishedContentCache publishedContent,
         IPublishedMediaCache publishedMediaCache)
-    : this(
-        variationContextAccessor,
-        examineManager,
-        publishedContent,
-        publishedMediaCache,
-        StaticServiceProvider.Instance.GetRequiredService<IDocumentNavigationQueryService>())
+        : this(
+            variationContextAccessor,
+            examineManager,
+            publishedContent,
+            publishedMediaCache,
+            StaticServiceProvider.Instance.GetRequiredService<IDocumentNavigationQueryService>())
     {
     }
 
@@ -199,7 +216,7 @@ public class PublishedContentQuery : IPublishedContentQuery
     /// </summary>
     /// <returns>An enumerable collection of root-level published content items.</returns>
     public IEnumerable<IPublishedContent> ContentAtRoot()
-        => ItemsAtRoot(_publishedContent);
+        => ItemsAtRoot(_publishedContent, _documentNavigationQueryService);
 
     #endregion
 
@@ -284,7 +301,7 @@ public class PublishedContentQuery : IPublishedContentQuery
     /// </summary>
     /// <returns>An <see cref="IEnumerable{IPublishedContent}"/> containing the root-level media items.</returns>
     public IEnumerable<IPublishedContent> MediaAtRoot()
-        => ItemsAtRoot(_publishedMediaCache);
+        => ItemsAtRoot(_publishedMediaCache, _mediaNavigationQueryService);
 
     #endregion
 
@@ -302,9 +319,9 @@ public class PublishedContentQuery : IPublishedContentQuery
     private IEnumerable<IPublishedContent> ItemsByIds(IPublishedCache? cache, IEnumerable<Guid> ids)
         => ids.Select(eachId => ItemById(eachId, cache)).WhereNotNull();
 
-    private IEnumerable<IPublishedContent> ItemsAtRoot(IPublishedCache? cache)
-        => _documentNavigationQueryService.TryGetRootKeys(out IEnumerable<Guid> rootKeys) is false ? []
-            : rootKeys.Select(x => cache?.GetById(false, x)).WhereNotNull();
+    private static IEnumerable<IPublishedContent> ItemsAtRoot(IPublishedCache? cache, INavigationQueryService navigationQueryService)
+        => navigationQueryService.TryGetRootKeys(out IEnumerable<Guid> rootKeys) is false ? []
+             : rootKeys.Select(x => cache?.GetById(false, x)).WhereNotNull();
 
     #endregion
 

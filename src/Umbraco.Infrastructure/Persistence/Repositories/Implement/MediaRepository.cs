@@ -638,7 +638,8 @@ public class MediaRepository : ContentRepositoryBase<int, IMedia, MediaRepositor
         // We need to flush the isolated cache by key explicitly here.
         // The MediaCacheRefresher does the same thing, but by the time it's invoked, custom notification handlers
         // might have already consumed the cached version (which at this point is the previous version).
-        IsolatedCache.ClearByKey(RepositoryCacheKeys.GetKey<IMedia, Guid>(entity.Key));
+        // GUID-keyed read repository uses a separate "uRepoGuid_" prefix.
+        IsolatedCache.Clear(RepositoryCacheKeys.GetGuidKey<IMedia>(entity.Key));
     }
 
     protected override void PersistDeletedItem(IMedia entity)
@@ -700,7 +701,7 @@ public class MediaRepository : ContentRepositoryBase<int, IMedia, MediaRepositor
         if (entity.HasIdentity)
         {
             var cacheKey = GetCacheKey(entity.Id);
-            IsolatedCache.Insert(cacheKey, () => entity, TimeSpan.FromMinutes(5), true);
+            IsolatedCache.Insert(cacheKey, () => entity, RepositoryCacheConstants.DefaultCacheDuration, true);
         }
     }
 
@@ -748,6 +749,16 @@ public class MediaRepository : ContentRepositoryBase<int, IMedia, MediaRepositor
                 repositoryCacheVersionService,
                 cacheSyncService) =>
             _outerRepo = outerRepo;
+
+        // Use a GUID-specific cache policy with a distinct prefix ("uRepoGuid_IMedia_")
+        // so that GUID-keyed cache entries don't interfere with the parent int-keyed repository's
+        // prefix-based search and count validation in DefaultRepositoryCachePolicy.
+        protected override IRepositoryCachePolicy<IMedia, Guid> CreateCachePolicy()
+            => new GuidReadRepositoryCachePolicy<IMedia>(
+                GlobalIsolatedCache,
+                ScopeAccessor,
+                RepositoryCacheVersionService,
+                CacheSyncService);
 
         protected override IMedia? PerformGet(Guid id)
         {
@@ -814,7 +825,7 @@ public class MediaRepository : ContentRepositoryBase<int, IMedia, MediaRepositor
             if (entity.HasIdentity)
             {
                 var cacheKey = GetCacheKey(entity.Key);
-                IsolatedCache.Insert(cacheKey, () => entity, TimeSpan.FromMinutes(5), true);
+                IsolatedCache.Insert(cacheKey, () => entity, RepositoryCacheConstants.DefaultCacheDuration, true);
             }
         }
 
@@ -831,7 +842,7 @@ public class MediaRepository : ContentRepositoryBase<int, IMedia, MediaRepositor
             }
         }
 
-        private static string GetCacheKey(Guid key) => RepositoryCacheKeys.GetKey<IMedia>() + key;
+        private static string GetCacheKey(Guid key) => GuidReadRepositoryCachePolicy<IMedia>.GetCacheKey(key);
     }
 
     #endregion
