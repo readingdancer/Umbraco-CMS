@@ -46,10 +46,7 @@ internal sealed class UserRepository : EntityRepositoryBase<Guid, IUser>, IUserR
     /// <param name="scopeAccessor">The scope accessor.</param>
     /// <param name="appCaches">The application caches.</param>
     /// <param name="logger">The logger.</param>
-    /// <param name="mapperCollection">
-    ///     A dictionary specifying the configuration for user passwords. If this is null then no
-    ///     password configuration will be persisted or read.
-    /// </param>
+    /// <param name="mapperCollection">The mapper collection.</param>
     /// <param name="globalSettings">The global settings.</param>
     /// <param name="passwordConfiguration">The password configuration.</param>
     /// <param name="jsonSerializer">The JSON serializer.</param>
@@ -145,7 +142,6 @@ internal sealed class UserRepository : EntityRepositoryBase<Guid, IUser>, IUserR
     /// <param name="username">The username of the user to retrieve.</param>
     /// <param name="includeSecurityData">
     ///     Can be used for slightly faster user lookups if the result doesn't require security data (i.e. groups, apps &amp; start nodes).
-    ///     This is really only used for a shim in order to upgrade to 7.6.
     /// </param>
     /// <returns>
     ///     A non cached <see cref="IUser" /> instance
