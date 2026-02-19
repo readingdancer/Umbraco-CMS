@@ -9,12 +9,12 @@ namespace Umbraco.Cms.Infrastructure.Persistence.Factories;
 
 internal sealed class ContentBaseFactory
 {
-/// <summary>
-///     Creates a <see cref="Content"/> entity from the specified <see cref="DocumentDto"/> and <see cref="IContentType"/>.
-/// </summary>
-/// <param name="dto">The <see cref="DocumentDto"/> containing the data used to construct the content entity.</param>
-/// <param name="contentType">The <see cref="IContentType"/> that defines the structure and properties of the content.</param>
-/// <returns>A <see cref="Content"/> instance populated with data from the provided <paramref name="dto"/> and <paramref name="contentType"/>.</returns>
+    /// <summary>
+    ///     Creates a <see cref="Content"/> entity from the specified <see cref="DocumentDto"/> and <see cref="IContentType"/>.
+    /// </summary>
+    /// <param name="dto">The <see cref="DocumentDto"/> containing the data used to construct the content entity.</param>
+    /// <param name="contentType">The <see cref="IContentType"/> that defines the structure and properties of the content.</param>
+    /// <returns>A <see cref="Content"/> instance populated with data from the provided <paramref name="dto"/> and <paramref name="contentType"/>.</returns>
     public static Content BuildEntity(DocumentDto dto, IContentType? contentType)
     {
         ContentDto contentDto = dto.ContentDto;
@@ -75,12 +75,12 @@ internal sealed class ContentBaseFactory
         }
     }
 
-/// <summary>
-///     Constructs a Media item entity from the provided data transfer object (DTO) and media type.
-/// </summary>
-/// <param name="dto">The <see cref="ContentDto"/> containing the data for the media item.</param>
-/// <param name="contentType">The <see cref="IMediaType"/> representing the type of the media item, or <c>null</c> if not specified.</param>
-/// <returns>A <see cref="Media"/> entity built from the specified DTO and media type.</returns>
+    /// <summary>
+    ///     Constructs a Media item entity from the provided data transfer object (DTO) and media type.
+    /// </summary>
+    /// <param name="dto">The <see cref="ContentDto"/> containing the data for the media item.</param>
+    /// <param name="contentType">The <see cref="IMediaType"/> representing the type of the media item, or <c>null</c> if not specified.</param>
+    /// <returns>A <see cref="Media"/> entity built from the specified DTO and media type.</returns>
     public static Core.Models.Media BuildEntity(ContentDto dto, IMediaType? contentType)
     {
         NodeDto nodeDto = dto.NodeDto;
@@ -118,12 +118,12 @@ internal sealed class ContentBaseFactory
         }
     }
 
-/// <summary>
-/// Builds a <see cref="Member"/> instance from the specified data transfer object and member type.
-/// </summary>
-/// <param name="dto">The <see cref="MemberDto"/> containing the member data.</param>
-/// <param name="contentType">The <see cref="IMemberType"/> describing the member type, or <c>null</c> if not specified.</param>
-/// <returns>The constructed <see cref="Member"/> instance.</returns>
+    /// <summary>
+    /// Builds a <see cref="Member"/> instance from the specified data transfer object and member type.
+    /// </summary>
+    /// <param name="dto">The <see cref="MemberDto"/> containing the member data.</param>
+    /// <param name="contentType">The <see cref="IMemberType"/> describing the member type, or <c>null</c> if not specified.</param>
+    /// <returns>The constructed <see cref="Member"/> instance.</returns>
     public static Member BuildEntity(MemberDto dto, IMemberType? contentType)
     {
         NodeDto nodeDto = dto.ContentDto.NodeDto;
@@ -178,12 +178,12 @@ internal sealed class ContentBaseFactory
         }
     }
 
-/// <summary>
-/// Creates a <see cref="DocumentDto"/> instance from the specified <see cref="IContent"/> entity and object type identifier.
-/// </summary>
-/// <param name="entity">The content entity to convert into a DTO.</param>
-/// <param name="objectType">The unique identifier representing the object type.</param>
-/// <returns>A <see cref="DocumentDto"/> representing the specified content entity.</returns>
+    /// <summary>
+    /// Creates a <see cref="DocumentDto"/> instance from the specified <see cref="IContent"/> entity and object type identifier.
+    /// </summary>
+    /// <param name="entity">The content entity to convert into a DTO.</param>
+    /// <param name="objectType">The unique identifier representing the object type.</param>
+    /// <returns>A <see cref="DocumentDto"/> representing the specified content entity.</returns>
     public static DocumentDto BuildDto(IContent entity, Guid objectType)
     {
         ContentDto contentDto = BuildContentDto(entity, objectType);
@@ -221,12 +221,12 @@ internal sealed class ContentBaseFactory
                     Id = x.Id,
                 }));
 
-/// <summary>
-///     Creates a <see cref="MediaDto"/> instance from the specified <see cref="IMedia"/> entity.
-/// </summary>
-/// <param name="mediaUrlGenerators">A collection of media URL generators used to resolve media URLs.</param>
-/// <param name="entity">The <see cref="IMedia"/> entity to convert to a DTO.</param>
-/// <returns>A <see cref="MediaDto"/> representing the provided media entity.</returns>
+    /// <summary>
+    ///     Creates a <see cref="MediaDto"/> instance from the specified <see cref="IMedia"/> entity.
+    /// </summary>
+    /// <param name="mediaUrlGenerators">A collection of media URL generators used to resolve media URLs.</param>
+    /// <param name="entity">The <see cref="IMedia"/> entity to convert to a DTO.</param>
+    /// <returns>A <see cref="MediaDto"/> representing the provided media entity.</returns>
     public static MediaDto BuildDto(MediaUrlGeneratorCollection mediaUrlGenerators, IMedia entity)
     {
         ContentDto contentDto = BuildContentDto(entity, Constants.ObjectTypes.Media);
@@ -241,11 +241,11 @@ internal sealed class ContentBaseFactory
         return dto;
     }
 
-/// <summary>
-///     Builds a <see cref="MemberDto"/> from the specified <see cref="IMember"/> entity.
-/// </summary>
-/// <param name="entity">The <see cref="IMember"/> entity to build the DTO from.</param>
-/// <returns>A <see cref="MemberDto"/> representing the given <paramref name="entity"/>.</returns>
+    /// <summary>
+    ///     Builds a <see cref="MemberDto"/> from the specified <see cref="IMember"/> entity.
+    /// </summary>
+    /// <param name="entity">The <see cref="IMember"/> entity to build the DTO from.</param>
+    /// <returns>A <see cref="MemberDto"/> representing the given <paramref name="entity"/>.</returns>
     public static MemberDto BuildDto(IMember entity)
     {
         ContentDto contentDto = BuildContentDto(entity, Constants.ObjectTypes.Member);

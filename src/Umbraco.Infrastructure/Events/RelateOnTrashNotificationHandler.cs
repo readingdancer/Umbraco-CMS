@@ -14,6 +14,7 @@ using Umbraco.Extensions;
 namespace Umbraco.Cms.Core.Events;
 
 // TODO: lots of duplicate code in this one, refactor
+
 /// <summary>
 /// Handles notifications triggered when content is moved to the recycle bin ("trash") in Umbraco,
 /// and manages the relationships between the trashed content and other entities accordingly.

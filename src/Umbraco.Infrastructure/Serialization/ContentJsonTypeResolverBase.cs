@@ -5,10 +5,10 @@ using Umbraco.Cms.Core.Models.DeliveryApi;
 
 namespace Umbraco.Cms.Infrastructure.Serialization;
 
-    /// <summary>
-    /// Serves as the base class for resolving JSON types during content serialization and deserialization in Umbraco.
-    /// Implementations of this class provide logic to map JSON data to specific content types.
-    /// </summary>
+/// <summary>
+/// Serves as the base class for resolving JSON types during content serialization and deserialization in Umbraco.
+/// Implementations of this class provide logic to map JSON data to specific content types.
+/// </summary>
 public abstract class ContentJsonTypeResolverBase : DefaultJsonTypeInfoResolver
 {
     /// <summary>

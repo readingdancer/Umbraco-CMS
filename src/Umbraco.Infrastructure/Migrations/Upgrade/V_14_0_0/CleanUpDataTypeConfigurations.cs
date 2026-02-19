@@ -7,9 +7,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_14_0_0;
 
-    /// <summary>
-    /// Cleans up data type configurations as part of the upgrade process to version 14.0.0.
-    /// </summary>
+/// <summary>
+/// Cleans up data type configurations as part of the upgrade process to version 14.0.0.
+/// </summary>
 public class CleanUpDataTypeConfigurations : MigrationBase
 {
     private readonly IConfigurationEditorJsonSerializer _configurationEditorJsonSerializer;

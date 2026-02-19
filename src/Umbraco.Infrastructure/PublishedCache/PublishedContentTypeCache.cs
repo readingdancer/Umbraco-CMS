@@ -24,10 +24,10 @@ public class PublishedContentTypeCache : IPublishedContentTypeCache
     private readonly Dictionary<string, IPublishedContentType> _typesByAlias = new();
     private readonly Dictionary<int, IPublishedContentType> _typesById = new();
 
-    // default ctor
     /// <summary>
     /// Initializes a new instance of the <see cref="Umbraco.Cms.Core.PublishedCache.PublishedContentTypeCache"/> class.
     /// </summary>
+    /// <remarks>default ctor</remarks>
     /// <param name="contentTypeService">The service used to manage content types. Typically injected as a dependency.</param>
     /// <param name="mediaTypeService">The service used to manage media types. Typically injected as a dependency.</param>
     /// <param name="memberTypeService">The service used to manage member types. Typically injected as a dependency.</param>

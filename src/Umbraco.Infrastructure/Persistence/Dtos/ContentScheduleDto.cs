@@ -30,16 +30,17 @@ internal sealed class ContentScheduleDto
     /// Gets or sets the identifier of the language associated with the content schedule.
     /// A null value indicates the schedule is invariant (not language-specific).
     /// </summary>
+    /// <remarks>can be invariant</remarks>
     [Column("languageId")]
     [ForeignKey(typeof(LanguageDto))]
-    [NullSetting(NullSetting = NullSettings.Null)] // can be invariant
+    [NullSetting(NullSetting = NullSettings.Null)]
     public int? LanguageId { get; set; }
 
-    // NOTE: this date is explicitly stored and treated as UTC despite the lack of "Utc" postfix.
     /// <summary>
     /// Gets or sets the scheduled date and time for the content action.
     /// This value is explicitly stored and treated as UTC, even though the property name does not include a 'Utc' suffix.
     /// </summary>
+    /// <remarks>NOTE: this date is explicitly stored and treated as UTC despite the lack of "Utc" postfix.</remarks>
     [Column("date")]
     public DateTime Date { get; set; }
 

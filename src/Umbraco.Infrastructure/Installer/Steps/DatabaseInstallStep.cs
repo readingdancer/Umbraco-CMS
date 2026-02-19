@@ -15,11 +15,11 @@ public class DatabaseInstallStep : StepBase, IInstallStep, IUpgradeStep
     private readonly IRuntimeState _runtime;
     private readonly DatabaseBuilder _databaseBuilder;
 
-/// <summary>
-/// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Installer.Steps.DatabaseInstallStep"/> class.
-/// </summary>
-/// <param name="runtime">The current runtime state of the Umbraco application.</param>
-/// <param name="databaseBuilder">The builder responsible for creating and upgrading the database schema.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Installer.Steps.DatabaseInstallStep"/> class.
+    /// </summary>
+    /// <param name="runtime">The current runtime state of the Umbraco application.</param>
+    /// <param name="databaseBuilder">The builder responsible for creating and upgrading the database schema.</param>
     public DatabaseInstallStep(IRuntimeState runtime, DatabaseBuilder databaseBuilder)
     {
         _runtime = runtime;

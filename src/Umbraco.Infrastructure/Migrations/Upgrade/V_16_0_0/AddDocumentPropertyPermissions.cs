@@ -66,9 +66,9 @@ internal class AddDocumentPropertyPermissions : MigrationBase
     [ExplicitColumns]
     private class UserGroupDto
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="UserGroupDto"/> class used in the document property permissions migration.
-    /// </summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserGroupDto"/> class used in the document property permissions migration.
+        /// </summary>
         public UserGroupDto()
         {
             UserGroup2AppDtos = [];
@@ -84,9 +84,9 @@ internal class AddDocumentPropertyPermissions : MigrationBase
         [PrimaryKeyColumn(IdentitySeed = 6)]
         public int Id { get; set; }
 
-    /// <summary>
-    /// Gets or sets the unique key that identifies the user group.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique key that identifies the user group.
+        /// </summary>
         [Column("key")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         [Constraint(Default = SystemMethods.NewGuid)]
@@ -109,11 +109,11 @@ internal class AddDocumentPropertyPermissions : MigrationBase
         [Index(IndexTypes.UniqueNonClustered, Name = "IX_umbracoUserGroup_userGroupName")]
         public string? Name { get; set; }
 
-    /// <summary>
-    /// Gets or sets the default permissions for the user group.
-    /// This property is obsolete and no longer used. Use <see cref="UserGroup2PermissionDtos"/> instead.
-    /// Scheduled for removal in Umbraco 18.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the default permissions for the user group.
+        /// This property is obsolete and no longer used. Use <see cref="UserGroup2PermissionDtos"/> instead.
+        /// Scheduled for removal in Umbraco 18.
+        /// </summary>
         [Column("userGroupDefaultPermissions")]
         [Length(50)]
         [NullSetting(NullSetting = NullSettings.Null)]
@@ -136,9 +136,9 @@ internal class AddDocumentPropertyPermissions : MigrationBase
         [Constraint(Default = SystemMethods.CurrentUTCDateTime)]
         public DateTime UpdateDate { get; set; }
 
-    /// <summary>
-    /// Gets or sets the icon for the user group.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the icon for the user group.
+        /// </summary>
         [Column("icon")]
         [NullSetting(NullSetting = NullSettings.Null)]
         public string? Icon { get; set; }
@@ -171,9 +171,9 @@ internal class AddDocumentPropertyPermissions : MigrationBase
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserGroupId")]
         public List<UserGroup2AppDto> UserGroup2AppDtos { get; set; }
 
-    /// <summary>
-    /// Gets or sets the collection of language associations for this user group.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the collection of language associations for this user group.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserGroupId")]
         public List<UserGroup2LanguageDto> UserGroup2LanguageDtos { get; set; }

@@ -382,11 +382,11 @@ public class AlterTableBuilder : ExpressionBuilderBase<AlterTableExpression, IAl
         return this;
     }
 
-/// <summary>
-/// Sets the specified rule to be applied on both delete and update actions for the table.
-/// </summary>
-/// <param name="rule">The rule to apply on delete and update.</param>
-/// <returns>An <see cref="IAlterTableColumnOptionBuilder"/> to continue building the table alteration.</returns>
+    /// <summary>
+    /// Sets the specified rule to be applied on both delete and update actions for the table.
+    /// </summary>
+    /// <param name="rule">The rule to apply on delete and update.</param>
+    /// <returns>An <see cref="IAlterTableColumnOptionBuilder"/> to continue building the table alteration.</returns>
     public IAlterTableColumnOptionBuilder OnDeleteOrUpdate(Rule rule)
     {
         OnDelete(rule);

@@ -163,9 +163,9 @@ internal class MigrateTours : UnscopedMigrationBase
     {
         public const string TableName = Constants.DatabaseSchema.Tables.User;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="OldUserDto"/> class with default values.
-    /// </summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OldUserDto"/> class with default values.
+        /// </summary>
         public OldUserDto()
         {
             UserGroupDtos = new List<UserGroupDto>();
@@ -209,9 +209,9 @@ internal class MigrateTours : UnscopedMigrationBase
         [Column("userName")]
         public string UserName { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the login name of the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the login name of the user.
+        /// </summary>
         [Column("userLogin")]
         [Length(125)]
         [Index(IndexTypes.NonClustered)]
@@ -232,9 +232,9 @@ internal class MigrateTours : UnscopedMigrationBase
         [Length(500)]
         public string? PasswordConfig { get; set; }
 
-    /// <summary>
-    /// Gets or sets the email address of the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the email address of the user.
+        /// </summary>
         [Column("userEmail")]
         public string Email { get; set; } = null!;
 
@@ -246,9 +246,9 @@ internal class MigrateTours : UnscopedMigrationBase
         [Length(10)]
         public string? UserLanguage { get; set; }
 
-    /// <summary>
-    /// Gets or sets the security stamp token used to validate the user's security credentials.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the security stamp token used to validate the user's security credentials.
+        /// </summary>
         [Column("securityStampToken")]
         [NullSetting(NullSetting = NullSettings.Null)]
         [Length(255)]
@@ -294,17 +294,17 @@ internal class MigrateTours : UnscopedMigrationBase
         [NullSetting(NullSetting = NullSettings.Null)]
         public DateTime? InvitedDate { get; set; }
 
-    /// <summary>
-    /// Gets or sets the date and time when the user was created.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date and time when the user was created.
+        /// </summary>
         [Column("createDate")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         [Constraint(Default = SystemMethods.CurrentDateTime)]
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
-    /// <summary>
-    /// Gets or sets the date and time when the user was last updated.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date and time when the user was last updated.
+        /// </summary>
         [Column("updateDate")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         [Constraint(Default = SystemMethods.CurrentDateTime)]
@@ -326,16 +326,16 @@ internal class MigrateTours : UnscopedMigrationBase
         [SpecialDbType(SpecialDbTypes.NVARCHARMAX)]
         public string? TourData { get; set; }
 
-    /// <summary>
-    /// Gets or sets the user groups associated with this user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the user groups associated with this user.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserId")]
         public List<UserGroupDto> UserGroupDtos { get; set; }
 
-    /// <summary>
-    /// Gets or sets the collection of start node DTOs for the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the collection of start node DTOs for the user.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserId")]
         public HashSet<UserStartNodeDto> UserStartNodeDtos { get; set; }
@@ -351,9 +351,9 @@ internal class MigrateTours : UnscopedMigrationBase
     {
         public const string TableName = Constants.DatabaseSchema.Tables.User;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="NewUserDto"/> class with default values.
-    /// </summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NewUserDto"/> class with default values.
+        /// </summary>
         public NewUserDto()
         {
             UserGroupDtos = new List<UserGroupDto>();
@@ -374,9 +374,9 @@ internal class MigrateTours : UnscopedMigrationBase
         [Constraint(Default = "0")]
         public bool Disabled { get; set; }
 
-    /// <summary>
-    /// Gets or sets the unique key identifier for the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique key identifier for the user.
+        /// </summary>
         [Column("key")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         [Constraint(Default = SystemMethods.NewGuid)]
@@ -391,15 +391,15 @@ internal class MigrateTours : UnscopedMigrationBase
         [Constraint(Default = "0")]
         public bool NoConsole { get; set; }
 
-    /// <summary>
-    /// Gets or sets the username associated with the new user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the username associated with the new user.
+        /// </summary>
         [Column("userName")]
         public string UserName { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the login name of the new user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the login name of the new user.
+        /// </summary>
         [Column("userLogin")]
         [Length(125)]
         [Index(IndexTypes.NonClustered)]
@@ -424,18 +424,18 @@ internal class MigrateTours : UnscopedMigrationBase
         [Column("userEmail")]
         public string Email { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the user's preferred language, represented as a language code (e.g., "en-US").
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the user's preferred language, represented as a language code (e.g., "en-US").
+        /// </summary>
         [Column("userLanguage")]
         [NullSetting(NullSetting = NullSettings.Null)]
         [Length(10)]
         public string? UserLanguage { get; set; }
 
-    /// <summary>
-    /// Gets or sets the security stamp token used to identify changes to the user's security credentials.
-    /// This token is typically updated when sensitive user information, such as a password, is changed.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the security stamp token used to identify changes to the user's security credentials.
+        /// This token is typically updated when sensitive user information, such as a password, is changed.
+        /// </summary>
         [Column("securityStampToken")]
         [NullSetting(NullSetting = NullSettings.Null)]
         [Length(255)]
@@ -448,16 +448,16 @@ internal class MigrateTours : UnscopedMigrationBase
         [NullSetting(NullSetting = NullSettings.Null)]
         public int? FailedLoginAttempts { get; set; }
 
-    /// <summary>
-    /// Gets or sets the date and time when the user was last locked out.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date and time when the user was last locked out.
+        /// </summary>
         [Column("lastLockoutDate")]
         [NullSetting(NullSetting = NullSettings.Null)]
         public DateTime? LastLockoutDate { get; set; }
 
-    /// <summary>
-    /// Gets or sets the date and time when the user's password was last changed.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date and time when the user's password was last changed.
+        /// </summary>
         [Column("lastPasswordChangeDate")]
         [NullSetting(NullSetting = NullSettings.Null)]
         public DateTime? LastPasswordChangeDate { get; set; }
@@ -507,9 +507,9 @@ internal class MigrateTours : UnscopedMigrationBase
         [Length(500)]
         public string? Avatar { get; set; }
 
-    /// <summary>
-    /// Gets or sets the list of user group DTOs associated with the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the list of user group DTOs associated with the user.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserId")]
         public List<UserGroupDto> UserGroupDtos { get; set; }

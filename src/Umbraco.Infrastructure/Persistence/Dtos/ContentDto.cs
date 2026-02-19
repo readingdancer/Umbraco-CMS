@@ -39,13 +39,15 @@ public class ContentDto
     [Reference(ReferenceType.OneToOne, ColumnName = PrimaryKeyColumnName)]
     public NodeDto NodeDto { get; set; } = null!;
 
-    // although a content has many content versions,
-    // they can only be loaded one by one (as several content),
-    // so this here is a OneToOne reference
     /// <summary>
     /// Gets or sets the content version data transfer object for this content.
     /// Represents a one-to-one relationship to the version information of the content item.
     /// </summary>
+    /// <remarks>
+    /// although a content has many content versions,
+    /// they can only be loaded one by one (as several content),
+    /// so this here is a OneToOne reference
+    /// </remarks>
     [ResultColumn]
     [Reference(ReferenceType.OneToOne, ReferenceMemberName = nameof(ContentVersionDto.NodeId))]
     public ContentVersionDto ContentVersionDto { get; set; } = null!;

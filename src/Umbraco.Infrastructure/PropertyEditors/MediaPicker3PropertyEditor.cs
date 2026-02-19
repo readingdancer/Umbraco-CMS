@@ -17,9 +17,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-/// <summary>
-/// Represents a media picker property editor.
-/// </summary>
+    /// <summary>
+    /// Represents a media picker property editor.
+    /// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.MediaPicker3,
     ValueType = ValueTypes.Json,
@@ -63,27 +63,27 @@ public class MediaPicker3PropertyEditor : DataEditor
         private readonly IBackOfficeSecurityAccessor _backOfficeSecurityAccessor;
         private readonly AppCaches _appCaches;
 
-/// <summary>
-/// Initializes a new instance of the <see cref="MediaPicker3PropertyValueEditor"/> class.
-/// </summary>
-/// <remarks>
-/// Note on <c>FromEditor()</c> and <c>ToEditor()</c> methods:
-/// The data is intentionally stored in the database as a raw JSON string without transformation.
-/// </remarks>
-/// <param name="shortStringHelper">Provides string manipulation and formatting utilities.</param>
-/// <param name="jsonSerializer">Handles JSON serialization and deserialization.</param>
-/// <param name="ioHelper">Provides IO-related helper methods.</param>
-/// <param name="attribute">The data editor attribute associated with this property editor.</param>
-/// <param name="mediaImportService">Service for importing media files.</param>
-/// <param name="mediaService">Service for managing media items.</param>
-/// <param name="temporaryFileService">Service for handling temporary files.</param>
-/// <param name="scopeProvider">Provides scope management for database operations.</param>
-/// <param name="backOfficeSecurityAccessor">Accessor for back office security context.</param>
-/// <param name="dataTypeReadCache">Cache for data type configuration.</param>
-/// <param name="localizedTextService">Service for retrieving localized text resources.</param>
-/// <param name="mediaTypeService">Service for managing media types.</param>
-/// <param name="mediaNavigationQueryService">Service for querying media navigation structures.</param>
-/// <param name="appCaches">Provides application-level caching.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MediaPicker3PropertyValueEditor"/> class.
+        /// </summary>
+        /// <remarks>
+        /// Note on <c>FromEditor()</c> and <c>ToEditor()</c> methods:
+        /// The data is intentionally stored in the database as a raw JSON string without transformation.
+        /// </remarks>
+        /// <param name="shortStringHelper">Provides string manipulation and formatting utilities.</param>
+        /// <param name="jsonSerializer">Handles JSON serialization and deserialization.</param>
+        /// <param name="ioHelper">Provides IO-related helper methods.</param>
+        /// <param name="attribute">The data editor attribute associated with this property editor.</param>
+        /// <param name="mediaImportService">Service for importing media files.</param>
+        /// <param name="mediaService">Service for managing media items.</param>
+        /// <param name="temporaryFileService">Service for handling temporary files.</param>
+        /// <param name="scopeProvider">Provides scope management for database operations.</param>
+        /// <param name="backOfficeSecurityAccessor">Accessor for back office security context.</param>
+        /// <param name="dataTypeReadCache">Cache for data type configuration.</param>
+        /// <param name="localizedTextService">Service for retrieving localized text resources.</param>
+        /// <param name="mediaTypeService">Service for managing media types.</param>
+        /// <param name="mediaNavigationQueryService">Service for querying media navigation structures.</param>
+        /// <param name="appCaches">Provides application-level caching.</param>
         public MediaPicker3PropertyValueEditor(
             IShortStringHelper shortStringHelper,
             IJsonSerializer jsonSerializer,
@@ -381,10 +381,10 @@ public class MediaPicker3PropertyEditor : DataEditor
         {
             private readonly ILocalizedTextService _localizedTextService;
 
-/// <summary>
-/// Initializes a new instance of the <see cref="MinMaxValidator"/> class.
-/// </summary>
-/// <param name="localizedTextService">The localized text service.</param>
+            /// <summary>
+            /// Initializes a new instance of the <see cref="MinMaxValidator"/> class.
+            /// </summary>
+            /// <param name="localizedTextService">The localized text service.</param>
             public MinMaxValidator(ILocalizedTextService localizedTextService) => _localizedTextService = localizedTextService;
 
             /// <inheritdoc/>
@@ -546,11 +546,11 @@ public class MediaPicker3PropertyEditor : DataEditor
             private readonly ILocalizedTextService _localizedTextService;
             private readonly IMediaNavigationQueryService _mediaNavigationQueryService;
 
-/// <summary>
-/// Initializes a new instance of the <see cref="StartNodeValidator"/> class.
-/// </summary>
-/// <param name="localizedTextService">Service used to provide localized text for validation messages.</param>
-/// <param name="mediaNavigationQueryService">Service used to query and validate media navigation nodes.</param>
+            /// <summary>
+            /// Initializes a new instance of the <see cref="StartNodeValidator"/> class.
+            /// </summary>
+            /// <param name="localizedTextService">Service used to provide localized text for validation messages.</param>
+            /// <param name="mediaNavigationQueryService">Service used to query and validate media navigation nodes.</param>
             public StartNodeValidator(
                 ILocalizedTextService localizedTextService,
                 IMediaNavigationQueryService mediaNavigationQueryService)

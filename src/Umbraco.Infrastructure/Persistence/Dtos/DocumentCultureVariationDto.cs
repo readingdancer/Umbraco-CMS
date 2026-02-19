@@ -41,44 +41,50 @@ internal sealed class DocumentCultureVariationDto
     [Index(IndexTypes.NonClustered, Name = "IX_" + TableName + "_LanguageId")]
     public int LanguageId { get; set; }
 
-    // this is convenient to carry the culture around, but has no db counterpart
     /// <summary>
     /// Gets or sets the culture identifier (e.g., "en-US") associated with this document variation.
     /// This property is not persisted in the database.
     /// </summary>
+    /// <remarks>this is convenient to carry the culture around, but has no db counterpart</remarks>
     [Ignore]
     public string? Culture { get; set; }
 
-    // authority on whether a culture has been edited
     /// <summary>
     /// Gets or sets a value indicating whether this culture variation of the document has been edited.
     /// </summary>
+    /// <remarks>authority on whether a culture has been edited</remarks>
     [Column("edited")]
     public bool Edited { get; set; }
 
-    // de-normalized for perfs
-    // (means there is a current content version culture variation for the language)
     /// <summary>
     /// Gets or sets a value indicating whether there is a current content version culture variation for the language.
     /// </summary>
+    /// <remarks>
+    /// de-normalized for perfs
+    /// (means there is a current content version culture variation for the language)
+    /// </remarks>
     [Column("available")]
     public bool Available { get; set; }
 
-    // de-normalized for perfs
-    // (means there is a published content version culture variation for the language)
     /// <summary>
     /// Gets or sets a value indicating whether a published content version exists for this culture and language.
     /// </summary>
+    /// <remarks>
+    /// de-normalized for perfs
+    /// (means there is a published content version culture variation for the language)
+    /// </remarks>
     [Column(PublishedColumnName)]
     public bool Published { get; set; }
 
-    // de-normalized for perfs
-    // (when available, copies name from current content version culture variation for the language)
-    // (otherwise, it's the published one, 'cos we need to have one)
     /// <summary>
     /// Gets or sets the denormalized name for the document's culture variation.
     /// This value is typically copied from the current content version's culture variation for the specified language, or from the published version if unavailable.
     /// </summary>
+    /// <remarks>
+    /// de-normalized for perfs
+    /// (when available, copies name from current content version culture variation for the language)
+    /// (otherwise, it's the published one, 'cos we need to have one)
+    /// </remarks>
     [Column("name")]
     [NullSetting(NullSetting = NullSettings.Null)]
     public string? Name { get; set; }

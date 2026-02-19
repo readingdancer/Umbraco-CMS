@@ -5,10 +5,10 @@ namespace Umbraco.Cms.Infrastructure.Migrations.Expressions.Alter.Expressions;
 /// </summary>
 public class AlterDefaultConstraintExpression : MigrationExpressionBase
 {
-/// <summary>
-/// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Migrations.Expressions.Alter.Expressions.AlterDefaultConstraintExpression"/> class using the specified migration context.
-/// </summary>
-/// <param name="context">The <see cref="IMigrationContext"/> to be used for the alter default constraint expression.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Migrations.Expressions.Alter.Expressions.AlterDefaultConstraintExpression"/> class using the specified migration context.
+    /// </summary>
+    /// <param name="context">The <see cref="IMigrationContext"/> to be used for the alter default constraint expression.</param>
     public AlterDefaultConstraintExpression(IMigrationContext context)
         : base(context)
     {

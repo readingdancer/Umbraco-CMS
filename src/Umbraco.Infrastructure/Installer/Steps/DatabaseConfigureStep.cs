@@ -11,9 +11,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Infrastructure.Installer.Steps;
 
-    /// <summary>
-    /// Step responsible for configuring the database during Umbraco installation.
-    /// </summary>
+/// <summary>
+/// Step responsible for configuring the database during Umbraco installation.
+/// </summary>
 public class DatabaseConfigureStep : StepBase, IInstallStep
 {
     private readonly IOptionsMonitor<ConnectionStrings> _connectionStrings;

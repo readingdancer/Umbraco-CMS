@@ -11,9 +11,9 @@ using Umbraco.Cms.Core.Web;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_15_0_0;
 
-    /// <summary>
-    /// Migration responsible for converting rich text editor properties to the new format as part of the upgrade process to Umbraco version 15.0.0.
-    /// </summary>
+/// <summary>
+/// Migration responsible for converting rich text editor properties to the new format as part of the upgrade process to Umbraco version 15.0.0.
+/// </summary>
 [Obsolete("Scheduled for removal in Umbraco 18.")]
 public partial class ConvertRichTextEditorProperties : ConvertBlockEditorPropertiesBase
 {

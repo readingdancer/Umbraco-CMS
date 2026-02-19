@@ -14,11 +14,11 @@ public interface IForeignKeyCascadeBuilder<out TNext, out TNextFk> : IFluentBuil
     /// </summary>
     TNextFk OnDelete(Rule rule);
 
-/// <summary>
-/// Specifies the action to take when the referenced primary key is updated.
-/// </summary>
-/// <param name="rule">The rule to apply on update (e.g., cascade, set null, restrict).</param>
-/// <returns>The next foreign key cascade builder.</returns>
+    /// <summary>
+    /// Specifies the action to take when the referenced primary key is updated.
+    /// </summary>
+    /// <param name="rule">The rule to apply on update (e.g., cascade, set null, restrict).</param>
+    /// <returns>The next foreign key cascade builder.</returns>
     TNextFk OnUpdate(Rule rule);
 
     /// <summary>

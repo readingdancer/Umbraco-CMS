@@ -56,13 +56,13 @@ public class DatabaseSchemaResult
     /// </summary>
     public List<string> ValidIndexes { get; }
 
-/// <summary>
-///     Determines whether the database contains an installed version.
-/// </summary>
-/// <remarks>
-///     <para>A database contains an installed version when it contains at least one valid table.</para>
-/// </remarks>
-/// <returns><c>true</c> if the database contains at least one valid table; otherwise, <c>false</c>.</returns>
+    /// <summary>
+    ///     Determines whether the database contains an installed version.
+    /// </summary>
+    /// <remarks>
+    ///     <para>A database contains an installed version when it contains at least one valid table.</para>
+    /// </remarks>
+    /// <returns><c>true</c> if the database contains at least one valid table; otherwise, <c>false</c>.</returns>
     public bool DetermineHasInstalledVersion() => ValidTables.Count > 0;
 
     /// <summary>

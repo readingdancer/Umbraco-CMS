@@ -13,11 +13,11 @@ namespace Umbraco.Cms.Infrastructure.DependencyInjection;
 
 public static partial class UmbracoBuilderExtensions
 {
-/// <summary>
-/// Registers the default set of Umbraco background jobs and related hosted services with the specified builder.
-/// </summary>
-/// <param name="builder">The <see cref="IUmbracoBuilder"/> to which background jobs will be added.</param>
-/// <returns>The same <see cref="IUmbracoBuilder"/> instance so that additional calls can be chained.</returns>
+    /// <summary>
+    /// Registers the default set of Umbraco background jobs and related hosted services with the specified builder.
+    /// </summary>
+    /// <param name="builder">The <see cref="IUmbracoBuilder"/> to which background jobs will be added.</param>
+    /// <returns>The same <see cref="IUmbracoBuilder"/> instance so that additional calls can be chained.</returns>
     public static IUmbracoBuilder AddBackgroundJobs(this IUmbracoBuilder builder)
     {
         // Add background jobs

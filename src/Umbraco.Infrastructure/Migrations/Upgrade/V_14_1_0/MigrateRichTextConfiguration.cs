@@ -6,12 +6,11 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_14_1_0;
 
-    /// <summary>
-    /// Migrates the rich text editor configuration as part of the upgrade to version 14.1.0.
-    /// </summary>
+/// <summary>
+/// Migrates the rich text editor configuration as part of the upgrade to version 14.1.0.
+/// </summary>
 public class MigrateRichTextConfiguration : MigrationBase
 {
-
     /// <summary>
     /// Initializes a new instance of the <see cref="MigrateRichTextConfiguration"/> class with the specified migration context.
     /// </summary>

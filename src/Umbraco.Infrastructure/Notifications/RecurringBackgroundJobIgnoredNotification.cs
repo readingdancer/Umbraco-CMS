@@ -8,12 +8,12 @@ namespace Umbraco.Cms.Infrastructure.Notifications
     /// </summary>
     public sealed class RecurringBackgroundJobIgnoredNotification : RecurringBackgroundJobNotification
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RecurringBackgroundJobIgnoredNotification"/> class.
-    /// This notification is triggered when a recurring background job is ignored and not executed.
-    /// </summary>
-    /// <param name="target">The instance of the recurring background job that was ignored.</param>
-    /// <param name="messages">The <see cref="EventMessages"/> containing any messages related to the ignored job.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RecurringBackgroundJobIgnoredNotification"/> class.
+        /// This notification is triggered when a recurring background job is ignored and not executed.
+        /// </summary>
+        /// <param name="target">The instance of the recurring background job that was ignored.</param>
+        /// <param name="messages">The <see cref="EventMessages"/> containing any messages related to the ignored job.</param>
         public RecurringBackgroundJobIgnoredNotification(IRecurringBackgroundJob target, EventMessages messages) : base(target, messages)
         {
         }

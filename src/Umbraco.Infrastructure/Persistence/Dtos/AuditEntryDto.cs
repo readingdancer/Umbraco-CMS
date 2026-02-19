@@ -20,12 +20,14 @@ internal sealed class AuditEntryDto
     [PrimaryKeyColumn]
     public int Id { get; set; }
 
-    // there is NO foreign key to the users table here, neither for performing user nor for
-    // affected user, so we can delete users and NOT delete the associated audit trails, and
-    // users can still be identified via the details free-form text fields.
     /// <summary>
     /// Gets or sets the ID of the user who performed the action.
     /// </summary>
+    /// <remarks>
+    /// there is NO foreign key to the users table here, neither for performing user nor for
+    /// affected user, so we can delete users and NOT delete the associated audit trails, and
+    /// users can still be identified via the details free-form text fields.
+    /// </remarks>
     [Column("performingUserId")]
     public int PerformingUserId { get; set; }
 

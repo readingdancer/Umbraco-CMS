@@ -12,10 +12,10 @@ public interface IDeleteDataBuilder : IFluentBuilder, IExecutableBuilder
     /// </summary>
     IDeleteDataBuilder Row(object dataAsAnonymousType);
 
-/// <summary>
-/// Specifies that all rows in the target table will be deleted.
-/// </summary>
-/// <returns>An <see cref="IExecutableBuilder"/> to execute the delete operation.</returns>
+    /// <summary>
+    /// Specifies that all rows in the target table will be deleted.
+    /// </summary>
+    /// <returns>An <see cref="IExecutableBuilder"/> to execute the delete operation.</returns>
     IExecutableBuilder AllRows();
 
     /// <summary>

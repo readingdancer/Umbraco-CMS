@@ -9,9 +9,9 @@ using Umbraco.Cms.Core.Web;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_15_0_0;
 
-    /// <summary>
-    /// Migration step that converts Block Grid editor properties during the upgrade to Umbraco 15.0.0.
-    /// </summary>
+/// <summary>
+/// Migration step that converts Block Grid editor properties during the upgrade to Umbraco 15.0.0.
+/// </summary>
 [Obsolete("Scheduled for removal in Umbraco 18.")]
 public class ConvertBlockGridEditorProperties : ConvertBlockEditorPropertiesBase
 {

@@ -13,9 +13,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-/// <summary>
-/// Represents a color picker property editor.
-/// </summary>
+    /// <summary>
+    /// Represents a color picker property editor.
+    /// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.ColorPicker,
     ValueEditorIsReusable = true)]
@@ -72,10 +72,10 @@ public class ColorPickerPropertyEditor : DataEditor
         {
             private readonly ILocalizedTextService _localizedTextService;
 
-/// <summary>
-/// Initializes a new instance of the <see cref="ConfiguredColorValidator"/> class.
-/// </summary>
-/// <param name="localizedTextService">The service used for retrieving localized text resources.</param>
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ConfiguredColorValidator"/> class.
+            /// </summary>
+            /// <param name="localizedTextService">The service used for retrieving localized text resources.</param>
             public ConfiguredColorValidator(ILocalizedTextService localizedTextService) => _localizedTextService = localizedTextService;
 
             /// <inheritdoc/>

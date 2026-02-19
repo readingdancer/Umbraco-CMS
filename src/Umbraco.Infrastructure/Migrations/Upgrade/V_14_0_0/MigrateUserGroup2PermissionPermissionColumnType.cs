@@ -4,9 +4,9 @@ using Umbraco.Cms.Infrastructure.Persistence.Dtos;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_14_0_0;
 
-    /// <summary>
-    /// Represents a migration that updates the data type of the <c>Permission</c> column in the <c>UserGroup2Permission</c> table.
-    /// </summary>
+/// <summary>
+/// Represents a migration that updates the data type of the <c>Permission</c> column in the <c>UserGroup2Permission</c> table.
+/// </summary>
 [Obsolete("Remove in Umbraco 18.")]
 public class MigrateUserGroup2PermissionPermissionColumnType : MigrationBase
 {

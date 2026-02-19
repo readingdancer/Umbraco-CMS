@@ -14,10 +14,10 @@ namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_14_0_0;
 [Obsolete("Remove in Umbraco 18.")]
 public class MigrateNotificationCharsToStrings : MigrationBase
 {
-/// <summary>
-/// Initializes a new instance of the <see cref="MigrateNotificationCharsToStrings"/> class with the specified migration context.
-/// </summary>
-/// <param name="context">The <see cref="IMigrationContext"/> to be used for the migration.</param>
+   /// <summary>
+   /// Initializes a new instance of the <see cref="MigrateNotificationCharsToStrings"/> class with the specified migration context.
+   /// </summary>
+   /// <param name="context">The <see cref="IMigrationContext"/> to be used for the migration.</param>
    public MigrateNotificationCharsToStrings(IMigrationContext context) : base(context)
     {
     }
@@ -51,20 +51,21 @@ public class MigrateNotificationCharsToStrings : MigrationBase
     [ExplicitColumns]
     private class LegacyUser2NodeNotifyDto
     {
-    /// <summary>
-    /// Gets or sets the identifier of the associated user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the identifier of the associated user.
+        /// </summary>
         [Column("userId")]
         [PrimaryKeyColumn(AutoIncrement = false, Name = "PK_umbracoUser2NodeNotify", OnColumns = "userId, nodeId, action")]
         [ForeignKey(typeof(UserDto))]
         public int UserId { get; set; }
 
-    /// <summary>
-    /// Gets or sets the identifier of the related node entity.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the identifier of the related node entity.
+        /// </summary>
         [Column("nodeId")]
         [ForeignKey(typeof(NodeDto))]
         public int NodeId { get; set; }
+
         /// <summary>
         /// Gets or sets the action code representing the notification action. This is typically a single-character string.
         /// </summary>

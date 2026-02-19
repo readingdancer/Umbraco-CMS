@@ -9,11 +9,11 @@ namespace Umbraco.Cms.Infrastructure.Notifications
     /// </summary>
     public sealed class RecurringBackgroundJobExecutedNotification : RecurringBackgroundJobNotification
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RecurringBackgroundJobExecutedNotification"/> class.
-    /// </summary>
-    /// <param name="target">The instance of the recurring background job that has just been executed.</param>
-    /// <param name="messages">The <see cref="EventMessages"/> generated during the execution of the job.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RecurringBackgroundJobExecutedNotification"/> class.
+        /// </summary>
+        /// <param name="target">The instance of the recurring background job that has just been executed.</param>
+        /// <param name="messages">The <see cref="EventMessages"/> generated during the execution of the job.</param>
         public RecurringBackgroundJobExecutedNotification(IRecurringBackgroundJob target, EventMessages messages) : base(target, messages)
         {
         }

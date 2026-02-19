@@ -68,16 +68,18 @@ public abstract class UmbracoIdentityUser : IdentityUser, IRememberBeingDirty
         remove => BeingDirty.PropertyChanged -= value;
     }
 
-    // NOTE: The purpose
-    // of this value is to try to prevent concurrent writes in the DB but this is
-    // an implementation detail at the data source level that has leaked into the
-    // model. A good writeup of that is here:
-    // https://stackoverflow.com/a/37362173
-    // For our purposes currently we won't worry about this.
     /// <summary>
     /// Gets or sets a random value that is updated whenever the user object is persisted to the data store.
     /// This value is used to detect and prevent concurrent updates to the same user record.
     /// </summary>
+    /// <remarks>
+    /// NOTE: The purpose
+    /// of this value is to try to prevent concurrent writes in the DB but this is
+    /// an implementation detail at the data source level that has leaked into the
+    /// model. A good writeup of that is here:
+    /// https://stackoverflow.com/a/37362173
+    /// For our purposes currently we won't worry about this.
+    /// </remarks>
     public override string? ConcurrencyStamp { get => base.ConcurrencyStamp; set => base.ConcurrencyStamp = value; }
 
     /// <summary>

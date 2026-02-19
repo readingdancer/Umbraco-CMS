@@ -28,19 +28,19 @@ internal static class UmbracoDatabaseExtensions
         return asDatabase;
     }
 
-/// <summary>
-///     Retrieves a dictionary of key/value pairs from the database table, filtered by a specified key prefix.
-///     This method does not use a scope or transaction.
-/// </summary>
-/// <remarks>
-///     Used by <see cref="RuntimeState" /> to determine the runtime state.
-///     The query is performed directly against the database without any transactional scope.
-/// </remarks>
-/// <param name="database">The <see cref="IUmbracoDatabase"/> instance to query. If null, the method returns null.</param>
-/// <param name="keyPrefix">The prefix used to filter the keys in the key/value table.</param>
-/// <returns>
-///     A read-only dictionary containing key/value pairs whose keys start with the specified prefix, or <c>null</c> if <paramref name="database"/> is null.
-/// </returns>
+    /// <summary>
+    ///     Retrieves a dictionary of key/value pairs from the database table, filtered by a specified key prefix.
+    ///     This method does not use a scope or transaction.
+    /// </summary>
+    /// <remarks>
+    ///     Used by <see cref="RuntimeState" /> to determine the runtime state.
+    ///     The query is performed directly against the database without any transactional scope.
+    /// </remarks>
+    /// <param name="database">The <see cref="IUmbracoDatabase"/> instance to query. If null, the method returns null.</param>
+    /// <param name="keyPrefix">The prefix used to filter the keys in the key/value table.</param>
+    /// <returns>
+    ///     A read-only dictionary containing key/value pairs whose keys start with the specified prefix, or <c>null</c> if <paramref name="database"/> is null.
+    /// </returns>
     public static IReadOnlyDictionary<string, string?>? GetFromKeyValueTable(
         this IUmbracoDatabase? database,
         string keyPrefix)

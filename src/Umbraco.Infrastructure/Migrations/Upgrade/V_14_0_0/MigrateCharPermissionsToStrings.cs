@@ -132,9 +132,9 @@ internal class MigrateCharPermissionsToStrings : MigrationBase
     [ExplicitColumns]
     private class UserGroupDto
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="UserGroupDto"/> class with default values.
-    /// </summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserGroupDto"/> class with default values.
+        /// </summary>
         public UserGroupDto()
         {
             UserGroup2AppDtos = [];
@@ -143,14 +143,14 @@ internal class MigrateCharPermissionsToStrings : MigrationBase
             UserGroup2GranularPermissionDtos = [];
         }
 
-    /// <summary>Gets or sets the unique identifier for the user group.</summary>
+        /// <summary>Gets or sets the unique identifier for the user group.</summary>
         [Column("id")]
         [PrimaryKeyColumn(IdentitySeed = 6)]
         public int Id { get; set; }
 
-    /// <summary>
-    /// Gets or sets the unique identifier key for the user group.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique identifier key for the user group.
+        /// </summary>
         [Column("key")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         [Constraint(Default = SystemMethods.NewGuid)]
@@ -171,12 +171,12 @@ internal class MigrateCharPermissionsToStrings : MigrationBase
         [Index(IndexTypes.UniqueNonClustered, Name = "IX_umbracoUserGroup_userGroupName")]
         public string? Name { get; set; }
 
-    /// <summary>
-    /// Gets or sets the default permissions for the user group as a string.
-    /// <para>
-    /// <b>Obsolete:</b> This property is no longer used. Use <see cref="UserGroup2PermissionDtos"/> instead. Scheduled for removal in Umbraco 18.
-    /// </para>
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the default permissions for the user group as a string.
+        /// <para>
+        /// <b>Obsolete:</b> This property is no longer used. Use <see cref="UserGroup2PermissionDtos"/> instead. Scheduled for removal in Umbraco 18.
+        /// </para>
+        /// </summary>
         [Column("userGroupDefaultPermissions")]
         [Length(50)]
         [NullSetting(NullSetting = NullSettings.Null)]
@@ -199,7 +199,7 @@ internal class MigrateCharPermissionsToStrings : MigrationBase
         [Constraint(Default = SystemMethods.CurrentUTCDateTime)]
         public DateTime UpdateDate { get; set; }
 
-    /// <summary>Gets or sets the icon associated with the user group.</summary>
+        /// <summary>Gets or sets the icon associated with the user group.</summary>
         [Column("icon")]
         [NullSetting(NullSetting = NullSettings.Null)]
         public string? Icon { get; set; }
@@ -227,9 +227,9 @@ internal class MigrateCharPermissionsToStrings : MigrationBase
         [ForeignKey(typeof(NodeDto), Name = "FK_startMediaId_umbracoNode_id")]
         public int? StartMediaId { get; set; }
 
-    /// <summary>
-    /// Gets or sets the collection of application associations for this user group.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the collection of application associations for this user group.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserGroupId")]
         public List<UserGroup2AppDto> UserGroup2AppDtos { get; set; }
@@ -248,9 +248,9 @@ internal class MigrateCharPermissionsToStrings : MigrationBase
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserGroupId")]
         public List<UserGroup2PermissionDto> UserGroup2PermissionDtos { get; set; }
 
-    /// <summary>
-    /// Gets or sets the list of granular permissions associated with the user group.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the list of granular permissions associated with the user group.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserGroupId")]
         public List<UserGroup2GranularPermissionDto> UserGroup2GranularPermissionDtos { get; set; }

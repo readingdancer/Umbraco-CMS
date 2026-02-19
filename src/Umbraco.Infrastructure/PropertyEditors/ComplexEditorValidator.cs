@@ -87,12 +87,12 @@ public abstract class ComplexEditorValidator : IValueValidator
     /// </summary>
     public class PropertyTypeValidationModel
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PropertyTypeValidationModel"/> class with the specified property type, posted value, and JSON path.
-    /// </summary>
-    /// <param name="propertyType">The <see cref="IPropertyType"/> representing the property type to be validated.</param>
-    /// <param name="postedValue">The value submitted for validation, which may be <c>null</c>.</param>
-    /// <param name="jsonPath">The JSON path indicating the location of the property within the data structure.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PropertyTypeValidationModel"/> class with the specified property type, posted value, and JSON path.
+        /// </summary>
+        /// <param name="propertyType">The <see cref="IPropertyType"/> representing the property type to be validated.</param>
+        /// <param name="postedValue">The value submitted for validation, which may be <c>null</c>.</param>
+        /// <param name="jsonPath">The JSON path indicating the location of the property within the data structure.</param>
         public PropertyTypeValidationModel(IPropertyType propertyType, object? postedValue, string jsonPath)
         {
             PostedValue = postedValue;
@@ -100,14 +100,14 @@ public abstract class ComplexEditorValidator : IValueValidator
             JsonPath = jsonPath;
         }
 
-    /// <summary>
-    /// Gets the value posted for this property type during validation.
-    /// </summary>
+        /// <summary>
+        /// Gets the value posted for this property type during validation.
+        /// </summary>
         public object? PostedValue { get; }
 
-    /// <summary>
-    /// Gets the <see cref="IPropertyType"/> that this validation model is associated with.
-    /// </summary>
+        /// <summary>
+        /// Gets the <see cref="IPropertyType"/> that this validation model is associated with.
+        /// </summary>
         public IPropertyType PropertyType { get; }
 
         /// <summary>
@@ -123,20 +123,20 @@ public abstract class ComplexEditorValidator : IValueValidator
     {
         private readonly List<PropertyTypeValidationModel> _list = new();
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ElementTypeValidationModel"/> class with the specified element type alias and unique identifier.
-    /// </summary>
-    /// <param name="elementTypeAlias">The alias of the element type to validate.</param>
-    /// <param name="id">The unique identifier (GUID) of the element.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ElementTypeValidationModel"/> class with the specified element type alias and unique identifier.
+        /// </summary>
+        /// <param name="elementTypeAlias">The alias of the element type to validate.</param>
+        /// <param name="id">The unique identifier (GUID) of the element.</param>
         public ElementTypeValidationModel(string elementTypeAlias, Guid id)
         {
             ElementTypeAlias = elementTypeAlias;
             Id = id;
         }
 
-    /// <summary>
-    /// Gets a collection containing the validation results for each property type.
-    /// </summary>
+        /// <summary>
+        /// Gets a collection containing the validation results for each property type.
+        /// </summary>
         public IEnumerable<PropertyTypeValidationModel> PropertyTypeValidation => _list;
 
         /// <summary>
@@ -144,13 +144,13 @@ public abstract class ComplexEditorValidator : IValueValidator
         /// </summary>
         public string ElementTypeAlias { get; }
 
-    /// <summary>
-    /// Gets the unique identifier of the element type.
-    /// </summary>
+        /// <summary>
+        /// Gets the unique identifier of the element type.
+        /// </summary>
         public Guid Id { get; }
 
-    /// <summary>Adds a property type validation to the element type validation model.</summary>
-    /// <param name="propValidation">The property type validation model to add.</param>
+        /// <summary>Adds a property type validation to the element type validation model.</summary>
+        /// <param name="propValidation">The property type validation model to add.</param>
         public void AddPropertyTypeValidation(PropertyTypeValidationModel propValidation) => _list.Add(propValidation);
     }
 }

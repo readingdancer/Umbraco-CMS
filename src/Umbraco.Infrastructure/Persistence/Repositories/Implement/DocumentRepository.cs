@@ -676,29 +676,32 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
 
     private sealed class ContentVariation
     {
-    /// <summary>
-    /// Gets or sets the culture identifier (e.g., language or locale) associated with this content variation.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the culture identifier (e.g., language or locale) associated with this content variation.
+        /// </summary>
         public string? Culture { get; set; }
-    /// <summary>
-    /// Gets or sets the display name associated with this content variation.
-    /// </summary>
+
+        /// <summary>
+        /// Gets or sets the display name associated with this content variation.
+        /// </summary>
         public string? Name { get; set; }
-    /// <summary>
-    /// Gets or sets the date and time associated with this content variation, such as its creation or last modification.
-    /// </summary>
+
+        /// <summary>
+        /// Gets or sets the date and time associated with this content variation, such as its creation or last modification.
+        /// </summary>
         public DateTime Date { get; set; }
     }
 
     private sealed class DocumentVariation
     {
-    /// <summary>
-    /// Gets or sets the culture identifier (e.g., language or locale) associated with this document variation.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the culture identifier (e.g., language or locale) associated with this document variation.
+        /// </summary>
         public string? Culture { get; set; }
-    /// <summary>
-    /// Gets or sets a value indicating whether the document variation has been edited.
-    /// </summary>
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the document variation has been edited.
+        /// </summary>
         public bool Edited { get; set; }
     }
 
@@ -930,21 +933,6 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
         return MapDtosToContent(Database.Fetch<DocumentDto>(sql), true);
     }
 
-    // TODO: This method needs to return a readonly version of IContent! The content returned
-    // from this method does not contain all of the data required to re-persist it and if that
-    // is attempted some odd things will occur.
-    // Either we create an IContentReadOnly (which ultimately we should for vNext so we can
-    // differentiate between methods that return entities that can be re-persisted or not), or
-    // in the meantime to not break API compatibility, we can add a property to IContentBase
-    // (or go further and have it on IUmbracoEntity): "IsReadOnly" and if that is true we throw
-    // an exception if that entity is passed to a Save method.
-    // Ideally we return "Slim" versions of content for all sorts of methods here and in ContentService.
-    // Perhaps another non-breaking alternative is to have new services like IContentServiceReadOnly
-    // which can return IContentReadOnly.
-    // We have the ability with `MapDtosToContent` to reduce the amount of data looked up for a
-    // content item. Ideally for paged data that populates list views, these would be ultra slim
-    // content items, there's no reason to populate those with really anything apart from property data,
-    // but until we do something like the above, we can't do that since it would be breaking and unclear.
     /// <summary>
     /// Retrieves a paged collection of lightweight ("slim") content versions for the specified node.
     /// </summary>
@@ -953,6 +941,21 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
     /// <param name="take">The maximum number of versions to return (for paging).</param>
     /// <returns>An enumerable collection of slim <see cref="Umbraco.Cms.Core.Models.IContent"/> instances representing the versions.</returns>
     /// <remarks>
+    /// TODO: This method needs to return a readonly version of IContent! The content returned
+    /// from this method does not contain all of the data required to re-persist it and if that
+    /// is attempted some odd things will occur.
+    /// Either we create an IContentReadOnly (which ultimately we should for vNext so we can
+    /// differentiate between methods that return entities that can be re-persisted or not), or
+    /// in the meantime to not break API compatibility, we can add a property to IContentBase
+    /// (or go further and have it on IUmbracoEntity): "IsReadOnly" and if that is true we throw
+    /// an exception if that entity is passed to a Save method.
+    /// Ideally we return "Slim" versions of content for all sorts of methods here and in ContentService.
+    /// Perhaps another non-breaking alternative is to have new services like IContentServiceReadOnly
+    /// which can return IContentReadOnly.
+    /// We have the ability with `MapDtosToContent` to reduce the amount of data looked up for a
+    /// content item. Ideally for paged data that populates list views, these would be ultra slim
+    /// content items, there's no reason to populate those with really anything apart from property data,
+    /// but until we do something like the above, we can't do that since it would be breaking and unclear.
     /// The returned content instances are 'slim' and may not contain all data required for re-persistence. They are intended for read-only scenarios such as version listings or rollbacks, and should not be used for saving or updating content.
     /// </remarks>
     public override IEnumerable<IContent> GetAllVersionsSlim(int nodeId, int skip, int take)
@@ -973,11 +976,11 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
             loadVariants: true);
     }
 
-/// <summary>
-/// Gets a specific version of the content by its version ID.
-/// </summary>
-/// <param name="versionId">The ID of the version to retrieve.</param>
-/// <returns>The content version matching the specified version ID, or null if not found.</returns>
+    /// <summary>
+    /// Gets a specific version of the content by its version ID.
+    /// </summary>
+    /// <param name="versionId">The ID of the version to retrieve.</param>
+    /// <returns>The content version matching the specified version ID, or null if not found.</returns>
     public override IContent? GetVersion(int versionId)
     {
         Sql<ISqlContext> sql = GetBaseQuery(QueryType.Single, false)
@@ -987,11 +990,11 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
         return dto == null ? null : MapDtoToContent(dto);
     }
 
-    // deletes a specific version
     /// <summary>
     /// Deletes a specific version of a document by its version ID.
     /// Throws an <see cref="InvalidOperationException"/> if the specified version is the current or published version.
     /// </summary>
+    /// <remarks>deletes a specific version</remarks>
     /// <param name="versionId">The ID of the version to delete.</param>
     public override void DeleteVersion(int versionId)
     {
@@ -1028,10 +1031,10 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
         PerformDeleteVersion(versionDto.ContentVersionDto.NodeId, versionId);
     }
 
-    //  deletes all versions of an entity, older than a date.
     /// <summary>
     /// Deletes all unpublished and non-current versions of a document entity for the specified node that are older than the given version date.
     /// </summary>
+    /// <remarks>deletes all versions of an entity, older than a date.</remarks>
     /// <param name="nodeId">The ID of the node whose versions are to be deleted.</param>
     /// <param name="versionDate">The cutoff date; versions older than this date will be deleted.</param>
     public override void DeleteVersions(int nodeId, DateTime versionDate)
@@ -1594,11 +1597,11 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
 
     #region Content Repository
 
-/// <summary>
-/// Counts the number of published documents, optionally filtered by content type alias.
-/// </summary>
-/// <param name="contentTypeAlias">The alias of the content type to filter by. If null or empty, counts all published documents.</param>
-/// <returns>The count of published documents matching the criteria.</returns>
+    /// <summary>
+    /// Counts the number of published documents, optionally filtered by content type alias.
+    /// </summary>
+    /// <param name="contentTypeAlias">The alias of the content type to filter by. If null or empty, counts all published documents.</param>
+    /// <returns>The count of published documents matching the criteria.</returns>
     public int CountPublished(string? contentTypeAlias = null)
     {
         Sql<ISqlContext> sql = SqlContext.Sql();
@@ -1645,11 +1648,11 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
     public void AssignEntityPermission(IContent entity, string permission, IEnumerable<int> groupIds) =>
         PermissionRepository.AssignEntityPermission(entity, permission, groupIds);
 
-/// <summary>
-/// Retrieves the collection of permissions assigned to the specified entity.
-/// </summary>
-/// <param name="entityId">The unique identifier of the entity for which to retrieve permissions.</param>
-/// <returns>An <see cref="EntityPermissionCollection"/> containing the permissions associated with the entity.</returns>
+    /// <summary>
+    /// Retrieves the collection of permissions assigned to the specified entity.
+    /// </summary>
+    /// <param name="entityId">The unique identifier of the entity for which to retrieve permissions.</param>
+    /// <returns>An <see cref="EntityPermissionCollection"/> containing the permissions associated with the entity.</returns>
     public EntityPermissionCollection GetPermissionsForEntity(int entityId) =>
         PermissionRepository.GetPermissionsForEntity(entityId);
 
@@ -1839,15 +1842,15 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
     {
         private readonly DocumentRepository _outerRepo;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ContentByGuidReadRepository"/> class.
-    /// </summary>
-    /// <param name="outerRepo">The parent <see cref="DocumentRepository"/> instance used for document operations.</param>
-    /// <param name="scopeAccessor">Provides access to the current database scope.</param>
-    /// <param name="cache">The application-level caches for storing and retrieving data.</param>
-    /// <param name="logger">The logger used for logging repository operations.</param>
-    /// <param name="repositoryCacheVersionService">Service for managing repository cache versions.</param>
-    /// <param name="cacheSyncService">Service for synchronizing cache across distributed environments.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContentByGuidReadRepository"/> class.
+        /// </summary>
+        /// <param name="outerRepo">The parent <see cref="DocumentRepository"/> instance used for document operations.</param>
+        /// <param name="scopeAccessor">Provides access to the current database scope.</param>
+        /// <param name="cache">The application-level caches for storing and retrieving data.</param>
+        /// <param name="logger">The logger used for logging repository operations.</param>
+        /// <param name="repositoryCacheVersionService">Service for managing repository cache versions.</param>
+        /// <param name="cacheSyncService">Service for synchronizing cache across distributed environments.</param>
         public ContentByGuidReadRepository(
             DocumentRepository outerRepo,
             IScopeAccessor scopeAccessor,
@@ -1928,11 +1931,11 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
         protected override string GetBaseWhereClause() =>
             throw new InvalidOperationException("This method won't be implemented.");
 
-/// <summary>
-/// Populates the GUID-keyed cache with the specified content entity.
-/// This enables entities retrieved by integer ID to also be cached and retrieved using their GUID.
-/// </summary>
-/// <param name="entity">The content entity to cache by its GUID key.</param>
+        /// <summary>
+        /// Populates the GUID-keyed cache with the specified content entity.
+        /// This enables entities retrieved by integer ID to also be cached and retrieved using their GUID.
+        /// </summary>
+        /// <param name="entity">The content entity to cache by its GUID key.</param>
         public void PopulateCacheByKey(IContent entity)
         {
             if (entity.HasIdentity)
@@ -1942,11 +1945,11 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
             }
         }
 
-/// <summary>
-/// Populates the GUID-keyed cache with the specified content entities.
-/// This allows entities retrieved by integer ID to also be cached for GUID lookups.
-/// </summary>
-/// <param name="entities">The collection of <see cref="IContent"/> entities to cache by their GUID keys.</param>
+        /// <summary>
+        /// Populates the GUID-keyed cache with the specified content entities.
+        /// This allows entities retrieved by integer ID to also be cached for GUID lookups.
+        /// </summary>
+        /// <param name="entities">The collection of <see cref="IContent"/> entities to cache by their GUID keys.</param>
         public void PopulateCacheByKey(IEnumerable<IContent> entities)
         {
             foreach (IContent entity in entities)
@@ -2211,17 +2214,19 @@ public class DocumentRepository : ContentRepositoryBase<int, IContent, DocumentR
     // ReSharper disable once ClassNeverInstantiated.Local
     private sealed class CultureNodeName
     {
-    /// <summary>
-    /// Gets or sets the unique identifier for the culture node name.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique identifier for the culture node name.
+        /// </summary>
         public int Id { get; set; }
-    /// <summary>
-    /// Gets or sets the localized name associated with the culture node.
-    /// </summary>
+
+        /// <summary>
+        /// Gets or sets the localized name associated with the culture node.
+        /// </summary>
         public string? Name { get; set; }
-    /// <summary>
-    /// Gets or sets the language identifier for the culture node name.
-    /// </summary>
+
+        /// <summary>
+        /// Gets or sets the language identifier for the culture node name.
+        /// </summary>
         public int LanguageId { get; set; }
     }
 

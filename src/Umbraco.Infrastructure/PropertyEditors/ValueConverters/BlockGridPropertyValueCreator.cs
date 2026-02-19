@@ -88,11 +88,11 @@ internal sealed class BlockGridPropertyValueCreator : BlockPropertyValueCreatorB
 
     private sealed class BlockGridItemActivator : BlockItemActivator<BlockGridItem>
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="BlockGridItemActivator"/> class.
-    /// </summary>
-    /// <param name="blockConverter">The <see cref="BlockEditorConverter"/> used to convert block editor values.</param>
-    /// <param name="constructorCache">The <see cref="BlockGridPropertyValueConstructorCache"/> used to cache constructors for block grid property values.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlockGridItemActivator"/> class.
+        /// </summary>
+        /// <param name="blockConverter">The <see cref="BlockEditorConverter"/> used to convert block editor values.</param>
+        /// <param name="constructorCache">The <see cref="BlockGridPropertyValueConstructorCache"/> used to cache constructors for block grid property values.</param>
         public BlockGridItemActivator(BlockEditorConverter blockConverter, BlockGridPropertyValueConstructorCache constructorCache)
             : base(blockConverter, constructorCache)
         {

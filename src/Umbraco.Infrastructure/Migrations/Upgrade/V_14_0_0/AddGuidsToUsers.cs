@@ -191,9 +191,9 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
     {
         public const string TableName = Constants.DatabaseSchema.Tables.User;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="OldUserDto"/> class, representing legacy user data for migration purposes.
-    /// </summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OldUserDto"/> class, representing legacy user data for migration purposes.
+        /// </summary>
         public OldUserDto()
         {
             UserGroupDtos = new List<UserGroupDto>();
@@ -264,9 +264,9 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
         [Length(10)]
         public string? UserLanguage { get; set; }
 
-    /// <summary>
-    /// Gets or sets the security stamp token associated with the user, typically used to validate the integrity of user authentication or to track changes to user credentials.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the security stamp token associated with the user, typically used to validate the integrity of user authentication or to track changes to user credentials.
+        /// </summary>
         [Column("securityStampToken")]
         [NullSetting(NullSetting = NullSettings.Null)]
         [Length(255)]
@@ -312,17 +312,17 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
         [NullSetting(NullSetting = NullSettings.Null)]
         public DateTime? InvitedDate { get; set; }
 
-    /// <summary>
-    /// Gets or sets the date and time when the user was created.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date and time when the user was created.
+        /// </summary>
         [Column("createDate")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         [Constraint(Default = SystemMethods.CurrentDateTime)]
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
-    /// <summary>
-    /// Gets or sets the date and time when the user was last updated.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date and time when the user was last updated.
+        /// </summary>
         [Column("updateDate")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         [Constraint(Default = SystemMethods.CurrentDateTime)]
@@ -344,16 +344,16 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
         [SpecialDbType(SpecialDbTypes.NVARCHARMAX)]
         public string? TourData { get; set; }
 
-    /// <summary>
-    /// Gets or sets the collection of user groups to which the user belongs.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the collection of user groups to which the user belongs.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserId")]
         public List<UserGroupDto> UserGroupDtos { get; set; }
 
-    /// <summary>
-    /// Gets or sets the collection of start node DTOs associated with the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the collection of start node DTOs associated with the user.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserId")]
         public HashSet<UserStartNodeDto> UserStartNodeDtos { get; set; }
@@ -369,9 +369,9 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
     {
         public const string TableName = Constants.DatabaseSchema.Tables.User;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="NewUserDto"/> class with default values.
-    /// </summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NewUserDto"/> class with default values.
+        /// </summary>
         public NewUserDto()
         {
             UserGroupDtos = new List<UserGroupDto>();
@@ -408,24 +408,24 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
         [Constraint(Default = "0")]
         public bool NoConsole { get; set; }
 
-    /// <summary>
-    /// Gets or sets the username associated with the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the username associated with the user.
+        /// </summary>
         [Column("userName")]
         public string UserName { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the login name of the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the login name of the user.
+        /// </summary>
         [Column("userLogin")]
         [Length(125)]
         [Index(IndexTypes.NonClustered)]
         public string? Login { get; set; }
 
-    /// <summary>
-    /// Gets or sets the hashed password of the user.
-    /// This value should not contain the plain text password.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the hashed password of the user.
+        /// This value should not contain the plain text password.
+        /// </summary>
         [Column("userPassword")]
         [Length(500)]
         public string? Password { get; set; }
@@ -438,7 +438,7 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
         [Length(500)]
         public string? PasswordConfig { get; set; }
 
-    /// <summary>Gets or sets the email address of the user.</summary>
+        /// <summary>Gets or sets the email address of the user.</summary>
         [Column("userEmail")]
         public string Email { get; set; } = null!;
 
@@ -450,15 +450,15 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
         [Length(10)]
         public string? UserLanguage { get; set; }
 
-    /// <summary>
-    /// Gets or sets the security stamp token associated with the user, used to validate the integrity of user authentication or security-related operations.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the security stamp token associated with the user, used to validate the integrity of user authentication or security-related operations.
+        /// </summary>
         [Column("securityStampToken")]
         [NullSetting(NullSetting = NullSettings.Null)]
         [Length(255)]
         public string? SecurityStampToken { get; set; }
 
-    /// <summary>Gets or sets the number of failed login attempts for the user.</summary>
+        /// <summary>Gets or sets the number of failed login attempts for the user.</summary>
         [Column("failedLoginAttempts")]
         [NullSetting(NullSetting = NullSettings.Null)]
         public int? FailedLoginAttempts { get; set; }
@@ -470,16 +470,16 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
         [NullSetting(NullSetting = NullSettings.Null)]
         public DateTime? LastLockoutDate { get; set; }
 
-    /// <summary>
-    /// Gets or sets the date and time when the user's password was last changed.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date and time when the user's password was last changed.
+        /// </summary>
         [Column("lastPasswordChangeDate")]
         [NullSetting(NullSetting = NullSettings.Null)]
         public DateTime? LastPasswordChangeDate { get; set; }
 
-    /// <summary>
-    /// Gets or sets the date and time when the user last logged in.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date and time when the user last logged in.
+        /// </summary>
         [Column("lastLoginDate")]
         [NullSetting(NullSetting = NullSettings.Null)]
         public DateTime? LastLoginDate { get; set; }
@@ -498,9 +498,9 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
         [NullSetting(NullSetting = NullSettings.Null)]
         public DateTime? InvitedDate { get; set; }
 
-    /// <summary>
-    /// Gets or sets the creation date of the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the creation date of the user.
+        /// </summary>
         [Column("createDate")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         [Constraint(Default = SystemMethods.CurrentDateTime)]
@@ -530,16 +530,16 @@ internal class AddGuidsToUsers : UnscopedMigrationBase
         [SpecialDbType(SpecialDbTypes.NVARCHARMAX)]
         public string? TourData { get; set; }
 
-    /// <summary>
-    /// Gets or sets the user groups associated with the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the user groups associated with the user.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserId")]
         public List<UserGroupDto> UserGroupDtos { get; set; }
 
-    /// <summary>
-    /// Gets or sets the collection of start node DTOs associated with the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the collection of start node DTOs associated with the user.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserId")]
         public HashSet<UserStartNodeDto> UserStartNodeDtos { get; set; }

@@ -14,9 +14,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-/// <summary>
-///     Represents a tags property editor.
-/// </summary>
+    /// <summary>
+    ///     Represents a tags property editor.
+    /// </summary>
 [TagsPropertyEditor]
 [DataEditor(
     Constants.PropertyEditors.Aliases.Tags,
@@ -60,15 +60,15 @@ public class TagsPropertyEditor : DataEditor
         private readonly IJsonSerializer _jsonSerializer;
         private readonly IDataTypeService _dataTypeService;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Umbraco.Cms.Core.PropertyEditors.TagsPropertyEditor.TagPropertyValueEditor"/> class,
-    /// used for handling tag property values in Umbraco.
-    /// </summary>
-    /// <param name="shortStringHelper">Provides methods for manipulating and formatting short strings.</param>
-    /// <param name="jsonSerializer">Handles serialization and deserialization of JSON data.</param>
-    /// <param name="ioHelper">Assists with IO operations and path handling.</param>
-    /// <param name="attribute">The attribute that defines metadata for the data editor.</param>
-    /// <param name="dataTypeService">Service for accessing and managing data types.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Umbraco.Cms.Core.PropertyEditors.TagsPropertyEditor.TagPropertyValueEditor"/> class,
+        /// used for handling tag property values in Umbraco.
+        /// </summary>
+        /// <param name="shortStringHelper">Provides methods for manipulating and formatting short strings.</param>
+        /// <param name="jsonSerializer">Handles serialization and deserialization of JSON data.</param>
+        /// <param name="ioHelper">Assists with IO operations and path handling.</param>
+        /// <param name="attribute">The attribute that defines metadata for the data editor.</param>
+        /// <param name="dataTypeService">Service for accessing and managing data types.</param>
         public TagPropertyValueEditor(
             IShortStringHelper shortStringHelper,
             IJsonSerializer jsonSerializer,
@@ -144,15 +144,15 @@ public class TagsPropertyEditor : DataEditor
         /// <inheritdoc />
         public override IValueRequiredValidator RequiredValidator => new RequiredJsonValueValidator();
 
-    /// <summary>
-    /// Converts the property value of a tag property to a format suitable for the property editor.
-    /// </summary>
-    /// <param name="property">The property whose value will be converted for the editor.</param>
-    /// <param name="culture">The culture to use when retrieving the property's value, or <c>null</c> for the default culture.</param>
-    /// <param name="segment">The segment to use when retrieving the property's value, or <c>null</c> for the default segment.</param>
-    /// <returns>
-    /// A collection of parsed tags if any are found; otherwise, <c>null</c> if the property value is null or no tags are present.
-    /// </returns>
+        /// <summary>
+        /// Converts the property value of a tag property to a format suitable for the property editor.
+        /// </summary>
+        /// <param name="property">The property whose value will be converted for the editor.</param>
+        /// <param name="culture">The culture to use when retrieving the property's value, or <c>null</c> for the default culture.</param>
+        /// <param name="segment">The segment to use when retrieving the property's value, or <c>null</c> for the default segment.</param>
+        /// <returns>
+        /// A collection of parsed tags if any are found; otherwise, <c>null</c> if the property value is null or no tags are present.
+        /// </returns>
         public override object? ToEditor(IProperty property, string? culture = null, string? segment = null)
         {
             var val = property.GetValue(culture, segment);

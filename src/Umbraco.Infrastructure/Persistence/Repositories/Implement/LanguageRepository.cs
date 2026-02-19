@@ -125,10 +125,10 @@ internal sealed class LanguageRepository : EntityRepositoryBase<int, ILanguage>,
         return null;
     }
 
-    // multi implementation of GetIsoCodeById
     /// <summary>
     /// Retrieves the ISO codes corresponding to the specified language IDs.
     /// </summary>
+    /// <remarks>multi implementation of GetIsoCodeById</remarks>
     /// <param name="ids">A collection of language IDs for which to retrieve ISO codes.</param>
     /// <param name="throwOnNotFound">If true, throws an <see cref="ArgumentException"/> when an ID is not found; if false, the corresponding entry in the result will be <c>null</c>.</param>
     /// <returns>

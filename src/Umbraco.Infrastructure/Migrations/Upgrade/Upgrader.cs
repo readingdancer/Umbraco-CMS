@@ -10,10 +10,10 @@ namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade;
 /// </summary>
 public class Upgrader
 {
-/// <summary>
-///     Initializes a new instance of the <see cref="Upgrader" /> class with the specified migration plan.
-/// </summary>
-/// <param name="plan">The <see cref="MigrationPlan"/> to use for the upgrade process.</param>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="Upgrader" /> class with the specified migration plan.
+    /// </summary>
+    /// <param name="plan">The <see cref="MigrationPlan"/> to use for the upgrade process.</param>
     public Upgrader(MigrationPlan plan) => Plan = plan;
 
     /// <summary>
@@ -48,13 +48,13 @@ public class Upgrader
         IKeyValueService keyValueService)
         => ExecuteAsync(migrationPlanExecutor, scopeProvider, keyValueService).GetAwaiter().GetResult();
 
-/// <summary>
-///     Executes the migration plan asynchronously using the specified executor, scope provider, and key-value service.
-/// </summary>
-/// <param name="migrationPlanExecutor">The executor responsible for running the migration plan.</param>
-/// <param name="scopeProvider">The provider used to manage database transaction scopes.</param>
-/// <param name="keyValueService">The service used to persist and retrieve key-value pairs for migration state tracking.</param>
-/// <returns>A task that represents the asynchronous operation, containing the result of the executed migration plan.</returns>
+    /// <summary>
+    ///     Executes the migration plan asynchronously using the specified executor, scope provider, and key-value service.
+    /// </summary>
+    /// <param name="migrationPlanExecutor">The executor responsible for running the migration plan.</param>
+    /// <param name="scopeProvider">The provider used to manage database transaction scopes.</param>
+    /// <param name="keyValueService">The service used to persist and retrieve key-value pairs for migration state tracking.</param>
+    /// <returns>A task that represents the asynchronous operation, containing the result of the executed migration plan.</returns>
     public async Task<ExecutedMigrationPlan> ExecuteAsync(
         IMigrationPlanExecutor migrationPlanExecutor,
         ICoreScopeProvider scopeProvider,

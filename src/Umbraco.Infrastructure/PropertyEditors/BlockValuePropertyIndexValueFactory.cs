@@ -32,14 +32,14 @@ internal sealed class BlockValuePropertyIndexValueFactory :
     // we only care about the content data when extracting values for indexing - not the layouts nor the settings
     internal sealed class IndexValueFactoryBlockValue
     {
-    /// <summary>
-    /// Gets or sets the list of content block item data.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the list of content block item data.
+        /// </summary>
         public List<BlockItemData> ContentData { get; set; } = new();
 
-    /// <summary>
-    /// Gets or sets the collection of <see cref="BlockItemVariation"/> instances that should be exposed by the index value factory.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the collection of <see cref="BlockItemVariation"/> instances that should be exposed by the index value factory.
+        /// </summary>
         public List<BlockItemVariation> Expose { get; set; } = new();
     }
 }

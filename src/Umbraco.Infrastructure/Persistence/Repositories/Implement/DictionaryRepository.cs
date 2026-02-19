@@ -279,14 +279,14 @@ internal sealed class DictionaryRepository : EntityRepositoryBase<int, IDictiona
 
     private sealed class DictionaryItemKeyIdDto
     {
-    /// <summary>
-    /// Gets the unique key identifier for the dictionary item.
-    /// </summary>
+        /// <summary>
+        /// Gets the unique key identifier for the dictionary item.
+        /// </summary>
         public string Key { get; } = null!;
 
-    /// <summary>
-    /// Gets or sets the unique identifier of the dictionary item.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique identifier of the dictionary item.
+        /// </summary>
         public Guid Id { get; set; }
     }
 
@@ -299,15 +299,15 @@ internal sealed class DictionaryRepository : EntityRepositoryBase<int, IDictiona
 
         private string QuotedColumn(string columnName) => $"{QuoteTableName(DictionaryDto.TableName)}.{QuoteColumnName(columnName)}";
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement.DictionaryRepository.DictionaryByUniqueIdRepository"/> class.
-    /// </summary>
-    /// <param name="dictionaryRepository">The parent <see cref="DictionaryRepository"/> used for dictionary item operations.</param>
-    /// <param name="scopeAccessor">Provides access to the current database scope.</param>
-    /// <param name="cache">The <see cref="AppCaches"/> instance for managing application-level caching.</param>
-    /// <param name="logger">The <see cref="ILogger{TCategoryName}"/> instance for logging repository activity.</param>
-    /// <param name="repositoryCacheVersionService">Service for managing repository cache versioning.</param>
-    /// <param name="cacheSyncService">Service for synchronizing cache across distributed environments.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement.DictionaryRepository.DictionaryByUniqueIdRepository"/> class.
+        /// </summary>
+        /// <param name="dictionaryRepository">The parent <see cref="DictionaryRepository"/> used for dictionary item operations.</param>
+        /// <param name="scopeAccessor">Provides access to the current database scope.</param>
+        /// <param name="cache">The <see cref="AppCaches"/> instance for managing application-level caching.</param>
+        /// <param name="logger">The <see cref="ILogger{TCategoryName}"/> instance for logging repository activity.</param>
+        /// <param name="repositoryCacheVersionService">Service for managing repository cache versioning.</param>
+        /// <param name="cacheSyncService">Service for synchronizing cache across distributed environments.</param>
         public DictionaryByUniqueIdRepository(
             DictionaryRepository dictionaryRepository,
             IScopeAccessor scopeAccessor,
@@ -384,15 +384,15 @@ internal sealed class DictionaryRepository : EntityRepositoryBase<int, IDictiona
 
         private string QuotedColumn(string columnName) => $"{QuoteTableName(DictionaryDto.TableName)}.{QuoteColumnName(columnName)}";
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement.DictionaryRepository.DictionaryByKeyRepository"/> class.
-    /// </summary>
-    /// <param name="dictionaryRepository">The parent <see cref="DictionaryRepository"/> instance.</param>
-    /// <param name="scopeAccessor">The <see cref="IScopeAccessor"/> used to manage database scopes.</param>
-    /// <param name="cache">The <see cref="AppCaches"/> instance for application-level caching.</param>
-    /// <param name="logger">The <see cref="ILogger{DictionaryByKeyRepository}"/> instance for logging.</param>
-    /// <param name="repositoryCacheVersionService">The <see cref="IRepositoryCacheVersionService"/> for managing cache versions.</param>
-    /// <param name="cacheSyncService">The <see cref="ICacheSyncService"/> for synchronizing cache across instances.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement.DictionaryRepository.DictionaryByKeyRepository"/> class.
+        /// </summary>
+        /// <param name="dictionaryRepository">The parent <see cref="DictionaryRepository"/> instance.</param>
+        /// <param name="scopeAccessor">The <see cref="IScopeAccessor"/> used to manage database scopes.</param>
+        /// <param name="cache">The <see cref="AppCaches"/> instance for application-level caching.</param>
+        /// <param name="logger">The <see cref="ILogger{DictionaryByKeyRepository}"/> instance for logging.</param>
+        /// <param name="repositoryCacheVersionService">The <see cref="IRepositoryCacheVersionService"/> for managing cache versions.</param>
+        /// <param name="cacheSyncService">The <see cref="ICacheSyncService"/> for synchronizing cache across instances.</param>
         public DictionaryByKeyRepository(
             DictionaryRepository dictionaryRepository,
             IScopeAccessor scopeAccessor,

@@ -23,10 +23,10 @@ public sealed class SystemTextConfigurationEditorJsonSerializer : SystemTextJson
     {
     }
 
-/// <summary>
-/// Initializes a new instance of the <see cref="SystemTextConfigurationEditorJsonSerializer" /> class.
-/// </summary>
-/// <param name="jsonSerializerEncoderFactory">Factory used to create JSON serializer encoders.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SystemTextConfigurationEditorJsonSerializer" /> class.
+    /// </summary>
+    /// <param name="jsonSerializerEncoderFactory">Factory used to create JSON serializer encoders.</param>
     public SystemTextConfigurationEditorJsonSerializer(IJsonSerializerEncoderFactory jsonSerializerEncoderFactory)
         : base(jsonSerializerEncoderFactory)
         => _jsonSerializerOptions = new JsonSerializerOptions()

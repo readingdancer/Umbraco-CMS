@@ -14,11 +14,13 @@ public interface IBlockEditorElementTypeCache
     /// <param name="keys">A collection of unique identifiers (keys) for the content types to retrieve.</param>
     /// <returns>An enumerable collection of <see cref="IContentType"/> instances that match the provided keys. Only content types with matching keys are returned.</returns>
     IEnumerable<IContentType> GetMany(IEnumerable<Guid> keys);
+
     /// <summary>
     /// Gets all block editor element content types.
     /// </summary>
     /// <returns>An enumerable of all <see cref="Umbraco.Cms.Core.Models.IContentType"/> instances.</returns>
     IEnumerable<IContentType> GetAll();
+
     /// <summary>
     /// Clears all cached block editor element types.
     /// </summary>

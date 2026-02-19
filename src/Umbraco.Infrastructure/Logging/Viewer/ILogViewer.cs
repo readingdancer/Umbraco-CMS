@@ -13,10 +13,10 @@ public interface ILogViewer
     /// </summary>
     bool CanHandleLargeLogs { get; }
 
-/// <summary>
-///     Retrieves all saved log searches from the configured data source.
-/// </summary>
-/// <returns>A read-only list of saved log searches.</returns>
+    /// <summary>
+    ///     Retrieves all saved log searches from the configured data source.
+    /// </summary>
+    /// <returns>A read-only list of saved log searches.</returns>
     [Obsolete("Use ILogViewerService.GetSavedLogQueriesAsync instead. Scheduled for removal in Umbraco 15.")]
     IReadOnlyList<SavedLogSearch> GetSavedSearches();
 
@@ -26,27 +26,27 @@ public interface ILogViewer
     [Obsolete("Use ILogViewerService.AddSavedLogQueryAsync instead. Scheduled for removal in Umbraco 15.")]
     IReadOnlyList<SavedLogSearch> AddSavedSearch(string name, string query);
 
-/// <summary>
-///     Deletes a saved search from the chosen data source and returns the remaining saved searches.
-/// </summary>
-/// <param name="name">The name of the saved search to delete.</param>
-/// <returns>A read-only list of the remaining saved log searches after deletion.</returns>
+    /// <summary>
+    ///     Deletes a saved search from the chosen data source and returns the remaining saved searches.
+    /// </summary>
+    /// <param name="name">The name of the saved search to delete.</param>
+    /// <returns>A read-only list of the remaining saved log searches after deletion.</returns>
     [Obsolete("Use ILogViewerService.DeleteSavedLogQueryAsync instead. Scheduled for removal in Umbraco 15.")]
     IReadOnlyList<SavedLogSearch> DeleteSavedSearch(string name);
 
-/// <summary>
-///     Returns the number of error log entries within a specified time period.
-///     Errors are counted by including warnings with exceptions, as well as error and fatal messages.
-/// </summary>
-/// <param name="logTimePeriod">The time period over which to count errors.</param>
-/// <returns>The number of errors in the specified time period.</returns>
+    /// <summary>
+    ///     Returns the number of error log entries within a specified time period.
+    ///     Errors are counted by including warnings with exceptions, as well as error and fatal messages.
+    /// </summary>
+    /// <param name="logTimePeriod">The time period over which to count errors.</param>
+    /// <returns>The number of errors in the specified time period.</returns>
     int GetNumberOfErrors(LogTimePeriod logTimePeriod);
 
-/// <summary>
-///     Returns the counts of log entries for each log level within the specified time period.
-/// </summary>
-/// <param name="logTimePeriod">The time period over which to count log levels.</param>
-/// <returns>A <see cref="LogLevelCounts"/> object representing the counts of each log level.</returns>
+    /// <summary>
+    ///     Returns the counts of log entries for each log level within the specified time period.
+    /// </summary>
+    /// <param name="logTimePeriod">The time period over which to count log levels.</param>
+    /// <returns>A <see cref="LogLevelCounts"/> object representing the counts of each log level.</returns>
     [Obsolete("Use ILogViewerService.GetLogLevelCounts instead. Scheduled for removal in Umbraco 15.")]
     LogLevelCounts GetLogLevelCounts(LogTimePeriod logTimePeriod);
 
@@ -64,19 +64,19 @@ public interface ILogViewer
     [Obsolete("Use ILogViewerService.CanViewLogsAsync instead. Scheduled for removal in Umbraco 15.")]
     bool CheckCanOpenLogs(LogTimePeriod logTimePeriod);
 
-/// <summary>
-///     Returns a paged collection of log messages for the specified time period and filter criteria.
-/// </summary>
-/// <param name="logTimePeriod">The time period for which to retrieve logs.</param>
-/// <param name="pageNumber">The page number to retrieve. Defaults to 1.</param>
-/// <param name="pageSize">The number of log entries per page. Defaults to 100.</param>
-/// <param name="orderDirection">The direction in which to order the logs (ascending or descending). Defaults to descending.</param>
-/// <param name="filterExpression">An optional filter expression to filter logs.</param>
-/// <param name="logLevels">An optional array of log levels to include.</param>
-/// <returns>A paged result containing the log messages.</returns>
-/// <remarks>
-/// This method is obsolete. Use <see cref="ILogViewerService.GetPagedLogs"/> instead. Scheduled for removal in Umbraco 15.
-/// </remarks>
+    /// <summary>
+    ///     Returns a paged collection of log messages for the specified time period and filter criteria.
+    /// </summary>
+    /// <param name="logTimePeriod">The time period for which to retrieve logs.</param>
+    /// <param name="pageNumber">The page number to retrieve. Defaults to 1.</param>
+    /// <param name="pageSize">The number of log entries per page. Defaults to 100.</param>
+    /// <param name="orderDirection">The direction in which to order the logs (ascending or descending). Defaults to descending.</param>
+    /// <param name="filterExpression">An optional filter expression to filter logs.</param>
+    /// <param name="logLevels">An optional array of log levels to include.</param>
+    /// <returns>A paged result containing the log messages.</returns>
+    /// <remarks>
+    /// This method is obsolete. Use <see cref="ILogViewerService.GetPagedLogs"/> instead. Scheduled for removal in Umbraco 15.
+    /// </remarks>
     [Obsolete("Use ILogViewerService.GetPagedLogs instead. Scheduled for removal in Umbraco 15.")]
     PagedResult<LogMessage> GetLogs(
         LogTimePeriod logTimePeriod,

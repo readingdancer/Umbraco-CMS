@@ -29,20 +29,20 @@ public class UmbracoDatabase : Database, IUmbracoDatabase
 
     #region Ctor
 
-/// <summary>
-///     Initializes a new instance of the <see cref="UmbracoDatabase" /> class.
-/// </summary>
-/// <remarks>
-///     <para>Used by UmbracoDatabaseFactory to create databases.</para>
-///     <para>Also used by DatabaseBuilder for creating databases and installing/upgrading.</para>
-/// </remarks>
-/// <param name="connectionString">The connection string used to connect to the database.</param>
-/// <param name="sqlContext">The <see cref="ISqlContext"/> providing SQL context and helpers for database operations.</param>
-/// <param name="provider">The <see cref="DbProviderFactory"/> used to create database provider-specific instances.</param>
-/// <param name="logger">The <see cref="ILogger{UmbracoDatabase}"/> instance for logging database operations.</param>
-/// <param name="bulkSqlInsertProvider">An optional <see cref="IBulkSqlInsertProvider"/> for performing bulk SQL insert operations.</param>
-/// <param name="databaseSchemaCreatorFactory">A factory for creating <see cref="DatabaseSchemaCreator"/> instances.</param>
-/// <param name="mapperCollection">An optional collection of <see cref="IMapper"/> instances for mapping database entities.</param>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="UmbracoDatabase" /> class.
+    /// </summary>
+    /// <remarks>
+    ///     <para>Used by UmbracoDatabaseFactory to create databases.</para>
+    ///     <para>Also used by DatabaseBuilder for creating databases and installing/upgrading.</para>
+    /// </remarks>
+    /// <param name="connectionString">The connection string used to connect to the database.</param>
+    /// <param name="sqlContext">The <see cref="ISqlContext"/> providing SQL context and helpers for database operations.</param>
+    /// <param name="provider">The <see cref="DbProviderFactory"/> used to create database provider-specific instances.</param>
+    /// <param name="logger">The <see cref="ILogger{UmbracoDatabase}"/> instance for logging database operations.</param>
+    /// <param name="bulkSqlInsertProvider">An optional <see cref="IBulkSqlInsertProvider"/> for performing bulk SQL insert operations.</param>
+    /// <param name="databaseSchemaCreatorFactory">A factory for creating <see cref="DatabaseSchemaCreator"/> instances.</param>
+    /// <param name="mapperCollection">An optional collection of <see cref="IMapper"/> instances for mapping database entities.</param>
     public UmbracoDatabase(
         string connectionString,
         ISqlContext sqlContext,
@@ -228,12 +228,12 @@ public class UmbracoDatabase : Database, IUmbracoDatabase
     public int BulkInsertRecords<T>(IEnumerable<T> records) =>
         _bulkSqlInsertProvider?.BulkInsertRecords(this, records) ?? 0;
 
-/// <summary>
-/// Validates the current database schema and returns the result.
-/// </summary>
-/// <returns>
-/// A <see cref="DatabaseSchemaResult" /> representing the outcome of the schema validation process for the current database.
-/// </returns>
+    /// <summary>
+    /// Validates the current database schema and returns the result.
+    /// </summary>
+    /// <returns>
+    /// A <see cref="DatabaseSchemaResult" /> representing the outcome of the schema validation process for the current database.
+    /// </returns>
     public DatabaseSchemaResult ValidateSchema()
     {
         DatabaseSchemaCreator? dbSchema = _databaseSchemaCreatorFactory?.Create(this);
@@ -255,10 +255,10 @@ public class UmbracoDatabase : Database, IUmbracoDatabase
         return i;
     }
 
-/// <summary>
-/// Determines whether the required Umbraco database tables are present, indicating that Umbraco is installed.
-/// </summary>
-/// <returns>True if the Umbraco database tables are detected to be installed; otherwise, false.</returns>
+    /// <summary>
+    /// Determines whether the required Umbraco database tables are present, indicating that Umbraco is installed.
+    /// </summary>
+    /// <returns>True if the Umbraco database tables are detected to be installed; otherwise, false.</returns>
     public bool IsUmbracoInstalled() => ValidateSchema().DetermineHasInstalledVersion();
 
     #endregion
@@ -379,16 +379,16 @@ public class UmbracoDatabase : Database, IUmbracoDatabase
 
     #endregion
 
-    // used for tracking commands
     /// <summary>
     /// Represents information about a command executed against the Umbraco database.
     /// </summary>
+    /// <remarks>used for tracking commands</remarks>
     public class CommandInfo
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Persistence.UmbracoDatabase.CommandInfo"/> class, wrapping the specified database command.
-    /// </summary>
-    /// <param name="cmd">The <see cref="System.Data.IDbCommand"/> to wrap.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Persistence.UmbracoDatabase.CommandInfo"/> class, wrapping the specified database command.
+        /// </summary>
+        /// <param name="cmd">The <see cref="System.Data.IDbCommand"/> to wrap.</param>
         public CommandInfo(IDbCommand cmd)
         {
             Text = cmd.CommandText;
@@ -412,17 +412,17 @@ public class UmbracoDatabase : Database, IUmbracoDatabase
         public ParameterInfo[] Parameters { get; }
     }
 
-    // used for tracking commands
     /// <summary>
     /// Contains metadata about a parameter used in database commands executed by <see cref="UmbracoDatabase"/>.
     /// </summary>
+    /// <remarks>used for tracking commands</remarks>
     public class ParameterInfo
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Persistence.UmbracoDatabase.ParameterInfo"/> class,
-    /// wrapping the specified <see cref="IDbDataParameter"/>.
-    /// </summary>
-    /// <param name="parameter">The <see cref="IDbDataParameter"/> to be wrapped by this <see cref="ParameterInfo"/> instance.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Umbraco.Cms.Infrastructure.Persistence.UmbracoDatabase.ParameterInfo"/> class,
+        /// wrapping the specified <see cref="IDbDataParameter"/>.
+        /// </summary>
+        /// <param name="parameter">The <see cref="IDbDataParameter"/> to be wrapped by this <see cref="ParameterInfo"/> instance.</param>
         public ParameterInfo(IDbDataParameter parameter)
         {
             Name = parameter.ParameterName;
@@ -431,7 +431,7 @@ public class UmbracoDatabase : Database, IUmbracoDatabase
             Size = parameter.Size;
         }
 
-    /// <summary>Gets the name of the parameter.</summary>
+        /// <summary>Gets the name of the parameter.</summary>
         public string Name { get; }
 
         /// <summary>

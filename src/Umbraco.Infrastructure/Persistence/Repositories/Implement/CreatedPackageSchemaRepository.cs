@@ -36,25 +36,25 @@ public class CreatedPackageSchemaRepository : ICreatedPackagesRepository
     private readonly string _tempFolderPath;
     private readonly PackageDefinitionXmlParser _xmlParser;
 
-/// <summary>
-///     Initializes a new instance of the <see cref="CreatedPackageSchemaRepository" /> class.
-/// </summary>
-/// <param name="hostingEnvironment">Provides information about the web hosting environment.</param>
-/// <param name="fileSystems">Manages access to various file systems used by the application.</param>
-/// <param name="serializer">Serializes and deserializes entities to and from XML.</param>
-/// <param name="dataTypeService">Service for managing data types.</param>
-/// <param name="fileService">Service for managing files and file-related operations.</param>
-/// <param name="mediaService">Service for managing media items.</param>
-/// <param name="mediaTypeService">Service for managing media types.</param>
-/// <param name="contentService">Service for managing content items.</param>
-/// <param name="mediaFileManager">Handles media file management operations.</param>
-/// <param name="contentTypeService">Service for managing content types.</param>
-/// <param name="scopeAccessor">Provides access to the current database scope.</param>
-/// <param name="templateService">Service for managing templates.</param>
-/// <param name="dictionaryItemService">Service for managing dictionary items for localization.</param>
-/// <param name="languageService">Service for managing languages.</param>
-/// <param name="mediaFolderPath">The file system path to the media folder, if specified.</param>
-/// <param name="tempFolderPath">The file system path to the temporary folder, if specified.</param>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="CreatedPackageSchemaRepository" /> class.
+    /// </summary>
+    /// <param name="hostingEnvironment">Provides information about the web hosting environment.</param>
+    /// <param name="fileSystems">Manages access to various file systems used by the application.</param>
+    /// <param name="serializer">Serializes and deserializes entities to and from XML.</param>
+    /// <param name="dataTypeService">Service for managing data types.</param>
+    /// <param name="fileService">Service for managing files and file-related operations.</param>
+    /// <param name="mediaService">Service for managing media items.</param>
+    /// <param name="mediaTypeService">Service for managing media types.</param>
+    /// <param name="contentService">Service for managing content items.</param>
+    /// <param name="mediaFileManager">Handles media file management operations.</param>
+    /// <param name="contentTypeService">Service for managing content types.</param>
+    /// <param name="scopeAccessor">Provides access to the current database scope.</param>
+    /// <param name="templateService">Service for managing templates.</param>
+    /// <param name="dictionaryItemService">Service for managing dictionary items for localization.</param>
+    /// <param name="languageService">Service for managing languages.</param>
+    /// <param name="mediaFolderPath">The file system path to the media folder, if specified.</param>
+    /// <param name="tempFolderPath">The file system path to the temporary folder, if specified.</param>
     public CreatedPackageSchemaRepository(
         IHostingEnvironment hostingEnvironment,
         FileSystems fileSystems,

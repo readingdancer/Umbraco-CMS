@@ -60,11 +60,11 @@ public class MembersErrorDescriber : UmbracoErrorDescriberBase
         Description = _textService.Localize("member", "memberHasPassword"),
     };
 
-/// <summary>
-/// Returns an <see cref="IdentityError"/> indicating that the user is already a member of the specified role.
-/// </summary>
-/// <param name="role">The name of the role the user is already in.</param>
-/// <returns>An <see cref="IdentityError"/> that describes the error.</returns>
+    /// <summary>
+    /// Returns an <see cref="IdentityError"/> indicating that the user is already a member of the specified role.
+    /// </summary>
+    /// <param name="role">The name of the role the user is already in.</param>
+    /// <returns>An <see cref="IdentityError"/> that describes the error.</returns>
     public override IdentityError UserAlreadyInRole(string role) => new()
     {
         Code = nameof(UserAlreadyInRole),

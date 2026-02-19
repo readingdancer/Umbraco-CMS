@@ -12,13 +12,13 @@ internal sealed class MigrationContext : IMigrationContext
 {
     private readonly Action? _onCompleteAction;
 
-/// <summary>
-///     Initializes a new instance of the <see cref="MigrationContext" /> class.
-/// </summary>
-/// <param name="plan">The <see cref="MigrationPlan"/> that defines the migration steps to execute.</param>
-/// <param name="database">The <see cref="IUmbracoDatabase"/> instance to use for database operations during migrations, or <c>null</c> if not required.</param>
-/// <param name="logger">The <see cref="ILogger{MigrationContext}"/> instance used for logging migration activities.</param>
-/// <param name="onCompleteAction">An optional <see cref="Action"/> to invoke when the migration completes.</param>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="MigrationContext" /> class.
+    /// </summary>
+    /// <param name="plan">The <see cref="MigrationPlan"/> that defines the migration steps to execute.</param>
+    /// <param name="database">The <see cref="IUmbracoDatabase"/> instance to use for database operations during migrations, or <c>null</c> if not required.</param>
+    /// <param name="logger">The <see cref="ILogger{MigrationContext}"/> instance used for logging migration activities.</param>
+    /// <param name="onCompleteAction">An optional <see cref="Action"/> to invoke when the migration completes.</param>
     public MigrationContext(MigrationPlan plan, IUmbracoDatabase? database, ILogger<MigrationContext> logger, Action? onCompleteAction = null)
     {
         _onCompleteAction = onCompleteAction;

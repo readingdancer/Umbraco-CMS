@@ -11,15 +11,15 @@ public class ScopeContext : IScopeContext, IInstanceIdentifiable
 
     private interface IEnlistedObject
     {
-    /// <summary>
-    /// Gets the priority value that determines the order in which the enlisted object is processed.
-    /// </summary>
+        /// <summary>
+        /// Gets the priority value that determines the order in which the enlisted object is processed.
+        /// </summary>
         int Priority { get; }
 
-    /// <summary>
-    /// Executes logic associated with the enlisted object, typically as part of a scope completion process.
-    /// </summary>
-    /// <param name="completed">True if the scope completed successfully; otherwise, false.</param>
+        /// <summary>
+        /// Executes logic associated with the enlisted object, typically as part of a scope completion process.
+        /// </summary>
+        /// <param name="completed">True if the scope completed successfully; otherwise, false.</param>
         void Execute(bool completed);
     }
 
@@ -154,12 +154,12 @@ _enlisted ??= new Dictionary<string, IEnlistedObject>();
     {
         private readonly Action<bool, T?>? _action;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="EnlistedObject{T}"/> class with the specified item, optional action, and priority.
-    /// </summary>
-    /// <param name="item">The item to enlist in the scope context.</param>
-    /// <param name="action">An optional action to invoke with a boolean indicating success or failure, and the enlisted item.</param>
-    /// <param name="priority">The priority value that determines the order in which the enlisted object is processed.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EnlistedObject{T}"/> class with the specified item, optional action, and priority.
+        /// </summary>
+        /// <param name="item">The item to enlist in the scope context.</param>
+        /// <param name="action">An optional action to invoke with a boolean indicating success or failure, and the enlisted item.</param>
+        /// <param name="priority">The priority value that determines the order in which the enlisted object is processed.</param>
         public EnlistedObject(T? item, Action<bool, T?>? action, int priority)
         {
             Item = item;
@@ -167,9 +167,9 @@ _enlisted ??= new Dictionary<string, IEnlistedObject>();
             _action = action;
         }
 
-    /// <summary>
-    /// Gets the object of type <typeparamref name="T"/> that has been enlisted in the current scope context.
-    /// </summary>
+        /// <summary>
+        /// Gets the object of type <typeparamref name="T"/> that has been enlisted in the current scope context.
+        /// </summary>
         public T? Item { get; }
 
         /// <summary>
@@ -178,10 +178,10 @@ _enlisted ??= new Dictionary<string, IEnlistedObject>();
         /// </summary>
         public int Priority { get; }
 
-    /// <summary>
-    /// Executes the associated action for this enlisted object, passing the specified completion status.
-    /// </summary>
-    /// <param name="completed">True if the operation has completed successfully; otherwise, false.</param>
+        /// <summary>
+        /// Executes the associated action for this enlisted object, passing the specified completion status.
+        /// </summary>
+        /// <param name="completed">True if the operation has completed successfully; otherwise, false.</param>
         public void Execute(bool completed)
         {
             if (_action is not null)

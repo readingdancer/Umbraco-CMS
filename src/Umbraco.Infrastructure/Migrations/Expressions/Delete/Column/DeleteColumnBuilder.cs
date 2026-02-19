@@ -3,9 +3,9 @@ using Umbraco.Cms.Infrastructure.Migrations.Expressions.Delete.Expressions;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Expressions.Delete.Column;
 
-    /// <summary>
-    /// Represents a builder used to define and execute the deletion of a column from a database table during a migration.
-    /// </summary>
+/// <summary>
+/// Represents a builder used to define and execute the deletion of a column from a database table during a migration.
+/// </summary>
 public class DeleteColumnBuilder : ExpressionBuilderBase<DeleteColumnExpression>,
     IDeleteColumnBuilder
 {

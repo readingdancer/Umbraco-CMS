@@ -27,10 +27,10 @@ public interface IProviderSpecificConnectionInterceptor : IProviderSpecificInter
 {
 }
 
-    /// <summary>
-    /// Represents an interceptor that handles exceptions specific to a particular database provider.
-    /// Implementations can use this to translate or process provider-specific exceptions.
-    /// </summary>
+/// <summary>
+/// Represents an interceptor that handles exceptions specific to a particular database provider.
+/// Implementations can use this to translate or process provider-specific exceptions.
+/// </summary>
 public interface IProviderSpecificExceptionInterceptor : IProviderSpecificInterceptor, IExceptionInterceptor
 {
 }
@@ -43,9 +43,9 @@ public interface IProviderSpecificDataInterceptor : IProviderSpecificInterceptor
 {
 }
 
-    /// <summary>
-    /// Represents an interceptor that enables customization of transaction behaviors specific to a database provider.
-    /// </summary>
+/// <summary>
+/// Represents an interceptor that enables customization of transaction behaviors specific to a database provider.
+/// </summary>
 public interface IProviderSpecificTransactionInterceptor : IProviderSpecificInterceptor, ITransactionInterceptor
 {
 }

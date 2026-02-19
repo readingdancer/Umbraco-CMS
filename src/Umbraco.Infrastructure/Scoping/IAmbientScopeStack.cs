@@ -5,6 +5,7 @@ internal interface IAmbientScopeStack : IScopeAccessor
     /// <summary>Removes and returns the current ambient scope from the stack.</summary>
     /// <returns>The current ambient <see cref="Umbraco.Cms.Infrastructure.Scoping.IScope"/> that was removed from the stack.</returns>
     IScope Pop();
+
     /// <summary>
     /// Pushes the specified scope onto the ambient scope stack.
     /// </summary>

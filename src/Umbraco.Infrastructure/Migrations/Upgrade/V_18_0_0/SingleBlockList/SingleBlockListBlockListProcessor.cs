@@ -6,10 +6,10 @@ namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_18_0_0.SingleBlockList
 [Obsolete("Scheduled for removal in Umbraco 22.")] // Available in v17, activated in v18. Migration needs to work on LTS to LTS 17=>21
 internal class SingleBlockListBlockListProcessor : SingleBlockBlockProcessorBase, ITypedSingleBlockListProcessor
 {
-/// <summary>
-/// Initializes a new instance of the <see cref="SingleBlockListBlockListProcessor"/> class.
-/// </summary>
-/// <param name="blockListConfigurationCache">Cache used to store and retrieve block list configurations.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SingleBlockListBlockListProcessor"/> class.
+    /// </summary>
+    /// <param name="blockListConfigurationCache">Cache used to store and retrieve block list configurations.</param>
     public SingleBlockListBlockListProcessor(
         SingleBlockListConfigurationCache blockListConfigurationCache)
         : base(blockListConfigurationCache)

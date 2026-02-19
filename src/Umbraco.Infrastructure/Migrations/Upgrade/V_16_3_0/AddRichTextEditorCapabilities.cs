@@ -4,9 +4,9 @@ using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_16_3_0;
 
-    /// <summary>
-    /// Represents a migration that adds rich text editor capabilities to the system as part of the upgrade to version 16.3.0.
-    /// </summary>
+/// <summary>
+/// Represents a migration that adds rich text editor capabilities to the system as part of the upgrade to version 16.3.0.
+/// </summary>
 [Obsolete("Remove in Umbraco 18.")]
 public class AddRichTextEditorCapabilities : AsyncMigrationBase
 {

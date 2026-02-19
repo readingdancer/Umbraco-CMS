@@ -20,14 +20,14 @@ public sealed class UmbracoServices
     private readonly IPublishedContentTypeFactory _publishedContentTypeFactory;
     private readonly IShortStringHelper _shortStringHelper;
 
-/// <summary>
-///     Initializes a new instance of the <see cref="UmbracoServices" /> class.
-/// </summary>
-/// <param name="contentTypeService">Service for managing content types.</param>
-/// <param name="mediaTypeService">Service for managing media types.</param>
-/// <param name="memberTypeService">Service for managing member types.</param>
-/// <param name="publishedContentTypeFactory">Factory for creating published content types.</param>
-/// <param name="shortStringHelper">Helper for handling short string operations.</param>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="UmbracoServices" /> class.
+    /// </summary>
+    /// <param name="contentTypeService">Service for managing content types.</param>
+    /// <param name="mediaTypeService">Service for managing media types.</param>
+    /// <param name="memberTypeService">Service for managing member types.</param>
+    /// <param name="publishedContentTypeFactory">Factory for creating published content types.</param>
+    /// <param name="shortStringHelper">Helper for handling short string operations.</param>
     public UmbracoServices(
         IContentTypeService contentTypeService,
         IMediaTypeService mediaTypeService,

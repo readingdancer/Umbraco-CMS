@@ -55,11 +55,11 @@ internal sealed class BlockListPropertyValueCreator : BlockPropertyValueCreatorB
 
     private sealed class BlockListItemActivator : BlockItemActivator<BlockListItem>
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="BlockListItemActivator"/> class.
-    /// </summary>
-    /// <param name="blockConverter">The <see cref="BlockEditorConverter"/> used to convert block editor data.</param>
-    /// <param name="constructorCache">The <see cref="BlockListPropertyValueConstructorCache"/> that provides cached constructors for block list property values.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlockListItemActivator"/> class.
+        /// </summary>
+        /// <param name="blockConverter">The <see cref="BlockEditorConverter"/> used to convert block editor data.</param>
+        /// <param name="constructorCache">The <see cref="BlockListPropertyValueConstructorCache"/> that provides cached constructors for block list property values.</param>
         public BlockListItemActivator(BlockEditorConverter blockConverter, BlockListPropertyValueConstructorCache constructorCache)
             : base(blockConverter, constructorCache)
         {

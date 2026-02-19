@@ -14,9 +14,9 @@ using Umbraco.Cms.Infrastructure.HostedServices;
 
 namespace Umbraco.Cms.Infrastructure.BackgroundJobs;
 
-    /// <summary>
-    /// Hosted service responsible for scheduling and executing recurring background jobs within the application.
-    /// </summary>
+/// <summary>
+/// Hosted service responsible for scheduling and executing recurring background jobs within the application.
+/// </summary>
 public static class RecurringBackgroundJobHostedService
 {
     /// <summary>

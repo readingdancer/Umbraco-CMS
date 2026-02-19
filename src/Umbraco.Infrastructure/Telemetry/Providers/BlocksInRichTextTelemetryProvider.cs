@@ -22,12 +22,12 @@ public class BlocksInRichTextTelemetryProvider : IDetailedTelemetryProvider
         _dataTypeService = dataTypeService;
     }
 
-/// <summary>
-/// Retrieves telemetry usage statistics related to blocks within rich text editors.
-/// </summary>
-/// <returns>
-/// An <see cref="IEnumerable{T}"/> of <see cref="Umbraco.Cms.Infrastructure.Telemetry.UsageInformation"/> objects, where each entry contains statistics such as the total number of rich text editors and the total number of registered blocks within those editors.
-/// </returns>
+    /// <summary>
+    /// Retrieves telemetry usage statistics related to blocks within rich text editors.
+    /// </summary>
+    /// <returns>
+    /// An <see cref="IEnumerable{T}"/> of <see cref="Umbraco.Cms.Infrastructure.Telemetry.UsageInformation"/> objects, where each entry contains statistics such as the total number of rich text editors and the total number of registered blocks within those editors.
+    /// </returns>
     public IEnumerable<UsageInformation> GetInformation()
     {
         IEnumerable<IDataType> richTextDataTypes = _dataTypeService.GetByEditorAliasAsync(Constants.PropertyEditors.Aliases.RichText).GetAwaiter().GetResult().ToArray();

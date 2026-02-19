@@ -4,10 +4,10 @@ using Umbraco.Cms.Infrastructure.Migrations.Expressions.Rename.Table;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Expressions.Rename;
 
-    /// <summary>
-    /// Provides methods to construct rename expressions used in database migrations.
-    /// This builder is typically used to specify how database objects should be renamed during a migration.
-    /// </summary>
+/// <summary>
+/// Provides methods to construct rename expressions used in database migrations.
+/// This builder is typically used to specify how database objects should be renamed during a migration.
+/// </summary>
 public class RenameBuilder : IRenameBuilder
 {
     private readonly IMigrationContext _context;

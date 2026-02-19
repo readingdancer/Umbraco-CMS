@@ -59,10 +59,10 @@ public interface IUmbracoDatabase : IDatabase
     /// <returns>A <see cref="DatabaseSchemaResult"/> containing details about the validation outcome, including any missing or invalid schema elements.</returns>
     DatabaseSchemaResult ValidateSchema();
 
-/// <summary>
-/// Executes a non-query command (such as INSERT, UPDATE, or DELETE) against the database.
-/// </summary>
-/// <param name="command">The <see cref="DbCommand"/> to execute.</param>
-/// <returns>The number of rows affected by the command.</returns>
+    /// <summary>
+    /// Executes a non-query command (such as INSERT, UPDATE, or DELETE) against the database.
+    /// </summary>
+    /// <param name="command">The <see cref="DbCommand"/> to execute.</param>
+    /// <returns>The number of rows affected by the command.</returns>
     int ExecuteNonQuery(DbCommand command) => command.ExecuteNonQuery();
 }

@@ -4,9 +4,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_14_0_0;
 
-    /// <summary>
-    /// Represents a migration that converts all scheduled publish dates in the database to use UTC time.
-    /// </summary>
+/// <summary>
+/// Represents a migration that converts all scheduled publish dates in the database to use UTC time.
+/// </summary>
 public class MigrateSchduledPublishesToUtc : MigrationBase
 {
     private readonly TimeProvider _timeProvider;

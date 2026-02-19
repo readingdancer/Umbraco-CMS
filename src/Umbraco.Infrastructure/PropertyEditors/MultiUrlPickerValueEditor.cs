@@ -347,9 +347,9 @@ public class MultiUrlPickerValueEditor : DataValueEditor, IDataValueReference, I
     [DataContract]
     public class LinkDto
     {
-    /// <summary>
-    /// Gets or sets the name of the link.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the name of the link.
+        /// </summary>
         [DataMember(Name = "name")]
         public string? Name { get; set; }
 
@@ -390,22 +390,22 @@ public class MultiUrlPickerValueEditor : DataValueEditor, IDataValueReference, I
     {
         private readonly ILocalizedTextService _localizedTextService;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MinMaxValidator"/> class with the specified localized text service.
-    /// </summary>
-    /// <param name="localizedTextService">The service used to provide localized text for validation messages.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MinMaxValidator"/> class with the specified localized text service.
+        /// </summary>
+        /// <param name="localizedTextService">The service used to provide localized text for validation messages.</param>
         public MinMaxValidator(ILocalizedTextService localizedTextService) => _localizedTextService = localizedTextService;
 
-    /// <summary>
-    /// Validates that the number of links provided meets the minimum and maximum constraints specified in the configuration.
-    /// </summary>
-    /// <param name="linksDtos">An array of <see cref="LinkDisplay"/> objects representing the links to validate. May be <c>null</c>.</param>
-    /// <param name="multiUrlPickerConfiguration">The configuration object specifying minimum and maximum allowed links. May be <c>null</c>.</param>
-    /// <param name="valueType">The type of value being validated (not used in this implementation).</param>
-    /// <param name="validationContext">The context for property validation.</param>
-    /// <returns>
-    /// An <see cref="IEnumerable{ValidationResult}"/> containing validation errors if the number of links is less than the minimum or greater than the maximum allowed; otherwise, an empty enumerable.
-    /// </returns>
+        /// <summary>
+        /// Validates that the number of links provided meets the minimum and maximum constraints specified in the configuration.
+        /// </summary>
+        /// <param name="linksDtos">An array of <see cref="LinkDisplay"/> objects representing the links to validate. May be <c>null</c>.</param>
+        /// <param name="multiUrlPickerConfiguration">The configuration object specifying minimum and maximum allowed links. May be <c>null</c>.</param>
+        /// <param name="valueType">The type of value being validated (not used in this implementation).</param>
+        /// <param name="validationContext">The context for property validation.</param>
+        /// <returns>
+        /// An <see cref="IEnumerable{ValidationResult}"/> containing validation errors if the number of links is less than the minimum or greater than the maximum allowed; otherwise, an empty enumerable.
+        /// </returns>
         public IEnumerable<ValidationResult> Validate(
             LinkDisplay[]? linksDtos,
             MultiUrlPickerConfiguration? multiUrlPickerConfiguration,

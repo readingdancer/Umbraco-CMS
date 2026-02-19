@@ -121,9 +121,9 @@ public class AddKindToUser : UnscopedMigrationBase
     {
         public const string TableName = Constants.DatabaseSchema.Tables.User;
 
-    /// <summary>
-    /// Initializes a new instance of <see cref="OldUserDto"/>.
-    /// </summary>
+        /// <summary>
+        /// Initializes a new instance of <see cref="OldUserDto"/>.
+        /// </summary>
         public OldUserDto()
         {
             UserGroupDtos = new List<UserGroupDto>();
@@ -195,9 +195,9 @@ public class AddKindToUser : UnscopedMigrationBase
         [Column("userEmail")]
         public string Email { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the ISO language code associated with the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the ISO language code associated with the user.
+        /// </summary>
         [Column("userLanguage")]
         [NullSetting(NullSetting = NullSettings.Null)]
         [Length(10)]
@@ -261,9 +261,9 @@ public class AddKindToUser : UnscopedMigrationBase
         [Constraint(Default = SystemMethods.CurrentDateTime)]
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
-    /// <summary>
-    /// Gets or sets the date and time when the user was last updated.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date and time when the user was last updated.
+        /// </summary>
         [Column("updateDate")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         [Constraint(Default = SystemMethods.CurrentDateTime)]
@@ -284,9 +284,9 @@ public class AddKindToUser : UnscopedMigrationBase
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserId")]
         public List<UserGroupDto> UserGroupDtos { get; set; }
 
-    /// <summary>
-    /// Gets or sets the collection of start node DTOs linked to the user.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the collection of start node DTOs linked to the user.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many, ReferenceMemberName = "UserId")]
         public HashSet<UserStartNodeDto> UserStartNodeDtos { get; set; }

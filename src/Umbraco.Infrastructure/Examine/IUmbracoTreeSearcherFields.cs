@@ -10,10 +10,10 @@ public interface IUmbracoTreeSearcherFields
     /// </summary>
     IEnumerable<string> GetBackOfficeFields();
 
-/// <summary>
-///     Gets the additional index fields that are searched in the back office for member entities.
-/// </summary>
-/// <returns>An enumerable collection of index field names used for searching member entities in the back office.</returns>
+    /// <summary>
+    ///     Gets the additional index fields that are searched in the back office for member entities.
+    /// </summary>
+    /// <returns>An enumerable collection of index field names used for searching member entities in the back office.</returns>
     IEnumerable<string> GetBackOfficeMembersFields();
 
     /// <summary>
@@ -21,10 +21,10 @@ public interface IUmbracoTreeSearcherFields
     /// </summary>
     IEnumerable<string> GetBackOfficeMediaFields();
 
-/// <summary>
-/// Returns the additional index fields that are searched in the back office for document entities.
-/// </summary>
-/// <returns>An enumerable collection of index field names used for searching document entities in the back office.</returns>
+    /// <summary>
+    /// Returns the additional index fields that are searched in the back office for document entities.
+    /// </summary>
+    /// <returns>An enumerable collection of index field names used for searching document entities in the back office.</returns>
     IEnumerable<string> GetBackOfficeDocumentFields();
 
     /// <summary>

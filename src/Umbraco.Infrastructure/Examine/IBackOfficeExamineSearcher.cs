@@ -8,10 +8,10 @@ namespace Umbraco.Cms.Infrastructure.Examine;
 /// </summary>
 public interface IBackOfficeExamineSearcher
 {
-    // default implementation to avoid breaking changes falls back to old behaviour
     /// <summary>
     /// Searches the back office Examine index using the specified query and parameters.
     /// </summary>
+    /// <remarks>default implementation to avoid breaking changes falls back to old behaviour</remarks>
     /// <param name="query">The search query string.</param>
     /// <param name="entityType">The type of Umbraco entity to search for.</param>
     /// <param name="pageSize">The maximum number of results to return per page.</param>

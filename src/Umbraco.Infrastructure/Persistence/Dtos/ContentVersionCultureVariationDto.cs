@@ -43,10 +43,10 @@ internal sealed class ContentVersionCultureVariationDto
     [Index(IndexTypes.NonClustered, Name = "IX_" + TableName + "_LanguageId")]
     public int LanguageId { get; set; }
 
-    // this is convenient to carry the culture around, but has no db counterpart
     /// <summary>
     /// Gets or sets the culture identifier for this content version variation. This property is for convenience only and is not mapped to the database.
     /// </summary>
+    /// <remarks>this is convenient to carry the culture around, but has no db counterpart</remarks>
     [Ignore]
     public string? Culture { get; set; }
 
@@ -59,13 +59,15 @@ internal sealed class ContentVersionCultureVariationDto
     /// <summary>
     /// Gets or sets the date and time when the content version culture variation was last updated.
     /// </summary>
-    [Column(UpdateDateColumnName)] // TODO: db rename to 'updateDate'
+    /// <remarks>TODO: db rename to 'updateDate'</remarks>
+    [Column(UpdateDateColumnName)]
     public DateTime UpdateDate { get; set; }
 
     /// <summary>
     /// Gets or sets the identifier of the user who last updated this content version culture variation.
     /// </summary>
-    [Column(UpdateUserIdColumnName)] // TODO: db rename to 'updateUserId'
+    /// <remarks>TODO: db rename to 'updateUserId'</remarks>
+    [Column(UpdateUserIdColumnName)]
     [ForeignKey(typeof(UserDto))]
     [NullSetting(NullSetting = NullSettings.Null)]
     public int? UpdateUserId

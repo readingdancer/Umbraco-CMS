@@ -17,9 +17,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-/// <summary>
-/// Represents a slider editor.
-/// </summary>
+    /// <summary>
+    /// Represents a slider editor.
+    /// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.Slider,
     ValueEditorIsReusable = true)]
@@ -27,11 +27,11 @@ public class SliderPropertyEditor : DataEditor
 {
     private readonly IIOHelper _ioHelper;
 
-/// <summary>
-///     Initializes a new instance of the <see cref="SliderPropertyEditor" /> class.
-/// </summary>
-/// <param name="dataValueEditorFactory">Factory used to create data value editors for the slider property editor.</param>
-/// <param name="ioHelper">Helper for IO operations, such as file and path handling.</param>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="SliderPropertyEditor" /> class.
+    /// </summary>
+    /// <param name="dataValueEditorFactory">Factory used to create data value editors for the slider property editor.</param>
+    /// <param name="ioHelper">Helper for IO operations, such as file and path handling.</param>
     public SliderPropertyEditor(IDataValueEditorFactory dataValueEditorFactory, IIOHelper ioHelper)
         : base(dataValueEditorFactory)
     {
@@ -192,10 +192,10 @@ public class SliderPropertyEditor : DataEditor
         /// </summary>
         internal sealed class RangeValidator : SliderPropertyConfigurationValidatorBase, IValueValidator
         {
-/// <summary>
-/// Initializes a new instance of the <see cref="RangeValidator"/> class.
-/// </summary>
-/// <param name="localizedTextService">The localized text service.</param>
+            /// <summary>
+            /// Initializes a new instance of the <see cref="RangeValidator"/> class.
+            /// </summary>
+            /// <param name="localizedTextService">The localized text service.</param>
             public RangeValidator(ILocalizedTextService localizedTextService)
                 : base(localizedTextService)
             {
@@ -235,10 +235,10 @@ public class SliderPropertyEditor : DataEditor
         /// </summary>
         internal sealed class MinMaxValidator : SliderPropertyConfigurationValidatorBase, IValueValidator
         {
-/// <summary>
-/// Initializes a new instance of the <see cref="MinMaxValidator"/> class.
-/// </summary>
-/// <param name="localizedTextService">Service used to provide localized text for validation messages.</param>
+            /// <summary>
+            /// Initializes a new instance of the <see cref="MinMaxValidator"/> class.
+            /// </summary>
+            /// <param name="localizedTextService">Service used to provide localized text for validation messages.</param>
             public MinMaxValidator(ILocalizedTextService localizedTextService)
                 : base(localizedTextService)
             {

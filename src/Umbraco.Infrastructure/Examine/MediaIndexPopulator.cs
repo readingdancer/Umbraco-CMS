@@ -21,25 +21,25 @@ public class MediaIndexPopulator : IndexPopulator<IUmbracoContentIndex>
 
     private IndexingSettings _indexingSettings;
 
-/// <summary>
-/// Initializes a new instance of the <see cref="MediaIndexPopulator"/> class, which is responsible for populating the media index in Examine.
-/// </summary>
-/// <param name="logger">The logger used to record diagnostic and operational information for the media index population process.</param>
-/// <param name="mediaService">The service used to access and manage media items in Umbraco.</param>
-/// <param name="mediaValueSetBuilder">The builder that constructs value sets from media items for indexing.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MediaIndexPopulator"/> class, which is responsible for populating the media index in Examine.
+    /// </summary>
+    /// <param name="logger">The logger used to record diagnostic and operational information for the media index population process.</param>
+    /// <param name="mediaService">The service used to access and manage media items in Umbraco.</param>
+    /// <param name="mediaValueSetBuilder">The builder that constructs value sets from media items for indexing.</param>
     [Obsolete("Please use the non-obsolete constructor. Scheduled for removal in Umbraco 19.")]
     public MediaIndexPopulator(ILogger<MediaIndexPopulator> logger, IMediaService mediaService, IValueSetBuilder<IMedia> mediaValueSetBuilder)
         : this(logger, null, mediaService, mediaValueSetBuilder, StaticServiceProvider.Instance.GetRequiredService<IOptionsMonitor<IndexingSettings>>())
     {
     }
 
-/// <summary>
-///     Initializes a new instance of the <see cref="MediaIndexPopulator"/> class, used to index all media content data.
-/// </summary>
-/// <param name="logger">The logger instance used for logging operations.</param>
-/// <param name="mediaService">The media service used to access media items.</param>
-/// <param name="mediaValueSetBuilder">The value set builder for constructing indexable values from media items.</param>
-/// <param name="indexingSettings">The indexing settings configuration.</param>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="MediaIndexPopulator"/> class, used to index all media content data.
+    /// </summary>
+    /// <param name="logger">The logger instance used for logging operations.</param>
+    /// <param name="mediaService">The media service used to access media items.</param>
+    /// <param name="mediaValueSetBuilder">The value set builder for constructing indexable values from media items.</param>
+    /// <param name="indexingSettings">The indexing settings configuration.</param>
     public MediaIndexPopulator(ILogger<MediaIndexPopulator> logger, IMediaService mediaService, IValueSetBuilder<IMedia> mediaValueSetBuilder, IOptionsMonitor<IndexingSettings> indexingSettings)
         : this(logger, null, mediaService, mediaValueSetBuilder, indexingSettings)
     {
@@ -58,14 +58,14 @@ public class MediaIndexPopulator : IndexPopulator<IUmbracoContentIndex>
     {
     }
 
-/// <summary>
-/// Initializes a new instance of the <see cref="MediaIndexPopulator"/> class, allowing specification of custom query parameters for media indexing.
-/// </summary>
-/// <param name="logger">The logger used for logging operations within the media index populator.</param>
-/// <param name="parentId">An optional parent media item ID to filter which media items are indexed.</param>
-/// <param name="mediaService">The service used to access and manage media items.</param>
-/// <param name="mediaValueSetBuilder">Builds value sets for media items to be indexed.</param>
-/// <param name="indexingSettings">Monitors configuration settings related to indexing.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MediaIndexPopulator"/> class, allowing specification of custom query parameters for media indexing.
+    /// </summary>
+    /// <param name="logger">The logger used for logging operations within the media index populator.</param>
+    /// <param name="parentId">An optional parent media item ID to filter which media items are indexed.</param>
+    /// <param name="mediaService">The service used to access and manage media items.</param>
+    /// <param name="mediaValueSetBuilder">Builds value sets for media items to be indexed.</param>
+    /// <param name="indexingSettings">Monitors configuration settings related to indexing.</param>
     public MediaIndexPopulator(ILogger<MediaIndexPopulator> logger, int? parentId, IMediaService mediaService, IValueSetBuilder<IMedia> mediaValueSetBuilder, IOptionsMonitor<IndexingSettings> indexingSettings)
     {
         _logger = logger;

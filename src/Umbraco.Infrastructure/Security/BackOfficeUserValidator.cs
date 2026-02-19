@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Umbraco.Cms.Core.Security;
 
-    /// <summary>
-    /// Provides validation logic for back office users of type <typeparamref name="T"/>.
-    /// </summary>
+/// <summary>
+/// Provides validation logic for back office users of type <typeparamref name="T"/>.
+/// </summary>
 public class BackOfficeUserValidator<T> : UserValidator<T>
     where T : BackOfficeIdentityUser
 {

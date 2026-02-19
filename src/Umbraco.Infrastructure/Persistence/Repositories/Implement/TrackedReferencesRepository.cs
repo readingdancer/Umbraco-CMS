@@ -18,11 +18,11 @@ namespace Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement
         private readonly IScopeAccessor _scopeAccessor;
         private readonly IUmbracoMapper _umbracoMapper;
 
-/// <summary>
-/// Initializes a new instance of the <see cref="TrackedReferencesRepository"/> class.
-/// </summary>
-/// <param name="scopeAccessor">Provides access to the current database scope for repository operations.</param>
-/// <param name="umbracoMapper">The mapper used to map between Umbraco entities and models.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TrackedReferencesRepository"/> class.
+        /// </summary>
+        /// <param name="scopeAccessor">Provides access to the current database scope for repository operations.</param>
+        /// <param name="umbracoMapper">The mapper used to map between Umbraco entities and models.</param>
         public TrackedReferencesRepository(IScopeAccessor scopeAccessor, IUmbracoMapper umbracoMapper)
         {
             _scopeAccessor = scopeAccessor;
@@ -485,9 +485,9 @@ namespace Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement
             [Column("otherKey")]
             public Guid OtherKey { get; set; }
 
-    /// <summary>
-    /// Gets or sets the alias associated with the referenced entity.
-    /// </summary>
+            /// <summary>
+            /// Gets or sets the alias associated with the referenced entity.
+            /// </summary>
             [Column("alias")]
             public string? Alias { get; set; }
 

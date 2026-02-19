@@ -61,10 +61,10 @@ public sealed class AutoModelsNotificationHandler : INotificationHandler<Umbraco
     /// <param name="notification">The notification instance containing content type cache refresh information.</param>
     public void Handle(DataTypeCacheRefresherNotification notification) => RequestModelsGeneration();
 
-/// <summary>
-/// Handles the <see cref="UmbracoApplicationStartingNotification" /> by triggering the generation of strongly-typed models when the Umbraco application is starting.
-/// </summary>
-/// <param name="notification">The notification instance that signals the Umbraco application is starting.</param>
+    /// <summary>
+    /// Handles the <see cref="UmbracoApplicationStartingNotification" /> by triggering the generation of strongly-typed models when the Umbraco application is starting.
+    /// </summary>
+    /// <param name="notification">The notification instance that signals the Umbraco application is starting.</param>
     public void Handle(UmbracoApplicationStartingNotification notification) => Install();
 
     public void Handle(UmbracoRequestEndNotification notification)

@@ -196,9 +196,9 @@ public class AddListViewKeysToDocumentTypes : UnscopedMigrationBase
         [Constraint(Default = "folder.png")]
         public string? Thumbnail { get; set; }
 
-    /// <summary>
-    /// Gets or sets the textual description associated with the content type.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the textual description associated with the content type.
+        /// </summary>
         [Column("description")]
         [NullSetting(NullSetting = NullSettings.Null)]
         [Length(1500)]
@@ -211,9 +211,9 @@ public class AddListViewKeysToDocumentTypes : UnscopedMigrationBase
         [Constraint(Default = "0")]
         public bool IsContainer { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether this content type is an element type.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets a value indicating whether this content type is an element type.
+        /// </summary>
         [Column("isElement")]
         [Constraint(Default = "0")]
         public bool IsElement { get; set; }

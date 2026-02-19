@@ -18,10 +18,10 @@ internal class DocumentUrlAliasDto
     [PrimaryKeyColumn(Clustered = false, AutoIncrement = true)]
     public int Id { get; set; }
 
-    // Unique index on (uniqueId, languageId, alias) - prevents duplicate entries
     /// <summary>
     /// Gets or sets the unique identifier (GUID) of the document associated with this URL alias.
     /// </summary>
+    /// <remarks>Unique index on (uniqueId, languageId, alias) - prevents duplicate entries</remarks>
     [Index(IndexTypes.UniqueNonClustered, ForColumns = "uniqueId, languageId, alias", Name = "IX_" + TableName + "_Unique")]
     [Column("uniqueId")]
     [ForeignKey(typeof(NodeDto), Column = NodeDto.KeyColumnName)]
@@ -34,11 +34,11 @@ internal class DocumentUrlAliasDto
     [ForeignKey(typeof(LanguageDto))]
     public int LanguageId { get; set; }
 
-    // Lookup index on (alias, languageId) for fast retrieval
     /// <summary>
     /// Gets or sets the alias string that represents an alternative URL for the document.
     /// Used for URL aliasing and fast retrieval in combination with language ID.
     /// </summary>
+    /// <remarks>Lookup index on (alias, languageId) for fast retrieval</remarks>
     [Index(IndexTypes.NonClustered, ForColumns = "alias, languageId", Name = "IX_" + TableName + "_Lookup")]
     [Column("alias")]
     [NullSetting(NullSetting = NullSettings.NotNull)]

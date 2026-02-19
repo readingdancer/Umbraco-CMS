@@ -82,11 +82,11 @@ public class SerilogLogger : IDisposable
         logger.Fatal(exception, message);
     }
 
-/// <summary>
-/// Logs a fatal error message and exception for the specified reporting type.
-/// </summary>
-/// <param name="reporting">The type on whose behalf the fatal error is being logged.</param>
-/// <param name="exception">The exception associated with the fatal error.</param>
+    /// <summary>
+    /// Logs a fatal error message and exception for the specified reporting type.
+    /// </summary>
+    /// <param name="reporting">The type on whose behalf the fatal error is being logged.</param>
+    /// <param name="exception">The exception associated with the fatal error.</param>
     public void Fatal(Type reporting, Exception exception)
     {
         ILogger logger = LoggerFor(reporting);
@@ -136,12 +136,12 @@ public class SerilogLogger : IDisposable
         logger.Error(exception, message);
     }
 
-/// <summary>
-/// Logs an error message and exception for the specified reporting component type.
-/// </summary>
-/// <param name="reporting">The <see cref="Type"/> representing the component reporting the error.</param>
-/// <param name="exception">The <see cref="Exception"/> instance to log.</param>
-/// <param name="message">The error message describing the context of the exception.</param>
+    /// <summary>
+    /// Logs an error message and exception for the specified reporting component type.
+    /// </summary>
+    /// <param name="reporting">The <see cref="Type"/> representing the component reporting the error.</param>
+    /// <param name="exception">The <see cref="Exception"/> instance to log.</param>
+    /// <param name="message">The error message describing the context of the exception.</param>
     public void Error(Type reporting, Exception exception)
     {
         ILogger logger = LoggerFor(reporting);

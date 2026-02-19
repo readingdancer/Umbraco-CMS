@@ -12,6 +12,7 @@ public interface IPermissionMapper
     /// Gets the context string that identifies the scope or area to which the permission mapper applies.
     /// </summary>
     string Context { get; }
+
     /// <summary>
     /// Maps a <see cref="UserGroup2GranularPermissionDto"/> to an <see cref="IGranularPermission"/> instance.
     /// </summary>

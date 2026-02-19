@@ -72,14 +72,14 @@ public sealed class RichTextEditorPastedImages
         _userService = StaticServiceProvider.Instance.GetRequiredService<IUserService>();
     }
 
-/// <summary>
-/// Finds all temporary pasted images in the provided HTML content, persists them to the media library,
-/// updates their URLs, and returns the modified HTML. Used by the RTE (and grid RTE) for drag/drop and pasting images.
-/// </summary>
-/// <param name="html">The HTML content containing pasted images with temporary references.</param>
-/// <param name="mediaParentFolder">The <see cref="Guid"/> of the media parent folder where images will be stored. If empty, the default media root is used.</param>
-/// <param name="userKey">The <see cref="Guid"/> of the user performing the operation.</param>
-/// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation. The task result contains the updated HTML with persisted image URLs and data attributes updated.</returns>
+    /// <summary>
+    /// Finds all temporary pasted images in the provided HTML content, persists them to the media library,
+    /// updates their URLs, and returns the modified HTML. Used by the RTE (and grid RTE) for drag/drop and pasting images.
+    /// </summary>
+    /// <param name="html">The HTML content containing pasted images with temporary references.</param>
+    /// <param name="mediaParentFolder">The <see cref="Guid"/> of the media parent folder where images will be stored. If empty, the default media root is used.</param>
+    /// <param name="userKey">The <see cref="Guid"/> of the user performing the operation.</param>
+    /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation. The task result contains the updated HTML with persisted image URLs and data attributes updated.</returns>
     public async Task<string> FindAndPersistPastedTempImagesAsync(string html, Guid mediaParentFolder, Guid userKey)
     {
         // Find all img's that has data-tmpimg attribute

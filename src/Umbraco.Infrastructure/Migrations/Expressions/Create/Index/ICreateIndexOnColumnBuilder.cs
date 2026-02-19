@@ -12,9 +12,9 @@ public interface ICreateIndexOnColumnBuilder : IFluentBuilder, IExecutableBuilde
     /// </summary>
     ICreateIndexColumnOptionsBuilder OnColumn(string columnName);
 
-/// <summary>
-///     Allows further configuration of index options for the current index creation operation.
-/// </summary>
-/// <returns>An <see cref="ICreateIndexOptionsBuilder" /> to specify index options.</returns>
+    /// <summary>
+    ///     Allows further configuration of index options for the current index creation operation.
+    /// </summary>
+    /// <returns>An <see cref="ICreateIndexOptionsBuilder" /> to specify index options.</returns>
     ICreateIndexOptionsBuilder WithOptions();
 }

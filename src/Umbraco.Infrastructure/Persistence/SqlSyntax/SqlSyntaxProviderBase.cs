@@ -94,11 +94,11 @@ public abstract class SqlSyntaxProviderBase<TSyntax> : ISqlSyntaxProvider
     /// </summary>
     public int DefaultDecimalScale { get; } = 9;
 
-    //Set by Constructor
     /// <summary>
     /// Gets the SQL definition string used for defining a string column in a database schema.
     /// This is typically used when generating or altering database tables.
     /// </summary>
+    /// <remarks>Set by Constructor</remarks>
     public virtual string StringColumnDefinition { get; }
 
     /// <summary>
@@ -167,6 +167,7 @@ public abstract class SqlSyntaxProviderBase<TSyntax> : ISqlSyntaxProvider
     /// Gets the SQL column definition string used for columns that store date-only values (without time).
     /// </summary>
     public string DateOnlyColumnDefinition { get; protected set; } = "DATE";
+
     /// <summary>
     /// Gets the SQL column definition string used for columns that store time-only values (without date component).
     /// </summary>
@@ -296,11 +297,11 @@ public abstract class SqlSyntaxProviderBase<TSyntax> : ISqlSyntaxProvider
     /// <returns>A SQL ORDER BY clause string for the specified GUID column.</returns>
     public virtual string OrderByGuid(string tableName, string columnName) => $"UPPER({this.GetQuotedColumn(tableName, columnName)})";
 
-/// <summary>
-/// Returns the specified name quoted with double quotes for use in SQL statements.
-/// </summary>
-/// <param name="name">The name to quote. Can be <c>null</c>.</param>
-/// <returns>The quoted name as a string, or <c>"null"</c> if <paramref name="name"/> is <c>null</c>.</returns
+    /// <summary>
+    /// Returns the specified name quoted with double quotes for use in SQL statements.
+    /// </summary>
+    /// <param name="name">The name to quote. Can be <c>null</c>.</param>
+    /// <returns>The quoted name as a string, or <c>"null"</c> if <paramref name="name"/> is <c>null</c>.</returns
     public virtual string GetQuotedName(string? name) => $"\"{name}\"";
 
     /// <summary>
@@ -401,11 +402,11 @@ public abstract class SqlSyntaxProviderBase<TSyntax> : ISqlSyntaxProvider
     /// </summary>
     public abstract string DbProvider { get; }
 
-/// <summary>
-/// Retrieves the names of all tables in the current database schema using the specified <paramref name="db"/> instance.
-/// </summary>
-/// <param name="db">The <see cref="IDatabase"/> instance to query for table names.</param>
-/// <returns>An <see cref="IEnumerable{string}"/> containing the names of tables in the schema.</returns>
+    /// <summary>
+    /// Retrieves the names of all tables in the current database schema using the specified <paramref name="db"/> instance.
+    /// </summary>
+    /// <param name="db">The <see cref="IDatabase"/> instance to query for table names.</param>
+    /// <returns>An <see cref="IEnumerable{string}"/> containing the names of tables in the schema.</returns>
     public virtual IEnumerable<string> GetTablesInSchema(IDatabase db) => new List<string>();
 
     /// <summary>
@@ -468,13 +469,13 @@ public abstract class SqlSyntaxProviderBase<TSyntax> : ISqlSyntaxProvider
     /// <returns>True if the primary key exists; otherwise, false.</returns>
     public virtual bool DoesPrimaryKeyExist(IDatabase db, string tableName, string primaryKeyName) => throw new NotImplementedException();
 
-/// <summary>
-/// Returns the formatted field name to be used in an SQL UPDATE statement, based on the specified field selector expression.
-/// </summary>
-/// <typeparam name="TDto">The type representing the data transfer object (DTO) containing the field.</typeparam>
-/// <param name="fieldSelector">An expression that selects the field to be updated.</param>
-/// <param name="tableAlias">An optional table alias to prefix the field name with, if required.</param>
-/// <returns>The formatted field name, optionally prefixed with the table alias, suitable for use in an UPDATE statement.</returns>
+    /// <summary>
+    /// Returns the formatted field name to be used in an SQL UPDATE statement, based on the specified field selector expression.
+    /// </summary>
+    /// <typeparam name="TDto">The type representing the data transfer object (DTO) containing the field.</typeparam>
+    /// <param name="fieldSelector">An expression that selects the field to be updated.</param>
+    /// <param name="tableAlias">An optional table alias to prefix the field name with, if required.</param>
+    /// <returns>The formatted field name, optionally prefixed with the table alias, suitable for use in an UPDATE statement.</returns>
     public virtual string GetFieldNameForUpdate<TDto>(
         Expression<Func<TDto, object?>> fieldSelector,
         string? tableAlias = null) => this.GetFieldName(fieldSelector, tableAlias);
@@ -529,10 +530,10 @@ public abstract class SqlSyntaxProviderBase<TSyntax> : ISqlSyntaxProvider
     /// <returns><c>true</c> if clustered indexes are supported; otherwise, <c>false</c>.</returns>
     public virtual bool SupportsClustered() => true;
 
-/// <summary>
-/// Determines whether identity insert is supported by the SQL syntax provider.
-/// </summary>
-/// <returns>True if identity insert is supported; otherwise, false.</returns>
+    /// <summary>
+    /// Determines whether identity insert is supported by the SQL syntax provider.
+    /// </summary>
+    /// <returns>True if identity insert is supported; otherwise, false.</returns>
     public virtual bool SupportsIdentityInsert() => true;
 
     /// <inheritdoc />
@@ -846,6 +847,7 @@ public abstract class SqlSyntaxProviderBase<TSyntax> : ISqlSyntaxProvider
     /// Returns the string <c>LEN</c>, which is the standard function for string length in SQL Server.
     /// </summary>
     public virtual string Length => "LEN";
+
     /// <summary>
     /// Gets the SQL keyword used for the substring function in SQL statements.
     /// </summary>

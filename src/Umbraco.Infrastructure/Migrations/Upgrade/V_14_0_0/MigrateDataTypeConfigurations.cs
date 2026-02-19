@@ -13,9 +13,9 @@ using PropertyEditorAliases = Umbraco.Cms.Core.Constants.PropertyEditors.Aliases
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_14_0_0;
 
-    /// <summary>
-    /// Performs the migration of data type configurations as part of the upgrade process to Umbraco version 14.0.0.
-    /// </summary>
+/// <summary>
+/// Performs the migration of data type configurations as part of the upgrade process to Umbraco version 14.0.0.
+/// </summary>
 public class MigrateDataTypeConfigurations : MigrationBase
 {
     private readonly IContentTypeService _contentTypeService;
@@ -677,24 +677,24 @@ public class MigrateDataTypeConfigurations : MigrationBase
         /// </summary>
         public int? MaxImageSize { get; set; }
 
-    /// <summary>
-    /// Gets or sets the operational mode for the rich text editor configuration.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the operational mode for the rich text editor configuration.
+        /// </summary>
         public string? Mode { get; set; }
 
-    /// <summary>
-    /// Gets or sets the width and height dimensions for the rich text editor configuration.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the width and height dimensions for the rich text editor configuration.
+        /// </summary>
         public EditorDimensions? Dimensions { get; set; }
 
-    /// <summary>
-    /// Defines the width and height settings for the rich text editor.
-    /// </summary>
+        /// <summary>
+        /// Defines the width and height settings for the rich text editor.
+        /// </summary>
         public class EditorDimensions
         {
-        /// <summary>
-        /// Gets or sets the width, in pixels, of the rich text editor.
-        /// </summary>
+            /// <summary>
+            /// Gets or sets the width, in pixels, of the rich text editor.
+            /// </summary>
             public int? Width { get; set; }
 
             /// <summary>
@@ -706,9 +706,9 @@ public class MigrateDataTypeConfigurations : MigrationBase
 
     private class ValueListItem
     {
-    /// <summary>
-    /// Gets or sets the unique identifier for this value list item.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique identifier for this value list item.
+        /// </summary>
         public int Id { get; set; }
 
         /// <summary>
@@ -719,39 +719,39 @@ public class MigrateDataTypeConfigurations : MigrationBase
 
     private class ColorPickerItem
     {
-    /// <summary>
-    /// Gets or sets the value associated with this color picker item, typically representing a color code or identifier.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the value associated with this color picker item, typically representing a color code or identifier.
+        /// </summary>
         public required string Value { get; set; }
 
-    /// <summary>Gets or sets the label of the color picker item.</summary>
+        /// <summary>Gets or sets the label of the color picker item.</summary>
         public required string Label { get; set; }
     }
 
     private class OldTreeSource
     {
-    /// <summary>
-    /// Gets or sets the type identifier for the old tree source configuration.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the type identifier for the old tree source configuration.
+        /// </summary>
         public required string Type { get; set; }
 
-    /// <summary>
-    /// Gets or sets the unique identifier (UDI) of the old tree source as a nullable <see cref="GuidUdi"/>.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique identifier (UDI) of the old tree source as a nullable <see cref="GuidUdi"/>.
+        /// </summary>
         public GuidUdi? Id { get; set; }
 
-    /// <summary>
-    /// Gets or sets the dynamic root value for the old tree source configuration.
-    /// This property may contain a reference or identifier used to determine the root node dynamically.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the dynamic root value for the old tree source configuration.
+        /// This property may contain a reference or identifier used to determine the root node dynamically.
+        /// </summary>
         public object? DynamicRoot { get; set; }
     }
 
     private class NewTreeSource
     {
-    /// <summary>
-    /// Gets or sets the identifier representing the type of the new tree source.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the identifier representing the type of the new tree source.
+        /// </summary>
         public required string Type { get; set; }
 
         /// <summary>
@@ -759,36 +759,36 @@ public class MigrateDataTypeConfigurations : MigrationBase
         /// </summary>
         public Guid? Id { get; set; }
 
-    /// <summary>
-    /// Gets or sets the dynamic root value used by the new tree source configuration.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the dynamic root value used by the new tree source configuration.
+        /// </summary>
         public object? DynamicRoot { get; set; }
     }
 
     private class ListViewDefaults
     {
-    /// <summary>
-    /// Specifies the default permissions for bulk actions in the ListView data type configuration.
-    /// </summary>
+        /// <summary>
+        /// Specifies the default permissions for bulk actions in the ListView data type configuration.
+        /// </summary>
         public class BulkActionPermissions
         {
-    /// <summary>Gets a value indicating whether bulk publish is allowed.</summary>
+            /// <summary>Gets a value indicating whether bulk publish is allowed.</summary>
             public bool AllowBulkPublish { get; } = true;
 
-    /// <summary>
-    /// Gets a value indicating whether the bulk unpublish action is permitted for this list view.
-    /// </summary>
+            /// <summary>
+            /// Gets a value indicating whether the bulk unpublish action is permitted for this list view.
+            /// </summary>
             public bool AllowBulkUnpublish { get; } = true;
 
-    /// <summary>
-    /// Gets a value indicating whether bulk copy is allowed.
-    /// </summary>
+            /// <summary>
+            /// Gets a value indicating whether bulk copy is allowed.
+            /// </summary>
             public bool AllowBulkCopy { get; } = true;
 
-    /// <summary>Gets a value indicating whether bulk move is allowed.</summary>
+            /// <summary>Gets a value indicating whether bulk move is allowed.</summary>
             public bool AllowBulkMove { get; } = true;
 
-    /// <summary>Indicates whether bulk delete actions are allowed.</summary>
+            /// <summary>Indicates whether bulk delete actions are allowed.</summary>
             public bool AllowBulkDelete { get; } = true;
         }
 
@@ -807,47 +807,47 @@ public class MigrateDataTypeConfigurations : MigrationBase
 
     private class OldListViewLayout
     {
-    /// <summary>
-    /// Gets or sets the name associated with the old list view layout configuration.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the name associated with the old list view layout configuration.
+        /// </summary>
         public string? Name { get; set; }
 
-    /// <summary>
-    /// Gets or sets the file system path for the old list view layout.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the file system path for the old list view layout.
+        /// </summary>
         public string? Path { get; set; }
 
-    /// <summary>Gets or sets the icon associated with the old list view layout.</summary>
+        /// <summary>Gets or sets the icon associated with the old list view layout.</summary>
         public string? Icon { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether this layout is a system-defined layout (1 for system, 0 for custom).
-    /// </summary>
+        /// <summary>
+        /// Gets or sets a value indicating whether this layout is a system-defined layout (1 for system, 0 for custom).
+        /// </summary>
         public int IsSystem { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether the layout item is selected.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets a value indicating whether the layout item is selected.
+        /// </summary>
         public bool Selected { get; set; }
     }
 
     private class NewListViewLayout
     {
-    /// <summary>
-    /// The name of the new list view layout.
-    /// </summary>
+        /// <summary>
+        /// The name of the new list view layout.
+        /// </summary>
         public string? Name { get; set; }
 
-    /// <summary>
-    /// Gets or sets the configuration string for the collection view layout in the list view.
-    /// This typically defines how items are displayed in the collection view of the list.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the configuration string for the collection view layout in the list view.
+        /// This typically defines how items are displayed in the collection view of the list.
+        /// </summary>
         public string? CollectionView { get; set; }
 
-    /// <summary>Gets or sets the icon associated with the new list view layout.</summary>
+        /// <summary>Gets or sets the icon associated with the new list view layout.</summary>
         public string? Icon { get; set; }
 
-    /// <summary>Gets or sets a value indicating whether this layout is a system layout.</summary>
+        /// <summary>Gets or sets a value indicating whether this layout is a system layout.</summary>
         public bool IsSystem { get; set; }
 
         /// <summary>Gets or sets a value indicating whether this item is selected.</summary>
@@ -856,15 +856,15 @@ public class MigrateDataTypeConfigurations : MigrationBase
 
     private class OldListViewProperty
     {
-    /// <summary>Gets or sets the alias of the old list view property.</summary>
+        /// <summary>Gets or sets the alias of the old list view property.</summary>
         public required string Alias { get; set; }
 
-    /// <summary>Gets or sets the header text for the old list view property.</summary>
+        /// <summary>Gets or sets the header text for the old list view property.</summary>
         public string? Header { get; set; }
 
-    /// <summary>
-    /// Gets or sets the template string used for naming items in the old list view property.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the template string used for naming items in the old list view property.
+        /// </summary>
         public string? NameTemplate { get; set; }
 
         /// <summary>
@@ -878,19 +878,19 @@ public class MigrateDataTypeConfigurations : MigrationBase
         /// <summary>Gets or sets the alias of the new list view property.</summary>
         public required string Alias { get; set; }
 
-    /// <summary>
-    /// Gets or sets the display header text for the new list view property in the data type configuration migration.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the display header text for the new list view property in the data type configuration migration.
+        /// </summary>
         public required string Header { get; set; }
 
-    /// <summary>
-    /// Gets or sets the template string used to generate names in the new list view configuration.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the template string used to generate names in the new list view configuration.
+        /// </summary>
         public string? NameTemplate { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether the property is a system-defined property.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets a value indicating whether the property is a system-defined property.
+        /// </summary>
         public required bool IsSystem { get; set; }
     }
 }

@@ -3,9 +3,9 @@ using NPoco;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_17_1_0;
 
-    /// <summary>
-    /// Represents a migration that alters the <c>ValidationRegExp</c> column to use <c>nvarchar(max)</c>, allowing for longer regular expression patterns to be stored.
-    /// </summary>
+/// <summary>
+/// Represents a migration that alters the <c>ValidationRegExp</c> column to use <c>nvarchar(max)</c>, allowing for longer regular expression patterns to be stored.
+/// </summary>
 public class ChangeValidationRegExpToNvarcharMax : MigrationBase
 {
     /// <summary>

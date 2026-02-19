@@ -12,9 +12,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_16_3_0;
 
-    /// <summary>
-    /// Handles the migration of label properties for media types to the updated format introduced in version 16.3.0.
-    /// </summary>
+/// <summary>
+/// Handles the migration of label properties for media types to the updated format introduced in version 16.3.0.
+/// </summary>
 [Obsolete("Remove in Umbraco 18.")]
 public class MigrateMediaTypeLabelProperties : AsyncMigrationBase
 {

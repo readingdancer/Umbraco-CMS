@@ -94,14 +94,14 @@ internal sealed class MemberEditingService : IMemberEditingService
         return await ValidateMember(updateModel, key, updateModel.NewPassword, member.ContentType.Key);
     }
 
-/// <summary>
-/// Asynchronously creates a new member using the provided member creation model and user context.
-/// </summary>
-/// <param name="createModel">The model containing the data required to create the member, including username, email, password, and member type.</param>
-/// <param name="user">The user performing the creation operation.</param>
-/// <returns>
-/// A <see cref="Task{TResult}"/> representing the asynchronous operation. The result is an <see cref="Attempt{MemberCreateResult, MemberEditingStatus}"/> indicating whether the member was created successfully, along with the creation result and status information describing any validation or processing issues.
-/// </returns>
+    /// <summary>
+    /// Asynchronously creates a new member using the provided member creation model and user context.
+    /// </summary>
+    /// <param name="createModel">The model containing the data required to create the member, including username, email, password, and member type.</param>
+    /// <param name="user">The user performing the creation operation.</param>
+    /// <returns>
+    /// A <see cref="Task{TResult}"/> representing the asynchronous operation. The result is an <see cref="Attempt{MemberCreateResult, MemberEditingStatus}"/> indicating whether the member was created successfully, along with the creation result and status information describing any validation or processing issues.
+    /// </returns>
     public async Task<Attempt<MemberCreateResult, MemberEditingStatus>> CreateAsync(MemberCreateModel createModel, IUser user)
     {
         var status = new MemberEditingStatus();

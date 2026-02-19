@@ -227,10 +227,10 @@ internal sealed class SimilarNodeName
             Text = name;
         }
 
-    /// <summary>
-    /// Gets the full name of the node, including the suffix in parentheses if the suffix is greater than zero.
-    /// For example, returns "NodeName (2)" if the suffix is 2, otherwise just the trimmed node name.
-    /// </summary>
+        /// <summary>
+        /// Gets the full name of the node, including the suffix in parentheses if the suffix is greater than zero.
+        /// For example, returns "NodeName (2)" if the suffix is 2, otherwise just the trimmed node name.
+        /// </summary>
         public string FullName
         {
             get

@@ -56,10 +56,10 @@ internal class EntityContainerRepository : EntityRepositoryBase<int, EntityConta
 
     protected Guid NodeObjectTypeId { get; }
 
-    // temp - so we don't have to implement GetByQuery
     /// <summary>
     /// Retrieves an <see cref="Umbraco.Cms.Core.Models.EntityContainer"/> by its unique identifier.
     /// </summary>
+    /// <remarks>temp - so we don't have to implement GetByQuery</remarks>
     /// <param name="id">The unique identifier of the entity container.</param>
     /// <returns>The corresponding <see cref="Umbraco.Cms.Core.Models.EntityContainer"/> if found; otherwise, <c>null</c>.</returns>
     public EntityContainer? Get(Guid id)

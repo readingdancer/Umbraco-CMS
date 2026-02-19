@@ -5,10 +5,10 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Umbraco.Cms.Core.PropertyEditors.ValueConverters;
 
-    /// <summary>
-    /// Serves as a base class that provides caching functionality for constructors used by block editor property value converters.
-    /// This helps optimize the instantiation of value converter objects in block editor scenarios.
-    /// </summary>
+/// <summary>
+/// Serves as a base class that provides caching functionality for constructors used by block editor property value converters.
+/// This helps optimize the instantiation of value converter objects in block editor scenarios.
+/// </summary>
 public abstract class BlockEditorPropertyValueConstructorCacheBase<T>
     where T : IBlockReference<IPublishedElement, IPublishedElement>
 {

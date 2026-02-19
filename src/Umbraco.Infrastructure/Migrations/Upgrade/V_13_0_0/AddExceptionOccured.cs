@@ -3,9 +3,9 @@ using Umbraco.Cms.Infrastructure.Persistence.Dtos;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_13_0_0;
 
-    /// <summary>
-    /// Represents a migration step that adds the <c>ExceptionOccured</c> column to the relevant database table as part of the upgrade to version 13.0.0.
-    /// </summary>
+/// <summary>
+/// Represents a migration step that adds the <c>ExceptionOccured</c> column to the relevant database table as part of the upgrade to version 13.0.0.
+/// </summary>
 public class AddExceptionOccured : MigrationBase
 {
     /// <summary>

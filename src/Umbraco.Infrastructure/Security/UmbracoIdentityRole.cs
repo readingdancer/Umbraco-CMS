@@ -65,16 +65,18 @@ public class UmbracoIdentityRole : IdentityRole, IRememberBeingDirty
     /// </summary>
     public bool HasIdentity { get; protected set; }
 
-    // NOTE: The purpose
-    // of this value is to try to prevent concurrent writes in the DB but this is
-    // an implementation detail at the data source level that has leaked into the
-    // model. A good writeup of that is here:
-    // https://stackoverflow.com/a/37362173
-    // For our purposes currently we won't worry about this.
     /// <summary>
     /// Gets or sets a random value that changes whenever the role is persisted to the store.
     /// This value is used to implement optimistic concurrency checks to prevent conflicting updates.
     /// </summary>
+    /// <remarks>
+    /// NOTE: The purpose
+    /// of this value is to try to prevent concurrent writes in the DB but this is
+    /// an implementation detail at the data source level that has leaked into the
+    /// model. A good writeup of that is here:
+    /// https://stackoverflow.com/a/37362173
+    /// For our purposes currently we won't worry about this.
+    /// </remarks>
     public override string? ConcurrencyStamp { get => base.ConcurrencyStamp; set => base.ConcurrencyStamp = value; }
 
     /// <summary>

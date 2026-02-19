@@ -1,8 +1,8 @@
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_14_0_0;
 
-    /// <summary>
-    /// Migration step that removes macro-related tables from the database schema as part of the upgrade to version 14.0.0.
-    /// </summary>
+/// <summary>
+/// Migration step that removes macro-related tables from the database schema as part of the upgrade to version 14.0.0.
+/// </summary>
 public class DeleteMacroTables : MigrationBase
 {
     /// <summary>

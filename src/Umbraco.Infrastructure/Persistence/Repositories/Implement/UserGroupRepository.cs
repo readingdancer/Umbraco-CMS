@@ -167,26 +167,26 @@ public class UserGroupRepository : EntityRepositoryBase<int, IUserGroup>, IUserG
     public void AddOrUpdateGroupWithUsers(IUserGroup userGroup, int[]? userIds) =>
         _userGroupWithUsersRepository.Save(new UserGroupWithUsers(userGroup, userIds));
 
-/// <summary>
-///     Gets explicitly defined permissions for the specified user groups and entities.
-/// </summary>
-/// <param name="groupIds">An array of user group IDs to retrieve permissions for.</param>
-/// <param name="entityIds">An array of entity IDs. If empty, returns permissions for the groups for all entities.</param>
-/// <returns>The collection of permissions explicitly defined for the specified groups and entities.</returns>
+    /// <summary>
+    ///     Gets explicitly defined permissions for the specified user groups and entities.
+    /// </summary>
+    /// <param name="groupIds">An array of user group IDs to retrieve permissions for.</param>
+    /// <param name="entityIds">An array of entity IDs. If empty, returns permissions for the groups for all entities.</param>
+    /// <returns>The collection of permissions explicitly defined for the specified groups and entities.</returns>
     public EntityPermissionCollection GetPermissions(int[] groupIds, params int[] entityIds) =>
         _permissionRepository.GetPermissionsForEntities(groupIds, entityIds);
 
-/// <summary>
-///     Retrieves the permissions assigned to the specified user groups for the given entities, including explicit permissions and, if requested, default permissions when explicit ones are not set.
-/// </summary>
-/// <param name="groups">The user groups for which to retrieve permissions.</param>
-/// <param name="fallbackToDefaultPermissions">
-///     If <c>true</c>, includes the group's default permissions for entities where no explicit permissions are assigned.
-/// </param>
-/// <param name="nodeIds">An array of entity IDs to retrieve permissions for. If empty, permissions for all entities accessible by the group(s) are returned.</param>
-/// <returns>
-///     An <see cref="EntityPermissionCollection"/> containing the permissions for the specified groups and entities.
-/// </returns>
+    /// <summary>
+    ///     Retrieves the permissions assigned to the specified user groups for the given entities, including explicit permissions and, if requested, default permissions when explicit ones are not set.
+    /// </summary>
+    /// <param name="groups">The user groups for which to retrieve permissions.</param>
+    /// <param name="fallbackToDefaultPermissions">
+    ///     If <c>true</c>, includes the group's default permissions for entities where no explicit permissions are assigned.
+    /// </param>
+    /// <param name="nodeIds">An array of entity IDs to retrieve permissions for. If empty, permissions for all entities accessible by the group(s) are returned.</param>
+    /// <returns>
+    ///     An <see cref="EntityPermissionCollection"/> containing the permissions for the specified groups and entities.
+    /// </returns>
     public EntityPermissionCollection GetPermissions(IReadOnlyUserGroup[]? groups, bool fallbackToDefaultPermissions, params int[] nodeIds)
     {
         if (groups == null)
@@ -261,30 +261,30 @@ public class UserGroupRepository : EntityRepositoryBase<int, IUserGroup>, IUserG
     /// </summary>
     private sealed class UserGroupWithUsers : EntityBase
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="UserGroupWithUsers"/> class with the specified user group and associated user IDs.
-    /// </summary>
-    /// <param name="userGroup">The <see cref="IUserGroup"/> instance representing the user group.</param>
-    /// <param name="userIds">An array of user IDs associated with the user group, or <c>null</c> if there are no associated users.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserGroupWithUsers"/> class with the specified user group and associated user IDs.
+        /// </summary>
+        /// <param name="userGroup">The <see cref="IUserGroup"/> instance representing the user group.</param>
+        /// <param name="userIds">An array of user IDs associated with the user group, or <c>null</c> if there are no associated users.</param>
         public UserGroupWithUsers(IUserGroup userGroup, int[]? userIds)
         {
             UserGroup = userGroup;
             UserIds = userIds;
         }
 
-    /// <summary>
-    /// Gets a value indicating whether the associated user group has an identity assigned.
-    /// </summary>
+        /// <summary>
+        /// Gets a value indicating whether the associated user group has an identity assigned.
+        /// </summary>
         public override bool HasIdentity => UserGroup.HasIdentity;
 
-    /// <summary>
-    /// Gets the associated user group for this <see cref="UserGroupWithUsers"/> instance.
-    /// </summary>
+        /// <summary>
+        /// Gets the associated user group for this <see cref="UserGroupWithUsers"/> instance.
+        /// </summary>
         public IUserGroup UserGroup { get; }
 
-    /// <summary>
-    /// Gets the IDs of the users associated with the user group.
-    /// </summary>
+        /// <summary>
+        /// Gets the IDs of the users associated with the user group.
+        /// </summary>
         public int[]? UserIds { get; }
     }
 
@@ -295,15 +295,15 @@ public class UserGroupRepository : EntityRepositoryBase<int, IUserGroup>, IUserG
     {
         private readonly UserGroupRepository _userGroupRepo;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="UserGroupWithUsersRepository"/> class.
-    /// </summary>
-    /// <param name="userGroupRepo">The <see cref="UserGroupRepository"/> used for user group data operations.</param>
-    /// <param name="scopeAccessor">The <see cref="IScopeAccessor"/> for managing database scopes.</param>
-    /// <param name="cache">The <see cref="AppCaches"/> instance for application-level caching.</param>
-    /// <param name="logger">The <see cref="ILogger{UserGroupWithUsersRepository}"/> instance for logging.</param>
-    /// <param name="repositoryCacheVersionService">The <see cref="IRepositoryCacheVersionService"/> for cache versioning.</param>
-    /// <param name="cacheSyncService">The <see cref="ICacheSyncService"/> for synchronizing cache across servers.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserGroupWithUsersRepository"/> class.
+        /// </summary>
+        /// <param name="userGroupRepo">The <see cref="UserGroupRepository"/> used for user group data operations.</param>
+        /// <param name="scopeAccessor">The <see cref="IScopeAccessor"/> for managing database scopes.</param>
+        /// <param name="cache">The <see cref="AppCaches"/> instance for application-level caching.</param>
+        /// <param name="logger">The <see cref="ILogger{UserGroupWithUsersRepository}"/> instance for logging.</param>
+        /// <param name="repositoryCacheVersionService">The <see cref="IRepositoryCacheVersionService"/> for cache versioning.</param>
+        /// <param name="cacheSyncService">The <see cref="ICacheSyncService"/> for synchronizing cache across servers.</param>
         public UserGroupWithUsersRepository(
             UserGroupRepository userGroupRepo,
             IScopeAccessor scopeAccessor,

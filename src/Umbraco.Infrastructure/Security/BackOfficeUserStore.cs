@@ -43,22 +43,22 @@ public class BackOfficeUserStore :
     private readonly IEventMessagesFactory _eventMessagesFactory;
     private readonly ILogger<BackOfficeUserStore> _logger;
 
-/// <summary>
-///     Initializes a new instance of the <see cref="BackOfficeUserStore" /> class.
-/// </summary>
-/// <param name="scopeProvider">Provides database transaction scopes for data operations.</param>
-/// <param name="entityService">Service for managing Umbraco entities.</param>
-/// <param name="externalLoginService">Handles external login providers with key support.</param>
-/// <param name="globalSettings">The global configuration settings for Umbraco.</param>
-/// <param name="mapper">Maps between domain and view models in Umbraco.</param>
-/// <param name="describer">Provides error descriptions for back office user operations.</param>
-/// <param name="appCaches">Provides access to application-level caches.</param>
-/// <param name="twoFactorLoginService">Service for managing two-factor authentication for users.</param>
-/// <param name="userGroupService">Service for managing user groups in the back office.</param>
-/// <param name="userRepository">Repository for accessing and persisting user data.</param>
-/// <param name="runtimeState">Represents the current runtime state of the Umbraco application.</param>
-/// <param name="eventMessagesFactory">Factory for creating event message collections.</param>
-/// <param name="logger">Logger instance for logging operations related to the user store.</param>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BackOfficeUserStore" /> class.
+    /// </summary>
+    /// <param name="scopeProvider">Provides database transaction scopes for data operations.</param>
+    /// <param name="entityService">Service for managing Umbraco entities.</param>
+    /// <param name="externalLoginService">Handles external login providers with key support.</param>
+    /// <param name="globalSettings">The global configuration settings for Umbraco.</param>
+    /// <param name="mapper">Maps between domain and view models in Umbraco.</param>
+    /// <param name="describer">Provides error descriptions for back office user operations.</param>
+    /// <param name="appCaches">Provides access to application-level caches.</param>
+    /// <param name="twoFactorLoginService">Service for managing two-factor authentication for users.</param>
+    /// <param name="userGroupService">Service for managing user groups in the back office.</param>
+    /// <param name="userRepository">Repository for accessing and persisting user data.</param>
+    /// <param name="runtimeState">Represents the current runtime state of the Umbraco application.</param>
+    /// <param name="eventMessagesFactory">Factory for creating event message collections.</param>
+    /// <param name="logger">Logger instance for logging operations related to the user store.</param>
     [ActivatorUtilitiesConstructor]
     public BackOfficeUserStore(
         ICoreScopeProvider scopeProvider,
@@ -642,15 +642,15 @@ public class BackOfficeUserStore :
             .Select(l => new UserLoginInfo(l.LoginProvider, l.ProviderKey, l.LoginProvider)).ToList());
     }
 
-/// <summary>
-///     Returns all users that belong to the specified role.
-/// </summary>
-/// <remarks>
-///     Identity role names correspond to Umbraco UserGroup aliases.
-/// </remarks>
-/// <param name="normalizedRoleName">The normalized name of the role (UserGroup alias) whose users are to be listed.</param>
-/// <param name="cancellationToken">A cancellation token to observe while waiting for the task to complete.</param>
-/// <returns>A task that represents the asynchronous operation. The task result contains a list of <see cref="BackOfficeIdentityUser"/> objects in the specified role.</returns>
+    /// <summary>
+    ///     Returns all users that belong to the specified role.
+    /// </summary>
+    /// <remarks>
+    ///     Identity role names correspond to Umbraco UserGroup aliases.
+    /// </remarks>
+    /// <param name="normalizedRoleName">The normalized name of the role (UserGroup alias) whose users are to be listed.</param>
+    /// <param name="cancellationToken">A cancellation token to observe while waiting for the task to complete.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a list of <see cref="BackOfficeIdentityUser"/> objects in the specified role.</returns>
     public override async Task<IList<BackOfficeIdentityUser>> GetUsersInRoleAsync(
         string normalizedRoleName,
         CancellationToken cancellationToken = default)

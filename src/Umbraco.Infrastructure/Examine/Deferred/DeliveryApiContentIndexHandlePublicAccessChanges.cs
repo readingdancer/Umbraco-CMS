@@ -47,16 +47,18 @@ internal sealed class DeliveryApiContentIndexHandlePublicAccessChanges : Deliver
         _backgroundTaskQueue = backgroundTaskQueue;
     }
 
-    // NOTE: at the time of implementing this, the distributed notifications for public access changes only ever
-    //       sends out "refresh all" notifications, which means we can't be clever about minimizing the work
-    //       effort to handle public access changes. instead we have to grab all protected content definitions
-    //       and handle every last one with every notification.
     /// <summary>
     /// Handles changes to public access for content in the delivery API index.
     /// Queues a background task to update or remove protected content in the index
     /// according to the current member authorization settings, ensuring the index reflects
     /// the latest access rules.
     /// </summary>
+    /// <remarks>
+    /// NOTE: at the time of implementing this, the distributed notifications for public access changes only ever
+    /// sends out "refresh all" notifications, which means we can't be clever about minimizing the work
+    /// effort to handle public access changes. instead we have to grab all protected content definitions
+    /// and handle every last one with every notification.
+    /// </remarks>
     public void Execute() => _backgroundTaskQueue.QueueBackgroundWorkItem(_ =>
     {
         IIndex index = _deliveryApiIndexingHandler.GetIndex() ??

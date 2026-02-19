@@ -19,7 +19,7 @@ public class IndexAttribute : Attribute
     ///     Overrides default naming of indexes:
     ///     IX_tableName
     /// </remarks>
-    public string? Name { get; set; } // Overrides default naming of indexes: IX_tableName
+    public string? Name { get; set; }
 
     /// <summary>
     ///     Gets or sets the type of index to create

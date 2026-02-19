@@ -67,13 +67,13 @@ public abstract class UmbracoUserStore<TUser, TRole>
 
     protected static string UserIdToString(int userId) => string.Intern(userId.ToString(CultureInfo.InvariantCulture));
 
-/// <summary>
-///     Asynchronously adds the specified user to the given role (user group).
-/// </summary>
-/// <param name="user">The user to add to the role.</param>
-/// <param name="normalizedRoleName">The normalized name of the role to add the user to.</param>
-/// <param name="cancellationToken">A cancellation token to observe while waiting for the task to complete.</param>
-/// <returns>A task that represents the asynchronous add-to-role operation.</returns>
+    /// <summary>
+    ///     Asynchronously adds the specified user to the given role (user group).
+    /// </summary>
+    /// <param name="user">The user to add to the role.</param>
+    /// <param name="normalizedRoleName">The normalized name of the role to add the user to.</param>
+    /// <param name="cancellationToken">A cancellation token to observe while waiting for the task to complete.</param>
+    /// <returns>A task that represents the asynchronous add-to-role operation.</returns>
     public override Task AddToRoleAsync(TUser user, string normalizedRoleName, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -125,12 +125,12 @@ public abstract class UmbracoUserStore<TUser, TRole>
     public override Task<string?> GetNormalizedUserNameAsync(TUser user, CancellationToken cancellationToken = default)
         => GetUserNameAsync(user, cancellationToken);
 
-/// <summary>
-///     Asynchronously retrieves the list of role names that the specified user belongs to.
-/// </summary>
-/// <param name="user">The user for whom to retrieve role names.</param>
-/// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
-/// <returns>A task that represents the asynchronous operation. The task result contains a list of role names associated with the user.</returns>
+    /// <summary>
+    ///     Asynchronously retrieves the list of role names that the specified user belongs to.
+    /// </summary>
+    /// <param name="user">The user for whom to retrieve role names.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a list of role names associated with the user.</returns>
     public override Task<IList<string>> GetRolesAsync(TUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -182,13 +182,13 @@ public abstract class UmbracoUserStore<TUser, TRole>
         return false;
     }
 
-/// <summary>
-///     Determines whether the specified user is a member of the given role.
-/// </summary>
-/// <param name="user">The user whose membership is to be checked.</param>
-/// <param name="normalizedRoleName">The normalized name of the role to check membership for.</param>
-/// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
-/// <returns>True if the user is in the specified role; otherwise, false.</returns>
+    /// <summary>
+    ///     Determines whether the specified user is a member of the given role.
+    /// </summary>
+    /// <param name="user">The user whose membership is to be checked.</param>
+    /// <param name="normalizedRoleName">The normalized name of the role to check membership for.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>True if the user is in the specified role; otherwise, false.</returns>
     public override Task<bool> IsInRoleAsync(TUser user, string normalizedRoleName, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -208,13 +208,13 @@ public abstract class UmbracoUserStore<TUser, TRole>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public override Task RemoveClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
-/// <summary>
-///     Removes a role (user group) from the specified user asynchronously.
-/// </summary>
-/// <param name="user">The user from whom to remove the role.</param>
-/// <param name="normalizedRoleName">The normalized name of the role to remove from the user.</param>
-/// <param name="cancellationToken">A cancellation token to cancel the operation.</param>
-/// <returns>A <see cref="Task"/> that represents the asynchronous remove operation.</returns>
+    /// <summary>
+    ///     Removes a role (user group) from the specified user asynchronously.
+    /// </summary>
+    /// <param name="user">The user from whom to remove the role.</param>
+    /// <param name="normalizedRoleName">The normalized name of the role to remove from the user.</param>
+    /// <param name="cancellationToken">A cancellation token to cancel the operation.</param>
+    /// <returns>A <see cref="Task"/> that represents the asynchronous remove operation.</returns>
     public override Task RemoveFromRoleAsync(TUser user, string normalizedRoleName, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();

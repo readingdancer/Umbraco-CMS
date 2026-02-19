@@ -339,9 +339,9 @@ internal sealed class DataTypeRepository : EntityRepositoryBase<int, IDataType>,
     [TableName(Constants.DatabaseSchema.Tables.ContentType)]
     private sealed class ContentTypeReferenceDto : ContentTypeDto
     {
-    /// <summary>
-    /// Gets the collection of property type references that belong to this content type reference.
-    /// </summary>
+        /// <summary>
+        /// Gets the collection of property type references that belong to this content type reference.
+        /// </summary>
         [ResultColumn]
         [Reference(ReferenceType.Many)]
         public List<PropertyTypeReferenceDto> PropertyTypes { get; } = null!;
@@ -620,15 +620,15 @@ internal sealed class DataTypeRepository : EntityRepositoryBase<int, IDataType>,
     {
         private readonly DataTypeRepository _outerRepo;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DataTypeByGuidReadRepository"/> class.
-    /// </summary>
-    /// <param name="outerRepo">The parent <see cref="DataTypeRepository"/> instance used for data type operations.</param>
-    /// <param name="scopeAccessor">Provides access to the current database scope.</param>
-    /// <param name="cache">The application-level caches for storing and retrieving data.</param>
-    /// <param name="logger">The logger used for logging repository operations.</param>
-    /// <param name="repositoryCacheVersionService">Service for managing repository cache versions.</param>
-    /// <param name="cacheSyncService">Service for synchronizing cache across distributed environments.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataTypeByGuidReadRepository"/> class.
+        /// </summary>
+        /// <param name="outerRepo">The parent <see cref="DataTypeRepository"/> instance used for data type operations.</param>
+        /// <param name="scopeAccessor">Provides access to the current database scope.</param>
+        /// <param name="cache">The application-level caches for storing and retrieving data.</param>
+        /// <param name="logger">The logger used for logging repository operations.</param>
+        /// <param name="repositoryCacheVersionService">Service for managing repository cache versions.</param>
+        /// <param name="cacheSyncService">Service for synchronizing cache across distributed environments.</param>
         public DataTypeByGuidReadRepository(
             DataTypeRepository outerRepo,
             IScopeAccessor scopeAccessor,
@@ -723,11 +723,11 @@ internal sealed class DataTypeRepository : EntityRepositoryBase<int, IDataType>,
         protected override string GetBaseWhereClause() =>
             throw new InvalidOperationException("This method won't be implemented.");
 
-/// <summary>
-/// Adds the specified data type entity to the cache using its GUID as the key.
-/// This ensures that entities retrieved by integer ID are also available for GUID-based lookups.
-/// </summary>
-/// <param name="entity">The data type entity to cache by its GUID key.</param>
+        /// <summary>
+        /// Adds the specified data type entity to the cache using its GUID as the key.
+        /// This ensures that entities retrieved by integer ID are also available for GUID-based lookups.
+        /// </summary>
+        /// <param name="entity">The data type entity to cache by its GUID key.</param>
         public void PopulateCacheByKey(IDataType entity)
         {
             if (entity.HasIdentity)
@@ -737,11 +737,11 @@ internal sealed class DataTypeRepository : EntityRepositoryBase<int, IDataType>,
             }
         }
 
-/// <summary>
-/// Populates the GUID-keyed cache with the specified collection of entities.
-/// This enables entities retrieved by integer ID to also be cached for GUID-based lookups.
-/// </summary>
-/// <param name="entities">The collection of <see cref="IDataType"/> entities to cache by GUID key.</param>
+        /// <summary>
+        /// Populates the GUID-keyed cache with the specified collection of entities.
+        /// This enables entities retrieved by integer ID to also be cached for GUID-based lookups.
+        /// </summary>
+        /// <param name="entities">The collection of <see cref="IDataType"/> entities to cache by GUID key.</param>
         public void PopulateCacheByKey(IEnumerable<IDataType> entities)
         {
             foreach (IDataType entity in entities)
@@ -750,11 +750,11 @@ internal sealed class DataTypeRepository : EntityRepositoryBase<int, IDataType>,
             }
         }
 
-/// <summary>
-/// Clears the GUID-keyed cache entry for the given key.
-/// This ensures deleted entities are not returned from the cache.
-/// </summary>
-/// <param name="key">The GUID key of the cache entry to clear.</param>
+        /// <summary>
+        /// Clears the GUID-keyed cache entry for the given key.
+        /// This ensures deleted entities are not returned from the cache.
+        /// </summary>
+        /// <param name="key">The GUID key of the cache entry to clear.</param>
         public void ClearCacheByKey(Guid key)
         {
             var cacheKey = GetCacheKey(key);

@@ -24,6 +24,7 @@ using Umbraco.Extensions;
 using IMapperCollection = Umbraco.Cms.Infrastructure.Persistence.Mappers.IMapperCollection;
 
 namespace Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement;
+
 /// <summary>
 /// Represents the UserRepository for doing CRUD operations for <see cref="IUser"/>
 /// </summary>
@@ -246,12 +247,12 @@ internal sealed class UserRepository : EntityRepositoryBase<Guid, IUser>, IUserR
         return dto == null ? null : new UserProfile(dto.Id, dto.UserName);
     }
 
-/// <summary>
-/// Retrieves a dictionary containing the number of users for each <see cref="Umbraco.Core.Models.Membership.UserState"/>.
-/// </summary>
-/// <returns>
-/// A dictionary where each key is a <see cref="Umbraco.Core.Models.Membership.UserState"/> value representing a user state, and the corresponding value is the count of users in that state.
-/// </returns>
+    /// <summary>
+    /// Retrieves a dictionary containing the number of users for each <see cref="Umbraco.Core.Models.Membership.UserState"/>.
+    /// </summary>
+    /// <returns>
+    /// A dictionary where each key is a <see cref="Umbraco.Core.Models.Membership.UserState"/> value representing a user state, and the corresponding value is the count of users in that state.
+    /// </returns>
     public IDictionary<UserState, int> GetUserStates()
     {
         // These keys in this query map to the `Umbraco.Core.Models.Membership.UserState` enum
@@ -278,13 +279,13 @@ SELECT 4 AS {keyAlias}, COUNT(id) AS {valueAlias} FROM {userTableName}
         return result.ToDictionary(x => (UserState)x.Key, x => x.Value);
     }
 
-/// <summary>
-/// Creates a new login session for a user and optionally clears stale sessions.
-/// </summary>
-/// <param name="userId">The ID of the user for whom to create the login session.</param>
-/// <param name="requestingIpAddress">The IP address from which the login request originated.</param>
-/// <param name="cleanStaleSessions">If true, removes login sessions older than 15 days.</param>
-/// <returns>The GUID of the newly created login session.</returns>
+    /// <summary>
+    /// Creates a new login session for a user and optionally clears stale sessions.
+    /// </summary>
+    /// <param name="userId">The ID of the user for whom to create the login session.</param>
+    /// <param name="requestingIpAddress">The IP address from which the login request originated.</param>
+    /// <param name="cleanStaleSessions">If true, removes login sessions older than 15 days.</param>
+    /// <returns>The GUID of the newly created login session.</returns>
     public Guid CreateLoginSession(int? userId, string requestingIpAddress, bool cleanStaleSessions = true)
     {
         DateTime now = DateTime.UtcNow;
@@ -1083,17 +1084,19 @@ SELECT 4 AS {keyAlias}, COUNT(id) AS {valueAlias} FROM {userTableName}
         return Database.ExecuteScalar<int>(sql) > 0;
     }
 
-    // This is a bit hacky, as we're stealing some of the cache implementation, so we also can cache user by id
-    // We do however need this, as all content have creatorId (as int) and thus when we index content
-    // this gets called for each content item, and we need to cache the user to avoid a lot of db calls
-    // TODO: Remove this once CreatorId gets migrated to a key.
-/// <summary>
-/// Retrieves a non-cached <see cref="IUser"/> instance for the specified user ID, or <c>null</c> if no user is found.
-/// </summary>
-/// <param name="id">The ID of the user to retrieve.</param>
-/// <returns>
-/// A non-cached <see cref="IUser"/> instance if a user with the specified ID exists; otherwise, <c>null</c>.
-/// </returns>
+    /// <summary>
+    /// Retrieves a non-cached <see cref="IUser"/> instance for the specified user ID, or <c>null</c> if no user is found.
+    /// </summary>
+    /// <remarks>
+    /// This is a bit hacky, as we're stealing some of the cache implementation, so we also can cache user by id
+    /// We do however need this, as all content have creatorId (as int) and thus when we index content
+    /// this gets called for each content item, and we need to cache the user to avoid a lot of db calls
+    /// TODO: Remove this once CreatorId gets migrated to a key.
+    /// </remarks>
+    /// <param name="id">The ID of the user to retrieve.</param>
+    /// <returns>
+    /// A non-cached <see cref="IUser"/> instance if a user with the specified ID exists; otherwise, <c>null</c>.
+    /// </returns>
     public IUser? Get(int id)
     {
         string cacheKey = RepositoryCacheKeys.GetKey<IUser, int>(id);
@@ -1138,18 +1141,18 @@ SELECT 4 AS {keyAlias}, COUNT(id) AS {valueAlias} FROM {userTableName}
         return Database.ExecuteScalar<int>(sql) > 0;
     }
 
-/// <summary>
-///     Gets a list of <see cref="IUser" /> objects associated with a given group
-/// </summary>
-/// <param name="groupId">Id of group</param>
-/// <returns>An enumerable collection of <see cref="IUser" /> objects in the specified group.</returns>
+    /// <summary>
+    ///     Gets a list of <see cref="IUser" /> objects associated with a given group
+    /// </summary>
+    /// <param name="groupId">Id of group</param>
+    /// <returns>An enumerable collection of <see cref="IUser" /> objects in the specified group.</returns>
     public IEnumerable<IUser> GetAllInGroup(int groupId) => GetAllInOrNotInGroup(groupId, true);
 
-/// <summary>
-///     Gets a list of <see cref="IUser" /> objects not associated with a given group
-/// </summary>
-/// <param name="groupId">Id of group</param>
-/// <returns>An enumerable collection of <see cref="IUser" /> objects not in the specified group.</returns>
+    /// <summary>
+    ///     Gets a list of <see cref="IUser" /> objects not associated with a given group
+    /// </summary>
+    /// <param name="groupId">Id of group</param>
+    /// <returns>An enumerable collection of <see cref="IUser" /> objects not in the specified group.</returns>
     public IEnumerable<IUser> GetAllNotInGroup(int groupId) => GetAllInOrNotInGroup(groupId, false);
 
     private IEnumerable<IUser> GetAllInOrNotInGroup(int groupId, bool include)

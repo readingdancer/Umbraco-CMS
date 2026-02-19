@@ -3,10 +3,10 @@ using Umbraco.Cms.Core.Models.ContentEditing;
 
 namespace Umbraco.Cms.Infrastructure.Examine;
 
-    /// <summary>
-    /// Represents a no-operation (noop) implementation of the back office Examine searcher, which performs no search actions.
-    /// This can be used as a placeholder or default when search functionality is not required.
-    /// </summary>
+/// <summary>
+/// Represents a no-operation (noop) implementation of the back office Examine searcher, which performs no search actions.
+/// This can be used as a placeholder or default when search functionality is not required.
+/// </summary>
 public class NoopBackOfficeExamineSearcher : IBackOfficeExamineSearcher
 {
     /// <summary>

@@ -22,10 +22,10 @@ public class MemberRoleStore : IQueryableRoleStore<UmbracoIdentityRole>
 
     private bool _disposed;
 
-    // private const string genericIdentityErrorCode = "IdentityErrorUserStore";
     /// <summary>
     /// Initializes a new instance of the <see cref="Umbraco.Cms.Core.Security.MemberRoleStore"/> class.
     /// </summary>
+    /// <remarks>private const string genericIdentityErrorCode = "IdentityErrorUserStore";</remarks>
     /// <param name="memberGroupService">Service used to manage and retrieve member groups.</param>
     /// <param name="errorDescriber">Provides error messages for identity-related operations.</param>
     public MemberRoleStore(IMemberGroupService memberGroupService, IdentityErrorDescriber errorDescriber)

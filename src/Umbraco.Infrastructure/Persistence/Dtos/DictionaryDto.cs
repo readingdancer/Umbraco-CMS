@@ -8,10 +8,11 @@ namespace Umbraco.Cms.Infrastructure.Persistence.Dtos;
 /// Data transfer object representing a dictionary item in the Umbraco CMS database.
 /// Used for persisting and retrieving dictionary entries, typically for localization or multilingual support.
 /// </summary>
+/// <remarks>public as required to be accessible from Deploy for the RepairDictionaryIdsWorkItem.</remarks>
 [TableName(TableName)]
 [PrimaryKey(PrimaryKeyColumnName)]
 [ExplicitColumns]
-public class DictionaryDto // public as required to be accessible from Deploy for the RepairDictionaryIdsWorkItem.
+public class DictionaryDto
 {
     public const string TableName = Constants.DatabaseSchema.Tables.DictionaryEntry;
     public const string PrimaryKeyColumnName = Constants.DatabaseSchema.Columns.PrimaryKeyNamePk;

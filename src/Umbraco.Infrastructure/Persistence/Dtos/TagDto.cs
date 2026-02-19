@@ -53,10 +53,10 @@ internal sealed class TagDto
     // [Length(301)] // de-normalized "{group}/{tag}"
     // public string Key { get; set; }
 
-    // queries result column
     /// <summary>
     /// Gets or sets the count of nodes associated with the tag.
     /// </summary>
+    /// <remarks>queries result column</remarks>
     [ResultColumn("NodeCount")]
     public int NodeCount { get; set; }
 }

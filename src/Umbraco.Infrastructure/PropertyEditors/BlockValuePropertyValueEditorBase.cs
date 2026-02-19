@@ -46,15 +46,15 @@ public abstract class BlockValuePropertyValueEditorBase<TValue, TLayout> : DataV
         _languageService = languageService;
     }
 
-    /// <summary>
-    /// Caches referenced entities for all property values with supporting property editors within the specified block editor data
-    /// optimising subsequent retrieval of entities when parsing and converting property values.
-    /// </summary>
-    /// <remarks>
-    /// This method iterates through all property values associated with data editors in the provided
-    /// block editor data and invokes caching for referenced entities where supported by the property editor.
-    /// </remarks>
-    /// <param name="blockEditorData">The block editor data containing content and settings property values to analyze for referenced entities.</param>
+              /// <summary>
+              /// Caches referenced entities for all property values with supporting property editors within the specified block editor data
+              /// optimising subsequent retrieval of entities when parsing and converting property values.
+              /// </summary>
+              /// <remarks>
+              /// This method iterates through all property values associated with data editors in the provided
+              /// block editor data and invokes caching for referenced entities where supported by the property editor.
+              /// </remarks>
+              /// <param name="blockEditorData">The block editor data containing content and settings property values to analyze for referenced entities.</param>
     [Obsolete("This method is available for support of request caching retrieved entities in derived property value editors. " +
               "The intention is to supersede this with lazy loaded read locks, which will make this unnecessary. " +
               "Scheduled for removal in Umbraco 19.")]
@@ -235,14 +235,14 @@ public abstract class BlockValuePropertyValueEditorBase<TValue, TLayout> : DataV
 
     private sealed class BlockStateMapping<T>
     {
-    /// <summary>
-    /// Gets or sets the edited value for the block, or <c>null</c> if no edited value is present.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the edited value for the block, or <c>null</c> if no edited value is present.
+        /// </summary>
         public T? Edited { get; set; }
 
-    /// <summary>
-    /// Gets or sets the current mapped block state value of type <typeparamref name="T"/>.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the current mapped block state value of type <typeparamref name="T"/>.
+        /// </summary>
         public T? Current { get; set; }
     }
 

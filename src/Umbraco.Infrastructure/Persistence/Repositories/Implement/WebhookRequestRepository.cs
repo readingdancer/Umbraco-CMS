@@ -48,11 +48,11 @@ public class WebhookRequestRepository : IWebhookRequestRepository
         return webhookRequest;
     }
 
-/// <summary>
-/// Asynchronously deletes the specified <see cref="WebhookRequest"/> from the database.
-/// </summary>
-/// <param name="webhookRequest">The <see cref="WebhookRequest"/> instance to delete.</param>
-/// <returns>A <see cref="Task"/> representing the asynchronous delete operation.</returns>
+    /// <summary>
+    /// Asynchronously deletes the specified <see cref="WebhookRequest"/> from the database.
+    /// </summary>
+    /// <param name="webhookRequest">The <see cref="WebhookRequest"/> instance to delete.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous delete operation.</returns>
     public async Task DeleteAsync(WebhookRequest webhookRequest)
     {
         Sql<ISqlContext> sql = Database.SqlContext.Sql()

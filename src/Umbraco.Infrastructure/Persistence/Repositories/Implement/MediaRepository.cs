@@ -726,15 +726,15 @@ public class MediaRepository : ContentRepositoryBase<int, IMedia, MediaRepositor
     {
         private readonly MediaRepository _outerRepo;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MediaByGuidReadRepository"/> class.
-    /// </summary>
-    /// <param name="outerRepo">The parent <see cref="MediaRepository"/> used for delegating media operations.</param>
-    /// <param name="scopeAccessor">Provides access to the current database scope.</param>
-    /// <param name="cache">The application-level caches for storing and retrieving media data.</param>
-    /// <param name="logger">The logger used for logging repository operations and errors.</param>
-    /// <param name="repositoryCacheVersionService">Service for managing cache versioning within the repository.</param>
-    /// <param name="cacheSyncService">Service responsible for synchronizing cache across distributed environments.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MediaByGuidReadRepository"/> class.
+        /// </summary>
+        /// <param name="outerRepo">The parent <see cref="MediaRepository"/> used for delegating media operations.</param>
+        /// <param name="scopeAccessor">Provides access to the current database scope.</param>
+        /// <param name="cache">The application-level caches for storing and retrieving media data.</param>
+        /// <param name="logger">The logger used for logging repository operations and errors.</param>
+        /// <param name="repositoryCacheVersionService">Service for managing cache versioning within the repository.</param>
+        /// <param name="cacheSyncService">Service responsible for synchronizing cache across distributed environments.</param>
         public MediaByGuidReadRepository(
             MediaRepository outerRepo,
             IScopeAccessor scopeAccessor,
@@ -815,11 +815,11 @@ public class MediaRepository : ContentRepositoryBase<int, IMedia, MediaRepositor
         protected override string GetBaseWhereClause() =>
             throw new InvalidOperationException("This method won't be implemented.");
 
-/// <summary>
-/// Populates the GUID-keyed cache with the given entity.
-/// This allows entities retrieved by int ID to also be cached for GUID lookups.
-/// </summary>
-/// <param name="entity">The media entity to cache by its GUID key.</param>
+        /// <summary>
+        /// Populates the GUID-keyed cache with the given entity.
+        /// This allows entities retrieved by int ID to also be cached for GUID lookups.
+        /// </summary>
+        /// <param name="entity">The media entity to cache by its GUID key.</param>
         public void PopulateCacheByKey(IMedia entity)
         {
             if (entity.HasIdentity)
@@ -829,11 +829,11 @@ public class MediaRepository : ContentRepositoryBase<int, IMedia, MediaRepositor
             }
         }
 
-/// <summary>
-/// Populates the GUID-keyed cache with the given entities.
-/// This allows entities retrieved by int ID to also be cached for GUID lookups.
-/// </summary>
-/// <param name="entities">The collection of media entities to cache by their GUID keys.</param>
+        /// <summary>
+        /// Populates the GUID-keyed cache with the given entities.
+        /// This allows entities retrieved by int ID to also be cached for GUID lookups.
+        /// </summary>
+        /// <param name="entities">The collection of media entities to cache by their GUID keys.</param>
         public void PopulateCacheByKey(IEnumerable<IMedia> entities)
         {
             foreach (IMedia entity in entities)

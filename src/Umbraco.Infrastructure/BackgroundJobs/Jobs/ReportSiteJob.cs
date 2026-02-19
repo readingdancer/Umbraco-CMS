@@ -30,10 +30,10 @@ public class ReportSiteJob : IRecurringBackgroundJob
     /// </summary>
     public ServerRole[] ServerRoles => Enum.GetValues<ServerRole>();
 
-    // No-op event as the period never changes on this job
     /// <summary>
     /// Event that is triggered when the reporting period for the site job is changed.
     /// </summary>
+    /// <remarks>No-op event as the period never changes on this job</remarks>
     public event EventHandler PeriodChanged
     {
         add { }
@@ -64,10 +64,10 @@ public class ReportSiteJob : IRecurringBackgroundJob
         _httpClientFactory = httpClientFactory;
     }
 
-/// <summary>
-/// Executes the background job that sends the anonymous site ID to the telemetry service.
-/// </summary>
-/// <returns>A task that represents the asynchronous operation.</returns>
+    /// <summary>
+    /// Executes the background job that sends the anonymous site ID to the telemetry service.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task RunJobAsync()
     {
         TelemetryReportData? telemetryReportData = await _telemetryService.GetTelemetryReportDataAsync().ConfigureAwait(false);

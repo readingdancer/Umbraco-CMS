@@ -51,31 +51,35 @@ public class DocumentDto
     // [NullSetting(NullSetting = NullSettings.Null)] // is contentVersionDto.Text for the published version
     // public string PublishName { get; set; }
 
-    // [Column("publishTemplateId")]
-    // [NullSetting(NullSetting = NullSettings.Null)] // is documentVersionDto.TemplateId for the published version
-    // public int? PublishTemplateId { get; set; }
     /// <summary>
     /// Gets or sets the <see cref="ContentDto"/> instance that contains the content data associated with this document.
     /// </summary>
+    /// <remarks>
+    /// [Column("publishTemplateId")]
+    /// [NullSetting(NullSetting = NullSettings.Null)] // is documentVersionDto.TemplateId for the published version
+    /// public int? PublishTemplateId { get; set; }
+    /// </remarks>
     [ResultColumn]
     [Reference(ReferenceType.OneToOne, ReferenceMemberName = nameof(ContentDto.NodeId))]
     public ContentDto ContentDto { get; set; } = null!;
 
-    // although a content has many content versions,
-    // they can only be loaded one by one (as several content),
-    // so this here is a OneToOne reference
     /// <summary>
     /// Gets or sets the document version data transfer object (DTO) that is referenced in a one-to-one relationship with this document.
     /// Although a document can have multiple versions, this property represents the specific version associated with this instance.
     /// </summary>
+    /// <remarks>
+    /// although a content has many content versions,
+    /// they can only be loaded one by one (as several content),
+    /// so this here is a OneToOne reference
+    /// </remarks>
     [ResultColumn]
     [Reference(ReferenceType.OneToOne)]
     public DocumentVersionDto DocumentVersionDto { get; set; } = null!;
 
-    // same
     /// <summary>
     /// Gets or sets the DTO containing information about the published version of the document.
     /// </summary>
+    /// <remarks>same</remarks>
     [ResultColumn]
     [Reference(ReferenceType.OneToOne)]
     public DocumentVersionDto? PublishedVersionDto { get; set; }

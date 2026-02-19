@@ -60,10 +60,12 @@ public class ContentValueSetValidator : ValueSetValidator, IContentValueSetValid
     /// Gets a value indicating whether the validator includes only published content values.
     /// </summary>
     public bool PublishedValuesOnly { get; }
+
     /// <summary>
     /// Gets a value indicating whether this validator supports protected content.
     /// </summary>
     public bool SupportProtectedContent { get; }
+
     /// <summary>
     /// Gets the identifier of the parent content item, if available.
     /// </summary>
@@ -150,29 +152,29 @@ public class ContentValueSetValidator : ValueSetValidator, IContentValueSetValid
         return true;
     }
 
-/// <summary>
-/// Validates the specified <see cref="Umbraco.Cms.Core.Models.ValueSet"/> to determine if it meets the requirements for indexing in Examine.
-/// <para>
-/// Validation includes checks for published status (including culture variants), the presence and validity of the content path, and whether the content is in the recycle bin or protected.
-/// If the value set fails any of these checks, it is either marked as failed (not indexable) or filtered (excluded from the index), depending on the nature of the issue.
-/// </para>
-/// </summary>
-/// <param name="valueSet">The <see cref="Umbraco.Cms.Core.Models.ValueSet"/> to validate.</param>
-/// <returns>
-/// A <see cref="Umbraco.Cms.Infrastructure.Examine.ValueSetValidationResult"/> indicating the outcome of the validation:
-/// <list type="bullet">
-///   <item>
-///     <description><c>Valid</c>: The value set passed all checks and is suitable for indexing.</description>
-///   </item>
-///   <item>
-///     <description><c>Filtered</c>: The value set should be excluded from the index due to path, recycle bin, or protected content rules.</description>
-///   </item>
-///   <item>
-///     <description><c>Failed</c>: The value set is invalid (for example, missing required fields) and cannot be indexed.</description>
-///   </item>
-/// </list>
-/// The result may also contain a filtered version of the original value set with unpublished culture variants removed.
-/// </returns>
+    /// <summary>
+    /// Validates the specified <see cref="Umbraco.Cms.Core.Models.ValueSet"/> to determine if it meets the requirements for indexing in Examine.
+    /// <para>
+    /// Validation includes checks for published status (including culture variants), the presence and validity of the content path, and whether the content is in the recycle bin or protected.
+    /// If the value set fails any of these checks, it is either marked as failed (not indexable) or filtered (excluded from the index), depending on the nature of the issue.
+    /// </para>
+    /// </summary>
+    /// <param name="valueSet">The <see cref="Umbraco.Cms.Core.Models.ValueSet"/> to validate.</param>
+    /// <returns>
+    /// A <see cref="Umbraco.Cms.Infrastructure.Examine.ValueSetValidationResult"/> indicating the outcome of the validation:
+    /// <list type="bullet">
+    ///   <item>
+    ///     <description><c>Valid</c>: The value set passed all checks and is suitable for indexing.</description>
+    ///   </item>
+    ///   <item>
+    ///     <description><c>Filtered</c>: The value set should be excluded from the index due to path, recycle bin, or protected content rules.</description>
+    ///   </item>
+    ///   <item>
+    ///     <description><c>Failed</c>: The value set is invalid (for example, missing required fields) and cannot be indexed.</description>
+    ///   </item>
+    /// </list>
+    /// The result may also contain a filtered version of the original value set with unpublished culture variants removed.
+    /// </returns>
     public override ValueSetValidationResult Validate(ValueSet valueSet)
     {
         // Notes on status on the result:

@@ -103,21 +103,21 @@ public class BatchedDatabaseServerMessenger : DatabaseServerMessenger
     {
     }
 
-/// <summary>
-///     Initializes a new instance of the <see cref="BatchedDatabaseServerMessenger" /> class.
-/// </summary>
-/// <param name="mainDom">The <see cref="IMainDom"/> instance managing main domain locking.</param>
-/// <param name="cacheRefreshers">A collection of cache refresher implementations.</param>
-/// <param name="serverRoleAccessor">Provides access to the current server role.</param>
-/// <param name="logger">The logger used for diagnostic and operational messages.</param>
-/// <param name="syncBootStateAccessor">Provides access to the synchronization boot state.</param>
-/// <param name="hostingEnvironment">The hosting environment abstraction.</param>
-/// <param name="cacheInstructionService">Service for handling cache instructions.</param>
-/// <param name="jsonSerializer">The serializer used for JSON operations.</param>
-/// <param name="requestCache">The request-level cache instance.</param>
-/// <param name="requestAccessor">Provides access to the current request context.</param>
-/// <param name="lastSyncedFileManager">Manages the state of the last synchronized file.</param>
-/// <param name="globalSettings">Monitors the global settings configuration.</param>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BatchedDatabaseServerMessenger" /> class.
+    /// </summary>
+    /// <param name="mainDom">The <see cref="IMainDom"/> instance managing main domain locking.</param>
+    /// <param name="cacheRefreshers">A collection of cache refresher implementations.</param>
+    /// <param name="serverRoleAccessor">Provides access to the current server role.</param>
+    /// <param name="logger">The logger used for diagnostic and operational messages.</param>
+    /// <param name="syncBootStateAccessor">Provides access to the synchronization boot state.</param>
+    /// <param name="hostingEnvironment">The hosting environment abstraction.</param>
+    /// <param name="cacheInstructionService">Service for handling cache instructions.</param>
+    /// <param name="jsonSerializer">The serializer used for JSON operations.</param>
+    /// <param name="requestCache">The request-level cache instance.</param>
+    /// <param name="requestAccessor">Provides access to the current request context.</param>
+    /// <param name="lastSyncedFileManager">Manages the state of the last synchronized file.</param>
+    /// <param name="globalSettings">Monitors the global settings configuration.</param>
     [Obsolete("Use the non-obsolete constructor instead. Scheduled for removal in Umbraco 18.")]
     public BatchedDatabaseServerMessenger(
         IMainDom mainDom,

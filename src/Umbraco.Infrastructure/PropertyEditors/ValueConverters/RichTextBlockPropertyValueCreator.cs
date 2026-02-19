@@ -58,11 +58,11 @@ internal sealed class RichTextBlockPropertyValueCreator : BlockPropertyValueCrea
 
     private sealed class RichTextBlockItemActivator : BlockItemActivator<RichTextBlockItem>
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RichTextBlockItemActivator"/> class.
-    /// </summary>
-    /// <param name="blockConverter">The <see cref="BlockEditorConverter"/> used to convert block editor values.</param>
-    /// <param name="constructorCache">The <see cref="RichTextBlockPropertyValueConstructorCache"/> used to cache constructors for rich text block property values.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RichTextBlockItemActivator"/> class.
+        /// </summary>
+        /// <param name="blockConverter">The <see cref="BlockEditorConverter"/> used to convert block editor values.</param>
+        /// <param name="constructorCache">The <see cref="RichTextBlockPropertyValueConstructorCache"/> used to cache constructors for rich text block property values.</param>
         public RichTextBlockItemActivator(BlockEditorConverter blockConverter, RichTextBlockPropertyValueConstructorCache constructorCache)
             : base(blockConverter, constructorCache)
         {

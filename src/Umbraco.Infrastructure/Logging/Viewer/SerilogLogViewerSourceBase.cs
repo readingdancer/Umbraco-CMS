@@ -193,12 +193,12 @@ public abstract class SerilogLogViewerSourceBase : ILogViewer
         return new PagedModel<LogMessage>(logMessages.Count(), logMessages.Skip(skip).Take(take));
     }
 
-/// <summary>
-/// Retrieves the Serilog minimum-level and UmbracoFile-level values from the configuration file.
-/// </summary>
-/// <returns>
-/// A read-only dictionary that maps sink names to their corresponding <see cref="LogEventLevel"/> values, or <c>null</c> if not set.
-/// </returns>
+    /// <summary>
+    /// Retrieves the Serilog minimum-level and UmbracoFile-level values from the configuration file.
+    /// </summary>
+    /// <returns>
+    /// A read-only dictionary that maps sink names to their corresponding <see cref="LogEventLevel"/> values, or <c>null</c> if not set.
+    /// </returns>
     [Obsolete("Use ILogViewerService.GetLogLevelsFromSinks instead. Scheduled for removal in Umbraco 15.")]
     public ReadOnlyDictionary<string, LogEventLevel?> GetLogLevels() => _logLevelLoader.GetLogLevelsFromSinks();
 

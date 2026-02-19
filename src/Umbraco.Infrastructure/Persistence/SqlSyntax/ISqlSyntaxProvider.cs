@@ -344,11 +344,11 @@ public interface ISqlSyntaxProvider
     /// <returns>A list of SQL strings representing the formatted foreign keys.</returns>
     List<string> Format(IEnumerable<ForeignKeyDefinition> foreignKeys);
 
-/// <summary>
-/// Generates the SQL statement for defining the primary key of the specified table.
-/// </summary>
-/// <param name="table">The <see cref="TableDefinition"/> representing the table whose primary key definition is to be formatted.</param>
-/// <returns>A string containing the SQL definition for the primary key.</returns>
+    /// <summary>
+    /// Generates the SQL statement for defining the primary key of the specified table.
+    /// </summary>
+    /// <param name="table">The <see cref="TableDefinition"/> representing the table whose primary key definition is to be formatted.</param>
+    /// <returns>A string containing the SQL definition for the primary key.</returns>
     string FormatPrimaryKey(TableDefinition table);
 
     /// <summary>
@@ -549,18 +549,18 @@ public interface ISqlSyntaxProvider
     /// <returns>The formatted field name, suitable for use in an UPDATE statement.</returns>
     string GetFieldNameForUpdate<TDto>(Expression<Func<TDto, object?>> fieldSelector, string? tableAlias = null);
 
-/// <summary>
-/// Appends the appropriate FOR UPDATE hint to the specified SQL query, if applicable for the database dialect.
-/// </summary>
-/// <param name="sql">The SQL query to which the FOR UPDATE hint will be appended.</param>
-/// <returns>The modified SQL query with the FOR UPDATE hint appended, or the original query if not applicable.</returns>
+    /// <summary>
+    /// Appends the appropriate FOR UPDATE hint to the specified SQL query, if applicable for the database dialect.
+    /// </summary>
+    /// <param name="sql">The SQL query to which the FOR UPDATE hint will be appended.</param>
+    /// <returns>The modified SQL query with the FOR UPDATE hint appended, or the original query if not applicable.</returns>
     Sql<ISqlContext> InsertForUpdateHint(Sql<ISqlContext> sql);
 
-/// <summary>
-/// Appends the relevant FOR UPDATE hint to the specified SQL query, if applicable for the underlying database.
-/// </summary>
-/// <param name="sql">The SQL query to which the FOR UPDATE hint will be appended.</param>
-/// <returns>A <see cref="Sql{ISqlContext}"/> instance with the FOR UPDATE hint appended, if supported.</returns>
+    /// <summary>
+    /// Appends the relevant FOR UPDATE hint to the specified SQL query, if applicable for the underlying database.
+    /// </summary>
+    /// <param name="sql">The SQL query to which the FOR UPDATE hint will be appended.</param>
+    /// <returns>A <see cref="Sql{ISqlContext}"/> instance with the FOR UPDATE hint appended, if supported.</returns>
     Sql<ISqlContext> AppendForUpdateHint(Sql<ISqlContext> sql);
 
     /// <summary>

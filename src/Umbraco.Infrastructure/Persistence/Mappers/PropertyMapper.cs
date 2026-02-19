@@ -3,9 +3,9 @@ using Umbraco.Cms.Infrastructure.Persistence.Dtos;
 
 namespace Umbraco.Cms.Infrastructure.Persistence.Mappers;
 
-    /// <summary>
-    /// Provides mapping logic between the Property entity and its corresponding database schema representation.
-    /// </summary>
+/// <summary>
+/// Provides mapping logic between the Property entity and its corresponding database schema representation.
+/// </summary>
 [MapperFor(typeof(Property))]
 public sealed class PropertyMapper : BaseMapper
 {

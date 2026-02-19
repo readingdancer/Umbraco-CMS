@@ -30,10 +30,10 @@ internal sealed class SingleBlockPropertyValueCreator : BlockPropertyValueCreato
         _constructorCache = constructorCache;
     }
 
-    // The underlying Value is still stored as an array to allow for code reuse and easier migration
     /// <summary>
     /// Creates a single <see cref="BlockListItem"/> model from the provided intermediate block model value.
     /// </summary>
+    /// <remarks>The underlying Value is still stored as an array to allow for code reuse and easier migration</remarks>
     /// <param name="owner">The <see cref="IPublishedElement"/> that owns the property.</param>
     /// <param name="referenceCacheLevel">The cache level to use for property references.</param>
     /// <param name="intermediateBlockModelValue">The intermediate block model value as a string, typically JSON.</param>
@@ -57,11 +57,11 @@ internal sealed class SingleBlockPropertyValueCreator : BlockPropertyValueCreato
 
     private sealed class BlockListItemActivator : BlockItemActivator<BlockListItem>
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="BlockListItemActivator"/> class.
-    /// </summary>
-    /// <param name="blockConverter">The <see cref="BlockEditorConverter"/> used to convert block editor data.</param>
-    /// <param name="constructorCache">The <see cref="BlockListPropertyValueConstructorCache"/> providing cached constructors for block list property values.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlockListItemActivator"/> class.
+        /// </summary>
+        /// <param name="blockConverter">The <see cref="BlockEditorConverter"/> used to convert block editor data.</param>
+        /// <param name="constructorCache">The <see cref="BlockListPropertyValueConstructorCache"/> providing cached constructors for block list property values.</param>
 
         public BlockListItemActivator(BlockEditorConverter blockConverter, BlockListPropertyValueConstructorCache constructorCache)
             : base(blockConverter, constructorCache)

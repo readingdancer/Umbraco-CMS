@@ -33,10 +33,10 @@ public class RuntimeState : IRuntimeState
     private readonly IRuntimeModeValidationService _runtimeModeValidationService = null!;
     private readonly IDatabaseAvailabilityCheck _databaseAvailabilityCheck = null!;
 
-/// <summary>
-/// Creates and returns the initial <see cref="RuntimeState"/> instance representing the booting state of the application.
-/// </summary>
-/// <returns>The initial <see cref="RuntimeState"/> instance representing the booting state.</returns>
+    /// <summary>
+    /// Creates and returns the initial <see cref="RuntimeState"/> instance representing the booting state of the application.
+    /// </summary>
+    /// <returns>The initial <see cref="RuntimeState"/> instance representing the booting state.</returns>
     public static RuntimeState Booting() => new RuntimeState() { Level = RuntimeLevel.Boot };
 
     /// <summary>
@@ -45,18 +45,18 @@ public class RuntimeState : IRuntimeState
     private RuntimeState()
     { }
 
-/// <summary>
-/// Initializes a new instance of the <see cref="RuntimeState" /> class with the specified configuration and services.
-/// </summary>
-/// <param name="globalSettings">The global settings for the Umbraco application.</param>
-/// <param name="unattendedSettings">The unattended installation and upgrade settings.</param>
-/// <param name="umbracoVersion">Provides information about the current Umbraco version.</param>
-/// <param name="databaseFactory">Factory for creating Umbraco database connections.</param>
-/// <param name="logger">The logger used for logging runtime state information.</param>
-/// <param name="packageMigrationState">Tracks the state of pending package migrations.</param>
-/// <param name="conflictingRouteService">Service for detecting conflicting routes in the application.</param>
-/// <param name="databaseProviderMetadata">A collection of metadata describing available database providers.</param>
-/// <param name="runtimeModeValidationService">Service for validating the runtime mode of the application.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RuntimeState" /> class with the specified configuration and services.
+    /// </summary>
+    /// <param name="globalSettings">The global settings for the Umbraco application.</param>
+    /// <param name="unattendedSettings">The unattended installation and upgrade settings.</param>
+    /// <param name="umbracoVersion">Provides information about the current Umbraco version.</param>
+    /// <param name="databaseFactory">Factory for creating Umbraco database connections.</param>
+    /// <param name="logger">The logger used for logging runtime state information.</param>
+    /// <param name="packageMigrationState">Tracks the state of pending package migrations.</param>
+    /// <param name="conflictingRouteService">Service for detecting conflicting routes in the application.</param>
+    /// <param name="databaseProviderMetadata">A collection of metadata describing available database providers.</param>
+    /// <param name="runtimeModeValidationService">Service for validating the runtime mode of the application.</param>
     [Obsolete("Please use the constructor taking all parameters. Scheduled for removal in Umbraco 18.")]
     public RuntimeState(
        IOptions<GlobalSettings> globalSettings,
@@ -82,19 +82,19 @@ public class RuntimeState : IRuntimeState
     {
     }
 
-/// <summary>
-/// Initializes a new instance of the <see cref="RuntimeState" /> class.
-/// </summary>
-/// <param name="globalSettings">The global settings for the Umbraco application.</param>
-/// <param name="unattendedSettings">The unattended installation and upgrade settings.</param>
-/// <param name="umbracoVersion">Provides information about the current Umbraco version.</param>
-/// <param name="databaseFactory">Factory for creating Umbraco database connections.</param>
-/// <param name="logger">The logger used for logging runtime state information.</param>
-/// <param name="packageMigrationState">Tracks the state of pending package migrations.</param>
-/// <param name="conflictingRouteService">Service for detecting conflicting routes in the application.</param>
-/// <param name="databaseProviderMetadata">A collection of metadata for available database providers.</param>
-/// <param name="runtimeModeValidationService">Service for validating the current runtime mode.</param>
-/// <param name="databaseAvailabilityCheck">Service to check the availability of the database.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RuntimeState" /> class.
+    /// </summary>
+    /// <param name="globalSettings">The global settings for the Umbraco application.</param>
+    /// <param name="unattendedSettings">The unattended installation and upgrade settings.</param>
+    /// <param name="umbracoVersion">Provides information about the current Umbraco version.</param>
+    /// <param name="databaseFactory">Factory for creating Umbraco database connections.</param>
+    /// <param name="logger">The logger used for logging runtime state information.</param>
+    /// <param name="packageMigrationState">Tracks the state of pending package migrations.</param>
+    /// <param name="conflictingRouteService">Service for detecting conflicting routes in the application.</param>
+    /// <param name="databaseProviderMetadata">A collection of metadata for available database providers.</param>
+    /// <param name="runtimeModeValidationService">Service for validating the current runtime mode.</param>
+    /// <param name="databaseAvailabilityCheck">Service to check the availability of the database.</param>
     public RuntimeState(
        IOptions<GlobalSettings> globalSettings,
        IOptions<UnattendedSettings> unattendedSettings,

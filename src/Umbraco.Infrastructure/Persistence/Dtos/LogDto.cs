@@ -29,10 +29,11 @@ internal sealed class LogDto
     /// <summary>
     /// Gets or sets the identifier of the user associated with the log entry, or <c>null</c> if the entry is not associated with a user.
     /// </summary>
+    /// <remarks>return null if zero</remarks>
     [Column(UserIdColumnName)]
     [ForeignKey(typeof(UserDto))]
     [NullSetting(NullSetting = NullSettings.Null)]
-    public int? UserId { get => _userId == 0 ? null : _userId; set => _userId = value; } // return null if zero
+    public int? UserId { get => _userId == 0 ? null : _userId; set => _userId = value; }
 
     /// <summary>
     /// Gets or sets the node identifier.

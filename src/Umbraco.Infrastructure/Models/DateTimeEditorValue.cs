@@ -2,9 +2,9 @@ using System.Runtime.Serialization;
 
 namespace Umbraco.Cms.Infrastructure.Models;
 
-    /// <summary>
-    /// Represents the value stored by a date and time editor in Umbraco.
-    /// </summary>
+/// <summary>
+/// Represents the value stored by a date and time editor in Umbraco.
+/// </summary>
 [DataContract]
 public class DateTimeEditorValue
 {

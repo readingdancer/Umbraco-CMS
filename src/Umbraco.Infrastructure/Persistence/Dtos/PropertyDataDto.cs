@@ -22,10 +22,10 @@ internal sealed class PropertyDataDto
 
     private decimal? _decimalValue;
 
-    // pk, not used at the moment (never updating)
     /// <summary>
     /// Gets or sets the unique primary key for this property data record.
     /// </summary>
+    /// <remarks>pk, not used at the moment (never updating)</remarks>
     [Column(PrimaryKeyColumnName)]
     [PrimaryKeyColumn]
     public int Id { get; set; }
@@ -183,10 +183,10 @@ internal sealed class PropertyDataDto
         && (ReferenceEquals(this, other) // and either ref-equals, or same id
             || (other is PropertyDataDto pdata && pdata.Id == Id));
 
-/// <summary>
-/// Returns a hash code for this instance, based on the <see cref="Id"/> property.
-/// </summary>
-/// <returns>A hash code for this instance.</returns>
+    /// <summary>
+    /// Returns a hash code for this instance, based on the <see cref="Id"/> property.
+    /// </summary>
+    /// <returns>A hash code for this instance.</returns>
     public override int GetHashCode() =>
 
         // ReSharper disable once NonReadonlyMemberInGetHashCode

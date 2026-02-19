@@ -10,11 +10,11 @@ public class MapperCollectionBuilder : SetCollectionBuilderBase<MapperCollection
 {
     protected override MapperCollectionBuilder This => this;
 
-/// <summary>
-/// Registers the mapper collection and related services with the specified <see cref="IServiceCollection"/>.
-/// This includes the <see cref="MapperConfigurationStore"/>, <see cref="IMapperCollection"/>, and ensures that the mapper collection is available for dependency injection.
-/// </summary>
-/// <param name="services">The service collection to register the mapper-related services with.</param>
+    /// <summary>
+    /// Registers the mapper collection and related services with the specified <see cref="IServiceCollection"/>.
+    /// This includes the <see cref="MapperConfigurationStore"/>, <see cref="IMapperCollection"/>, and ensures that the mapper collection is available for dependency injection.
+    /// </summary>
+    /// <param name="services">The service collection to register the mapper-related services with.</param>
     public override void RegisterWith(IServiceCollection services)
     {
         base.RegisterWith(services);

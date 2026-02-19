@@ -4,10 +4,10 @@ using Umbraco.Cms.Infrastructure.Persistence.DatabaseAnnotations;
 
 namespace Umbraco.Cms.Infrastructure.Persistence.Dtos;
 
-    /// <summary>
-    /// Represents a data transfer object (DTO) that defines the association between a user and a user group in the persistence layer.
-    /// Typically used to map user-to-group relationships in the database.
-    /// </summary>
+/// <summary>
+/// Represents a data transfer object (DTO) that defines the association between a user and a user group in the persistence layer.
+/// Typically used to map user-to-group relationships in the database.
+/// </summary>
 [TableName(TableName)]
 [PrimaryKey([UserIdColumnName, UserGroupIdColumnName], AutoIncrement = false)]
 [ExplicitColumns]

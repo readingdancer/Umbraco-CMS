@@ -4,9 +4,9 @@ using Umbraco.Cms.Infrastructure.Persistence.DatabaseAnnotations;
 
 namespace Umbraco.Cms.Infrastructure.Persistence.Dtos;
 
-    /// <summary>
-    /// Represents a data transfer object (DTO) that defines the association between a user group and an application in the system.
-    /// </summary>
+/// <summary>
+/// Represents a data transfer object (DTO) that defines the association between a user group and an application in the system.
+/// </summary>
 [TableName(TableName)]
 [PrimaryKey([UserGroupIdColumnName, AppAliasColumnName], AutoIncrement = false)]
 [ExplicitColumns]

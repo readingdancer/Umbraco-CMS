@@ -122,6 +122,7 @@ public interface IColumnOptionBuilder<out TNext, out TNextFk> : IFluentBuilder
     /// <param name="foreignColumnName">The name of the column in the foreign table that references this column.</param>
     /// <returns>An object representing the next step in the migration expression.</returns>
     TNextFk ReferencedBy(string foreignTableName, string foreignColumnName);
+
     /// <summary>
     /// Specifies that this column is referenced by a foreign key constraint from another table.
     /// </summary>

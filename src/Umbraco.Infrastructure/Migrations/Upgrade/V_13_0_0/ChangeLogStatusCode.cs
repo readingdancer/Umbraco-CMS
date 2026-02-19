@@ -55,52 +55,52 @@ public class ChangeLogStatusCode : MigrationBase
     [ExplicitColumns]
     private class WebhookLogDtoOld
     {
-    /// <summary>
-    /// Gets or sets the unique identifier of the webhook log entry.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique identifier of the webhook log entry.
+        /// </summary>
         [Column("id")]
         [PrimaryKeyColumn(AutoIncrement = true)]
         public int Id { get; set; }
 
-    /// <summary>
-    /// Gets or sets the unique identifier for the webhook.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique identifier for the webhook.
+        /// </summary>
         [Column("webhookKey")]
         public Guid WebhookKey { get; set; }
 
-    /// <summary>
-    /// Gets or sets the unique identifier key for the webhook log entry.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique identifier key for the webhook log entry.
+        /// </summary>
         [Column(Name = "key")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         public Guid Key { get; set; }
 
-    /// <summary>
-    /// Gets or sets the HTTP status code returned by the webhook operation for this log entry.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the HTTP status code returned by the webhook operation for this log entry.
+        /// </summary>
         [Column(Name = "statusCode")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         public string StatusCode { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Gets or sets the date and time when the webhook log entry was created.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date and time when the webhook log entry was created.
+        /// </summary>
         [Column(Name = "date")]
         [Index(IndexTypes.NonClustered, Name = "IX_" + Constants.DatabaseSchema.Tables.WebhookLog + "_date")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         public DateTime Date { get; set; }
 
-    /// <summary>
-    /// Gets or sets the URL related to this webhook log entry.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the URL related to this webhook log entry.
+        /// </summary>
         [Column(Name = "url")]
         [SpecialDbType(SpecialDbTypes.NVARCHARMAX)]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         public string Url { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Gets or sets the alias of the event associated with this webhook log entry.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the alias of the event associated with this webhook log entry.
+        /// </summary>
         [Column(Name = "eventAlias")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
         public string EventAlias { get; set; } = string.Empty;
@@ -136,9 +136,9 @@ public class ChangeLogStatusCode : MigrationBase
         [NullSetting(NullSetting = NullSettings.NotNull)]
         public string ResponseHeaders { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Gets or sets the HTTP response body returned by the webhook, as recorded in the log.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the HTTP response body returned by the webhook, as recorded in the log.
+        /// </summary>
         [Column(Name = "responseBody")]
         [SpecialDbType(SpecialDbTypes.NVARCHARMAX)]
         [NullSetting(NullSetting = NullSettings.NotNull)]

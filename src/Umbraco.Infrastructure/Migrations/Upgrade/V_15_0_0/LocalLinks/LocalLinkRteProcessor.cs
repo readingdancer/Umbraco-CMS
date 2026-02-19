@@ -86,9 +86,9 @@ public class LocalLinkRteProcessor : ITypedLocalLinkProcessor
     }
 }
 
-    /// <summary>
-    /// Provides helper methods for processing rich text editor (RTE) blocks containing local links during the upgrade to Umbraco version 15.0.0.
-    /// </summary>
+/// <summary>
+/// Provides helper methods for processing rich text editor (RTE) blocks containing local links during the upgrade to Umbraco version 15.0.0.
+/// </summary>
 [Obsolete("Scheduled for removal in Umbraco 18.")]
 public static partial class RteBlockHelper
 {

@@ -442,12 +442,12 @@ WHERE nodeId IN (@0)";
 
     private class UpdateItem
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="UpdateItem"/> class with the specified property data, property type, and updated value.
-    /// </summary>
-    /// <param name="propertyDataDto">The <see cref="PropertyDataDto"/> representing the data for the property to be updated.</param>
-    /// <param name="propertyType">The <see cref="IPropertyType"/> that defines the type of the property being updated.</param>
-    /// <param name="updatedValue">The new value to assign to the property.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateItem"/> class with the specified property data, property type, and updated value.
+        /// </summary>
+        /// <param name="propertyDataDto">The <see cref="PropertyDataDto"/> representing the data for the property to be updated.</param>
+        /// <param name="propertyType">The <see cref="IPropertyType"/> that defines the type of the property being updated.</param>
+        /// <param name="updatedValue">The new value to assign to the property.</param>
         public UpdateItem(PropertyDataDto propertyDataDto, IPropertyType propertyType, object? updatedValue)
         {
             PropertyDataDto = propertyDataDto;
@@ -455,21 +455,21 @@ WHERE nodeId IN (@0)";
             UpdatedValue = updatedValue;
         }
 
-    /// <summary>
-    /// Gets or sets the value that has been updated for this item during the migration process.
-    /// This typically represents the new value assigned after migration logic is applied.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the value that has been updated for this item during the migration process.
+        /// This typically represents the new value assigned after migration logic is applied.
+        /// </summary>
         public object? UpdatedValue { get; set; }
 
-    /// <summary>
-    /// Gets or sets the property data transfer object (DTO) associated with this update item.
-    /// This object contains the data for a specific property being migrated in the single block list upgrade process.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the property data transfer object (DTO) associated with this update item.
+        /// This object contains the data for a specific property being migrated in the single block list upgrade process.
+        /// </summary>
         public PropertyDataDto PropertyDataDto { get; set; }
 
-    /// <summary>
-    /// Gets or sets the <see cref="IPropertyType"/> that is associated with this update item.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the <see cref="IPropertyType"/> that is associated with this update item.
+        /// </summary>
         public IPropertyType PropertyType { get; set; }
     }
 }

@@ -91,6 +91,7 @@ internal sealed class PropertyTypeReadOnlyDto
     public bool LabelOnTop { get; set; }
 
     /* cmsMemberType */
+
     /// <summary>
     /// Gets or sets a value indicating whether members can edit this property type.
     /// </summary>
@@ -110,6 +111,7 @@ internal sealed class PropertyTypeReadOnlyDto
     public bool IsSensitive { get; set; }
 
     /* DataType */
+
     /// <summary>
     /// Gets or sets the alias identifying the property editor associated with this property type.
     /// </summary>

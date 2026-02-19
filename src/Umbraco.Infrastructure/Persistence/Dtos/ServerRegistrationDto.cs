@@ -30,9 +30,10 @@ internal sealed class ServerRegistrationDto
     /// <summary>
     /// Gets or sets the unique server identity, typically the computer name.
     /// </summary>
+    /// <remarks>server identity is unique</remarks>
     [Column("computerName")]
     [Length(255)]
-    [Index(IndexTypes.UniqueNonClustered, Name = "IX_computerName")] // server identity is unique
+    [Index(IndexTypes.UniqueNonClustered, Name = "IX_computerName")]
     public string? ServerIdentity { get; set; }
 
     /// <summary>

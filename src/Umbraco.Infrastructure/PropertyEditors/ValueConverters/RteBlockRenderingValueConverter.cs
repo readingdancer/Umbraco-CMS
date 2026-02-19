@@ -123,10 +123,10 @@ public class RteBlockRenderingValueConverter : SimpleRichTextValueConverter, IDe
             _ => throw new ArgumentOutOfRangeException(nameof(level), level, null)
         };
 
-    // to counterweigh the cache level, we're going to do as much of the heavy lifting as we can while converting source to intermediate
     /// <summary>
     /// Converts the source value of a rich text editor property to an intermediate <see cref="RichTextEditorIntermediateValue"/> for further processing and caching.
     /// </summary>
+    /// <remarks>to counterweigh the cache level, we're going to do as much of the heavy lifting as we can while converting source to intermediate</remarks>
     /// <param name="owner">The <see cref="IPublishedElement"/> that owns the property being converted.</param>
     /// <param name="propertyType">The <see cref="IPublishedPropertyType"/> metadata describing the property.</param>
     /// <param name="source">The source value to convert, typically a JSON string or object representing the rich text editor value.</param>
@@ -341,9 +341,9 @@ public class RteBlockRenderingValueConverter : SimpleRichTextValueConverter, IDe
         /// </summary>
         public required string Markup { get; set; }
 
-    /// <summary>
-    /// Gets or sets the model representing the rich text block associated with this intermediate value.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the model representing the rich text block associated with this intermediate value.
+        /// </summary>
         public required RichTextBlockModel? RichTextBlockModel { get; set; }
     }
 

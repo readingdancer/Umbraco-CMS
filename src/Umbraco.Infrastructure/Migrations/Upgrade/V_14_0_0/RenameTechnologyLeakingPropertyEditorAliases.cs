@@ -3,9 +3,9 @@ using Umbraco.Cms.Infrastructure.Persistence.Dtos;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_14_0_0;
 
-    /// <summary>
-    /// Migration that renames property editor aliases to remove technology-specific details.
-    /// </summary>
+/// <summary>
+/// Migration that renames property editor aliases to remove technology-specific details.
+/// </summary>
 public class RenameTechnologyLeakingPropertyEditorAliases : MigrationBase
 {
     /// <summary>

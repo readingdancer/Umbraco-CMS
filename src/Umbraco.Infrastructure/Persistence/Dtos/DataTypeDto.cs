@@ -27,8 +27,9 @@ public class DataTypeDto
     /// <summary>
     /// Gets or sets the alias of the property editor associated with this data type.
     /// </summary>
+    /// <remarks>TODO: should this have a length</remarks>
     [Column("propertyEditorAlias")]
-    public string EditorAlias { get; set; } = null!; // TODO: should this have a length
+    public string EditorAlias { get; set; } = null!;
 
     /// <summary>
     /// Gets or sets the alias of the editor UI associated with the data type.

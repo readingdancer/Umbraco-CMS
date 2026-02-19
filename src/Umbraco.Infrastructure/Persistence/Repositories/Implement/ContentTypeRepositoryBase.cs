@@ -1679,11 +1679,11 @@ internal abstract class ContentTypeRepositoryBase<TEntity> : EntityRepositoryBas
         return Database.ExecuteScalar<int>(sql) > 0;
     }
 
-/// <summary>
-///     Determines whether any content nodes exist for the specified content type ID.
-/// </summary>
-/// <param name="id">The content type ID to check for associated content nodes.</param>
-/// <returns><c>true</c> if content nodes exist for the given content type ID; otherwise, <c>false</c>.</returns>
+    /// <summary>
+    ///     Determines whether any content nodes exist for the specified content type ID.
+    /// </summary>
+    /// <param name="id">The content type ID to check for associated content nodes.</param>
+    /// <returns><c>true</c> if content nodes exist for the given content type ID; otherwise, <c>false</c>.</returns>
     public bool HasContentNodes(int id)
     {
         var sql = new Sql(
@@ -1765,19 +1765,19 @@ internal abstract class ContentTypeRepositoryBase<TEntity> : EntityRepositoryBas
         /// </summary>
         public int NodeId { get; set; }
 
-    /// <summary>
-    /// Gets or sets the current version number of the entity.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the current version number of the entity.
+        /// </summary>
         public int CurrentVersion { get; set; }
 
-    /// <summary>
-    /// Gets or sets the unique identifier of the language associated with this DTO.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique identifier of the language associated with this DTO.
+        /// </summary>
         public int LanguageId { get; set; }
 
-    /// <summary>
-    /// Gets or sets the current name of the content type.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the current name of the content type.
+        /// </summary>
         public string? CurrentName { get; set; }
 
         /// <summary>
@@ -1785,15 +1785,16 @@ internal abstract class ContentTypeRepositoryBase<TEntity> : EntityRepositoryBas
         /// </summary>
         public string? PublishedName { get; set; }
 
-    /// <summary>
-    /// Gets or sets the version number of the published content item, if available.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the version number of the published content item, if available.
+        /// </summary>
         public int? PublishedVersion { get; set; }
 
         /// <summary>
         /// Gets or sets the identifier of the associated DocumentCultureVariationDto.
         /// </summary>
-        public int Id { get; set; } // the Id of the DocumentCultureVariationDto
+        /// <remarks>the Id of the DocumentCultureVariationDto</remarks>
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the content type's name has been edited.
@@ -1805,9 +1806,9 @@ internal abstract class ContentTypeRepositoryBase<TEntity> : EntityRepositoryBas
     {
         private decimal? _decimalValue;
 
-    /// <summary>
-    /// Gets or sets the unique identifier for the version of the property value.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique identifier for the version of the property value.
+        /// </summary>
         public int VersionId { get; set; }
 
         /// <summary>
@@ -1820,12 +1821,12 @@ internal abstract class ContentTypeRepositoryBase<TEntity> : EntityRepositoryBas
         /// </summary>
         public int? LanguageId { get; set; }
 
-    /// <summary>
-    /// Gets or sets the culture or variation segment associated with the property value version.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the culture or variation segment associated with the property value version.
+        /// </summary>
         public string? Segment { get; set; }
 
-    /// <summary>Gets or sets the integer value of the property.</summary>
+        /// <summary>Gets or sets the integer value of the property.</summary>
         public int? IntValue { get; set; }
 
         /// <summary>
@@ -1838,9 +1839,9 @@ internal abstract class ContentTypeRepositoryBase<TEntity> : EntityRepositoryBas
             set => _decimalValue = value?.Normalize();
         }
 
-    /// <summary>
-    /// Gets or sets the date value associated with this property value version.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the date value associated with this property value version.
+        /// </summary>
         public DateTime? DateValue { get; set; }
 
         /// <summary>
@@ -1856,9 +1857,9 @@ internal abstract class ContentTypeRepositoryBase<TEntity> : EntityRepositoryBas
         /// </summary>
         public int NodeId { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether this is the current version.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets a value indicating whether this is the current version.
+        /// </summary>
         public bool Current { get; set; }
 
         /// <summary>

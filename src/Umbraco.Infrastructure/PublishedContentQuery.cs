@@ -459,12 +459,12 @@ public class PublishedContentQuery : IPublishedContentQuery
         private readonly IVariationContextAccessor _variationContextAccessor;
         private readonly IEnumerable<PublishedSearchResult> _wrapped;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CultureContextualSearchResults"/> class, wrapping a collection of search results and contextualizing them for a specific culture.
-    /// </summary>
-    /// <param name="wrapped">The collection of <see cref="PublishedSearchResult"/> items to wrap.</param>
-    /// <param name="variationContextAccessor">The accessor used to obtain variation context information.</param>
-    /// <param name="culture">The culture identifier to contextualize the search results for (e.g., "en-US").</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CultureContextualSearchResults"/> class, wrapping a collection of search results and contextualizing them for a specific culture.
+        /// </summary>
+        /// <param name="wrapped">The collection of <see cref="PublishedSearchResult"/> items to wrap.</param>
+        /// <param name="variationContextAccessor">The accessor used to obtain variation context information.</param>
+        /// <param name="culture">The culture identifier to contextualize the search results for (e.g., "en-US").</param>
         public CultureContextualSearchResults(
             IEnumerable<PublishedSearchResult> wrapped,
             IVariationContextAccessor variationContextAccessor,
@@ -475,12 +475,12 @@ public class PublishedContentQuery : IPublishedContentQuery
             _culture = culture;
         }
 
-    /// <summary>
-    /// Returns an enumerator that iterates through the search results, contextualized to the specified culture.
-    /// </summary>
-    /// <returns>
-    /// An enumerator of <see cref="Umbraco.Cms.Core.Models.PublishedContent.PublishedSearchResult"/> objects, where each result is contextualized to the specified culture for the duration of enumeration.
-    /// </returns>
+        /// <summary>
+        /// Returns an enumerator that iterates through the search results, contextualized to the specified culture.
+        /// </summary>
+        /// <returns>
+        /// An enumerator of <see cref="Umbraco.Cms.Core.Models.PublishedContent.PublishedSearchResult"/> objects, where each result is contextualized to the specified culture for the duration of enumeration.
+        /// </returns>
         public IEnumerator<PublishedSearchResult> GetEnumerator()
         {
             // We need to change the current culture to what is requested and then change it back
@@ -508,12 +508,12 @@ public class PublishedContentQuery : IPublishedContentQuery
             private readonly IVariationContextAccessor _variationContextAccessor;
             private readonly IEnumerator<PublishedSearchResult> _wrapped;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CultureContextualSearchResultsEnumerator"/> class.
-    /// </summary>
-    /// <param name="wrapped">The enumerator of <see cref="PublishedSearchResult"/> items to wrap.</param>
-    /// <param name="variationContextAccessor">The accessor used to manage culture variation context during enumeration.</param>
-    /// <param name="originalContext">The original variation context, or <c>null</c> if none was provided.</param>
+            /// <summary>
+            /// Initializes a new instance of the <see cref="CultureContextualSearchResultsEnumerator"/> class.
+            /// </summary>
+            /// <param name="wrapped">The enumerator of <see cref="PublishedSearchResult"/> items to wrap.</param>
+            /// <param name="variationContextAccessor">The accessor used to manage culture variation context during enumeration.</param>
+            /// <param name="originalContext">The original variation context, or <c>null</c> if none was provided.</param>
             public CultureContextualSearchResultsEnumerator(
                 IEnumerator<PublishedSearchResult> wrapped,
                 IVariationContextAccessor variationContextAccessor,
@@ -524,15 +524,15 @@ public class PublishedContentQuery : IPublishedContentQuery
                 _originalContext = originalContext;
             }
 
-    /// <summary>Gets the current <see cref="PublishedSearchResult"/> in the enumerator.</summary>
+            /// <summary>Gets the current <see cref="PublishedSearchResult"/> in the enumerator.</summary>
             public PublishedSearchResult Current => _wrapped.Current;
 
             object IEnumerator.Current => Current;
 
-    /// <summary>
-    /// Releases all resources used by the enumerator and restores the original variation context.
-    /// This ensures that any changes to the variation context during enumeration are reverted.
-    /// </summary>
+            /// <summary>
+            /// Releases all resources used by the enumerator and restores the original variation context.
+            /// This ensures that any changes to the variation context during enumeration are reverted.
+            /// </summary>
             public void Dispose()
             {
                 _wrapped.Dispose();
@@ -541,13 +541,13 @@ public class PublishedContentQuery : IPublishedContentQuery
                 _variationContextAccessor.VariationContext = _originalContext;
             }
 
-    /// <summary>Advances the enumerator to the next element of the collection.</summary>
-    /// <returns><c>true</c> if the enumerator was successfully advanced to the next element; <c>false</c> if the enumerator has passed the end of the collection.</returns>
+            /// <summary>Advances the enumerator to the next element of the collection.</summary>
+            /// <returns><c>true</c> if the enumerator was successfully advanced to the next element; <c>false</c> if the enumerator has passed the end of the collection.</returns>
             public bool MoveNext() => _wrapped.MoveNext();
 
-    /// <summary>
-    /// Resets the enumerator to its initial position, which is before the first element in the collection.
-    /// </summary>
+            /// <summary>
+            /// Resets the enumerator to its initial position, which is before the first element in the collection.
+            /// </summary>
             public void Reset() => _wrapped.Reset();
         }
     }

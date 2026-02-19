@@ -209,17 +209,17 @@ public class CreateUserStep : StepBase, IInstallStep
     /// </summary>
     private class EmailModel
     {
-    /// <summary>
-    /// Gets or sets the name of the user to be included in the email model.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the name of the user to be included in the email model.
+        /// </summary>
         public required string Name { get; init; }
 
-    /// <summary>Gets or sets the email address of the user.</summary>
+        /// <summary>Gets or sets the email address of the user.</summary>
         public required string Email { get; init; }
 
-    /// <summary>
-    /// Gets or sets the collection of user group names associated with the user being created.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the collection of user group names associated with the user being created.
+        /// </summary>
         public required List<string> UserGroup { get; init; }
     }
 

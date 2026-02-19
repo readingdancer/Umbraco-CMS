@@ -3,9 +3,9 @@ using Umbraco.Cms.Infrastructure.Persistence.Dtos;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_15_0_0;
 
-    /// <summary>
-    /// Represents a migration that adds a 'DocumentUrl' column to the relevant database table during the upgrade to version 15.0.0.
-    /// </summary>
+/// <summary>
+/// Represents a migration that adds a 'DocumentUrl' column to the relevant database table during the upgrade to version 15.0.0.
+/// </summary>
 [Obsolete("Remove in Umbraco 18.")]
 public class AddDocumentUrl : MigrationBase
 {

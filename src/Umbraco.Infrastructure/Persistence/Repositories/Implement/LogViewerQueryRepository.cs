@@ -134,22 +134,22 @@ internal sealed class LogViewerQueryRepository : EntityRepositoryBase<int, ILogV
 
     internal sealed class LogViewerQueryModelFactory
     {
-    /// <summary>
-    /// Creates an <see cref="Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement.LogViewerQueryRepository.ILogViewerQuery" /> instance from the specified <see cref="Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement.LogViewerQueryRepository.LogViewerQueryDto" />.
-    /// </summary>
-    /// <param name="dto">The DTO containing the log viewer query information.</param>
-    /// <returns>A new <see cref="Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement.LogViewerQueryRepository.ILogViewerQuery" /> instance.</returns>
+        /// <summary>
+        /// Creates an <see cref="Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement.LogViewerQueryRepository.ILogViewerQuery" /> instance from the specified <see cref="Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement.LogViewerQueryRepository.LogViewerQueryDto" />.
+        /// </summary>
+        /// <param name="dto">The DTO containing the log viewer query information.</param>
+        /// <returns>A new <see cref="Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement.LogViewerQueryRepository.ILogViewerQuery" /> instance.</returns>
         public ILogViewerQuery BuildEntity(LogViewerQueryDto dto)
         {
             var logViewerQuery = new LogViewerQuery(dto.Name, dto.Query) { Id = dto.Id };
             return logViewerQuery;
         }
 
-    /// <summary>
-    /// Builds a <see cref="LogViewerQueryDto"/> from the given <see cref="ILogViewerQuery"/> entity.
-    /// </summary>
-    /// <param name="entity">The log viewer query entity to convert.</param>
-    /// <returns>A data transfer object representing the log viewer query.</returns>
+        /// <summary>
+        /// Builds a <see cref="LogViewerQueryDto"/> from the given <see cref="ILogViewerQuery"/> entity.
+        /// </summary>
+        /// <param name="entity">The log viewer query entity to convert.</param>
+        /// <returns>A data transfer object representing the log viewer query.</returns>
         public LogViewerQueryDto BuildDto(ILogViewerQuery entity)
         {
             var dto = new LogViewerQueryDto { Name = entity.Name, Query = entity.Query, Id = entity.Id };

@@ -90,11 +90,11 @@ internal sealed class FileSystemMainDomLock : IMainDomLock
         return Task.FromResult(false);
     }
 
-    // Create a long running task to poll to check if anyone has created a lock release file.
     /// <summary>
     /// Starts (if not already started) a long-running asynchronous task that listens for the creation of a lock release signal file, indicating that the main domain lock should be released.
     /// If the listening task is already running, returns the existing task instance.
     /// </summary>
+    /// <remarks>Create a long running task to poll to check if anyone has created a lock release file.</remarks>
     /// <returns>
     /// A <see cref="Task"/> representing the asynchronous listening operation for the lock release signal file.
     /// </returns>

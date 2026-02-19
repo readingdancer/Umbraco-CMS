@@ -3,9 +3,9 @@ using Umbraco.Cms.Infrastructure.Persistence.DatabaseAnnotations;
 
 namespace Umbraco.Cms.Infrastructure.Persistence.DatabaseModelDefinitions;
 
-    /// <summary>
-    /// Represents the definition of a database column, including its data type, properties, and constraints.
-    /// </summary>
+/// <summary>
+/// Represents the definition of a database column, including its data type, properties, and constraints.
+/// </summary>
 public class ColumnDefinition
 {
     /// <summary>
@@ -13,18 +13,20 @@ public class ColumnDefinition
     /// </summary>
     public virtual string Name { get; set; } = null!;
 
-    // This type is typically used as part of a migration
     /// <summary>
     /// Gets or sets the data type of the column in the database.
     /// </summary>
+    /// <remarks>This type is typically used as part of a migration</remarks>
     public virtual DbType? Type { get; set; }
 
-    // When DbType isn't set explicitly the Type will be used to find the right DbType in the SqlSyntaxProvider.
-    // This type is typically used as part of an initial table creation
     /// <summary>
     /// Gets or sets the CLR <see cref="Type"/> that represents the property associated with this column.
     /// This type is used to infer the database type when <c>DbType</c> is not explicitly set, typically during initial table creation.
     /// </summary>
+    /// <remarks>
+    /// When DbType isn't set explicitly the Type will be used to find the right DbType in the SqlSyntaxProvider.
+    /// This type is typically used as part of an initial table creation
+    /// </remarks>
     public Type PropertyType { get; set; } = null!;
 
     /// <summary>
@@ -75,7 +77,8 @@ public class ColumnDefinition
     /// <summary>
     /// Gets or sets a value indicating whether the column is indexed.
     /// </summary>
-    public virtual bool IsIndexed { get; set; } // Clustered?
+    /// <remarks>Clustered?</remarks>
+    public virtual bool IsIndexed { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this column is part of the primary key.
@@ -88,7 +91,8 @@ public class ColumnDefinition
     /// <summary>
     /// Gets or sets the names of the columns that compose a composite primary key.
     /// </summary>
-    public virtual string? PrimaryKeyColumns { get; set; } // When the primary key spans multiple columns
+    /// <remarks>When the primary key spans multiple columns</remarks>
+    public virtual string? PrimaryKeyColumns { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the column allows null values.

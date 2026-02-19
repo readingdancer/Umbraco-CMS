@@ -70,11 +70,11 @@ namespace Umbraco.Cms.Infrastructure.DependencyInjection;
 
 public static partial class UmbracoBuilderExtensions
 {
-/// <summary>
-/// Registers all core Umbraco services required for the application to run. These services may be replaced later in the pipeline.
-/// </summary>
-/// <param name="builder">The <see cref="IUmbracoBuilder"/> to which the core services will be added.</param>
-/// <returns>The same <see cref="IUmbracoBuilder"/> instance, enabling method chaining.</returns>
+    /// <summary>
+    /// Registers all core Umbraco services required for the application to run. These services may be replaced later in the pipeline.
+    /// </summary>
+    /// <param name="builder">The <see cref="IUmbracoBuilder"/> to which the core services will be added.</param>
+    /// <returns>The same <see cref="IUmbracoBuilder"/> instance, enabling method chaining.</returns>
     public static IUmbracoBuilder AddCoreInitialServices(this IUmbracoBuilder builder)
     {
         builder

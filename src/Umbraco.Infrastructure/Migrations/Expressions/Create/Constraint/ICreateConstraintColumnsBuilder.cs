@@ -7,11 +7,11 @@ namespace Umbraco.Cms.Infrastructure.Migrations.Expressions.Create.Constraint;
 /// </summary>
 public interface ICreateConstraintColumnsBuilder : IFluentBuilder
 {
-/// <summary>
-///     Specifies the name of the column to which the constraint will be applied in the migration.
-/// </summary>
-/// <param name="columnName">The name of the column to specify for the constraint.</param>
-/// <returns>An <see cref="IExecutableBuilder"/> to execute the next step in the migration.</returns>
+    /// <summary>
+    ///     Specifies the name of the column to which the constraint will be applied in the migration.
+    /// </summary>
+    /// <param name="columnName">The name of the column to specify for the constraint.</param>
+    /// <returns>An <see cref="IExecutableBuilder"/> to execute the next step in the migration.</returns>
     IExecutableBuilder Column(string columnName);
 
     /// <summary>

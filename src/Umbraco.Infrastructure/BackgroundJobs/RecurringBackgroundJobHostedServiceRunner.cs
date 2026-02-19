@@ -85,25 +85,25 @@ public class RecurringBackgroundJobHostedServiceRunner : IHostedService
 
     private sealed class NamedServiceJob
     {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="NamedServiceJob"/> class using the specified job name and hosted service instance.
-    /// </summary>
-    /// <param name="name">The unique name identifying the job.</param>
-    /// <param name="hostedService">The <see cref="IHostedService"/> instance to be executed as the background job.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NamedServiceJob"/> class using the specified job name and hosted service instance.
+        /// </summary>
+        /// <param name="name">The unique name identifying the job.</param>
+        /// <param name="hostedService">The <see cref="IHostedService"/> instance to be executed as the background job.</param>
         public NamedServiceJob(string name, IHostedService hostedService)
         {
             Name = name;
             HostedService = hostedService;
         }
 
-    /// <summary>
-    /// Gets the unique name that identifies this background job.
-    /// </summary>
+        /// <summary>
+        /// Gets the unique name that identifies this background job.
+        /// </summary>
         public string Name { get; }
 
-    /// <summary>
-    /// Gets the hosted service instance associated with the named service job.
-    /// </summary>
+        /// <summary>
+        /// Gets the hosted service instance associated with the named service job.
+        /// </summary>
         public IHostedService HostedService { get; }
     }
 }

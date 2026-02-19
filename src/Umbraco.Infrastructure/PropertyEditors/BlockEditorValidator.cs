@@ -8,11 +8,11 @@ using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    /// Provides validation logic for block editor property values and their layouts in Umbraco.
-    /// </summary>
-    /// <typeparam name="TValue">The type representing the value of the block editor.</typeparam>
-    /// <typeparam name="TLayout">The type representing the layout structure of the block editor.</typeparam>
+/// <summary>
+/// Provides validation logic for block editor property values and their layouts in Umbraco.
+/// </summary>
+/// <typeparam name="TValue">The type representing the value of the block editor.</typeparam>
+/// <typeparam name="TLayout">The type representing the layout structure of the block editor.</typeparam>
 public class BlockEditorValidator<TValue, TLayout> : BlockEditorValidatorBase<TValue, TLayout>
     where TValue : BlockValue<TLayout>, new()
     where TLayout : class, IBlockLayoutItem, new()

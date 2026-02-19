@@ -36,9 +36,9 @@ public abstract class IndexPopulator<TIndex> : IndexPopulator
     public virtual bool IsRegistered(TIndex index) => true;
 }
 
-    /// <summary>
-    /// Provides functionality to populate and manage Examine indexes with data in Umbraco.
-    /// </summary>
+/// <summary>
+/// Provides functionality to populate and manage Examine indexes with data in Umbraco.
+/// </summary>
 public abstract class IndexPopulator : IIndexPopulator
 {
     private readonly ConcurrentHashSet<string> _registeredIndexes = new();

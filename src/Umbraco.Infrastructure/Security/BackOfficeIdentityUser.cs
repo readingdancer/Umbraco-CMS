@@ -130,17 +130,17 @@ public class BackOfficeIdentityUser : UmbracoIdentityUser
         set => BeingDirty.SetPropertyValueAndDetectChanges(value, ref _kind, nameof(Kind));
     }
 
-/// <summary>
-///     Creates a new <see cref="BackOfficeIdentityUser"/> instance without an identity, for use before the user is persisted.
-/// </summary>
-/// <param name="globalSettings">The global settings used to initialize the user instance.</param>
-/// <param name="username">The username for the new user. Cannot be null or whitespace.</param>
-/// <param name="email">The email address for the user. This can be null, but must be set before persisting the user.</param>
-/// <param name="culture">The culture assigned to the user. Cannot be null or whitespace.</param>
-/// <param name="name">The display name of the user. Optional.</param>
-/// <param name="id">The unique identifier for the user. Optional; if not provided, a new one will be generated.</param>
-/// <param name="kind">The kind of user. Optional; defaults to <see cref="UserKind.Default"/>.</param>
-/// <returns>A new instance of <see cref="BackOfficeIdentityUser"/> without an identity.</returns>
+    /// <summary>
+    ///     Creates a new <see cref="BackOfficeIdentityUser"/> instance without an identity, for use before the user is persisted.
+    /// </summary>
+    /// <param name="globalSettings">The global settings used to initialize the user instance.</param>
+    /// <param name="username">The username for the new user. Cannot be null or whitespace.</param>
+    /// <param name="email">The email address for the user. This can be null, but must be set before persisting the user.</param>
+    /// <param name="culture">The culture assigned to the user. Cannot be null or whitespace.</param>
+    /// <param name="name">The display name of the user. Optional.</param>
+    /// <param name="id">The unique identifier for the user. Optional; if not provided, a new one will be generated.</param>
+    /// <param name="kind">The kind of user. Optional; defaults to <see cref="UserKind.Default"/>.</param>
+    /// <returns>A new instance of <see cref="BackOfficeIdentityUser"/> without an identity.</returns>
     public static BackOfficeIdentityUser CreateNew(GlobalSettings globalSettings, string? username, string email, string culture, string? name = null, Guid? id = null, UserKind kind = UserKind.Default)
     {
         if (string.IsNullOrWhiteSpace(username))
@@ -172,10 +172,10 @@ public class BackOfficeIdentityUser : UmbracoIdentityUser
         return user;
     }
 
-/// <summary>
-///     Sets the user groups for the backoffice identity user and updates related roles.
-/// </summary>
-/// <param name="value">The collection of user groups to assign to the user.</param>
+    /// <summary>
+    ///     Sets the user groups for the backoffice identity user and updates related roles.
+    /// </summary>
+    /// <param name="value">The collection of user groups to assign to the user.</param>
     public void SetGroups(IReadOnlyCollection<IReadOnlyUserGroup> value)
     {
         // so they recalculate

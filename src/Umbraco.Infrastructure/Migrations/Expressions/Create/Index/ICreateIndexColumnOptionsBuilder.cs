@@ -1,8 +1,8 @@
 namespace Umbraco.Cms.Infrastructure.Migrations.Expressions.Create.Index;
 
-    /// <summary>
-    /// Provides options for configuring a column when creating an index in a migration expression.
-    /// </summary>
+/// <summary>
+/// Provides options for configuring a column when creating an index in a migration expression.
+/// </summary>
 public interface ICreateIndexColumnOptionsBuilder : IFluentBuilder
 {
     /// <summary>Marks the index column to be sorted in ascending order.</summary>

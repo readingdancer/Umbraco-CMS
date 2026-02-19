@@ -4,11 +4,11 @@ using Umbraco.Cms.Core.Serialization;
 
 namespace Umbraco.Cms.Core.PropertyEditors.ValueConverters;
 
-// NOTE: this class is made public on purpose because all value converters should be public
 /// <summary>
 /// Converts the value stored by an entity data picker property editor into a strongly-typed object
 /// that can be used within Umbraco, such as an entity identifier or reference.
 /// </summary>
+/// <remarks>NOTE: this class is made public on purpose because all value converters should be public</remarks>
 [DefaultPropertyValueConverter(typeof(JsonValueConverter))]
 public sealed class EntityDataPickerValueConverter : PropertyValueConverterBase
 {
@@ -72,10 +72,10 @@ public sealed class EntityDataPickerValueConverter : PropertyValueConverterBase
 
     private class EntityDataPickerDto
     {
-    /// <summary>
-    /// Gets or sets the collection of selected entity identifiers.
-    /// Each identifier is represented as a string.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the collection of selected entity identifiers.
+        /// Each identifier is represented as a string.
+        /// </summary>
         public required string[] Ids { get; init; }
     }
 }

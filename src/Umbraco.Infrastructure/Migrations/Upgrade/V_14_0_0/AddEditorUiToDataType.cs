@@ -126,7 +126,7 @@ public class AddEditorUiToDataType : MigrationBase
 
     private class DataTypeEditorAliasMigrationData
     {
-    /// <summary>Gets or sets the identifier of the data type.</summary>
+        /// <summary>Gets or sets the identifier of the data type.</summary>
         [JsonPropertyName("DataTypeId")]
         public int DataTypeId { get; set; }
 

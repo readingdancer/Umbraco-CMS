@@ -21,9 +21,9 @@ public class ImageCropperConfiguration
     /// </summary>
     public class Crop
     {
-    /// <summary>
-    /// Gets or sets the unique alias that identifies this crop configuration.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the unique alias that identifies this crop configuration.
+        /// </summary>
         public string Alias { get; set; } = null!;
 
         /// <summary>
@@ -31,9 +31,9 @@ public class ImageCropperConfiguration
         /// </summary>
         public int Width { get; set; }
 
-    /// <summary>
-    /// Gets or sets the height of the crop, in pixels.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the height of the crop, in pixels.
+        /// </summary>
         public int Height { get; set; }
     }
 }

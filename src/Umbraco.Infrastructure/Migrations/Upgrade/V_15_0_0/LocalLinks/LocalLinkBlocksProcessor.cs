@@ -44,9 +44,9 @@ public abstract class LocalLinkBlocksProcessor
     }
 }
 
-    /// <summary>
-    /// Handles the processing and migration of local link block lists as part of the upgrade process to Umbraco version 15.0.0.
-    /// </summary>
+/// <summary>
+/// Handles the processing and migration of local link block lists as part of the upgrade process to Umbraco version 15.0.0.
+/// </summary>
 [Obsolete("Scheduled for removal in Umbraco 18.")]
 public class LocalLinkBlockListProcessor : LocalLinkBlocksProcessor, ITypedLocalLinkProcessor
 {
@@ -69,9 +69,9 @@ public class LocalLinkBlockListProcessor : LocalLinkBlocksProcessor, ITypedLocal
     public Func<object?, Func<object?, bool>, Func<string, string>, bool> Process => ProcessBlocks;
 }
 
-    /// <summary>
-    /// Handles the processing of local link block grids as part of the upgrade process to Umbraco version 15.0.0.
-    /// </summary>
+/// <summary>
+/// Handles the processing of local link block grids as part of the upgrade process to Umbraco version 15.0.0.
+/// </summary>
 [Obsolete("Scheduled for removal in Umbraco 18.")]
 public class LocalLinkBlockGridProcessor : LocalLinkBlocksProcessor, ITypedLocalLinkProcessor
 {

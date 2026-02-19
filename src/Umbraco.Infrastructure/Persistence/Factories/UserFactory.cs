@@ -75,12 +75,12 @@ internal static class UserFactory
         }
     }
 
-/// <summary>
-/// Creates a <see cref="UserDto"/> instance from the specified <see cref="IUser"/> entity.
-/// Copies relevant properties from the user entity to the data transfer object, including start nodes and metadata.
-/// </summary>
-/// <param name="entity">The <see cref="IUser"/> entity to convert.</param>
-/// <returns>A <see cref="UserDto"/> populated with data from the provided user entity.</returns>
+    /// <summary>
+    /// Creates a <see cref="UserDto"/> instance from the specified <see cref="IUser"/> entity.
+    /// Copies relevant properties from the user entity to the data transfer object, including start nodes and metadata.
+    /// </summary>
+    /// <param name="entity">The <see cref="IUser"/> entity to convert.</param>
+    /// <returns>A <see cref="UserDto"/> populated with data from the provided user entity.</returns>
     public static UserDto BuildDto(IUser entity)
     {
         var dto = new UserDto

@@ -2,6 +2,7 @@ using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Sync;
 
 namespace Umbraco.Cms.Infrastructure.BackgroundJobs;
+
 /// <summary>
 ///     A recurring background job
 /// </summary>

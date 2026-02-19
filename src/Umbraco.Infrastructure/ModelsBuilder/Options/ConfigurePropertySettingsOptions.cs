@@ -13,7 +13,6 @@ public class ConfigurePropertySettingsOptions :
     IConfigureOptions<MemberPropertySettings>,
     IConfigureOptions<MediaPropertySettings>
 {
-
     /// <summary>
     /// Configures the specified <see cref="ContentPropertySettings"/> instance by adding reserved field names.
     /// The reserved names are derived from the property and method names of <see cref="IPublishedContent"/>,

@@ -92,17 +92,17 @@ public interface IDatabaseProviderMetadata
     public bool ForceCreateDatabase { get; }
 
 
-/// <summary>
-/// Determines whether the specified connection string could have been built using <see cref="GenerateConnectionString"/>.
-/// </summary>
-/// <param name="connectionString">The connection string to evaluate.</param>
-/// <returns><c>true</c> if the connection string could have been built using <see cref="GenerateConnectionString"/>; otherwise, <c>false</c>.</returns>
+    /// <summary>
+    /// Determines whether the specified connection string could have been built using <see cref="GenerateConnectionString"/>.
+    /// </summary>
+    /// <param name="connectionString">The connection string to evaluate.</param>
+    /// <returns><c>true</c> if the connection string could have been built using <see cref="GenerateConnectionString"/>; otherwise, <c>false</c>.</returns>
     public bool CanRecognizeConnectionString(string? connectionString) => false;
 
-/// <summary>
-///     Generates a connection string for the specified database model using this provider's format.
-/// </summary>
-/// <param name="databaseModel">The database model for which to generate the connection string.</param>
-/// <returns>The generated connection string, or <c>null</c> if it cannot be generated.</returns>
+    /// <summary>
+    ///     Generates a connection string for the specified database model using this provider's format.
+    /// </summary>
+    /// <param name="databaseModel">The database model for which to generate the connection string.</param>
+    /// <returns>The generated connection string, or <c>null</c> if it cannot be generated.</returns>
     string? GenerateConnectionString(DatabaseModel databaseModel);
 }

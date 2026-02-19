@@ -61,14 +61,14 @@ public class PackageMigrationRunner
         _packageMigrationPlans = packageMigrationPlans.ToDictionary(x => x.Name);
     }
 
-/// <summary>
-/// Synchronously runs any pending migrations for the specified package.
-/// </summary>
-/// <param name="packageName">The name of the package for which to run pending migrations.</param>
-/// <returns>An enumerable containing details of the executed migration plans, if any were run; otherwise, an empty enumerable.</returns>
-/// <remarks>
-/// This method is obsolete. Use <see cref="RunPackageMigrationsIfPendingAsync(string)"/> instead.
-/// </remarks>
+    /// <summary>
+    /// Synchronously runs any pending migrations for the specified package.
+    /// </summary>
+    /// <param name="packageName">The name of the package for which to run pending migrations.</param>
+    /// <returns>An enumerable containing details of the executed migration plans, if any were run; otherwise, an empty enumerable.</returns>
+    /// <remarks>
+    /// This method is obsolete. Use <see cref="RunPackageMigrationsIfPendingAsync(string)"/> instead.
+    /// </remarks>
     [Obsolete("Please use RunPackageMigrationsIfPendingAsync instead. Scheduled for removal in Umbraco 18.")]
     public IEnumerable<ExecutedMigrationPlan> RunPackageMigrationsIfPending(string packageName)
         => RunPackageMigrationsIfPendingAsync(packageName).GetAwaiter().GetResult();
@@ -91,13 +91,13 @@ public class PackageMigrationRunner
         return await RunPackagePlansAsync(packagePlans).ConfigureAwait(false);
     }
 
-/// <summary>
-///     Runs any pending migrations for the specified package and checks if all executed package migrations succeeded.
-/// </summary>
-/// <param name="packageName">The name of the package to run migrations for.</param>
-/// <returns>
-///     A <see cref="Task"/> representing the asynchronous operation, containing an <see cref="Attempt{TResult, TStatus}"/> where <c>TResult</c> is a <see cref="bool"/> indicating success or failure, and <c>TStatus</c> is a <see cref="PackageMigrationOperationStatus"/> describing the result of the migration operation.
-/// </returns>
+    /// <summary>
+    ///     Runs any pending migrations for the specified package and checks if all executed package migrations succeeded.
+    /// </summary>
+    /// <param name="packageName">The name of the package to run migrations for.</param>
+    /// <returns>
+    ///     A <see cref="Task"/> representing the asynchronous operation, containing an <see cref="Attempt{TResult, TStatus}"/> where <c>TResult</c> is a <see cref="bool"/> indicating success or failure, and <c>TStatus</c> is a <see cref="PackageMigrationOperationStatus"/> describing the result of the migration operation.
+    /// </returns>
     public async Task<Attempt<bool, PackageMigrationOperationStatus>> RunPendingPackageMigrations(string packageName)
     {
         // Check if there are any migrations (note that the key for _packageMigrationPlans is the migration plan name, not the package name).

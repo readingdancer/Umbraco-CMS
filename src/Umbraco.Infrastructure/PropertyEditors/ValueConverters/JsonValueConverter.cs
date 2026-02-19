@@ -45,11 +45,11 @@ public class JsonValueConverter : PropertyValueConverterBase, IDeliveryApiProper
         && editor.GetValueEditor().ValueType.InvariantEquals(ValueTypes.Json)
         && _excludedPropertyEditors.Contains(propertyType.EditorAlias) == false;
 
-    // We return a JsonDocument here because it's readonly and faster than JsonNode.
     /// <summary>
     /// Gets the type of the property value for the given published property type.
     /// This implementation always returns <see cref="JsonDocument"/> as the property value type.
     /// </summary>
+    /// <remarks>We return a JsonDocument here because it's readonly and faster than JsonNode.</remarks>
     /// <param name="propertyType">The published property type.</param>
     /// <returns>The <see cref="Type"/> representing <see cref="JsonDocument"/>.</returns>
     public override Type GetPropertyValueType(IPublishedPropertyType propertyType)

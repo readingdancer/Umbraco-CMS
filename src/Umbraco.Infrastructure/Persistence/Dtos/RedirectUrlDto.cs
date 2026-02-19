@@ -23,15 +23,16 @@ internal sealed class RedirectUrlDto
     /// </summary>
     public RedirectUrlDto() => CreateDateUtc = DateTime.UtcNow;
 
-    // notes
-    //
-    // we want a unique, non-clustered  index on (url ASC, contentId ASC, culture ASC, createDate DESC) but the
-    // problem is that the index key must be 900 bytes max. should we run without an index? done
-    // some perfs comparisons, and running with an index on a hash is only slightly slower on
-    // inserts, and much faster on reads, so... we have an index on a hash.
     /// <summary>
     /// Gets or sets the unique identifier for the redirect URL.
     /// </summary>
+    /// <remarks>
+    /// notes
+    /// we want a unique, non-clustered  index on (url ASC, contentId ASC, culture ASC, createDate DESC) but the
+    /// problem is that the index key must be 900 bytes max. should we run without an index? done
+    /// some perfs comparisons, and running with an index on a hash is only slightly slower on
+    /// inserts, and much faster on reads, so... we have an index on a hash.
+    /// </remarks>
     [Column(PrimaryKeyColumnName)]
     [PrimaryKeyColumn(Name = "PK_umbracoRedirectUrl", AutoIncrement = false)]
     public Guid Id { get; set; }

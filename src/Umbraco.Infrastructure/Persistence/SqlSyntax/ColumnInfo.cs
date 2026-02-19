@@ -72,6 +72,7 @@ public class ColumnInfo
     /// Gets or sets the ordinal position of the column.
     /// </summary>
     public int Ordinal { get; set; }
+
     /// <summary>
     /// Gets or sets the default value for the column.
     /// </summary>

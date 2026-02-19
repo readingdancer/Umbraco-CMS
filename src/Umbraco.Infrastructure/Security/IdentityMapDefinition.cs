@@ -25,15 +25,15 @@ public class IdentityMapDefinition : IMapDefinition
     private readonly ILocalizedTextService _textService;
     private readonly ITwoFactorLoginService _twoFactorLoginService;
 
-/// <summary>
-/// Initializes a new instance of the <see cref="Umbraco.Cms.Core.Security.IdentityMapDefinition"/> class.
-/// </summary>
-/// <param name="textService">An <see cref="ILocalizedTextService"/> used for retrieving localized text.</param>
-/// <param name="entityService">An <see cref="IEntityService"/> for accessing Umbraco entities.</param>
-/// <param name="globalSettings">The <see cref="IOptions{GlobalSettings}"/> providing global configuration options.</param>
-/// <param name="securitySettings">The <see cref="IOptions{SecuritySettings}"/> providing security configuration options.</param>
-/// <param name="appCaches">The <see cref="AppCaches"/> instance for application-level caching.</param>
-/// <param name="twoFactorLoginService">An <see cref="ITwoFactorLoginService"/> for managing two-factor authentication.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Umbraco.Cms.Core.Security.IdentityMapDefinition"/> class.
+    /// </summary>
+    /// <param name="textService">An <see cref="ILocalizedTextService"/> used for retrieving localized text.</param>
+    /// <param name="entityService">An <see cref="IEntityService"/> for accessing Umbraco entities.</param>
+    /// <param name="globalSettings">The <see cref="IOptions{GlobalSettings}"/> providing global configuration options.</param>
+    /// <param name="securitySettings">The <see cref="IOptions{SecuritySettings}"/> providing security configuration options.</param>
+    /// <param name="appCaches">The <see cref="AppCaches"/> instance for application-level caching.</param>
+    /// <param name="twoFactorLoginService">An <see cref="ITwoFactorLoginService"/> for managing two-factor authentication.</param>
     public IdentityMapDefinition(
         ILocalizedTextService textService,
         IEntityService entityService,

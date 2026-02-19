@@ -441,17 +441,17 @@ public class MemberRepository : ContentRepositoryBase<int, IMember, MemberReposi
         Ordering? ordering)
         => GetPage(query, pageIndex, pageSize, out totalRecords, propertyAliases: null, filter: filter, ordering: ordering);
 
-/// <summary>
-///     Gets a page of member results based on the specified query and paging parameters.
-/// </summary>
-/// <param name="query">An optional query to filter the members.</param>
-/// <param name="pageIndex">The zero-based index of the page to retrieve.</param>
-/// <param name="pageSize">The number of members to include in a page.</param>
-/// <param name="totalRecords">When this method returns, contains the total number of records matching the query.</param>
-/// <param name="propertyAliases">An optional array of property aliases to include in the result. May be <c>null</c>.</param>
-/// <param name="filter">An additional optional filter query to further restrict the results.</param>
-/// <param name="ordering">An optional ordering criteria for the results.</param>
-/// <returns>An enumerable collection of <see cref="IMember"/> objects for the specified page.</returns>
+    /// <summary>
+    ///     Gets a page of member results based on the specified query and paging parameters.
+    /// </summary>
+    /// <param name="query">An optional query to filter the members.</param>
+    /// <param name="pageIndex">The zero-based index of the page to retrieve.</param>
+    /// <param name="pageSize">The number of members to include in a page.</param>
+    /// <param name="totalRecords">When this method returns, contains the total number of records matching the query.</param>
+    /// <param name="propertyAliases">An optional array of property aliases to include in the result. May be <c>null</c>.</param>
+    /// <param name="filter">An additional optional filter query to further restrict the results.</param>
+    /// <param name="ordering">An optional ordering criteria for the results.</param>
+    /// <returns>An enumerable collection of <see cref="IMember"/> objects for the specified page.</returns>
     public override IEnumerable<IMember> GetPage(
         IQuery<IMember>? query,
         long pageIndex,

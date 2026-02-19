@@ -7,24 +7,24 @@ using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-/// <summary>
-/// Represents a property editor for editing an unspecified date/time value.
-/// </summary>
-/// <remarks>
-/// This is one of four property editors derived from <see cref="DateTimePropertyEditorBase"/> and storing their value as JSON with timezone information.
-/// </remarks>
+    /// <summary>
+    /// Represents a property editor for editing an unspecified date/time value.
+    /// </summary>
+    /// <remarks>
+    /// This is one of four property editors derived from <see cref="DateTimePropertyEditorBase"/> and storing their value as JSON with timezone information.
+    /// </remarks>
 [DataEditor(
     Constants.PropertyEditors.Aliases.DateTimeUnspecified,
     ValueType = ValueTypes.Json,
     ValueEditorIsReusable = true)]
 public class DateTimeUnspecifiedPropertyEditor : DateTimePropertyEditorBase
 {
-/// <summary>
-/// Initializes a new instance of the <see cref="DateTimeUnspecifiedPropertyEditor"/> class.
-/// </summary>
-/// <param name="dataValueEditorFactory">Factory for creating data value editors for property values.</param>
-/// <param name="ioHelper">Helper for IO operations, such as path and file handling.</param>
-/// <param name="propertyIndexValueFactory">Factory for creating index values for date/time properties with unspecified kind.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DateTimeUnspecifiedPropertyEditor"/> class.
+    /// </summary>
+    /// <param name="dataValueEditorFactory">Factory for creating data value editors for property values.</param>
+    /// <param name="ioHelper">Helper for IO operations, such as path and file handling.</param>
+    /// <param name="propertyIndexValueFactory">Factory for creating index values for date/time properties with unspecified kind.</param>
     public DateTimeUnspecifiedPropertyEditor(
         IDataValueEditorFactory dataValueEditorFactory,
         IIOHelper ioHelper,

@@ -21,13 +21,13 @@ public interface IBackOfficeUserClientCredentialsManager
     /// <returns>A task representing the asynchronous operation, containing an enumerable of client ID strings.</returns>
     Task<IEnumerable<string>> GetClientIdsAsync(Guid userKey);
 
-/// <summary>
-/// Asynchronously saves client credentials for the specified back office user.
-/// </summary>
-/// <param name="userKey">The unique identifier of the back office user.</param>
-/// <param name="clientId">The client identifier to save.</param>
-/// <param name="clientSecret">The client secret to save.</param>
-/// <returns>A <see cref="Task"/> representing the asynchronous operation, containing an <see cref="Attempt{BackOfficeUserClientCredentialsOperationStatus}"/> indicating the result of the operation.</returns>
+    /// <summary>
+    /// Asynchronously saves client credentials for the specified back office user.
+    /// </summary>
+    /// <param name="userKey">The unique identifier of the back office user.</param>
+    /// <param name="clientId">The client identifier to save.</param>
+    /// <param name="clientSecret">The client secret to save.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing an <see cref="Attempt{BackOfficeUserClientCredentialsOperationStatus}"/> indicating the result of the operation.</returns>
     Task<Attempt<BackOfficeUserClientCredentialsOperationStatus>> SaveAsync(Guid userKey, string clientId, string clientSecret);
 
     /// <summary>

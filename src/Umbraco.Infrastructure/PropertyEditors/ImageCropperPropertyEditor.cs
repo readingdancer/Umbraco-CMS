@@ -17,9 +17,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-/// <summary>
-///     Represents an image cropper property editor.
-/// </summary>
+    /// <summary>
+    ///     Represents an image cropper property editor.
+    /// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.ImageCropper,
     ValueType = ValueTypes.Json,
@@ -43,17 +43,17 @@ public class ImageCropperPropertyEditor : DataEditor,
 
     private ContentSettings _contentSettings;
 
-/// <summary>
-///     Initializes a new instance of the <see cref="ImageCropperPropertyEditor" /> class.
-/// </summary>
-/// <param name="dataValueEditorFactory">Factory for creating data value editors for property values.</param>
-/// <param name="loggerFactory">Factory used to create logger instances for logging operations.</param>
-/// <param name="mediaFileManager">Manages media file storage and retrieval.</param>
-/// <param name="contentSettings">Provides access to content-related configuration settings.</param>
-/// <param name="ioHelper">Helper for IO operations such as path resolution and file handling.</param>
-/// <param name="uploadAutoFillProperties">Configuration for auto-filling properties on file upload.</param>
-/// <param name="contentService">Service for managing and accessing content items.</param>
-/// <param name="jsonSerializer">Serializer for handling JSON serialization and deserialization.</param>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="ImageCropperPropertyEditor" /> class.
+    /// </summary>
+    /// <param name="dataValueEditorFactory">Factory for creating data value editors for property values.</param>
+    /// <param name="loggerFactory">Factory used to create logger instances for logging operations.</param>
+    /// <param name="mediaFileManager">Manages media file storage and retrieval.</param>
+    /// <param name="contentSettings">Provides access to content-related configuration settings.</param>
+    /// <param name="ioHelper">Helper for IO operations such as path resolution and file handling.</param>
+    /// <param name="uploadAutoFillProperties">Configuration for auto-filling properties on file upload.</param>
+    /// <param name="contentService">Service for managing and accessing content items.</param>
+    /// <param name="jsonSerializer">Serializer for handling JSON serialization and deserialization.</param>
     public ImageCropperPropertyEditor(
         IDataValueEditorFactory dataValueEditorFactory,
         ILoggerFactory loggerFactory,
@@ -105,10 +105,10 @@ public class ImageCropperPropertyEditor : DataEditor,
         return false;
     }
 
-/// <summary>
-///     Handles the copying of uploaded image files for image cropper properties after content has been copied.
-/// </summary>
-/// <param name="notification">The notification containing the original content and its copy.</param>
+    /// <summary>
+    ///     Handles the copying of uploaded image files for image cropper properties after content has been copied.
+    /// </summary>
+    /// <param name="notification">The notification containing the original content and its copy.</param>
     public void Handle(ContentCopiedNotification notification)
     {
         // get the image cropper field properties
@@ -390,9 +390,9 @@ public class ImageCropperPropertyEditor : DataEditor,
     // for efficient value deserialization, we don't want to deserialize more than we need to (we don't need crops, focal point etc.)
     private sealed class LightWeightImageCropperValue
     {
-    /// <summary>
-    /// Gets or sets the source URL of the image used by the cropper. May be <c>null</c> or empty if no image is set.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the source URL of the image used by the cropper. May be <c>null</c> or empty if no image is set.
+        /// </summary>
         public string? Src { get; set; } = string.Empty;
     }
 }

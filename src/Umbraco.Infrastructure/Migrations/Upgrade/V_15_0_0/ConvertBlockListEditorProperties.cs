@@ -9,9 +9,9 @@ using Umbraco.Cms.Core.Web;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_15_0_0;
 
-    /// <summary>
-    /// Converts Block List editor properties as part of the upgrade process to version 15.0.0.
-    /// </summary>
+/// <summary>
+/// Converts Block List editor properties as part of the upgrade process to version 15.0.0.
+/// </summary>
 [Obsolete("Scheduled for removal in Umbraco 18.")]
 public class ConvertBlockListEditorProperties : ConvertBlockEditorPropertiesBase
 {

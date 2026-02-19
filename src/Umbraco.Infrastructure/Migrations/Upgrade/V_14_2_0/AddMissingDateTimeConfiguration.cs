@@ -7,9 +7,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_14_2_0;
 
-    /// <summary>
-    /// Migration step that ensures any missing DateTime configuration settings are added during the upgrade to version 14.2.0.
-    /// </summary>
+/// <summary>
+/// Migration step that ensures any missing DateTime configuration settings are added during the upgrade to version 14.2.0.
+/// </summary>
 public class AddMissingDateTimeConfiguration : MigrationBase
 {
     private readonly IConfigurationEditorJsonSerializer _configurationEditorJsonSerializer;

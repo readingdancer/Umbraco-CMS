@@ -367,15 +367,15 @@ internal sealed class MemberGroupRepository : EntityRepositoryBase<int, IMemberG
 
     private sealed class AssignedRolesDto
     {
-    /// <summary>
-    /// Gets or sets the name of the role.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the name of the role.
+        /// </summary>
         [Column("text")]
         public string? RoleName { get; set; }
 
-    /// <summary>
-    /// Gets or sets the identifier of the member.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the identifier of the member.
+        /// </summary>
         [Column("Member")]
         public int MemberId { get; set; }
 

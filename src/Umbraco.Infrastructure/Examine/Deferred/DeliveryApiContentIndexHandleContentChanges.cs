@@ -168,9 +168,9 @@ internal sealed class DeliveryApiContentIndexHandleContentChanges : DeliveryApiC
 
     private sealed class CulturePublishStatus : IEquatable<CulturePublishStatus>
     {
-    /// <summary>
-    /// Gets or sets the culture identifier for the publish status.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the culture identifier for the publish status.
+        /// </summary>
         public required string Culture { get; set; }
 
         /// <summary>
@@ -178,11 +178,11 @@ internal sealed class DeliveryApiContentIndexHandleContentChanges : DeliveryApiC
         /// </summary>
         public required string Published { get; set; }
 
-    /// <summary>
-    /// Determines whether the specified <see cref="CulturePublishStatus"/> is equal to the current instance.
-    /// </summary>
-    /// <param name="other">The other <see cref="CulturePublishStatus"/> to compare with this instance.</param>
-    /// <returns><c>true</c> if the specified <see cref="CulturePublishStatus"/> is equal to the current instance; otherwise, <c>false</c>.</returns>
+        /// <summary>
+        /// Determines whether the specified <see cref="CulturePublishStatus"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="other">The other <see cref="CulturePublishStatus"/> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="CulturePublishStatus"/> is equal to the current instance; otherwise, <c>false</c>.</returns>
         public bool Equals(CulturePublishStatus? other)
         {
             if (ReferenceEquals(null, other))
@@ -198,11 +198,11 @@ internal sealed class DeliveryApiContentIndexHandleContentChanges : DeliveryApiC
             return Culture == other.Culture && Published == other.Published;
         }
 
-    /// <summary>
-    /// Determines whether the specified object is equal to the current <see cref="CulturePublishStatus"/> instance.
-    /// </summary>
-    /// <param name="obj">The object to compare with the current instance.</param>
-    /// <returns><c>true</c> if the specified object is equal to the current instance; otherwise, <c>false</c>.</returns>
+        /// <summary>
+        /// Determines whether the specified object is equal to the current <see cref="CulturePublishStatus"/> instance.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns><c>true</c> if the specified object is equal to the current instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
@@ -223,10 +223,10 @@ internal sealed class DeliveryApiContentIndexHandleContentChanges : DeliveryApiC
             return Equals((CulturePublishStatus)obj);
         }
 
-    /// <summary>
-    /// Returns a hash code for this instance, computed from the <c>Culture</c> and <c>Published</c> properties.
-    /// </summary>
-    /// <returns>A hash code for the current <see cref="CulturePublishStatus"/> object.</returns>
+        /// <summary>
+        /// Returns a hash code for this instance, computed from the <c>Culture</c> and <c>Published</c> properties.
+        /// </summary>
+        /// <returns>A hash code for the current <see cref="CulturePublishStatus"/> object.</returns>
         public override int GetHashCode() => HashCode.Combine(Culture, Published);
     }
 

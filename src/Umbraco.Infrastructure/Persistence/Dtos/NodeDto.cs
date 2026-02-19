@@ -64,10 +64,10 @@ public class NodeDto
     [Index(IndexTypes.NonClustered, Name = "IX_" + TableName + "_parentId_nodeObjectType", ForColumns = $"{ParentIdColumnName},{NodeObjectTypeColumnName}", IncludeColumns = $"{TrashedColumnName},{UserIdColumnName},{LevelColumnName},{PathColumnName},{SortOrderColumnName},{UniqueIdColumnNameTypo},{TextColumnName},{CreateDateColumnName}")]
     public int ParentId { get; set; }
 
-    // NOTE: This index is primarily for the nucache data lookup, see https://github.com/umbraco/Umbraco-CMS/pull/8365#issuecomment-673404177
     /// <summary>
     /// Gets or sets the depth level of the node within the content tree hierarchy, where the root node is level 0.
     /// </summary>
+    /// <remarks>NOTE: This index is primarily for the nucache data lookup, see https://github.com/umbraco/Umbraco-CMS/pull/8365#issuecomment-673404177</remarks>
     [Column(LevelColumnName)]
     [Index(IndexTypes.NonClustered, Name = "IX_" + TableName + "_Level", ForColumns = $"{LevelColumnName},{ParentIdColumnName},{SortOrderColumnName},{NodeObjectTypeColumnName},{TrashedColumnName}", IncludeColumns = $"{UserIdColumnName},{PathColumnName},{KeyColumnName},{CreateDateColumnName}")]
     public short Level { get; set; }
@@ -98,10 +98,14 @@ public class NodeDto
     /// <summary>
     /// Gets or sets the identifier of the user who created the node.
     /// </summary>
-    [Column(UserIdColumnName)] // TODO: db rename to 'createUserId'
+    /// <remarks>
+    /// Returns null if zero.
+    /// TODO: db rename to 'createUserId'.
+    /// </remarks>
+    [Column(UserIdColumnName)]
     [ForeignKey(typeof(UserDto))]
     [NullSetting(NullSetting = NullSettings.Null)]
-    public int? UserId { get => _userId == 0 ? null : _userId; set => _userId = value; } // return null if zero
+    public int? UserId { get => _userId == 0 ? null : _userId; set => _userId = value; }
 
     /// <summary>
     /// Gets or sets the display text or name associated with the node.
@@ -113,7 +117,8 @@ public class NodeDto
     /// <summary>
     /// Gets or sets the unique identifier (GUID) representing the object type associated with this node.
     /// </summary>
-    [Column(NodeObjectTypeColumnName)] // TODO: db rename to 'objectType'
+    /// <remarks>TODO: db rename to 'objectType'</remarks>
+    [Column(NodeObjectTypeColumnName)]
     [NullSetting(NullSetting = NullSettings.Null)]
     [Index(IndexTypes.NonClustered, Name = "IX_" + TableName + "_ObjectType", ForColumns = $"{NodeObjectTypeColumnName},{TrashedColumnName}", IncludeColumns = $"{UniqueIdColumnNameTypo},{ParentIdColumnName},{LevelColumnName},{PathColumnName},{SortOrderColumnName},{UserIdColumnName},{TextColumnName},{CreateDateColumnName}")]
     public Guid? NodeObjectType { get; set; }

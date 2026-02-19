@@ -82,17 +82,17 @@ public class ImageCropperValue :TemporaryFileUploadValueBase, IHtmlEncodedString
         return new ImageUrlGenerationOptions(url);
     }
 
-/// <summary>
-///     Returns the image URL for the specified crop alias using the provided image URL generator.
-/// </summary>
-/// <param name="alias">The alias of the crop to retrieve the URL for. If empty or not found, the original image or focal point may be used.</param>
-/// <param name="imageUrlGenerator">The image URL generator used to construct the URL.</param>
-/// <param name="useCropDimensions">If true, the crop's width and height are used in the generated URL; otherwise, dimensions are not applied.</param>
-/// <param name="useFocalPoint">If true, the focal point is used in URL generation. If false, the crop's coordinates are used if available.</param>
-/// <param name="cacheBusterValue">An optional value appended to the URL to prevent caching issues.</param>
-/// <returns>
-///   The URL of the cropped image if the crop is found; otherwise, null if the specified crop alias does not exist.
-/// </returns>
+    /// <summary>
+    ///     Returns the image URL for the specified crop alias using the provided image URL generator.
+    /// </summary>
+    /// <param name="alias">The alias of the crop to retrieve the URL for. If empty or not found, the original image or focal point may be used.</param>
+    /// <param name="imageUrlGenerator">The image URL generator used to construct the URL.</param>
+    /// <param name="useCropDimensions">If true, the crop's width and height are used in the generated URL; otherwise, dimensions are not applied.</param>
+    /// <param name="useFocalPoint">If true, the focal point is used in URL generation. If false, the crop's coordinates are used if available.</param>
+    /// <param name="cacheBusterValue">An optional value appended to the URL to prevent caching issues.</param>
+    /// <returns>
+    ///   The URL of the cropped image if the crop is found; otherwise, null if the specified crop alias does not exist.
+    /// </returns>
     public string? GetCropUrl(
         string alias,
         IImageUrlGenerator imageUrlGenerator,
@@ -147,25 +147,25 @@ public class ImageCropperValue :TemporaryFileUploadValueBase, IHtmlEncodedString
     public bool HasFocalPoint()
         => FocalPoint is not null && (FocalPoint.Left != 0.5m || FocalPoint.Top != 0.5m);
 
-/// <summary>
-///     Determines whether the value has crops.
-/// </summary>
-/// <returns><c>true</c> if the value has crops; otherwise, <c>false</c>.</returns>
+    /// <summary>
+    ///     Determines whether the value has crops.
+    /// </summary>
+    /// <returns><c>true</c> if the value has crops; otherwise, <c>false</c>.</returns>
     public bool HasCrops()
         => Crops is not null && Crops.Any();
 
-/// <summary>
-/// Determines whether a crop with the specified alias exists in the value.
-/// </summary>
-/// <param name="alias">The alias of the crop to check for.</param>
-/// <returns><c>true</c> if a crop with the specified alias exists; otherwise, <c>false</c>.</returns>
+    /// <summary>
+    /// Determines whether a crop with the specified alias exists in the value.
+    /// </summary>
+    /// <param name="alias">The alias of the crop to check for.</param>
+    /// <returns><c>true</c> if a crop with the specified alias exists; otherwise, <c>false</c>.</returns>
     public bool HasCrop(string alias)
         => Crops is not null && Crops.Any(x => x.Alias == alias);
 
-/// <summary>
-/// Checks if the value contains a source image.
-/// </summary>
-/// <returns>Returns <c>true</c> if a source image is present; otherwise, <c>false</c>.</returns>
+    /// <summary>
+    /// Checks if the value contains a source image.
+    /// </summary>
+    /// <returns>Returns <c>true</c> if a source image is present; otherwise, <c>false</c>.</returns>
     public bool HasImage()
         => !string.IsNullOrWhiteSpace(Src);
 
@@ -257,10 +257,10 @@ public class ImageCropperValue :TemporaryFileUploadValueBase, IHtmlEncodedString
         public static bool operator !=(ImageCropperFocalPoint left, ImageCropperFocalPoint right)
             => !Equals(left, right);
 
-    /// <summary>
-    /// Returns a hash code for this instance, based on the <c>Left</c> and <c>Top</c> properties.
-    /// </summary>
-    /// <returns>A hash code for the current <see cref="ImageCropperFocalPoint"/> object.</returns>
+        /// <summary>
+        /// Returns a hash code for this instance, based on the <c>Left</c> and <c>Top</c> properties.
+        /// </summary>
+        /// <returns>A hash code for the current <see cref="ImageCropperFocalPoint"/> object.</returns>
         public override int GetHashCode()
         {
             unchecked
@@ -281,9 +281,9 @@ public class ImageCropperValue :TemporaryFileUploadValueBase, IHtmlEncodedString
     /// </summary>
     public class ImageCropperCrop : IEquatable<ImageCropperCrop>
     {
-    /// <summary>
-    /// Gets or sets the alias of the image crop.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the alias of the image crop.
+        /// </summary>
         public string? Alias { get; set; }
 
         /// <summary>
@@ -323,10 +323,10 @@ public class ImageCropperValue :TemporaryFileUploadValueBase, IHtmlEncodedString
         public static bool operator !=(ImageCropperCrop? left, ImageCropperCrop? right)
             => !Equals(left, right);
 
-    /// <summary>
-    /// Returns a hash code for this <see cref="ImageCropperCrop"/> instance, based on its properties.
-    /// </summary>
-    /// <returns>A hash code representing the current crop's state.</returns>
+        /// <summary>
+        /// Returns a hash code for this <see cref="ImageCropperCrop"/> instance, based on its properties.
+        /// </summary>
+        /// <returns>A hash code representing the current crop's state.</returns>
         public override int GetHashCode()
         {
             unchecked
@@ -350,9 +350,9 @@ public class ImageCropperValue :TemporaryFileUploadValueBase, IHtmlEncodedString
     /// </summary>
     public class ImageCropperCropCoordinates : IEquatable<ImageCropperCropCoordinates>
     {
-    /// <summary>
-    /// Gets or sets the X-coordinate of the top-left corner (X1) of the image crop rectangle.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the X-coordinate of the top-left corner (X1) of the image crop rectangle.
+        /// </summary>
         public decimal X1 { get; set; }
 
         /// <summary>
@@ -365,9 +365,9 @@ public class ImageCropperValue :TemporaryFileUploadValueBase, IHtmlEncodedString
         /// </summary>
         public decimal X2 { get; set; }
 
-    /// <summary>
-    /// Gets or sets the Y2 coordinate, representing the bottom edge of the image crop rectangle.
-    /// </summary>
+        /// <summary>
+        /// Gets or sets the Y2 coordinate, representing the bottom edge of the image crop rectangle.
+        /// </summary>
         public decimal Y2 { get; set; }
 
         #region IEquatable
@@ -394,10 +394,10 @@ public class ImageCropperValue :TemporaryFileUploadValueBase, IHtmlEncodedString
         public static bool operator !=(ImageCropperCropCoordinates? left, ImageCropperCropCoordinates? right)
             => !Equals(left, right);
 
-    /// <summary>
-    /// Returns a hash code for this instance based on the crop coordinates.
-    /// </summary>
-    /// <returns>A hash code representing the current crop coordinates.</returns>
+        /// <summary>
+        /// Returns a hash code for this instance based on the crop coordinates.
+        /// </summary>
+        /// <returns>A hash code representing the current crop coordinates.</returns>
         public override int GetHashCode()
         {
             unchecked
@@ -442,10 +442,10 @@ public class ImageCropperValue :TemporaryFileUploadValueBase, IHtmlEncodedString
     public static bool operator !=(ImageCropperValue? left, ImageCropperValue? right)
         => !Equals(left, right);
 
-/// <summary>
-/// Returns a hash code for this <see cref="ImageCropperValue"/> instance, based on its property values.
-/// </summary>
-/// <returns>A hash code representing the current <see cref="ImageCropperValue"/> object.</returns>
+    /// <summary>
+    /// Returns a hash code for this <see cref="ImageCropperValue"/> instance, based on its property values.
+    /// </summary>
+    /// <returns>A hash code representing the current <see cref="ImageCropperValue"/> object.</returns>
     public override int GetHashCode()
     {
         unchecked

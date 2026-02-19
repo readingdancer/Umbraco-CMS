@@ -10,11 +10,11 @@ namespace Umbraco.Cms.Infrastructure.Persistence.Mappers;
 [MapperFor(typeof(IAuditItem))]
 public sealed class AuditItemMapper : BaseMapper
 {
-/// <summary>
-/// Initializes a new instance of the <see cref="AuditItemMapper"/> class.
-/// </summary>
-/// <param name="sqlContext">A lazily-initialized <see cref="ISqlContext"/> providing SQL context for the mapper.</param>
-/// <param name="maps">The <see cref="MapperConfigurationStore"/> containing mapping configurations.</param>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AuditItemMapper"/> class.
+    /// </summary>
+    /// <param name="sqlContext">A lazily-initialized <see cref="ISqlContext"/> providing SQL context for the mapper.</param>
+    /// <param name="maps">The <see cref="MapperConfigurationStore"/> containing mapping configurations.</param>
     public AuditItemMapper(Lazy<ISqlContext> sqlContext, MapperConfigurationStore maps)
         : base(sqlContext, maps)
     {

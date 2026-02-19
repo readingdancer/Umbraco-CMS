@@ -2,9 +2,9 @@ using Umbraco.Cms.Core;
 
 namespace Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_14_0_0;
 
-    /// <summary>
-    /// Migration that adds the <c>UiAlias</c> column to the <c>PropertyEditor</c> table during the upgrade to version 14.0.0.
-    /// </summary>
+/// <summary>
+/// Migration that adds the <c>UiAlias</c> column to the <c>PropertyEditor</c> table during the upgrade to version 14.0.0.
+/// </summary>
 public class AddPropertyEditorUiAliasColumn : MigrationBase
 {
     /// <summary>
