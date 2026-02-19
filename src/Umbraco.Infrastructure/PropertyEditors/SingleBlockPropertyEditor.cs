@@ -16,9 +16,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Infrastructure.PropertyEditors;
 
-    /// <summary>
-    /// Represents a single block property editor.
-    /// </summary>
+/// <summary>
+/// Represents a single block property editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.SingleBlock,
     ValueType = ValueTypes.Json,

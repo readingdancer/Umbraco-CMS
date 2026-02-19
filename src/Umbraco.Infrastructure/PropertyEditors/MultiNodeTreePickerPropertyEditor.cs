@@ -17,9 +17,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    /// Represents a multi-node tree picker property editor.
-    /// </summary>
+/// <summary>
+/// Represents a multi-node tree picker property editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.MultiNodeTreePicker,
     ValueType = ValueTypes.Text,

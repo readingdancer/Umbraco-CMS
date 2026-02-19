@@ -7,9 +7,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    /// Represents a block list property editor.
-    /// </summary>
+/// <summary>
+/// Represents a block list property editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.BlockGrid,
     ValueType = ValueTypes.Json)]

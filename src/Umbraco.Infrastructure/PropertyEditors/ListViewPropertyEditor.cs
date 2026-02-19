@@ -5,9 +5,9 @@ using Umbraco.Cms.Core.IO;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    ///     Represents a list-view editor.
-    /// </summary>
+/// <summary>
+///     Represents a list-view editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.ListView,
     ValueEditorIsReusable = true)]

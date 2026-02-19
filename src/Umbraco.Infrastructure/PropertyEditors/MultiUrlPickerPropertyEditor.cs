@@ -6,9 +6,9 @@ using Umbraco.Cms.Core.Models;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    /// Represents a property editor in Umbraco that enables users to select and manage multiple URLs within a property.
-    /// </summary>
+/// <summary>
+/// Represents a property editor in Umbraco that enables users to select and manage multiple URLs within a property.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.MultiUrlPicker,
     ValueType = ValueTypes.Json,

@@ -7,9 +7,9 @@ using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    /// Defines an email address property editor.
-    /// </summary>
+/// <summary>
+/// Defines an email address property editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.EmailAddress,
     ValueEditorIsReusable = true)]

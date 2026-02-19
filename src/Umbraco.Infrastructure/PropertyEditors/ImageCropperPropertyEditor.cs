@@ -17,9 +17,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    ///     Represents an image cropper property editor.
-    /// </summary>
+/// <summary>
+///     Represents an image cropper property editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.ImageCropper,
     ValueType = ValueTypes.Json,

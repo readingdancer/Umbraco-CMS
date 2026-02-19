@@ -17,9 +17,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    /// Represents a slider editor.
-    /// </summary>
+/// <summary>
+/// Represents a slider editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.Slider,
     ValueEditorIsReusable = true)]

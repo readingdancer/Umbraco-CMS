@@ -17,9 +17,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    /// Represents a media picker property editor.
-    /// </summary>
+/// <summary>
+/// Represents a media picker property editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.MediaPicker3,
     ValueType = ValueTypes.Json,

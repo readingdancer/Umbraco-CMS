@@ -14,9 +14,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    ///     Represents a tags property editor.
-    /// </summary>
+/// <summary>
+///     Represents a tags property editor.
+/// </summary>
 [TagsPropertyEditor]
 [DataEditor(
     Constants.PropertyEditors.Aliases.Tags,

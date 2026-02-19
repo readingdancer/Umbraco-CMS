@@ -7,10 +7,10 @@ using Umbraco.Cms.Core.Serialization;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    /// Represents a flexible drop-down property editor used in Umbraco for selecting values from a configurable list.
-    /// This editor allows for dynamic configuration of options and supports various selection scenarios.
-    /// </summary>
+/// <summary>
+/// Represents a flexible drop-down property editor used in Umbraco for selecting values from a configurable list.
+/// This editor allows for dynamic configuration of options and supports various selection scenarios.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.DropDownListFlexible,
     ValueEditorIsReusable = true)]

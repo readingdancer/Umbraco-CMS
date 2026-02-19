@@ -6,9 +6,9 @@ using Umbraco.Cms.Core.Models;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    ///     Represents a textbox property and parameter editor.
-    /// </summary>
+/// <summary>
+///     Represents a textbox property and parameter editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.TextBox,
     ValueEditorIsReusable = true)]

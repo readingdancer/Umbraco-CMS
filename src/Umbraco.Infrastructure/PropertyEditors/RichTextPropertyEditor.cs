@@ -21,9 +21,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    ///     Represents a rich text property editor.
-    /// </summary>
+/// <summary>
+///     Represents a rich text property editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.RichText,
     ValueType = ValueTypes.Text,

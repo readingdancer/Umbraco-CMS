@@ -7,9 +7,9 @@ using Umbraco.Cms.Core.Models;
 
 namespace Umbraco.Cms.Core.PropertyEditors;
 
-    /// <summary>
-    /// Defines the file upload property editor.
-    /// </summary>
+/// <summary>
+/// Defines the file upload property editor.
+/// </summary>
 [DataEditor(
     Constants.PropertyEditors.Aliases.UploadField,
     ValueEditorIsReusable = true)]
